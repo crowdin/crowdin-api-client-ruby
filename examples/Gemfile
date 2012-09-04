@@ -1,0 +1,4 @@
+source :rubygems
+
+gem 'crowdin-api', :path => '../'
+gem 'rest-client'
