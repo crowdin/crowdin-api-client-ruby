@@ -15,9 +15,14 @@ crowdin = Crowdin::API.new(:api_key => API_KEY, :project_identifier => PROJECT_I
 
 pp crowdin.add_directory(:name => 'test')
 #pp crowdin.delete_directory(:name => 'test')
-
 #pp crowdin.add_file(:files => {'/test1/ua.txt' => File.new('ua.txt', 'rb'), 'ru.txt' => File.new('ru.txt', 'rb')}, :type => 'auto')
-
+#puts crowdin.update_file(:files => {'/test1/ua.txt' => File.new('ua.txt', 'rb')})
 #pp crowdin.delete_file(:file => 'ru.txt')
-
-pp crowdin.download('all')
+#puts crowdin.download('all')
+#puts crowdin.supported_languages
+#puts crowdin.status
+#puts crowdin.info
+#puts crowdin.download_glossary
+#puts crowdin.download_tm
+#puts crowdin.upload_glossary(:file => File.new('project.tbx', 'rb'))
+#puts crowdin.upload_tm(:file => File.new('project.tmx', 'rb'))
