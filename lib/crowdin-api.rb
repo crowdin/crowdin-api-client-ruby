@@ -16,13 +16,15 @@ module Crowdin
     def initialize(options = {})
       @api_key            = options.delete(:api_key)
       @project_identifier = options.delete(:project_identifier)
+      @account_key        = options.delete(:account_key)
 
       url = 'http://api.crowdin.net'
 
       options = {
-        :headers => {},
-        :params  => {},
-        :key     => @api_key,
+        :headers                => {},
+        :params                 => {},
+        :key                    => @api_key,
+        :'account-key'          => @account_key,
       }.merge(options)
 
       options[:headers] = {
@@ -33,7 +35,8 @@ module Crowdin
       }.merge(options[:headers])
 
       options[:params] = {
-        :key                    => @api_key
+        :key                    => @api_key,
+        :'account-key'          => @account_key,
       }.merge(options[:params])
 
       @options = options
@@ -65,7 +68,7 @@ module Crowdin
           message = doc.elements['error'].elements['message'].text
           error = Crowdin::API::Errors::Error.new(code, message)
           raise(error)
-        elsif doc.elements['success']
+        else
           return @response
         end
       end
