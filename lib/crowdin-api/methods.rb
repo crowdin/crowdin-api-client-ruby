@@ -99,7 +99,7 @@ module Crowdin
     #
     # GET http://api.crowdin.net/api/project/{project-identifier}/download/{package}.zip?key={project-key}
     #
-    def download(package)
+    def download(package = 'all')
       request(
         :method => :get,
         :path   => "/api/project/#{@project_identifier}/download/#{package}.zip",

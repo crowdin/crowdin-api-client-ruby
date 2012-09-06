@@ -1,4 +1,5 @@
 require 'logger'
+require 'rexml/document'
 require 'rest_client'
 
 require "crowdin-api/errors"
@@ -43,13 +44,32 @@ module Crowdin
       case params[:method]
       when :post
         @connection[params[:path]].post(@options.merge(params[:query] || {})) { |response, request, result, &block|
-          return response
+          @response = response
         }
       when :get
         @connection[params[:path]].get(:params => @options[:params].merge(params[:query] || {})) { |response, request, result, &block|
-          return response
+          @response = response
         }
       end
+
+      if @response.headers[:content_disposition]
+        filename = @response.headers[:content_disposition][/attachment; filename="(.+?)"/, 1]
+        body = @response.body
+        file = open(filename, 'wb')
+        file.write(body)
+        return true
+      else
+        doc = REXML::Document.new @response.body
+        if doc.elements['error']
+          code    = doc.elements['error'].elements['code'].text
+          message = doc.elements['error'].elements['message'].text
+          error = Crowdin::API::Errors::Error.new(code, message)
+          raise(error)
+        elsif doc.elements['success']
+          return @response
+        end
+      end
+
     end
 
     private
