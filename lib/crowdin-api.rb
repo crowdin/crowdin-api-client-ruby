@@ -46,17 +46,19 @@ module Crowdin
     def request(params, &block)
       case params[:method]
       when :post
-        @connection[params[:path]].post(@options.merge(params[:query] || {})) { |response, request, result, &block|
+        query = @options.merge(params[:query] || {})
+        @connection[params[:path]].post(query) { |response, request, result, &block|
           @response = response
         }
       when :get
-        @connection[params[:path]].get(:params => @options[:params].merge(params[:query] || {})) { |response, request, result, &block|
+        query = @options[:params].merge(params[:query] || {})
+        @connection[params[:path]].get(:params => query) { |response, request, result, &block|
           @response = response
         }
       end
 
       if @response.headers[:content_disposition]
-        filename = @response.headers[:content_disposition][/attachment; filename="(.+?)"/, 1]
+        filename = params[:output] || @response.headers[:content_disposition][/attachment; filename="(.+?)"/, 1]
         body = @response.body
         file = open(filename, 'wb')
         file.write(body)
@@ -69,6 +71,7 @@ module Crowdin
           error = Crowdin::API::Errors::Error.new(code, message)
           raise(error)
         else
+          # leave non-JSON body as is
           return @response
         end
       end

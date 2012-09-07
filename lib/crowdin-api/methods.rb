@@ -100,10 +100,11 @@ module Crowdin
     #
     # GET http://api.crowdin.net/api/project/{project-identifier}/download/{package}.zip?key={project-key}
     #
-    def download(package = 'all')
+    def download(params = {})
       request(
-        :method => :get,
-        :path   => "/api/project/#{@project_identifier}/download/#{package}.zip",
+        :method  => :get,
+        :path    => "/api/project/#{@project_identifier}/download/#{params[:package] || 'all'}.zip",
+        :output  => params[:output]
       )
     end
 
@@ -182,10 +183,11 @@ module Crowdin
     #
     # GET http://api.crowdin.net/api/project/{project-identifier}/download-glossary?key={project-key}
     #
-    def download_glossary
+    def download_glossary(params = {})
       request(
         :method => :get,
         :path   => "/api/project/#{@project_identifier}/download-glossary",
+        :output => params[:output]
       )
     end
 
@@ -195,10 +197,11 @@ module Crowdin
     #
     # GET http://api.crowdin.net/api/project/{project-identifier}/download-tm?key={project-key}
     #
-    def download_tm
+    def download_tm(params = {})
       request(
         :method => :get,
         :path   => "/api/project/#{@project_identifier}/download-tm",
+        :output => params[:output]
       )
     end
 
