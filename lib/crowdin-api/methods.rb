@@ -1,24 +1,24 @@
 module Crowdin
 
   # API Methods:
-  # + Add File 
-  # + Update File 
-  # + Delete File 
-  # + Upload Translations 
-  # + Translation Status 
-  # + Project Info 
-  # + Download Translations (GET) 
-  # + Export Translations 
+  # + Add File
+  # + Update File
+  # + Delete File
+  # + Upload Translations
+  # + Translation Status
+  # + Project Info
+  # + Download Translations (GET)
+  # + Export Translations
   # + Account Projects (GET)
-  # + Create Project 
-  # - Edit Project 
-  # + Delete Project 
-  # + Create Directory 
-  # + Delete Directory 
+  # + Create Project
+  # - Edit Project
+  # + Delete Project
+  # + Create Directory
+  # + Delete Directory
   # + Download Glossary (GET)
-  # - Upload Glossary 
+  # - Upload Glossary
   # + Download TM (GET)
-  # + Upload TM 
+  # + Upload TM
   # + Supported Languages (GET)
   #
   class API
@@ -249,7 +249,7 @@ module Crowdin
       )
     end
 
-    # Edit Crowdin project. 
+    # Edit Crowdin project.
     #
     # == Request
     #
@@ -263,7 +263,7 @@ module Crowdin
       )
     end
 
-    # Delete Crowdin project with all translations. 
+    # Delete Crowdin project with all translations.
     #
     # == Request
     #
@@ -277,7 +277,7 @@ module Crowdin
       )
     end
 
-    # Get Crowdin Project details. 
+    # Get Crowdin Project details.
     #
     # == Request
     #

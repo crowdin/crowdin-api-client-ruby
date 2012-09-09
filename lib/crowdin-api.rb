@@ -68,10 +68,10 @@ module Crowdin
         if doc.elements['error']
           code    = doc.elements['error'].elements['code'].text
           message = doc.elements['error'].elements['message'].text
-          error = Crowdin::API::Errors::Error.new(code, message)
+          error   = Crowdin::API::Errors::Error.new(code, message)
           raise(error)
         else
-          # leave non-JSON body as is
+          # leave body as is
           return @response
         end
       end
