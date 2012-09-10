@@ -14,11 +14,10 @@ module Crowdin
   class API
 
     def initialize(options = {})
-      @api_key            = options.delete(:api_key)
-      @project_identifier = options.delete(:project_identifier)
-      @account_key        = options.delete(:account_key)
-
-      url = 'http://api.crowdin.net'
+      @api_key     = options.delete(:api_key)
+      @project_id  = options.delete(:project_id)
+      @account_key = options.delete(:account_key)
+      @base_url    = options.delete(:base_url)
 
       options = {
         :headers                => {},
@@ -40,19 +39,19 @@ module Crowdin
       }.merge(options[:params])
 
       @options = options
-      @connection = RestClient::Resource.new(url, options)
+      @connection = RestClient::Resource.new(@base_url, options)
     end
 
     def request(params, &block)
       case params[:method]
       when :post
         query = @options.merge(params[:query] || {})
-        @connection[params[:path]].post(query) { |response, request, result, &block|
+        @connection[params[:path]].post(query) { |response, _, _|
           @response = response
         }
       when :get
         query = @options[:params].merge(params[:query] || {})
-        @connection[params[:path]].get(:params => query) { |response, request, result, &block|
+        @connection[params[:path]].get(:params => query) { |response, _, _|
           @response = response
         }
       end

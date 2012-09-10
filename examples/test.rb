@@ -8,10 +8,13 @@ require 'crowdin-api'
 
 puts Crowdin::API::VERSION
 
-API_KEY            = '79323cdcd6b4566154c4fb9c6bbd3be1'
-PROJECT_IDENTIFIER = 'rubytestapi'
+API_KEY    = '79323cdcd6b4566154c4fb9c6bbd3be1'
+PROJECT_ID = 'rubytestapi'
 
-crowdin = Crowdin::API.new(:api_key => API_KEY, :project_identifier => PROJECT_IDENTIFIER)
+crowdin = Crowdin::API.new(
+  :api_key => API_KEY,
+  :project_id => PROJECT_ID,
+  :base_url => 'http://api.crowdin.net')
 
 #crowdin.add_directory(:name => 'test')
 #crowdin.delete_directory(:name => 'test')
@@ -20,13 +23,13 @@ crowdin = Crowdin::API.new(:api_key => API_KEY, :project_identifier => PROJECT_I
 #crowdin.update_file(:files => {'/test1/ua.txt' => File.new('ua.txt', 'rb')})
 #crowdin.delete_file(:file => 'ru.txt')
 #puts crowdin.upload_translation(:files => {'ua.txt' => File.new('ua.txt', 'rb')}, :language => 'ru')
-#crowdin.download(:package => 'ru', :output => 'all-in-one.zip')
+#crowdin.download_translation(:package => 'ru', :output => 'all-in-one.zip')
 #crowdin.download_glossary(:output => '1.txt')
 #crowdin.download_tm
-#crowdin.export
+#crowdin.export_translations
 #crowdin.supported_languages
-#puts crowdin.status(:json => true)
-#puts crowdin.info(:json => true)
+puts crowdin.translations_status(:json => true)
+puts crowdin.project_info(:json => true)
 #crowdin.upload_glossary(:file => File.new('rubytest.tbx', 'rb'))
 #crowdin.upload_tm(:file => File.new('project.tmx', 'rb'))
 =begin
