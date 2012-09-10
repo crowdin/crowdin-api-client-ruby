@@ -27,9 +27,9 @@ crowdin = Crowdin::API.new(
 #crowdin.download_glossary(:output => '1.txt')
 #crowdin.download_tm
 #crowdin.export_translations
-#crowdin.supported_languages
-puts crowdin.translations_status(:json => true)
-puts crowdin.project_info(:json => true)
+#crowdin.supported_languages(:json => true)
+#puts crowdin.translations_status(:json => true)
+#puts crowdin.project_info(:json => true)
 #crowdin.upload_glossary(:file => File.new('rubytest.tbx', 'rb'))
 #crowdin.upload_tm(:file => File.new('project.tmx', 'rb'))
 =begin

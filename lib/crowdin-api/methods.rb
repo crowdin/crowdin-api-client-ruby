@@ -29,11 +29,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/add-directory?key={project-key}
     #
-    def add_directory(params)
+    def add_directory(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/add-directory",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -43,11 +43,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/delete-directory?key={project-key}
     #
-    def delete_directory(params)
+    def delete_directory(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/delete-directory",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -57,11 +57,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/add-file?key={project-key}
     #
-    def add_file(params)
+    def add_file(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/add-file",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -71,7 +71,7 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/update-file?key={project-key}
     #
-    def update_file(params)
+    def update_file(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/update-file",
@@ -85,11 +85,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/delete-file?key={project-key}
     #
-    def delete_file(params)
+    def delete_file(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/delete-file",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -104,7 +104,7 @@ module Crowdin
       request(
         :method  => :get,
         :path    => "/api/project/#{@project_id}/download/#{params[:package] || 'all'}.zip",
-        :output  => params[:output]
+        :output  => params[:output],
       )
     end
 
@@ -114,11 +114,11 @@ module Crowdin
     #
     # POST POST http://api.crowdin.net/api/project/{project-identifier}/export?key={project-key}
     #
-    def export_translations(params)
+    def export_translations(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/export",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -128,11 +128,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/upload-translation?key={project-key}
     #
-    def upload_translation(params)
+    def upload_translation(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/upload-translation",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -142,10 +142,11 @@ module Crowdin
     #
     # GET http://api.crowdin.net/api/supported-languages
     #
-    def supported_languages
+    def supported_languages(params = {})
       request(
         :method => :get,
         :path   => "/api/supported-languages",
+        :query  => params,
       )
     end
 
@@ -155,11 +156,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/status?key={project-key}
     #
-    def translations_status(params)
+    def translations_status(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/status",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -169,11 +170,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/info?key={project-key}
     #
-    def project_info(params)
+    def project_info(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/info",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -187,7 +188,7 @@ module Crowdin
       request(
         :method => :get,
         :path   => "/api/project/#{@project_id}/download-glossary",
-        :output => params[:output]
+        :output => params[:output],
       )
     end
 
@@ -201,7 +202,7 @@ module Crowdin
       request(
         :method => :get,
         :path   => "/api/project/#{@project_id}/download-tm",
-        :output => params[:output]
+        :output => params[:output],
       )
     end
 
@@ -212,11 +213,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/upload-glossary?key={project-key}
     #
-    def upload_glossary(params)
+    def upload_glossary(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/upload-glossary",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -226,11 +227,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/upload-tm?key={project-key}
     #
-    def upload_tm(params)
+    def upload_tm(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/upload-tm",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -241,11 +242,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/account/create-project?account-key={account-key}
     #
-    def create_project(params)
+    def create_project(params = {})
       request(
         :method => :post,
         :path   => "/api/account/create-project",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -255,11 +256,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/edit-project?key={key}
     #
-    def edit_project(params)
+    def edit_project(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/edit-project",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -269,11 +270,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/delete-project?key={project-key}
     #
-    def delete_project(params)
+    def delete_project(params = {})
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/delete-project",
-        :query  => params
+        :query  => params,
       )
     end
 
@@ -283,11 +284,11 @@ module Crowdin
     #
     # GET http://api.crowdin.net/api/account/get-projects?key={account-key}
     #
-    def get_projects(params)
+    def get_projects(params = {})
       request(
         :method => :get,
         :path   => "/api/account/get-projects",
-        :query  => params
+        :query  => params,
       )
     end
 
