@@ -1,38 +1,17 @@
 module Crowdin
 
-  # API Methods:
-  # + Add File
-  # + Update File
-  # + Delete File
-  # + Upload Translations
-  # + Translation Status
-  # + Project Info
-  # + Download Translations (GET)
-  # + Export Translations
-  # + Account Projects (GET)
-  # + Create Project
-  # - Edit Project
-  # + Delete Project
-  # + Create Directory
-  # + Delete Directory
-  # + Download Glossary (GET)
-  # - Upload Glossary
-  # + Download TM (GET)
-  # + Upload TM
-  # + Supported Languages (GET)
-  #
   class API
 
     # Add new file to Crowdin project.
     #
-    # ==Parameters
+    # == Parameters
     #
-    # `files`: Array of files that should be added to Crowdin project.
+    # files - Array of files that should be added to Crowdin project.
     # file is a Hash {:dest, :source, :title, :export_pattern}
-    # :dest - File name with path in Crowdin project (required)
-    # :source - Path for uploaded file (required)
-    # :title - Title in Crowdin UI (optional)
-    # :export_pattern - Resulted file name (optional)
+    # * :dest - file name with path in Crowdin project (required)
+    # * :source - path for uploaded file (required)
+    # * :title - title in Crowdin UI (optional)
+    # * :export_pattern - Resulted file name (optional)
     #
     # == Request
     #
