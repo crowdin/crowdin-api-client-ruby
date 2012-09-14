@@ -33,6 +33,45 @@ crowdin = Crowdin::API.new(:api_key => API_KEY)
 
 Now you can make requests to the api.
 
+### Add File
+
+### Update File
+
+### Delete File
+
+### Upload Translations
+
+### Translation Status
+
+### Project Info
+
+### Download Translations
+
+### Export Translations
+
+### Account Projects
+
+### Create Project
+
+### Edit Project
+
+### Delete Project
+
+### Create Directory
+
+### Delete Directory
+
+### Download Glossary
+
+### Upload Glossary
+
+### Download TM
+
+### Upload TM
+
+###Supported Languages
+
+
 ## Contributing
 
 1. Fork it

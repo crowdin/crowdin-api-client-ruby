@@ -38,19 +38,18 @@ module Crowdin
         :'account-key'          => @account_key,
       }.merge(options[:params])
 
-      @options = options
       @connection = RestClient::Resource.new(@base_url, options)
     end
 
     def request(params, &block)
       case params[:method]
       when :post
-        query = @options.merge(params[:query] || {})
+        query = @connection.options.merge(params[:query] || {})
         @connection[params[:path]].post(query) { |response, _, _|
           @response = response
         }
       when :get
-        query = @options[:params].merge(params[:query] || {})
+        query = @connection.options[:params].merge(params[:query] || {})
         @connection[params[:path]].get(:params => query) { |response, _, _|
           @response = response
         }

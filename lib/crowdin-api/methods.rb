@@ -23,41 +23,35 @@ module Crowdin
   #
   class API
 
-    # Add directory to Crowdin project.
-    #
-    # == Request
-    #
-    # POST http://api.crowdin.net/api/project/{project-identifier}/add-directory?key={project-key}
-    #
-    def add_directory(params = {})
-      request(
-        :method => :post,
-        :path   => "/api/project/#{@project_id}/add-directory",
-        :query  => params,
-      )
-    end
-
-    # Delete Crowdin project directory. All nested files and directories will be deleted too.
-    #
-    # == Request
-    #
-    # POST http://api.crowdin.net/api/project/{project-identifier}/delete-directory?key={project-key}
-    #
-    def delete_directory(params = {})
-      request(
-        :method => :post,
-        :path   => "/api/project/#{@project_id}/delete-directory",
-        :query  => params,
-      )
-    end
-
     # Add new file to Crowdin project.
+    #
+    # ==Parameters
+    #
+    # `files`: Array of files that should be added to Crowdin project.
+    # file is a Hash {:dest, :source, :title, :export_pattern}
+    # :dest - File name with path in Crowdin project (required)
+    # :source - Path for uploaded file (required)
+    # :title - Title in Crowdin UI (optional)
+    # :export_pattern - Resulted file name (optional)
     #
     # == Request
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/add-file?key={project-key}
     #
-    def add_file(params = {})
+    def add_file(files, params = {})
+      params[:files] = Hash[files.map{ |f| [
+        f[:dest]               || raise(ArgumentError, "'`:dest`' is required"),
+        ::File.open(f[:source] || raise(ArgumentError, "'`:source` is required'"))
+      ] }]
+
+      params[:titles] = Hash[files.map{ |f| [f[:dest], f[:title]] }]
+      params[:titles].delete_if{ |k, v| v.nil? }
+
+      params[:export_patterns] = Hash[files.map{ |f| [f[:dest], f[:export_pattern]] }]
+      params[:export_patterns].delete_if{ |k, v| v.nil? }
+
+      params.delete_if{ |k, v| v.empty? }
+
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/add-file",
@@ -71,13 +65,101 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/update-file?key={project-key}
     #
-    def update_file(params = {})
+    def update_file(files)
+      files = Hash[files.map{ |f| [
+        f[:dest]               || raise(ArgumentError, "'`:dest` is required'"),
+        ::File.open(f[:source] || raise(ArgumentError, "'`:source` is required'") )
+      ] }]
+
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/update-file",
-        :query  => params
+        :query  => { :files => files }
       )
     end
+
+    # Upload existing translations to your Crowdin project.
+    #
+    # == Request
+    #
+    # POST http://api.crowdin.net/api/project/{project-identifier}/upload-translation?key={project-key}
+    #
+    def upload_translation(files, language, params = {})
+      params[:files] = Hash[files.map{ |f| [
+        f[:dest]               || raise(ArgumentError, "`:dest` is required"),
+        ::File.open(f[:source] || raise(ArgumentError, "`:source` is required"))
+      ] }]
+
+      params[:language] = language
+
+      request(
+        :method => :post,
+        :path   => "/api/project/#{@project_id}/upload-translation",
+        :query  => params,
+      )
+    end
+
+    # Upload your glossarries for Crowdin Project in TBX file format.
+    #
+    # == Request
+    #
+    # POST http://api.crowdin.net/api/project/{project-identifier}/upload-glossary?key={project-key}
+    #
+    def upload_glossary(file)
+      # raise "#{path} file does not exist" unless ::File.exist?(path)
+      file = ::File.open(file, 'rb')
+
+      request(
+        :method => :post,
+        :path   => "/api/project/#{@project_id}/upload-glossary",
+        :query  => { :file => file },
+      )
+    end
+
+    # Upload your Translation Memory for Crowdin Project in TMX file format.
+    #
+    # == Request
+    #
+    # POST http://api.crowdin.net/api/project/{project-identifier}/upload-tm?key={project-key}
+    #
+    def upload_tm(file)
+      file = ::File.open(file, 'rb')
+
+      request(
+        :method => :post,
+        :path   => "/api/project/#{@project_id}/upload-tm",
+        :query  => { :file => file },
+      )
+    end
+
+    # Add directory to Crowdin project.
+    #
+    # == Request
+    #
+    # POST http://api.crowdin.net/api/project/{project-identifier}/add-directory?key={project-key}
+    #
+    def add_directory(name)
+      request(
+        :method => :post,
+        :path   => "/api/project/#{@project_id}/add-directory",
+        :query  => { :name => name },
+      )
+    end
+
+    # Delete Crowdin project directory. All nested files and directories will be deleted too.
+    #
+    # == Request
+    #
+    # POST http://api.crowdin.net/api/project/{project-identifier}/delete-directory?key={project-key}
+    #
+    def delete_directory(name)
+      request(
+        :method => :post,
+        :path   => "/api/project/#{@project_id}/delete-directory",
+        :query  => { :name => name },
+      )
+    end
+
 
     # Delete file from Crowdin project. All the translations will be lost without ability to restore them.
     #
@@ -85,11 +167,11 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/delete-file?key={project-key}
     #
-    def delete_file(params = {})
+    def delete_file(file)
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/delete-file",
-        :query  => params,
+        :query  => { :file => file },
       )
     end
 
@@ -100,81 +182,11 @@ module Crowdin
     #
     # GET http://api.crowdin.net/api/project/{project-identifier}/download/{package}.zip?key={project-key}
     #
-    def download_translation(params = {})
+    def download_translation(package = 'all', params = {})
       request(
         :method  => :get,
-        :path    => "/api/project/#{@project_id}/download/#{params[:package] || 'all'}.zip",
+        :path    => "/api/project/#{@project_id}/download/#{package}.zip",
         :output  => params[:output],
-      )
-    end
-
-    # Build ZIP archive with the latest translations. Please note that this method can be invoked only every 30 minutes. Also API call will be ignored if there were no any changes in project since last export.
-    #
-    # == Request
-    #
-    # POST POST http://api.crowdin.net/api/project/{project-identifier}/export?key={project-key}
-    #
-    def export_translations(params = {})
-      request(
-        :method => :post,
-        :path   => "/api/project/#{@project_id}/export",
-        :query  => params,
-      )
-    end
-
-    # Upload existing translations to your Crowdin project.
-    #
-    # == Request
-    #
-    # POST http://api.crowdin.net/api/project/{project-identifier}/upload-translation?key={project-key}
-    #
-    def upload_translation(params = {})
-      request(
-        :method => :post,
-        :path   => "/api/project/#{@project_id}/upload-translation",
-        :query  => params,
-      )
-    end
-
-    # Get supported languages list with Crowdin codes mapped to locale name and standarded codes.
-    #
-    # == Request
-    #
-    # GET http://api.crowdin.net/api/supported-languages
-    #
-    def supported_languages(params = {})
-      request(
-        :method => :get,
-        :path   => "/api/supported-languages",
-        :query  => params,
-      )
-    end
-
-    # Track your Crowdin project translation progress by language. Default response format is XML.
-    #
-    # == Request
-    #
-    # POST http://api.crowdin.net/api/project/{project-identifier}/status?key={project-key}
-    #
-    def translations_status(params = {})
-      request(
-        :method => :post,
-        :path   => "/api/project/#{@project_id}/status",
-        :query  => params,
-      )
-    end
-
-    # Get Crowdin Project details.
-    #
-    # == Request
-    #
-    # POST http://api.crowdin.net/api/project/{project-identifier}/info?key={project-key}
-    #
-    def project_info(params = {})
-      request(
-        :method => :post,
-        :path   => "/api/project/#{@project_id}/info",
-        :query  => params,
       )
     end
 
@@ -206,32 +218,59 @@ module Crowdin
       )
     end
 
-    # TODO
-    # Upload your glossarries for Crowdin Project in TBX file format.
+    # Build ZIP archive with the latest translations. Please note that this method can be invoked only every 30 minutes. Also API call will be ignored if there were no any changes in project since last export.
     #
     # == Request
     #
-    # POST http://api.crowdin.net/api/project/{project-identifier}/upload-glossary?key={project-key}
+    # POST http://api.crowdin.net/api/project/{project-identifier}/export?key={project-key}
     #
-    def upload_glossary(params = {})
+    def export_translations
       request(
         :method => :post,
-        :path   => "/api/project/#{@project_id}/upload-glossary",
-        :query  => params,
+        :path   => "/api/project/#{@project_id}/export",
       )
     end
 
-    # Upload your Translation Memory for Crowdin Project in TMX file format.
+
+    # Get supported languages list with Crowdin codes mapped to locale name and standarded codes.
     #
     # == Request
     #
-    # POST http://api.crowdin.net/api/project/{project-identifier}/upload-tm?key={project-key}
+    # GET http://api.crowdin.net/api/supported-languages
     #
-    def upload_tm(params = {})
+    def supported_languages(format = :xml)
+      request(
+        :method => :get,
+        :path   => "/api/supported-languages",
+        :query  => { format => true },
+      )
+    end
+
+    # Track your Crowdin project translation progress by language. Default response format is XML.
+    #
+    # == Request
+    #
+    # POST http://api.crowdin.net/api/project/{project-identifier}/status?key={project-key}
+    #
+    def translations_status(format = :xml)
       request(
         :method => :post,
-        :path   => "/api/project/#{@project_id}/upload-tm",
-        :query  => params,
+        :path   => "/api/project/#{@project_id}/status",
+        :query  => { format => true },
+      )
+    end
+
+    # Get Crowdin Project details.
+    #
+    # == Request
+    #
+    # POST http://api.crowdin.net/api/project/{project-identifier}/info?key={project-key}
+    #
+    def project_info(format = :xml)
+      request(
+        :method => :post,
+        :path   => "/api/project/#{@project_id}/info",
+        :query  => { format => true },
       )
     end
 
@@ -270,11 +309,10 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/delete-project?key={project-key}
     #
-    def delete_project(params = {})
+    def delete_project
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/delete-project",
-        :query  => params,
       )
     end
 
@@ -284,11 +322,11 @@ module Crowdin
     #
     # GET http://api.crowdin.net/api/account/get-projects?key={account-key}
     #
-    def get_projects(params = {})
+    def get_projects(login)
       request(
         :method => :get,
         :path   => "/api/account/get-projects",
-        :query  => params,
+        :query  => { :login => login },
       )
     end
 
