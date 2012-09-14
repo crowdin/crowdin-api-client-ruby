@@ -28,12 +28,30 @@ Start by creating a connection to Crowdin with your credentials:
 ```ruby
 require 'crowdin-api'
 
-crowdin = Crowdin::API.new(:api_key => API_KEY)
+crowdin = Crowdin::API.new(:api_key => API_KEY, :project_id => PROJECT_ID, :account_key => ACCOUNT_KEY)
 ```
 
 Now you can make requests to the api.
 
 ### Add File
+
+Documentation:  <http://crowdin.net/page/api/add-file>.
+
+First parameter is array of files that should be added to Crowdin project.
+Every file is hash:
+* `:dest` - file name with path in Crowdin project (_required_)
+* `:source` - uploaded file (_required_)
+* `:title` - title for uploaded file (_optional_)
+* `:export_pattern` - string that defines name of resulted file (_optional_)
+
+
+```ruby
+crowdin.add_file(
+  files = [
+    { :dest => '/directory/array.xml', :source => 'array.xml', :export_pattern => '/values-%two_letter_code%/%original_file_name%' },
+    { :dest => 'string.xml', :source => 'strings.xml', :title => 'Texts in Application' }
+], :type => 'android')
+```
 
 ### Update File
 
