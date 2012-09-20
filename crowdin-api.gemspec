@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "crowdin-api"
   gem.require_paths = ["lib"]
   gem.version       = Crowdin::API::VERSION
+
+  gem.add_dependency('rest-client')
 end

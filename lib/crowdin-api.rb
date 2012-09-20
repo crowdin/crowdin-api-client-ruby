@@ -1,6 +1,6 @@
 require 'logger'
 require 'rexml/document'
-require 'rest_client'
+require 'rest-client'
 
 require "crowdin-api/errors"
 require "crowdin-api/methods"
