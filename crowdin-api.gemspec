@@ -5,7 +5,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Anton Maminov"]
   gem.email         = ["anton.linux@gmail.com"]
   gem.description   = %q{The Crowdin Ruby Client is used to interact with the Crowdin API from Ruby}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.summary       = %q{The Crowdin Ruby Client is used to interact with the Crowdin API from Ruby}
   gem.homepage      = "https://github.com/mamantoha/crowdin-api"
 
   gem.files         = `git ls-files`.split($\)

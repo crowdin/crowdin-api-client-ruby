@@ -1,10 +1,19 @@
 # -*- encoding: utf-8 -*-
 
-require 'bundler'
-Bundler.setup :default
+#require 'bundler'
+#Bundler.setup :default
 
 require 'pp'
+#require 'crowdin-api'
+
+begin # XXX: Remove this begin/rescue before distributing your app
 require 'crowdin-api'
+rescue LoadError
+  STDERR.puts "In development, you need to use `bundle exec bin/todo` to run your app"
+  STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
+  STDERR.puts "Feel free to remove this message from bin/todo now"
+  exit 64
+end
 
 puts Crowdin::API::VERSION
 
