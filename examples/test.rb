@@ -1,19 +1,10 @@
 # -*- encoding: utf-8 -*-
 
-#require 'bundler'
-#Bundler.setup :default
+require 'bundler'
+Bundler.setup :default
 
 require 'pp'
-#require 'crowdin-api'
-
-begin # XXX: Remove this begin/rescue before distributing your app
 require 'crowdin-api'
-rescue LoadError
-  STDERR.puts "In development, you need to use `bundle exec bin/todo` to run your app"
-  STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
-  STDERR.puts "Feel free to remove this message from bin/todo now"
-  exit 64
-end
 
 puts Crowdin::API::VERSION
 
@@ -25,7 +16,7 @@ crowdin = Crowdin::API.new(
   :api_key     => API_KEY,
   :project_id  => PROJECT_ID,
   :account_key => ACCOUNT_KEY,
-  :base_url    => 'http://api.crowdin.net')
+)
 
 #puts crowdin.get_projects('anton.linux')
 
@@ -52,12 +43,12 @@ crowdin.update_file(
 #=end
 
 #crowdin.upload_translation([{dest: '/test1/ua.txt', source: 'ua.txt' }], 'ru')
-  
+
 #crowdin.download_translation('ru', :output => 'russia-goodbye.zip')
 #crowdin.download_glossary(:output => '1.txt')
 #crowdin.download_tm
 
-  
+
 #crowdin.export_translations
 
 #crowdin.supported_languages(:json)

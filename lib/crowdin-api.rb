@@ -17,7 +17,7 @@ module Crowdin
       @api_key     = options.delete(:api_key)
       @project_id  = options.delete(:project_id)
       @account_key = options.delete(:account_key)
-      @base_url    = options.delete(:base_url)
+      @base_url    = options.delete(:base_url) || 'http://api.crowdin.net'
 
       options = {
         :headers                => {},
