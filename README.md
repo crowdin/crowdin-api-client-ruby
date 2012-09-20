@@ -65,6 +65,14 @@ crowdin.add_file(
 
 ### Download Translations
 
+Documentation: <http://crowdin.net/page/api/download>
+
+First parameter is the language of translation you need or download `all` of them at once.
+
+```ruby
+crowdin.download_translation('ru', :output => '/path/to/download/ru_RU.zip')
+```
+
 ### Export Translations
 
 ### Account Projects
