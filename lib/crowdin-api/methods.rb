@@ -245,7 +245,7 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/info?key={project-key}
     #
-    def project_info(format = :xml)
+    def project_info(format = :json)
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/info",

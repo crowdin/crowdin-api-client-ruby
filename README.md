@@ -49,13 +49,35 @@ Every file is hash:
 crowdin.add_file(
   files = [
     { :dest => '/directory/array.xml', :source => 'array.xml', :export_pattern => '/values-%two_letter_code%/%original_file_name%' },
-    { :dest => 'string.xml', :source => 'strings.xml', :title => 'Texts in Application' }
+    { :dest => 'strings.xml', :source => 'strings.xml', :title => 'Texts in Application' }
 ], :type => 'android')
 ```
 
 ### Update File
 
+Documentation <http://crowdin.net/page/api/update-file>
+
+First parameter is array of files that should be updated in Crowdin project.
+Every file is hash:
+* `:dest` - file name with path in Crowdin project (_required_)
+* `:source` - uploaded file (_required_)
+
+```ruby
+crowdin.update_file(
+  files = [
+    { :dest => '/directory/array.xml', :source => 'array.xml' },
+    { :dest => 'strings.xml', :source => 'strings.xml' }
+])
+
+```
+
 ### Delete File
+
+Documentation <http://crowdin.net/page/api/delete-file>
+
+```ruby
+crowdin.delete_file('strings.xml')
+```
 
 ### Upload Translations
 

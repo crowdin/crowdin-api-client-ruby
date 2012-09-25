@@ -60,6 +60,7 @@ module Crowdin
         body = @response.body
         file = open(filename, 'wb')
         file.write(body)
+        file.close
         return true
       else
         doc = REXML::Document.new @response.body
