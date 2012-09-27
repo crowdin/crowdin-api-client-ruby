@@ -40,6 +40,13 @@ module Crowdin
 
     # Upload fresh version of your localization file to Crowdin.
     #
+    # == Parameters
+    #
+    # files - Array of files that should be added to Crowdin project.
+    # file is a Hash {:dest, :source}
+    # * :dest - file name with path in Crowdin project (required)
+    # * :source - path for uploaded file (required)
+    #
     # == Request
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/update-file?key={project-key}
@@ -59,6 +66,18 @@ module Crowdin
 
     # Upload existing translations to your Crowdin project.
     #
+    # == Parameters
+    #
+    # files - Array of files that should be added to Crowdin project.
+    # file is a Hash {:dest, :source}
+    # * :dest - file name with path in Crowdin project (required)
+    # * :source - path for uploaded file (required)
+    #
+    # Optional:
+    # * :import_duplicates (default: false)
+    # * :import_eq_suggestions (default: false)
+    # * :auto_approve_imported (default: false)
+    #
     # == Request
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/upload-translation?key={project-key}
@@ -75,6 +94,21 @@ module Crowdin
         :method => :post,
         :path   => "/api/project/#{@project_id}/upload-translation",
         :query  => params,
+      )
+    end
+
+    # Download ZIP file with translations. You can choose the language of translation you need or download all of them at once.
+    # Note: If you would like to download the most recent translations you may want to use export API method before downloading.
+    #
+    # == Request
+    #
+    # GET http://api.crowdin.net/api/project/{project-identifier}/download/{package}.zip?key={project-key}
+    #
+    def download_translation(language = 'all', params = {})
+      request(
+        :method  => :get,
+        :path    => "/api/project/#{@project_id}/download/#{language}.zip",
+        :output  => params[:output],
       )
     end
 
@@ -151,21 +185,6 @@ module Crowdin
         :method => :post,
         :path   => "/api/project/#{@project_id}/delete-file",
         :query  => { :file => file },
-      )
-    end
-
-    # Download ZIP file with translations. You can choose the language of translation you need or download all of them at once.
-    # Note: If you would like to download the most recent translations you may want to use export API method before downloading.
-    #
-    # == Request
-    #
-    # GET http://api.crowdin.net/api/project/{project-identifier}/download/{package}.zip?key={project-key}
-    #
-    def download_translation(package = 'all', params = {})
-      request(
-        :method  => :get,
-        :path    => "/api/project/#{@project_id}/download/#{package}.zip",
-        :output  => params[:output],
       )
     end
 
