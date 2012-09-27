@@ -156,6 +156,7 @@ Documentation: <http://crowdin.net/page/api/supported-languages>
 Tested with the following Ruby versions:
 
 - MRI 1.9.3
+- JRuby 1.7.0
 
 ## Contributing
 
