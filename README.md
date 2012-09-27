@@ -1,6 +1,7 @@
 # Crowdin::API
 
 The Crowdin Ruby Client is used to interact with the Crowdin API from Ruby.
+
 For more about the Crowdin API see <http://crowdin.net/page/api>.
 
 ## Installation
@@ -81,9 +82,15 @@ crowdin.delete_file('strings.xml')
 
 ### Upload Translations
 
+Documentation: <http://crowdin.net/page/api/upload-translation>
+
 ### Translation Status
 
+Documentation: <http://crowdin.net/page/api/status>
+
 ### Project Info
+
+Documentation: <http://crowdin.net/page/api/info>
 
 ### Download Translations
 
@@ -97,28 +104,58 @@ crowdin.download_translation('ru', :output => '/path/to/download/ru_RU.zip')
 
 ### Export Translations
 
+Documentation: <http://crowdin.net/page/api/export>
+
 ### Account Projects
+
+Documentation: <http://crowdin.net/page/api/get-projects>
 
 ### Create Project
 
+Documentation: <http://crowdin.net/page/api/create-project>
+
 ### Edit Project
+
+Documentation: <http://crowdin.net/page/api/edit-project>
 
 ### Delete Project
 
+Documentation: <http://crowdin.net/page/api/delete-project>
+
 ### Create Directory
+
+Documentation: <http://crowdin.net/page/api/add-directory>
 
 ### Delete Directory
 
+Documentation: <http://crowdin.net/page/api/delete-directory>
+
 ### Download Glossary
+
+Documentation: <http://crowdin.net/page/api/download-glossary>
 
 ### Upload Glossary
 
+Documentation: <http://crowdin.net/page/api/upload-glossary>
+
 ### Download TM
+
+Documentation: <http://crowdin.net/page/api/download-tm>
 
 ### Upload TM
 
-###Supported Languages
+Documentation: <http://crowdin.net/page/api/upload-tm>
 
+### Supported Languages
+
+Documentation: <http://crowdin.net/page/api/supported-languages>
+
+
+## Supported Rubies
+
+Tested with the following Ruby versions:
+
+- MRI 1.9.3
 
 ## Contributing
 
