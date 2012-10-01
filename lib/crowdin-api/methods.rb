@@ -1,4 +1,9 @@
 module Crowdin
+  # A wrapper and interface to the Crowdin api. Please visit the Crowdin developers
+  # site for a full explaination of what each of the Crowdin api methods
+  # expect and perform.
+  #
+  # http://crowdin.net/page/api
 
   class API
 
@@ -236,25 +241,23 @@ module Crowdin
     #
     # GET http://api.crowdin.net/api/supported-languages
     #
-    def supported_languages(format = :xml)
+    def supported_languages
       request(
         :method => :get,
         :path   => "/api/supported-languages",
-        :query  => { format => true },
       )
     end
 
-    # Track your Crowdin project translation progress by language. Default response format is XML.
+    # Track your Crowdin project translation progress by language.
     #
     # == Request
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/status?key={project-key}
     #
-    def translations_status(format = :xml)
+    def translations_status
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/status",
-        :query  => { format => true },
       )
     end
 
@@ -264,11 +267,10 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/info?key={project-key}
     #
-    def project_info(format = :json)
+    def project_info
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/info",
-        :query  => { format => true },
       )
     end
 

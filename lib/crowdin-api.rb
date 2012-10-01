@@ -1,5 +1,6 @@
+require 'pp'
 require 'logger'
-require 'rexml/document'
+require 'json'
 require 'rest-client'
 
 require "crowdin-api/errors"
@@ -13,6 +14,13 @@ require "crowdin-api/version"
 module Crowdin
   class API
 
+    # Create a new API object using the given parameters.
+    #
+    # @param [String] api_key the authentication API key can be found on the project settings page
+    # @param [String] project_id the project identifier.
+    # @param [String] account_key the account API Key
+    # @param [String] base_url the url of the Crowdin API
+    #
     def initialize(options = {})
       @api_key     = options.delete(:api_key)
       @project_id  = options.delete(:project_id)
@@ -24,10 +32,11 @@ module Crowdin
         :params                 => {},
         :key                    => @api_key,
         :'account-key'          => @account_key,
+        :json                   => true
       }.merge(options)
 
       options[:headers] = {
-        'Accept'                => 'application/xml',
+        'Accept'                => 'application/json',
         'User-Agent'            => "crowdin-rb/#{Crowdin::API::VERSION}",
         'X-Ruby-Version'        => RUBY_VERSION,
         'X-Ruby-Platform'       => RUBY_PLATFORM
@@ -36,6 +45,7 @@ module Crowdin
       options[:params] = {
         :key                    => @api_key,
         :'account-key'          => @account_key,
+        :json                   => true
       }.merge(options[:params])
 
       @connection = RestClient::Resource.new(@base_url, options)
@@ -63,15 +73,14 @@ module Crowdin
         file.close
         return true
       else
-        doc = REXML::Document.new @response.body
-        if doc.elements['error']
-          code    = doc.elements['error'].elements['code'].text
-          message = doc.elements['error'].elements['message'].text
+        doc = JSON.parse(@response.body)
+        if doc.kind_of?(Hash) && doc['code']
+          code    = doc['code']
+          message = doc['message']
           error   = Crowdin::API::Errors::Error.new(code, message)
           raise(error)
         else
-          # leave body as is
-          return @response
+          return doc
         end
       end
 
