@@ -74,7 +74,7 @@ module Crowdin
         return true
       else
         begin
-          doc = JSON.parse(@response.body)
+          doc = JSON.load(@response.body)
           if doc.kind_of?(Hash) && !doc['success']
             code    = doc['error']['code']
             message = doc['error']['message']
