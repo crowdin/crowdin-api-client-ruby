@@ -73,18 +73,14 @@ module Crowdin
         file.close
         return true
       else
-        begin
-          doc = JSON.load(@response.body)
-          if doc.kind_of?(Hash) && !doc['success']
-            code    = doc['error']['code']
-            message = doc['error']['message']
-            error   = Crowdin::API::Errors::Error.new(code, message)
-            raise(error)
-          else
-            return doc
-          end
-        rescue
-          # leave non-JSON body as is
+        doc = JSON.load(@response.body)
+        if doc.kind_of?(Hash) && doc['success'] == false
+          code    = doc['error']['code']
+          message = doc['error']['message']
+          error   = Crowdin::API::Errors::Error.new(code, message)
+          raise(error)
+        else
+          return doc
         end
       end
 
