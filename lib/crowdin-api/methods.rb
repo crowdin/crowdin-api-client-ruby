@@ -58,7 +58,7 @@ module Crowdin
     #
     # POST http://api.crowdin.net/api/project/{project-identifier}/update-file?key={project-key}
     #
-    def update_file(files)
+    def update_file(files, params = {})
       files = Hash[files.map{ |f| [
         f[:dest]               || raise(ArgumentError, "'`:dest` is required'"),
         ::File.open(f[:source] || raise(ArgumentError, "'`:source` is required'") )
