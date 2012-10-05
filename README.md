@@ -64,11 +64,13 @@ First parameter is array of files that should be updated in Crowdin project.
 Every file is hash:
 * `:dest` - file name with path in Crowdin project (_required_)
 * `:source` - uploaded file (_required_)
+* `:title` - title for uploaded file (_optional_)
+* `:export_pattern` - string that defines name of resulted file (_optional_)
 
 ```ruby
 crowdin.update_file(
   files = [
-    { :dest => '/directory/array.xml', :source => 'array.xml' },
+    { :dest => '/directory/array.xml', :source => 'array.xml', :export_pattern => '/values-%two_letter_code%/%original_file_name%'},
     { :dest => 'strings.xml', :source => 'strings.xml' }
 ])
 

@@ -47,10 +47,12 @@ module Crowdin
     #
     # == Parameters
     #
-    # files - Array of files that should be added to Crowdin project.
+    # files - Array of files that should be updated in Crowdin project.
     # file is a Hash {:dest, :source}
     # * :dest - file name with path in Crowdin project (required)
     # * :source - path for uploaded file (required)
+    # * :title - title in Crowdin UI (optional)
+    # * :export_pattern - Resulted file name (optional)
     #
     # == Request
     #
@@ -61,6 +63,14 @@ module Crowdin
         f[:dest]               || raise(ArgumentError, "'`:dest` is required'"),
         ::File.open(f[:source] || raise(ArgumentError, "'`:source` is required'") )
       ] }]
+
+      params[:titles] = Hash[files.map{ |f| [f[:dest], f[:title]] }]
+      params[:titles].delete_if{ |k, v| v.nil? }
+
+      params[:export_patterns] = Hash[files.map{ |f| [f[:dest], f[:export_pattern]] }]
+      params[:export_patterns].delete_if{ |k, v| v.nil? }
+
+      params.delete_if{ |k, v| v.empty? }
 
       request(
         :method => :post,
