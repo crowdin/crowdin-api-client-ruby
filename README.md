@@ -28,8 +28,10 @@ Start by creating a connection to Crowdin with your credentials:
 
 ```ruby
 require 'crowdin-api'
+require 'logger'
 
 crowdin = Crowdin::API.new(:api_key => API_KEY, :project_id => PROJECT_ID, :account_key => ACCOUNT_KEY)
+crowdin.log = Logger.new $stderr
 ```
 
 Now you can make requests to the api.

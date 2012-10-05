@@ -1,5 +1,4 @@
 require 'pp'
-require 'logger'
 require 'json'
 require 'rest-client'
 
@@ -7,12 +6,27 @@ require "crowdin-api/errors"
 require "crowdin-api/methods"
 require "crowdin-api/version"
 
-#log = Logger.new(STDOUT)
-#RestClient.log = log
-#log.level = Logger::DEBUG
 
+# The Crowdin::API library is used for interactions with a crowdin.net website.
+#
+# == Example
+#
+#   require 'crowdin-api'
+#   require 'logger'
+#
+#   crowdin = Crowdin::API.new(:api_key => API_KEY, :project_id => PROJECT_ID)
+#   crowdin.log = Logger.new($stderr)
+#
 module Crowdin
   class API
+
+    class << self
+      # Default logger for all Crowdin::API instances
+      #
+      #   Crowdin::API.log = Logger.new($stderr)
+      #
+      attr_accessor :log
+    end
 
     # Create a new API object using the given parameters.
     #
@@ -26,6 +40,8 @@ module Crowdin
       @project_id  = options.delete(:project_id)
       @account_key = options.delete(:account_key)
       @base_url    = options.delete(:base_url) || 'http://api.crowdin.net'
+
+      @log = nil
 
       options = {
         :headers                => {},
@@ -65,6 +81,9 @@ module Crowdin
         }
       end
 
+      log.debug("args: #{@response.args}") if log
+      log.debug("body: #{@response.body}") if log
+
       if @response.headers[:content_disposition]
         filename = params[:output] || @response.headers[:content_disposition][/attachment; filename="(.+?)"/, 1]
         body = @response.body
@@ -84,6 +103,18 @@ module Crowdin
         end
       end
 
+    end
+
+    # The current logger. If no logger has been set Crowdin::API.log is used.
+    #
+    def log
+      @log || Crowdin::API.log
+    end
+
+    # Sets the +logger+ used by this instance of Crowdin::API
+    #
+    def log= logger
+      @log = logger
     end
 
     private
