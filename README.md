@@ -51,7 +51,7 @@ Every file is hash:
 ```ruby
 crowdin.add_file(
   files = [
-    { :dest => '/directory/array.xml', :source => 'array.xml', :export_pattern => '/values-%two_letter_code%/%original_file_name%' },
+    { :dest => '/directory/array.xml', :source => 'array.xml', :export_pattern => '/values-%two_letters_code%/%original_file_name%' },
     { :dest => 'strings.xml', :source => 'strings.xml', :title => 'Texts in Application' }
 ], :type => 'android')
 ```
@@ -70,7 +70,7 @@ Every file is hash:
 ```ruby
 crowdin.update_file(
   files = [
-    { :dest => '/directory/array.xml', :source => 'array.xml', :export_pattern => '/values-%two_letter_code%/%original_file_name%'},
+    { :dest => '/directory/array.xml', :source => 'array.xml', :export_pattern => '/values-%two_letters_code%/%original_file_name%'},
     { :dest => 'strings.xml', :source => 'strings.xml' }
 ])
 

@@ -1,7 +1,7 @@
 PATH
   remote: ../
   specs:
-    crowdin-api (0.0.8)
+    crowdin-api (0.0.9)
       rest-client
 
 GEM
@@ -13,6 +13,7 @@ GEM
 
 PLATFORMS
   java
+  ruby
 
 DEPENDENCIES
   crowdin-api!
