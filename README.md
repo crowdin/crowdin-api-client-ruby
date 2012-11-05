@@ -42,10 +42,10 @@ Documentation:  <http://crowdin.net/page/api/add-file>.
 
 First parameter is array of files that should be added to Crowdin project.
 Every file is hash:
-* `:dest` - file name with path in Crowdin project (_required_)
-* `:source` - uploaded file (_required_)
-* `:title` - title for uploaded file (_optional_)
-* `:export_pattern` - string that defines name of resulted file (_optional_)
+* `:dest` - file name with path in Crowdin project (required)
+* `:source` - uploaded file (required)
+* `:title` - title for uploaded file (optional)
+* `:export_pattern` - string that defines name of resulted file (optional)
 
 
 ```ruby
@@ -62,10 +62,10 @@ Documentation <http://crowdin.net/page/api/update-file>
 
 First parameter is array of files that should be updated in Crowdin project.
 Every file is hash:
-* `:dest` - file name with path in Crowdin project (_required_)
-* `:source` - uploaded file (_required_)
-* `:title` - title for uploaded file (_optional_)
-* `:export_pattern` - string that defines name of resulted file (_optional_)
+* `:dest` - file name with path in Crowdin project (required)
+* `:source` - uploaded file (required)
+* `:title` - title for uploaded file (optional)
+* `:export_pattern` - string that defines name of resulted file (optional)
 
 ```ruby
 crowdin.update_file(
@@ -87,6 +87,31 @@ crowdin.delete_file('strings.xml')
 ### Upload Translations
 
 Documentation: <http://crowdin.net/page/api/upload-translation>
+
+First parameter is array of translated files that should be added to Crowdin project.
+Every file is hash:
+* `:dest` - file names in Crowdin (required)
+* `:source` - uploaded translation (required)
+
+Second parameter is target language.
+With a single call it's possible to upload translations for several files but only into one of the languages.
+Check [complete list of Crowdin language codes](http://crowdin.net/page/api/language-codes) that can be used.
+
+Optional params:
+* `:import_duplicates` - defines whether to add translation if there is the same translation previously added (default: false)
+* `:import_eq_suggestions` - defines whether to add translation if it is equal to source string at Crowdin (default: false)
+* `:auto_approve_imported` - mark uploaded translations as approved (default: false)
+
+```ruby
+crowdin.upload_translation(
+  files = [
+    { :dest => 'strings.xml', :source => 'strings_uk.xml' },
+    { :dest => 'array.xml', :source => 'array_uk.xml' }
+  ],
+  language = 'uk',
+  params = {:import_duplicates => true}
+)
+```
 
 ### Translation Status
 
