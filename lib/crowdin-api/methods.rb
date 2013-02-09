@@ -34,7 +34,7 @@ module Crowdin
       params[:export_patterns] = Hash[files.map{ |f| [f[:dest], f[:export_pattern]] }]
       params[:export_patterns].delete_if{ |k, v| v.nil? }
 
-      params.delete_if{ |k, v| v.empty? }
+      params.delete_if{ |k, v| v.to_s.empty? }
 
       request(
         :method => :post,
