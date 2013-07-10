@@ -64,7 +64,7 @@ module Crowdin
         :json                   => true
       }.merge(options[:params])
 
-      @connection = RestClient::Resource.new(@base_url, options)
+      @connection = RestClient::Resource.new(@base_url, options.merge(:timeout => -1, :open_timeout => -1))
     end
 
     def request(params, &block)
