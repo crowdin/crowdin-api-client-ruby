@@ -2,18 +2,19 @@
 require File.expand_path('../lib/crowdin-api/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Crowdin"]
-  gem.email         = ["support@crowdin.net"]
-  gem.description   = %q{The Crowdin Ruby Client is used to interact with the Crowdin API from Ruby}
-  gem.summary       = %q{The Crowdin Ruby Client is used to interact with the Crowdin API from Ruby}
-  gem.homepage      = "https://github.com/crowdin/crowdin-cli"
+  gem.name          = 'crowdin-api'
+  gem.version       = Crowdin::API::VERSION
+
+  gem.authors       = ['Crowdin']
+  gem.email         = ['support@crowdin.net']
+  gem.homepage      = 'https://github.com/crowdin/crowdin-api/'
+  gem.description   = 'Ruby Client for the Crowdin API'
+  gem.summary       = 'Client library to manage translations on Crowdin'
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = "crowdin-api"
-  gem.require_paths = ["lib"]
-  gem.version       = Crowdin::API::VERSION
+  gem.require_paths = ['lib']
 
-  gem.add_dependency('rest-client')
+  gem.add_dependency 'rest-client', '>= 1.8.6'
 end
