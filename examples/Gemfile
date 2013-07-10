@@ -1,3 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
+gem 'rest-client', :git => 'git://github.com/rest-client/rest-client.git'
 gem 'crowdin-api', :path => '../'
