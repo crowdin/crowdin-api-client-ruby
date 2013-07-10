@@ -4,6 +4,8 @@ The Crowdin Ruby Client is used to interact with the Crowdin API from Ruby.
 
 For more about the Crowdin API see <http://crowdin.net/page/api>.
 
+> **WARNING**: This is a development version: It contains the latest changes, but may also have severe known issues, including crashes and data loss situations. In fact, it may not work at all.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -240,4 +242,4 @@ Author: Anton Maminov (anton.maminov@gmail.com)
 
 Copyright: 2012-2013 [Crowdin.net](http://crowdin.net/)
 
-This library is distributed under the MIT license.  Please see the LICENSE file.
+This library is distributed under the MIT license. Please see the LICENSE file.
