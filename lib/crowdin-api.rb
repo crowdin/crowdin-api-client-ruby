@@ -6,7 +6,6 @@ require "crowdin-api/errors"
 require "crowdin-api/methods"
 require "crowdin-api/version"
 
-
 # The Crowdin::API library is used for interactions with a crowdin.net website.
 #
 # == Example
@@ -47,7 +46,6 @@ module Crowdin
         :headers                => {},
         :params                 => {},
         :timeout                => -1,
-        :open_timeout           => -1,
         :key                    => @api_key,
         :'account-key'          => @account_key,
         :json                   => true
