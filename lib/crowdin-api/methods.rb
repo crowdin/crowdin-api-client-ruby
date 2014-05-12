@@ -59,10 +59,14 @@ module Crowdin
     # POST http://api.crowdin.net/api/project/{project-identifier}/update-file?key={project-key}
     #
     def update_file(files, params = {})
-      params[:files] = Hash[files.map{ |f| [
-        f[:dest]               || raise(ArgumentError, "'`:dest` is required'"),
-        ::File.open(f[:source] || raise(ArgumentError, "'`:source` is required'") )
-      ] }]
+      params[:files] = Hash[files.map{ |f|
+        dest = f[:dest] || raise(ArgumentError, "'`:dest` is required'")
+        source = ::File.open(f[:source] || raise(ArgumentError, "'`:source` is required'"))
+        source.define_singleton_method(:original_filename) do
+          dest
+        end
+        [dest, source]
+      }]
 
       params[:titles] = Hash[files.map{ |f| [f[:dest], f[:title]] }]
       params[:titles].delete_if{ |k, v| v.nil? }
