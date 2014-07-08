@@ -240,6 +240,6 @@ Tested with the following Ruby versions:
 
 Author: Anton Maminov (anton.maminov@gmail.com)
 
-Copyright: 2012-2013 [Crowdin.net](http://crowdin.net/)
+Copyright: 2012-2014 [Crowdin.net](http://crowdin.net/)
 
 This library is distributed under the MIT license. Please see the LICENSE file.
