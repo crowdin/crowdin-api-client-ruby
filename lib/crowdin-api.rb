@@ -6,7 +6,7 @@ require "crowdin-api/errors"
 require "crowdin-api/methods"
 require "crowdin-api/version"
 
-# The Crowdin::API library is used for interactions with a crowdin.net website.
+# The Crowdin::API library is used for interactions with a crowdin.com website.
 #
 # == Example
 #
@@ -38,7 +38,7 @@ module Crowdin
       @api_key     = options.delete(:api_key)
       @project_id  = options.delete(:project_id)
       @account_key = options.delete(:account_key)
-      @base_url    = options.delete(:base_url) || 'http://api.crowdin.net'
+      @base_url    = options.delete(:base_url) || 'http://api.crowdin.com'
 
       @log = nil
 
