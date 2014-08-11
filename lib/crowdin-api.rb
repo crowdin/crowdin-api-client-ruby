@@ -38,7 +38,7 @@ module Crowdin
       @api_key     = options.delete(:api_key)
       @project_id  = options.delete(:project_id)
       @account_key = options.delete(:account_key)
-      @base_url    = options.delete(:base_url) || 'http://api.crowdin.com'
+      @base_url    = options.delete(:base_url) || 'https://api.crowdin.com'
 
       @log = nil
 
