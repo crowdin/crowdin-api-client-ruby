@@ -20,7 +20,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/add-file?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/add-file?key={project-key}
     #
     def add_file(files, params = {})
       params[:files] = Hash[files.map{ |f| [
@@ -56,7 +56,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/update-file?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/update-file?key={project-key}
     #
     def update_file(files, params = {})
       params[:files] = Hash[files.map{ |f|
@@ -99,7 +99,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/upload-translation?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/upload-translation?key={project-key}
     #
     def upload_translation(files, language, params = {})
       params[:files] = Hash[files.map{ |f| [
@@ -121,7 +121,7 @@ module Crowdin
     #
     # == Request
     #
-    # GET http://api.crowdin.com/api/project/{project-identifier}/download/{package}.zip?key={project-key}
+    # GET https://api.crowdin.com/api/project/{project-identifier}/download/{package}.zip?key={project-key}
     #
     def download_translation(language = 'all', params = {})
       request(
@@ -135,7 +135,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/upload-glossary?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/upload-glossary?key={project-key}
     #
     def upload_glossary(file)
       # raise "#{path} file does not exist" unless ::File.exist?(path)
@@ -152,7 +152,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/upload-tm?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/upload-tm?key={project-key}
     #
     def upload_tm(file)
       file = ::File.open(file, 'rb')
@@ -168,7 +168,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/add-directory?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/add-directory?key={project-key}
     #
     def add_directory(name)
       request(
@@ -182,7 +182,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/delete-directory?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/delete-directory?key={project-key}
     #
     def delete_directory(name)
       request(
@@ -197,7 +197,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/delete-file?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/delete-file?key={project-key}
     #
     def delete_file(file)
       request(
@@ -211,7 +211,7 @@ module Crowdin
     #
     # == Request
     #
-    # GET http://api.crowdin.com/api/project/{project-identifier}/download-glossary?key={project-key}
+    # GET https://api.crowdin.com/api/project/{project-identifier}/download-glossary?key={project-key}
     #
     def download_glossary(params = {})
       request(
@@ -225,7 +225,7 @@ module Crowdin
     #
     # == Request
     #
-    # GET http://api.crowdin.com/api/project/{project-identifier}/download-tm?key={project-key}
+    # GET https://api.crowdin.com/api/project/{project-identifier}/download-tm?key={project-key}
     #
     def download_tm(params = {})
       request(
@@ -239,7 +239,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/export?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/export?key={project-key}
     #
     def export_translations
       request(
@@ -253,7 +253,7 @@ module Crowdin
     #
     # == Request
     #
-    # GET http://api.crowdin.com/api/supported-languages
+    # GET https://api.crowdin.com/api/supported-languages
     #
     def supported_languages
       request(
@@ -266,7 +266,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/status?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/status?key={project-key}
     #
     def translations_status
       request(
@@ -279,7 +279,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/info?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/info?key={project-key}
     #
     def project_info
       request(
@@ -293,7 +293,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/account/create-project?account-key={account-key}
+    # POST https://api.crowdin.com/api/account/create-project?account-key={account-key}
     #
     def create_project(params = {})
       request(
@@ -307,7 +307,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/edit-project?key={key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/edit-project?key={key}
     #
     def edit_project(params = {})
       request(
@@ -321,7 +321,7 @@ module Crowdin
     #
     # == Request
     #
-    # POST http://api.crowdin.com/api/project/{project-identifier}/delete-project?key={project-key}
+    # POST https://api.crowdin.com/api/project/{project-identifier}/delete-project?key={project-key}
     #
     def delete_project
       request(
@@ -334,7 +334,7 @@ module Crowdin
     #
     # == Request
     #
-    # GET http://api.crowdin.com/api/account/get-projects?key={account-key}
+    # GET https://api.crowdin.com/api/account/get-projects?key={account-key}
     #
     def get_projects(login)
       request(
