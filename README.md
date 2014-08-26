@@ -1,6 +1,6 @@
 # Crowdin::API
 
-The Crowdin Ruby Client is used to interact with the Crowdin API from Ruby.
+A Ruby interface to the Crowdin API.
 
 For more about the Crowdin API see <https://crowdin.com/page/api>.
 
@@ -225,8 +225,8 @@ Documentation: <https://crowdin.com/page/api/supported-languages>
 
 Tested with the following Ruby versions:
 
-- MRI 1.9.3
-- JRuby 1.7.0
+- MRI 2.1.2
+- JRuby 1.7
 
 ## Contributing
 
