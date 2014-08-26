@@ -64,6 +64,7 @@ module Crowdin
         :json                   => true
       }.merge(options[:params])
 
+      RestClient.proxy = ENV['http_proxy'] if ENV['http_proxy']
       @connection = RestClient::Resource.new(@base_url, options)
     end
 
