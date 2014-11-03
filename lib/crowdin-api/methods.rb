@@ -253,12 +253,12 @@ module Crowdin
     #
     # == Request
     #
-    # GET https://api.crowdin.com/api/supported-languages
+    # GET https://api.crowdin.com/api/project/{project-identifier}/supported-languages?key={project-key}
     #
     def supported_languages
       request(
         :method => :get,
-        :path   => "/api/supported-languages",
+        :path   => "/api/project/#{@project_id}/supported-languages",
       )
     end
 
