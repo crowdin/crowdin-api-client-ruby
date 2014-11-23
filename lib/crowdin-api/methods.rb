@@ -193,6 +193,32 @@ module Crowdin
     end
 
 
+    # Rename or change directory attributes.
+    #
+    # == Parameters
+    #
+    # name - Full directory path that should be modified (e.g. /MainPage/AboutUs).
+    #
+    # Optional:
+    # * :new_name - new directory name (not contain path, name only)
+    # * :title - new directory title to be displayed in Crowdin UI
+    # * :export_pattern - new directory export pattern
+    #
+    # == Request
+    #
+    # POST https://api.crowdin.com/api/project/{project-identifier}/change-directory?key={project-key}
+    #
+    def change_directory(name, params = {})
+      params[:name] = name
+
+      request(
+        :method => :post,
+        :path   => "/api/project/#{@project_id}/change-directory",
+        :query  => params,
+      )
+    end
+
+
     # Delete file from Crowdin project. All the translations will be lost without ability to restore them.
     #
     # == Request

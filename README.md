@@ -112,6 +112,25 @@ Documentation: <https://crowdin.com/page/api/delete-directory>
 crowdin.delete_directory('dirname')
 ```
 
+### Change Directory
+
+Rename or change directory attributes.
+
+Documentation: <https://crowdin.com/page/api/change-directory>
+
+First parameter `name` - full directory path that should be modified (e.g. /MainPage/AboutUs) (required)
+
+Optional params:
+* `:new_name` - new directory name
+* `:title` - new directory title to be displayed in Crowdin UI
+* `:export_pattern` - new direcrory export pattern. Is used to create directory name and path in resulted translations bundle.
+
+When renaming directory the path can not be changed (it means `new_name` parameter can not contain path, name only).
+
+```ruby
+crowdin.change_directory('/MainPage/AboutUs', new_name: 'AboutCompany')
+```
+
 ### Upload Translations
 
 Upload translations made in a third party software or previously made translations.
