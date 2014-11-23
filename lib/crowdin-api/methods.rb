@@ -3,7 +3,7 @@ module Crowdin
   # site for a full explaination of what each of the Crowdin api methods
   # expect and perform.
   #
-  # http://crowdin.com/page/api
+  # https://crowdin.com/page/api
 
   class API
 
@@ -12,7 +12,7 @@ module Crowdin
     # == Parameters
     #
     # files - Array of files that should be added to Crowdin project.
-    # file is a Hash {:dest, :source, :title, :export_pattern}
+    # file is a Hash { :dest, :source, :title, :export_pattern }
     # * :dest - file name with path in Crowdin project (required)
     # * :source - path for uploaded file (required)
     # * :title - title in Crowdin UI (optional)
@@ -23,18 +23,18 @@ module Crowdin
     # POST https://api.crowdin.com/api/project/{project-identifier}/add-file?key={project-key}
     #
     def add_file(files, params = {})
-      params[:files] = Hash[files.map{ |f| [
+      params[:files] = Hash[files.map { |f| [
         f[:dest]               || raise(ArgumentError, "'`:dest`' is required"),
         ::File.open(f[:source] || raise(ArgumentError, "'`:source` is required'"))
       ] }]
 
-      params[:titles] = Hash[files.map{ |f| [f[:dest], f[:title]] }]
-      params[:titles].delete_if{ |k, v| v.nil? }
+      params[:titles] = Hash[files.map { |f| [f[:dest], f[:title]] }]
+      params[:titles].delete_if { |k, v| v.nil? }
 
-      params[:export_patterns] = Hash[files.map{ |f| [f[:dest], f[:export_pattern]] }]
-      params[:export_patterns].delete_if{ |k, v| v.nil? }
+      params[:export_patterns] = Hash[files.map { |f| [f[:dest], f[:export_pattern]] }]
+      params[:export_patterns].delete_if { |k, v| v.nil? }
 
-      params.delete_if{ |k, v| v.to_s.empty? }
+      params.delete_if { |k, v| v.to_s.empty? }
 
       request(
         :method => :post,
@@ -48,7 +48,7 @@ module Crowdin
     # == Parameters
     #
     # files - Array of files that should be updated in Crowdin project.
-    # file is a Hash {:dest, :source}
+    # file is a Hash { :dest, :source }
     # * :dest - file name with path in Crowdin project (required)
     # * :source - path for uploaded file (required)
     # * :title - title in Crowdin UI (optional)
@@ -59,7 +59,7 @@ module Crowdin
     # POST https://api.crowdin.com/api/project/{project-identifier}/update-file?key={project-key}
     #
     def update_file(files, params = {})
-      params[:files] = Hash[files.map{ |f|
+      params[:files] = Hash[files.map { |f|
         dest = f[:dest] || raise(ArgumentError, "'`:dest` is required'")
         source = ::File.open(f[:source] || raise(ArgumentError, "'`:source` is required'"))
         source.define_singleton_method(:original_filename) do
@@ -68,13 +68,13 @@ module Crowdin
         [dest, source]
       }]
 
-      params[:titles] = Hash[files.map{ |f| [f[:dest], f[:title]] }]
-      params[:titles].delete_if{ |k, v| v.nil? }
+      params[:titles] = Hash[files.map { |f| [f[:dest], f[:title]] }]
+      params[:titles].delete_if { |k, v| v.nil? }
 
-      params[:export_patterns] = Hash[files.map{ |f| [f[:dest], f[:export_pattern]] }]
-      params[:export_patterns].delete_if{ |k, v| v.nil? }
+      params[:export_patterns] = Hash[files.map { |f| [f[:dest], f[:export_pattern]] }]
+      params[:export_patterns].delete_if { |k, v| v.nil? }
 
-      params.delete_if{ |k, v| v.to_s.empty? }
+      params.delete_if { |k, v| v.to_s.empty? }
 
       request(
         :method => :post,
@@ -88,7 +88,7 @@ module Crowdin
     # == Parameters
     #
     # files - Array of files that should be added to Crowdin project.
-    # file is a Hash {:dest, :source}
+    # file is a Hash { :dest, :source }
     # * :dest - file name with path in Crowdin project (required)
     # * :source - path for uploaded file (required)
     #
@@ -102,7 +102,7 @@ module Crowdin
     # POST https://api.crowdin.com/api/project/{project-identifier}/upload-translation?key={project-key}
     #
     def upload_translation(files, language, params = {})
-      params[:files] = Hash[files.map{ |f| [
+      params[:files] = Hash[files.map { |f| [
         f[:dest]               || raise(ArgumentError, "`:dest` is required"),
         ::File.open(f[:source] || raise(ArgumentError, "`:source` is required"))
       ] }]
@@ -117,6 +117,7 @@ module Crowdin
     end
 
     # Download ZIP file with translations. You can choose the language of translation you need or download all of them at once.
+    #
     # Note: If you would like to download the most recent translations you may want to use export API method before downloading.
     #
     # == Request
@@ -261,7 +262,10 @@ module Crowdin
       )
     end
 
-    # Build ZIP archive with the latest translations. Please note that this method can be invoked only every 30 minutes. Also API call will be ignored if there were no any changes in project since last export.
+    # Build ZIP archive with the latest translations.
+    #
+    # Please note that this method can be invoked only every 30 minutes.
+    # Also API call will be ignored if there were no any changes in project since last export.
     #
     # == Request
     #
@@ -315,7 +319,7 @@ module Crowdin
     end
 
     # Create new Crowdin project.
-    # Important: The API method requires Account API Key. This key can not be found on your profile pages, please contact us to obtain API key for your account.
+    # Important: The API method requires Account API Key. This key can not be found on your profile pages.
     #
     # == Request
     #
@@ -357,10 +361,11 @@ module Crowdin
     end
 
     # Get Crowdin Project details.
+    # Important: The API method requires Account API Key. This key can not be found on your profile pages.
     #
     # == Request
     #
-    # GET https://api.crowdin.com/api/account/get-projects?key={account-key}
+    # GET https://api.crowdin.com/api/account/get-projects?account-key={account-key}
     #
     def get_projects(login)
       request(

@@ -28,12 +28,20 @@ $ gem install crowdin-api
 
 Start by creating a connection to Crowdin with your credentials:
 
+Please note that almost all API calls require the `Project Identifier` and `Project API Key`.
+
 ```ruby
 require 'crowdin-api'
 require 'logger'
 
-crowdin = Crowdin::API.new(api_key: API_KEY, project_id: PROJECT_ID, account_key: ACCOUNT_KEY)
+crowdin = Crowdin::API.new(api_key: API_KEY, project_id: PROJECT_ID)
 crowdin.log = Logger.new $stderr
+```
+
+As well there are several API methods (`get_projects`, `create_project`) that require `User API Key` instead of regular `Project API Key`.
+
+```ruby
+crowdin = Crowdin::API.new(account_key: ACCOUNT_KEY)
 ```
 
 Now you can make requests to the api.
@@ -47,17 +55,18 @@ Documentation:  <https://crowdin.com/page/api/add-file>.
 First parameter is array of files that should be added to Crowdin project.
 Every file is hash:
 * `:dest` - file name with path in Crowdin project (required)
-* `:source` - uploaded file (required)
-* `:title` - title for uploaded file (optional)
+* `:source` - file that should be added (required)
+* `:title` - string that defines title for uploaded file (optional)
 * `:export_pattern` - string that defines name of resulted file (optional)
 
+**NOTE!** 20 files max are allowed to upload per one time file transfer.
 
 ```ruby
 crowdin.add_file(
   files = [
-    { :dest => '/directory/array.xml', :source => 'array.xml', :export_pattern => '/values-%two_letters_code%/%original_file_name%' },
-    { :dest => 'strings.xml', :source => 'strings.xml', :title => 'Texts in Application' }
-], :type => 'android')
+    { dest: '/directory/array.xml', source: 'array.xml', export_pattern: '/values-%two_letters_code%/%original_file_name%' },
+    { dest: 'strings.xml', source: 'strings.xml', title: 'Texts in Application' }
+], type: 'android')
 ```
 
 ### Update File
@@ -72,6 +81,8 @@ Every file is hash:
 * `:source` - uploaded file (required)
 * `:title` - title for uploaded file (optional)
 * `:export_pattern` - string that defines name of resulted file (optional)
+
+**NOTE!** 20 files max are allowed to upload per one time file transfer.
 
 ```ruby
 crowdin.update_file(
@@ -133,7 +144,7 @@ crowdin.change_directory('/MainPage/AboutUs', new_name: 'AboutCompany')
 
 ### Upload Translations
 
-Upload translations made in a third party software or previously made translations.
+Upload existing translations to your Crowdin project.
 
 Documentation: <https://crowdin.com/page/api/upload-translation>
 
@@ -150,6 +161,8 @@ Optional params:
 * `:import_duplicates` - defines whether to add translation if there is the same translation previously added (default: false)
 * `:import_eq_suggestions` - defines whether to add translation if it is equal to source string at Crowdin (default: false)
 * `:auto_approve_imported` - mark uploaded translations as approved (default: false)
+
+**NOTE!** 20 files max are allowed to upload per one time file transfer.
 
 ```ruby
 crowdin.upload_translation(
@@ -198,6 +211,11 @@ crowdin.project_info
 
 Build ZIP archive with the latest translations.
 
+**Note!** This method can be invoked only once per 30 minutes (there is no such restriction for organization plans).
+
+Also API call will be ignored if there were no changes in the project since previous export.
+You can see whether ZIP archive with latest translations was actually build by status attribute (`built` or `skipped`) returned in response.
+
 Documentation: <https://crowdin.com/page/api/export>
 
 ```ruby
@@ -206,9 +224,22 @@ crowdin.export_translations
 
 ### Account Projects
 
+Get Crowdin Project details.
+
+**Important:** This API method requires `Account API Key`. This key can not be found on your profile pages.
+
 Documentation: <https://crowdin.com/page/api/get-projects>
 
+```ruby
+crowdin = Crowdin::API.new(account_key: ACCOUNT_KEY)
+crowdin.get_projects(login = 'YourCrowdinAccount')
+```
+
 ### Create Project
+
+Create Crowdin project.
+
+**Important:** This API method requires `Account API Key`. This key can not be found on your profile pages.
 
 Documentation: <https://crowdin.com/page/api/create-project>
 
