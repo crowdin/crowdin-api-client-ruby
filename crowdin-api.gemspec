@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.executables = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files = gem.files.grep(%r{^(test|spec|features)/})
-  s.extra_rdoc_files = ["README.md", "LICENSE"]
+  gem.extra_rdoc_files = ["README.md", "LICENSE"]
 
   gem.add_dependency 'rest-client', '~> 1.6.8'
   gem.add_development_dependency 'rspec', '~> 0'
