@@ -275,8 +275,8 @@ Documentation: <https://crowdin.com/page/api/supported-languages>
 
 Tested with the following Ruby versions:
 
-- MRI 2.1.2
-- JRuby 1.7
+- MRI 2.2.1
+- JRuby 9.0.0.0.pre2
 
 ## Contributing
 

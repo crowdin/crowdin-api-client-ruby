@@ -45,8 +45,8 @@ module Crowdin
       options = {
         :headers                => {},
         :params                 => {},
-        :timeout                => -1,
-        :open_timeout           => -1,
+        :timeout                => nil,
+        :open_timeout           => nil,
         :key                    => @api_key,
         :'account-key'          => @account_key,
         :json                   => true

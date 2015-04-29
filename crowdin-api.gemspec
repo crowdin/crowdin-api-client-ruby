@@ -20,6 +20,6 @@ Gem::Specification.new do |gem|
   gem.test_files = gem.files.grep(%r{^(test|spec|features)/})
   gem.extra_rdoc_files = ["README.md", "LICENSE"]
 
-  gem.add_dependency 'rest-client', '~> 1.6.8'
+  gem.add_dependency 'rest-client'
   gem.add_development_dependency 'rspec', '~> 0'
 end
