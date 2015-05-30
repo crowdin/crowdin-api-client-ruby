@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'logger'
+require 'crowdin-api'
+
+# You can add fixtures and/or initialization code here to make experimenting
+# with your gem easier. You can also use a different console, if you like.
+
+api_key = '79323cdcd6b4566154c4fb9c6bbd3be1'
+project_id = 'rubytestapi'
+base_url = 'https://api.crowdin.com'
+
+@crowdin = Crowdin::API.new(api_key: api_key, project_id: project_id, base_url: base_url)
+@crowdin.log = Logger.new(STDOUT)
+
+# (If you use this, don't forget to add pry to your Gemfile!)
+# require "pry"
+# Pry.start
+
+require "irb"
+IRB.start

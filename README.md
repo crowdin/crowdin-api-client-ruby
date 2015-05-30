@@ -4,6 +4,8 @@ A Ruby interface to the Crowdin API.
 
 For more about the Crowdin API see <https://crowdin.com/page/api>.
 
+To experiment with that code, run `bin/console` for an interactive prompt.
+
 > **WARNING**: This is a development version: It contains the latest changes, but may also have severe known issues, including crashes and data loss situations. In fact, it may not work at all.
 
 ## Installation
