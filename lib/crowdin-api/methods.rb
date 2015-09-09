@@ -18,6 +18,14 @@ module Crowdin
     # * :title - title in Crowdin UI (optional)
     # * :export_pattern - Resulted file name (optional)
     #
+    # Optional:
+    # * :branch - a branch name.
+    #   If the branch is not exists Crowdin will be return an error:
+    #     "error":{
+    #       "code":8,
+    #       "message":"File was not found"
+    #   }
+    #
     # == Request
     #
     # POST https://api.crowdin.com/api/project/{project-identifier}/add-file?key={project-key}
@@ -54,6 +62,9 @@ module Crowdin
     # * :title - title in Crowdin UI (optional)
     # * :export_pattern - Resulted file name (optional)
     #
+    # Optional:
+    # * :branch - a branch name
+    #
     # == Request
     #
     # POST https://api.crowdin.com/api/project/{project-identifier}/update-file?key={project-key}
@@ -89,13 +100,16 @@ module Crowdin
     #
     # files - Array of files that should be added to Crowdin project.
     # file is a Hash { :dest, :source }
-    # * :dest - file name with path in Crowdin project (required)
-    # * :source - path for uploaded file (required)
+    #   * :dest - file name with path in Crowdin project (required)
+    #   * :source - path for uploaded file (required)
+    # language - Target language. With a single call it's possible to upload translations for several
+    #   files but only into one of the languages. (required)
     #
     # Optional:
     # * :import_duplicates (default: false)
     # * :import_eq_suggestions (default: false)
     # * :auto_approve_imported (default: false)
+    # * :branch - a branch name
     #
     # == Request
     #
@@ -120,6 +134,10 @@ module Crowdin
     #
     # Note: If you would like to download the most recent translations you may want to use export API method before downloading.
     #
+    # Optional:
+    # * :output - a name of ZIP file with translations
+    # * :branch - a branch name
+    #
     # == Request
     #
     # GET https://api.crowdin.com/api/project/{project-identifier}/download/{package}.zip?key={project-key}
@@ -128,7 +146,8 @@ module Crowdin
       request(
         :method  => :get,
         :path    => "/api/project/#{@project_id}/download/#{language}.zip",
-        :output  => params[:output],
+        :output  => params.delete(:output),
+        :query   => params,
       )
     end
 
@@ -167,29 +186,53 @@ module Crowdin
 
     # Add directory to Crowdin project.
     #
+    # == Parameters
+    #
+    # name - directory name (with path if nested directory should be created). (required)
+    #
+    # Optional:
+    # * :is_branch - create new branch. Valid values - 0, 1. Only when create root directory.
+    # * :branch - a branch name.
+    #
     # == Request
     #
     # POST https://api.crowdin.com/api/project/{project-identifier}/add-directory?key={project-key}
     #
-    def add_directory(name)
+    def add_directory(name, params = {})
+      params[:name] = name
+
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/add-directory",
-        :query  => { :name => name },
+        :query  => params,
       )
     end
 
     # Delete Crowdin project directory. All nested files and directories will be deleted too.
     #
+    # == Parameters
+    #
+    # name - Directory path (or just name if the directory is in root) (required)
+    # :branch - a branch name (optional)
+    #
+    # FIXME
+    # When you try to remove the branch directory Crowdin will be return an error:
+    #   "error":{
+    #     "code":17,
+    #     "message":"Specified directory was not found"
+    #   }
+    #
     # == Request
     #
     # POST https://api.crowdin.com/api/project/{project-identifier}/delete-directory?key={project-key}
     #
-    def delete_directory(name)
+    def delete_directory(name, params = {})
+      params[:name] = name
+
       request(
         :method => :post,
         :path   => "/api/project/#{@project_id}/delete-directory",
-        :query  => { :name => name },
+        :query  => params,
       )
     end
 
@@ -204,6 +247,7 @@ module Crowdin
     # * :new_name - new directory name (not contain path, name only)
     # * :title - new directory title to be displayed in Crowdin UI
     # * :export_pattern - new directory export pattern
+    # * :branch - a branch name
     #
     # == Request
     #
@@ -267,14 +311,18 @@ module Crowdin
     # Please note that this method can be invoked only every 30 minutes.
     # Also API call will be ignored if there were no any changes in project since last export.
     #
+    # Optional:
+    # * :branch - a branch name
+    #
     # == Request
     #
-    # POST https://api.crowdin.com/api/project/{project-identifier}/export?key={project-key}
+    # GET https://api.crowdin.com/api/project/{project-identifier}/export?key={project-key}
     #
-    def export_translations
+    def export_translations(params = {})
       request(
-        :method => :post,
+        :method => :get,
         :path   => "/api/project/#{@project_id}/export",
+        :query  => params,
       )
     end
 

@@ -61,6 +61,9 @@ Every file is hash:
 * `:title` - string that defines title for uploaded file (optional)
 * `:export_pattern` - string that defines name of resulted file (optional)
 
+Optional params:
+* `:branch` - a branch name (optional)
+
 **NOTE!** 20 files max are allowed to upload per one time file transfer.
 
 ```ruby
@@ -83,6 +86,9 @@ Every file is hash:
 * `:source` - uploaded file (required)
 * `:title` - title for uploaded file (optional)
 * `:export_pattern` - string that defines name of resulted file (optional)
+
+Optional params:
+* `:branch` - a branch name (optional)
 
 **NOTE!** 20 files max are allowed to upload per one time file transfer.
 
@@ -109,15 +115,30 @@ crowdin.delete_file('strings.xml')
 
 Create a new directory in Crowdin project.
 
+First parameter `name` - full directory path that should be created (e.g. /MainPage/AboutUs) (required)
+
+Optional params:
+* `:is_branch` - create new branch. Valid values - `'0'`, `'1'`. Only when create root directory.
+* `:branch` - a branch name.
+
 Documentation: <https://crowdin.com/page/api/add-directory>
 
 ```ruby
 crowdin.add_directory('dirname')
 ```
 
+Create a new branch:
+
+```ruby
+crowdin.add_directory('master', is_branch: '1')
+```
+
 ### Delete Directory
 
 Remove directory with nested files from Crowdin project.
+
+Optional params:
+* `:branch` - a branch name (optional)
 
 Documentation: <https://crowdin.com/page/api/delete-directory>
 
@@ -137,6 +158,8 @@ Optional params:
 * `:new_name` - new directory name
 * `:title` - new directory title to be displayed in Crowdin UI
 * `:export_pattern` - new direcrory export pattern. Is used to create directory name and path in resulted translations bundle.
+* `:branch` - a branch name.
+
 
 When renaming directory the path can not be changed (it means `new_name` parameter can not contain path, name only).
 
@@ -163,6 +186,7 @@ Optional params:
 * `:import_duplicates` - defines whether to add translation if there is the same translation previously added (default: false)
 * `:import_eq_suggestions` - defines whether to add translation if it is equal to source string at Crowdin (default: false)
 * `:auto_approve_imported` - mark uploaded translations as approved (default: false)
+* `:branch` - a branch name (default: nil)
 
 **NOTE!** 20 files max are allowed to upload per one time file transfer.
 
@@ -184,6 +208,11 @@ Download last exported translation package (one target language or all languages
 Documentation: <https://crowdin.com/page/api/download>
 
 First parameter is the language of translation you need or download `all` of them at once.
+
+Optional params:
+* `:output` - a name of ZIP file with translations
+* `:branch` - a branch name (default: nil)
+
 
 ```ruby
 crowdin.download_translation('ru', :output => '/path/to/download/ru_RU.zip')
@@ -217,6 +246,9 @@ Build ZIP archive with the latest translations.
 
 Also API call will be ignored if there were no changes in the project since previous export.
 You can see whether ZIP archive with latest translations was actually build by status attribute (`built` or `skipped`) returned in response.
+
+Optional params:
+* `:branch` - a branch name (default: nil)
 
 Documentation: <https://crowdin.com/page/api/export>
 

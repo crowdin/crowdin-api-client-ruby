@@ -1,4 +1,3 @@
-require 'pp'
 require 'json'
 require 'rest-client'
 
@@ -70,6 +69,9 @@ module Crowdin
     end
 
     def request(params, &block)
+      # Returns a query hash with non nil values.
+      params[:query].reject! { |_, value| value.nil? } if params[:query]
+
       case params[:method]
       when :post
         query = @connection.options.merge(params[:query] || {})
@@ -84,7 +86,6 @@ module Crowdin
       end
 
       log.debug("args: #{@response.args}") if log
-      log.debug("body: #{@response.body}") if log
 
       if @response.headers[:content_disposition]
         filename = params[:output] || @response.headers[:content_disposition][/attachment; filename="(.+?)"/, 1]
@@ -95,6 +96,8 @@ module Crowdin
         return true
       else
         doc = JSON.load(@response.body)
+        log.debug("body: #{doc}") if log
+
         if doc.kind_of?(Hash) && doc['success'] == false
           code    = doc['error']['code']
           message = doc['error']['message']
