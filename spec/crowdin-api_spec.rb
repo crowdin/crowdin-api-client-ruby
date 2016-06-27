@@ -7,7 +7,7 @@ describe Crowdin::API do
   end
 
   it 'should have a version' do
-    expect(Crowdin::API::VERSION).to eq('0.2.5')
+    expect(Crowdin::API::VERSION).to eq('0.4.0')
   end
 
   it 'should get a list of supported languages' do
