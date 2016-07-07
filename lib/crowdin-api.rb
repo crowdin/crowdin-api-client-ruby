@@ -47,7 +47,6 @@ module Crowdin
         :headers                => {},
         :params                 => {},
         :timeout                => nil,
-        :open_timeout           => nil,
         :key                    => @api_key,
         :'account-key'          => @account_key,
         :json                   => true
@@ -87,7 +86,7 @@ module Crowdin
         }
       end
 
-      log.debug("args: #{@response.args}") if log
+      log.debug("args: #{@response.request.args}") if log
 
       if @response.headers[:content_disposition]
         filename = params[:output] || @response.headers[:content_disposition][/attachment; filename="(.+?)"/, 1]

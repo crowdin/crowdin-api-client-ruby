@@ -37,12 +37,12 @@ module Crowdin
       ] }]
 
       params[:titles] = Hash[files.map { |f| [f[:dest], f[:title]] }]
-      params[:titles].delete_if { |k, v| v.nil? }
+      params[:titles].delete_if { |_, v| v.nil? }
 
       params[:export_patterns] = Hash[files.map { |f| [f[:dest], f[:export_pattern]] }]
-      params[:export_patterns].delete_if { |k, v| v.nil? }
+      params[:export_patterns].delete_if { |_, v| v.nil? }
 
-      params.delete_if { |k, v| v.to_s.empty? }
+      params.delete_if { |_, v| v.respond_to?(:empty?) ? !!v.empty? : !v }
 
       request(
         :method => :post,
@@ -80,12 +80,12 @@ module Crowdin
       }]
 
       params[:titles] = Hash[files.map { |f| [f[:dest], f[:title]] }]
-      params[:titles].delete_if { |k, v| v.nil? }
+      params[:titles].delete_if { |_, v| v.nil? }
 
       params[:export_patterns] = Hash[files.map { |f| [f[:dest], f[:export_pattern]] }]
-      params[:export_patterns].delete_if { |k, v| v.nil? }
+      params[:export_patterns].delete_if { |_, v| v.nil? }
 
-      params.delete_if { |k, v| v.to_s.empty? }
+      params.delete_if { |_, v| v.respond_to?(:empty?) ? !!v.empty? : !v }
 
       request(
         :method => :post,
