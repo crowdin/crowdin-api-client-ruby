@@ -256,6 +256,31 @@ Documentation: <https://crowdin.com/page/api/export>
 crowdin.export_translations
 ```
 
+### Export File
+
+Download translations for a single file from CrowdIn
+
+Parameters:
+
+* :file - The path to the file that should be exported from the project
+* :language - The CrowdIn Language code - see <https://support.crowdin.com/api/language-codes/>
+
+Optional:
+
+* :output - where to save the exported file 
+* :branch - a branch name
+* :format - specify `xliff` to export in XLIFF file format
+* :export_translated_only - Defines whether only translated strings will be exported to the final file. 
+                            Acceptable values are: 1 or 0.
+* :export_approved_only - If set to 1 only approved translations will be exported in resulted file. 
+                          Acceptable values are: 1 or 0.  
+
+Documentation: <https://support.crowdin.com/api/export-file/>
+
+```ruby
+crowdin.export_file({file: 'file_name_on_crowdin.xml', language: :ru, output: './tmp/place_you_want_to_save_locally.xml'})
+```
+
 ### Account Projects
 
 Get Crowdin Project details.

@@ -326,6 +326,8 @@ module Crowdin
       )
     end
 
+    # Download translations for a single file from CrowdIn
+    #
     # == Parameters
     #
     # * :file - The path to the file that should be exported from the project
