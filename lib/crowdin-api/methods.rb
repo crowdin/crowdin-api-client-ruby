@@ -326,6 +326,36 @@ module Crowdin
       )
     end
 
+    # == Parameters
+    #
+    # * :file - The path to the file that should be exported from the project
+    # * :language - The CrowdIn Language code - see https://support.crowdin.com/api/language-codes/ 
+    #
+    # Optional:
+    #
+    # * :output - where to save the exported file 
+    # * :branch - a branch name
+    # * :format - specify `xliff` to export in XLIFF file format
+    # * :export_translated_only - Defines whether only translated strings will be exported to the final file. 
+    #                             Acceptable values are: 1 or 0.
+    # * :export_approved_only - If set to 1 only approved translations will be exported in resulted file. 
+    #                           Acceptable values are: 1 or 0.  
+    #
+    # == Request
+    #
+    # GET https://api.crowdin.com/api/project/{project-identifier}/export-file?key={project-key}
+    #
+    def export_file(params = {})
+      raise(ArgumentError, "'`:file`' is required") unless params[:file].present?
+      raise(ArgumentError, "'`:language`' is required") unless params[:language].present?
+
+      request(
+        :method => :get,
+        :path   => "/api/project/#{@project_id}/export-file",
+        :output => params.delete(:output),
+        :query  => params
+      )
+    end
 
     # Get supported languages list with Crowdin codes mapped to locale name and standarded codes.
     #
