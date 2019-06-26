@@ -306,6 +306,31 @@ module Crowdin
       )
     end
 
+    # Export a single translated file from Crowdin.
+    #
+    # == Parameters
+    #
+    # file - File name with path in Crowdin project. (required)
+    # language - Target language. (required)
+    #
+    # Optional:
+    # * :branch - a branch name
+    #
+    # == Request
+    #
+    # GET https://api.crowdin.com/api/project/{project-identifier}/export-file?key={project-key}
+    #
+    def export_file(file, language, params = {})
+      params[:file] = file
+      params[:language] = language
+      request(
+        :method => :get,
+        :path   => "/api/project/#{@project_id}/export-file",
+        :output => params.delete(:output),
+        :query  => params,
+      )
+    end
+
     # Build ZIP archive with the latest translations.
     #
     # Please note that this method can be invoked only every 30 minutes.
