@@ -330,6 +330,6 @@ Tested with the following Ruby versions:
 
 Author: Anton Maminov (anton.maminov@gmail.com)
 
-Copyright: 2012-2015 [crowdin.com](https://crowdin.com/)
+Copyright: 2012-2019 [crowdin.com](https://crowdin.com/)
 
 This library is distributed under the MIT license. Please see the LICENSE file.
