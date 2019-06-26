@@ -12,18 +12,20 @@ To experiment with that code, run `bin/console` for an interactive prompt.
 
 Add this line to your application's Gemfile:
 
-```
+```gemfile
 gem 'crowdin-api'
 ```
 
 And then execute:
-```
-$ bundle
+
+```console
+bundle
 ```
 
 Or install it yourself as:
-```
-$ gem install crowdin-api
+
+```console
+gem install crowdin-api
 ```
 
 ## Usage
@@ -56,12 +58,14 @@ Documentation:  <https://support.crowdin.com/api/add-file/>.
 
 First parameter is array of files that should be added to Crowdin project.
 Every file is hash:
+
 * `:dest` - file name with path in Crowdin project (required)
 * `:source` - file that should be added (required)
 * `:title` - string that defines title for uploaded file (optional)
 * `:export_pattern` - string that defines name of resulted file (optional)
 
 Optional params:
+
 * `:branch` - a branch name (optional)
 
 **NOTE!** 20 files max are allowed to upload per one time file transfer.
@@ -82,12 +86,14 @@ Documentation <https://support.crowdin.com/api/update-file/>
 
 First parameter is array of files that should be updated in Crowdin project.
 Every file is hash:
+
 * `:dest` - file name with path in Crowdin project (required)
 * `:source` - uploaded file (required)
 * `:title` - title for uploaded file (optional)
 * `:export_pattern` - string that defines name of resulted file (optional)
 
 Optional params:
+
 * `:branch` - a branch name (optional)
 
 **NOTE!** 20 files max are allowed to upload per one time file transfer.
@@ -118,6 +124,7 @@ Create a new directory in Crowdin project.
 First parameter `name` - full directory path that should be created (e.g. /MainPage/AboutUs) (required)
 
 Optional params:
+
 * `:is_branch` - create new branch. Valid values - `'0'`, `'1'`. Only when create root directory.
 * `:branch` - a branch name.
 
@@ -138,6 +145,7 @@ crowdin.add_directory('master', is_branch: '1')
 Remove directory with nested files from Crowdin project.
 
 Optional params:
+
 * `:branch` - a branch name (optional)
 
 Documentation: <https://support.crowdin.com/api/delete-directory/>
@@ -155,6 +163,7 @@ Documentation: <https://support.crowdin.com/api/change-directory/>
 First parameter `name` - full directory path that should be modified (e.g. /MainPage/AboutUs) (required)
 
 Optional params:
+
 * `:new_name` - new directory name
 * `:title` - new directory title to be displayed in Crowdin UI
 * `:export_pattern` - new direcrory export pattern. Is used to create directory name and path in resulted translations bundle.
@@ -175,6 +184,7 @@ Documentation: <https://support.crowdin.com/api/upload-translation/>
 
 First parameter is array of translated files that should be added to Crowdin project.
 Every file is hash:
+
 * `:dest` - file names in Crowdin (required)
 * `:source` - uploaded translation (required)
 
@@ -183,6 +193,7 @@ With a single call it's possible to upload translations for several files but on
 Check [complete list of Crowdin language codes](https://support.crowdin.com/api/language-codes/) that can be used.
 
 Optional params:
+
 * `:import_duplicates` - defines whether to add translation if there is the same translation previously added (default: false)
 * `:import_eq_suggestions` - defines whether to add translation if it is equal to source string at Crowdin (default: false)
 * `:auto_approve_imported` - mark uploaded translations as approved (default: false)
@@ -210,9 +221,9 @@ Documentation: <https://support.crowdin.com/api/download/>
 First parameter is the language of translation you need or download `all` of them at once.
 
 Optional params:
+
 * `:output` - a name of ZIP file with translations
 * `:branch` - a branch name (default: nil)
-
 
 ```ruby
 crowdin.download_translation('ru', :output => '/path/to/download/ru_RU.zip')
@@ -254,6 +265,7 @@ Also API call will be ignored if there were no changes in the project since prev
 You can see whether ZIP archive with latest translations was actually build by status attribute (`built` or `skipped`) returned in response.
 
 Optional params:
+
 * `:branch` - a branch name (default: nil)
 
 Documentation: <https://support.crowdin.com/api/export/>
@@ -315,8 +327,8 @@ Documentation: <https://support.crowdin.com/api/supported-languages/>
 
 Tested with the following Ruby versions:
 
-- MRI 2.2.1
-- JRuby 9.0.0.0
+* MRI 2.2.1
+* JRuby 9.0.0.0
 
 ## Contributing
 
