@@ -2,7 +2,7 @@
 
 A Ruby interface to the Crowdin API.
 
-For more about the Crowdin API see <https://crowdin.com/page/api>.
+For more about the Crowdin API see <https://support.crowdin.com/api/api-integration-setup/>.
 
 To experiment with that code, run `bin/console` for an interactive prompt.
 
@@ -52,7 +52,7 @@ Now you can make requests to the api.
 
 Add new file to Crowdin project.
 
-Documentation:  <https://crowdin.com/page/api/add-file>.
+Documentation:  <https://support.crowdin.com/api/add-file/>.
 
 First parameter is array of files that should be added to Crowdin project.
 Every file is hash:
@@ -78,7 +78,7 @@ crowdin.add_file(
 
 Upload fresh version of your localization file.
 
-Documentation <https://crowdin.com/page/api/update-file>
+Documentation <https://support.crowdin.com/api/update-file/>
 
 First parameter is array of files that should be updated in Crowdin project.
 Every file is hash:
@@ -105,7 +105,7 @@ crowdin.update_file(
 
 Remove file from Crowdin project.
 
-Documentation <https://crowdin.com/page/api/delete-file>
+Documentation <https://support.crowdin.com/api/delete-file/>
 
 ```ruby
 crowdin.delete_file('strings.xml')
@@ -121,7 +121,7 @@ Optional params:
 * `:is_branch` - create new branch. Valid values - `'0'`, `'1'`. Only when create root directory.
 * `:branch` - a branch name.
 
-Documentation: <https://crowdin.com/page/api/add-directory>
+Documentation: <https://support.crowdin.com/api/add-directory/>
 
 ```ruby
 crowdin.add_directory('dirname')
@@ -140,7 +140,7 @@ Remove directory with nested files from Crowdin project.
 Optional params:
 * `:branch` - a branch name (optional)
 
-Documentation: <https://crowdin.com/page/api/delete-directory>
+Documentation: <https://support.crowdin.com/api/delete-directory/>
 
 ```ruby
 crowdin.delete_directory('dirname')
@@ -150,7 +150,7 @@ crowdin.delete_directory('dirname')
 
 Rename or change directory attributes.
 
-Documentation: <https://crowdin.com/page/api/change-directory>
+Documentation: <https://support.crowdin.com/api/change-directory/>
 
 First parameter `name` - full directory path that should be modified (e.g. /MainPage/AboutUs) (required)
 
@@ -171,7 +171,7 @@ crowdin.change_directory('/MainPage/AboutUs', new_name: 'AboutCompany')
 
 Upload existing translations to your Crowdin project.
 
-Documentation: <https://crowdin.com/page/api/upload-translation>
+Documentation: <https://support.crowdin.com/api/upload-translation/>
 
 First parameter is array of translated files that should be added to Crowdin project.
 Every file is hash:
@@ -180,7 +180,7 @@ Every file is hash:
 
 Second parameter is target language.
 With a single call it's possible to upload translations for several files but only into one of the languages.
-Check [complete list of Crowdin language codes](https://crowdin.com/page/api/language-codes) that can be used.
+Check [complete list of Crowdin language codes](https://support.crowdin.com/api/language-codes/) that can be used.
 
 Optional params:
 * `:import_duplicates` - defines whether to add translation if there is the same translation previously added (default: false)
@@ -205,7 +205,7 @@ crowdin.upload_translation(
 
 Download last exported translation package (one target language or all languages as one zip file).
 
-Documentation: <https://crowdin.com/page/api/download>
+Documentation: <https://support.crowdin.com/api/download/>
 
 First parameter is the language of translation you need or download `all` of them at once.
 
@@ -222,7 +222,7 @@ crowdin.download_translation('ru', :output => '/path/to/download/ru_RU.zip')
 
 Track overall translation and proofreading progress of each target language.
 
-Documentation: <https://crowdin.com/page/api/status>
+Documentation: <https://support.crowdin.com/api/status/>
 
 ```ruby
 crowdin.translations_status
@@ -232,11 +232,17 @@ crowdin.translations_status
 
 Shows project details and meta information (last translations date, currently uploaded files, target languages etc..).
 
-Documentation: <https://crowdin.com/page/api/info>
+Documentation: <https://support.crowdin.com/api/info/>
 
 ```ruby
 crowdin.project_info
 ```
+
+### Export File
+
+Export a single translated file from Crowdin.
+
+Documentation: <https://support.crowdin.com/api/export-file/>
 
 ### Export Translations
 
@@ -250,7 +256,7 @@ You can see whether ZIP archive with latest translations was actually build by s
 Optional params:
 * `:branch` - a branch name (default: nil)
 
-Documentation: <https://crowdin.com/page/api/export>
+Documentation: <https://support.crowdin.com/api/export/>
 
 ```ruby
 crowdin.export_translations
@@ -262,7 +268,7 @@ Get Crowdin Project details.
 
 **Important:** This API method requires `Account API Key`. This key can not be found on your profile pages.
 
-Documentation: <https://crowdin.com/page/api/get-projects>
+Documentation: <https://support.crowdin.com/api/get-projects/>
 
 ```ruby
 crowdin = Crowdin::API.new(account_key: ACCOUNT_KEY)
@@ -275,35 +281,35 @@ Create Crowdin project.
 
 **Important:** This API method requires `Account API Key`. This key can not be found on your profile pages.
 
-Documentation: <https://crowdin.com/page/api/create-project>
+Documentation: <https://support.crowdin.com/api/create-project/>
 
 ### Edit Project
 
-Documentation: <https://crowdin.com/page/api/edit-project>
+Documentation: <https://support.crowdin.com/api/edit-project/>
 
 ### Delete Project
 
-Documentation: <https://crowdin.com/page/api/delete-project>
+Documentation: <https://support.crowdin.com/api/delete-project/>
 
 ### Download Glossary
 
-Documentation: <https://crowdin.com/page/api/download-glossary>
+Documentation: <https://support.crowdin.com/api/download-glossary/>
 
 ### Upload Glossary
 
-Documentation: <https://crowdin.com/page/api/upload-glossary>
+Documentation: <https://support.crowdin.com/api/upload-glossary/>
 
 ### Download TM
 
-Documentation: <https://crowdin.com/page/api/download-tm>
+Documentation: <https://support.crowdin.com/api/download-tm/>
 
 ### Upload TM
 
-Documentation: <https://crowdin.com/page/api/upload-tm>
+Documentation: <https://support.crowdin.com/api/upload-tm/>
 
 ### Supported Languages
 
-Documentation: <https://crowdin.com/page/api/supported-languages>
+Documentation: <https://support.crowdin.com/api/supported-languages/>
 
 ## Supported Rubies
 
