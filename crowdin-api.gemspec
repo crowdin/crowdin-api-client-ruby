@@ -22,10 +22,10 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'rest-client', '~> 2.0'
 
-  gem.add_development_dependency 'rspec', '~> 3.4'
-  gem.add_development_dependency 'webmock', '~> 2.1'
-  gem.add_development_dependency 'sinatra', '~> 1.4', '>= 1.4.7'
   gem.add_development_dependency 'bundler', '~> 1.9'
-  gem.add_development_dependency 'rake', '~> 10.0'
-  gem.add_development_dependency 'pry', '~> 0.10.3'
+  gem.add_development_dependency 'rspec', '~> 3.8'
+  gem.add_development_dependency 'webmock', '~> 3.6'
+  gem.add_development_dependency 'sinatra', '~> 2.0', '>= 2.0.5'
+  gem.add_development_dependency 'rake', '~> 11.2', '>= 11.2.2'
+  gem.add_development_dependency 'pry', '~> 0.12.2'
 end
