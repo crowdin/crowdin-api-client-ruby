@@ -65,10 +65,11 @@ module Crowdin
       # Returns a query hash with non nil values.
       params[:query].reject! { |_, value| value.nil? } if params[:query]
 
-      case params[:method]
-      when :post
+      method = params[:method]
+      case method
+      when :post, :delete, :put, :patch
         query = @connection.options.merge(params[:query] || {})
-        @connection[params[:path]].post(query) { |response, _, _|
+        @connection[params[:path]].public_send(method, query) { |response, _, _|
           @response = response
         }
       when :get
