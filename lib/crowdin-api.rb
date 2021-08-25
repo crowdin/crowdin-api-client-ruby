@@ -32,13 +32,11 @@ module Crowdin
     #
     # @param [String] api_key the authentication API key can be found on the project settings page
     # @param [String] project_id the project identifier.
-    # @param [String] account_key the account API Key
     # @param [String] base_url the url of the Crowdin API
     #
     def initialize(options = {})
       @api_key     = options.delete(:api_key)
       @project_id  = options.delete(:project_id)
-      @account_key = options.delete(:account_key)
       @base_url    = options.delete(:base_url) || 'https://api.crowdin.com'
 
       @log = nil
@@ -47,23 +45,17 @@ module Crowdin
         :headers                => {},
         :params                 => {},
         :timeout                => nil,
-        :key                    => @api_key,
-        :'account-key'          => @account_key,
         :json                   => true
       }.merge(options)
 
       options[:headers] = {
         'Accept'                => 'application/json',
+        'Authorization'         => "Bearer #{@api_key}",
+        'Content-Type'          => 'application/json',
         'User-Agent'            => "crowdin-rb/#{Crowdin::API::VERSION}",
         'X-Ruby-Version'        => RUBY_VERSION,
         'X-Ruby-Platform'       => RUBY_PLATFORM
       }.merge(options[:headers])
-
-      options[:params] = {
-        :key                    => @api_key,
-        :'account-key'          => @account_key,
-        :json                   => true
-      }.merge(options[:params])
 
       RestClient.proxy = ENV['http_proxy'] if ENV['http_proxy']
       @connection = RestClient::Resource.new(@base_url, options)
