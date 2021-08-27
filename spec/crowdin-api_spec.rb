@@ -10,7 +10,7 @@ describe Crowdin::API do
     expect(Crowdin::API::VERSION).to_not be_nil
   end
 
-  it 'should get a list of supported languages' do
-    expect(@crowdin_client.supported_languages).to eq([{}])
+  it 'should get a list of directories' do
+    expect(@crowdin_client.list_directories).to eq([{}])
   end
 end

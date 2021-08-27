@@ -1,12 +1,12 @@
 require 'sinatra/base'
 
 class FakeCrowdin < Sinatra::Base
-  get '/api/project/:project_identifier/supported-languages' do
-    json_response 200, 'supported-languages.json'
+  get '/api/v2/projects/:project_identifier/directories' do
+    json_response 200, 'directories.json'
   end
 
-  get '/api/project/supported-languages' do
-    json_response 200, 'supported-languages.json'
+  get '/api/v2/projects/directories' do
+    json_response 200, 'directories.json'
   end
 
   private
