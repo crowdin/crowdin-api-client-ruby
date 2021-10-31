@@ -1,3 +1,7 @@
 source 'https://rubygems.org'
 gemspec
-gem 'rubocop', '~> 1.20', require: false, group: :development
+
+group :development do
+  gem 'rubocop', '~> 1.20', require: false
+  gem 'byebug',  '~> 11.1', require: false
+end

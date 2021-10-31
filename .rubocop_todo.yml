@@ -35,7 +35,7 @@ Layout/EmptyLinesAroundClassBody:
   Exclude:
     - 'lib/crowdin-api.rb'
     - 'lib/crowdin-api/errors.rb'
-    - 'lib/crowdin-api/methods.rb'
+    - 'lib/crowdin-api/client.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -169,7 +169,7 @@ Style/Documentation:
     - 'test/**/*'
     - 'lib/crowdin-api.rb'
     - 'lib/crowdin-api/errors.rb'
-    - 'lib/crowdin-api/methods.rb'
+    - 'lib/crowdin-api/client.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -189,7 +189,7 @@ Style/FrozenStringLiteralComment:
     - 'crowdin-api.gemspec'
     - 'lib/crowdin-api.rb'
     - 'lib/crowdin-api/errors.rb'
-    - 'lib/crowdin-api/methods.rb'
+    - 'lib/crowdin-api/client.rb'
     - 'lib/crowdin-api/version.rb'
     - 'spec/crowdin-api_spec.rb'
     - 'spec/features/external_request_spec.rb'
