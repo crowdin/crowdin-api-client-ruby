@@ -3,38 +3,63 @@ module Crowdin
     module Projects
 
       def list_projects(query={})
-        get_request(
-          path: "#{@api_version_url}/projects",
-          query: query
+        request = Web::Request.new(
+          @connection,
+          :get,
+          "#{@target_api_url}/projects",
+          query
         )
+
+        request.process_request!
+        request.process_response!
       end
 
       def add_project(query={})
-        post_request(
-          path: "#{@api_version_url}/projects",
-          query: query
+        request = Web::Request.new(
+          @connection,
+          :post,
+          "#{@target_api_url}/projects",
+          query
         )
+
+        request.process_request!
+        request.process_response!
       end
 
       def get_project(project_id, query={})
-        get_request(
-          path: "#{@api_version_url}/projects/#{project_id}",
-          query: query
+        request = Web::Request.new(
+          @connection,
+          :get,
+          "#{@target_api_url}/projects/#{project_id}",
+          query
         )
+
+        request.process_request!
+        request.process_response!
       end
 
       def delete_project(project_id, query={})
-        delete_request(
-          path: "#{@api_version_url}/projects/#{project_id}",
-          query: query
+        request = Web::Request.new(
+          @connection,
+          :delete,
+          "#{@target_api_url}/#{project_id}",
+          query
         )
+
+        request.process_request!
+        request.process_response!
       end
 
       def edit_project(project_id, query={})
-        patch_request(
-          path: "#{@api_version_url}/projects/#{project_id}",
-          query: query
+        request = Web::Request.new(
+          @connection,
+          :patch,
+          "#{@target_api_url}/#{project_id}",
+          query
         )
+
+        request.process_request!
+        request.process_response!
       end
 
     end
