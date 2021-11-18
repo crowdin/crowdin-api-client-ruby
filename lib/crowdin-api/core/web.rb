@@ -2,16 +2,22 @@ module Crowdin
   module Web
 
     class Query
-      attr_reader :method, :query, :cleared_query
+      attr_reader :method, :query
 
-      def initialize(method, query)
-        @method        = method
-        @query         = query
-        @cleared_query = get_cleared_query
+      def initialize(method, query, options={})
+        @method     = method
+        @query      = query
+        @file_query = options.delete(:file_query)
       end
 
       def perform
-        @method.eql?(:get) ? { params: @cleared_query } : JSON.generate(@cleared_query)
+        if @file_query
+          @query
+        elsif @method.eql?(:get)
+          { params: get_cleared_query }
+        else
+          JSON.generate(get_cleared_query)
+        end
       end
 
       private
@@ -22,11 +28,11 @@ module Crowdin
     end
 
     class Request < Client
-      def initialize(connection, method, path, query)
+      def initialize(connection, method, path, query, file_query=false)
         @connection = connection
         @method     = method
         @path       = path
-        @payload    = Query.new(method, query).perform
+        @payload    = Query.new(method, query, file_query: file_query).perform
         @output     = nil
       end
 
@@ -44,18 +50,20 @@ module Crowdin
 
           log! "body: #{doc}"
 
-          doc.kind_of?(Hash) && doc['success'] == false ? raise_error!(doc) : doc
+          # doc.kind_of?(Hash) && doc['errors'].any? => errors output
+          doc
         end
       end
 
       private
 
-      def raise_error!(doc)
+      def parse_error!(doc)
+        key     = doc['key']
         code    = doc['error']['code']
         message = doc['error']['message']
-        error   = Errors::Error.new(code, message)
+        error   = Errors::Error.new(key, code, message)
 
-        raise(error)
+        error.to_s
       end
 
       def write_file!(output, response)

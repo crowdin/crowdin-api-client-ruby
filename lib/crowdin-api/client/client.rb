@@ -10,6 +10,7 @@ module Crowdin
   class Client
 
     include API::Projects
+    include API::Storages
 
     # Create a new API object using the given parameters.
     #
@@ -69,3 +70,8 @@ module Crowdin
 
   end
 end
+
+# TODO
+# Remove extra arguments from request methods
+# Write examples how to call request methods
+# Error handler

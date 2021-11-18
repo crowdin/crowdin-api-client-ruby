@@ -9,6 +9,7 @@ require 'crowdin-api/core/errors'
 
 # Api modules
 require 'crowdin-api/projects/projects'
+require 'crowdin-api/storages/storages'
 
 # Client
 require 'crowdin-api/client/version'

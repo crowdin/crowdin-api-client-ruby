@@ -1,12 +1,12 @@
 module Crowdin
   module API
-    module Projects
+    module Storages
 
-      def list_projects(query={})
+      def list_storages(query={})
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects",
+          "#{@target_api_url}/storages",
           query
         )
 
@@ -14,23 +14,27 @@ module Crowdin
         request.process_response!
       end
 
-      def add_project(query={})
+      def add_storage(file)
+        @connection.headers['Content-Type']         = 'application/octet-stream'
+        @connection.headers['Crowdin-API-FileName'] = File.basename(file)
+
         request = Web::Request.new(
           @connection,
           :post,
-          "#{@target_api_url}/projects",
-          query
+          "#{@target_api_url}/storages",
+          file,
+          true
         )
 
         request.process_request!
         request.process_response!
       end
 
-      def get_project(project_id, query={})
+      def get_storage(storage_id, query={})
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects/#{project_id}",
+          "#{@target_api_url}/storages/#{storage_id}",
           query
         )
 
@@ -38,23 +42,11 @@ module Crowdin
         request.process_response!
       end
 
-      def delete_project(project_id, query={})
+      def delete_storage(storage_id, query={})
         request = Web::Request.new(
           @connection,
           :delete,
-          "#{@target_api_url}/projects/#{project_id}",
-          query
-        )
-
-        request.process_request!
-        request.process_response!
-      end
-
-      def edit_project(project_id, query={})
-        request = Web::Request.new(
-          @connection,
-          :patch,
-          "#{@target_api_url}/projects/#{project_id}",
+          "#{@target_api_url}/storages/#{storage_id}",
           query
         )
 

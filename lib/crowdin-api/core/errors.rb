@@ -2,14 +2,16 @@ module Crowdin
   module Errors
 
     class Error < StandardError
+      attr_reader :key
       attr_reader :error_code
       attr_reader :error_message
       attr_reader :message
 
-      def initialize(error_code, error_message)
+      def initialize(key, error_code, error_message)
+        @key           = key
         @error_code    = error_code.to_i
         @error_message = error_message
-        @message       = "#{error_code}: #{error_message}"
+        @message       = "#{key} => #{error_code}: #{error_message}"
       end
 
       def to_s
