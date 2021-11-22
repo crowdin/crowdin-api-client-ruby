@@ -5,7 +5,6 @@ module Crowdin
       attr_reader :key
       attr_reader :error_code
       attr_reader :error_message
-      attr_reader :message
 
       def initialize(key, error_code, error_message)
         @key           = key

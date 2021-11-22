@@ -4,20 +4,15 @@ module Crowdin
     class Query
       attr_reader :method, :query
 
-      def initialize(method, query, options={})
-        @method     = method
-        @query      = query
-        @file_query = options.delete(:file_query)
+      def initialize(method, query)
+        @method = method
+        @query  = query
       end
 
       def perform
-        if @file_query
-          @query
-        elsif @method.eql?(:get)
-          { params: get_cleared_query }
-        else
-          JSON.generate(get_cleared_query)
-        end
+        return @query if @query.is_a?(File)
+
+        @method.eql?(:get) ? { params: get_cleared_query } : get_cleared_query.to_json
       end
 
       private
@@ -28,50 +23,43 @@ module Crowdin
     end
 
     class Request < Client
-      def initialize(connection, method, path, query, file_query=false)
+      def initialize(connection, method, path, query={}, headers={})
         @connection = connection
         @method     = method
         @path       = path
-        @payload    = Query.new(method, query, file_query: file_query).perform
+        @payload    = Query.new(method, query).perform
+        @headers    = headers
         @output     = nil
       end
 
       def process_request!
-        @connection[@path].send(@method, @payload) { |response, _, _| @response = response }
+        if @method.eql?(:delete)
+          @response = @connection[@path].send(@method)
+        elsif @method.eql?(:get)
+          @response = @connection[@path].send(@method, @payload)
+        else
+          @connection[@path].send(@method, @payload, @headers) { |response, _, _| @response = response }
+        end
       end
 
       def process_response!
         log! "args: #{@response.request.args}"
 
-        if @response.headers[:content_disposition]
-          write_file!(@output, @response)
-        else
-          doc = JSON.load(@response.body)
+        doc = JSON.load(@response.body)
 
-          log! "body: #{doc}"
+        log! "body: #{doc}"
 
-          # doc.kind_of?(Hash) && doc['errors'].any? => errors output
-          doc
-        end
+        doc
       end
 
       private
 
-      def parse_error!(doc)
-        key     = doc['key']
-        code    = doc['error']['code']
-        message = doc['error']['message']
-        error   = Errors::Error.new(key, code, message)
-
-        error.to_s
+      def parse_error!(errors)
+        #TODO
       end
 
       def write_file!(output, response)
-        filename = output || response.headers[:content_disposition][/attachment; filename="(.+?)"/, 1]
-        body = response.body
-        file = open(filename, 'wb')
-        file.write(body)
-        file.close
+        #TODO
       end
     end
 
