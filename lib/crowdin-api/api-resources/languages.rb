@@ -1,12 +1,12 @@
 module Crowdin
   module API
-    module Projects
+    module Languages
 
-      def list_projects(query={})
+      def list_languages(query={})
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects",
+          "#{@target_api_url}/languages",
           query
         )
 
@@ -14,11 +14,11 @@ module Crowdin
         request.process_response!
       end
 
-      def add_project(query={})
+      def add_custom_language(query={})
         request = Web::Request.new(
           @connection,
           :post,
-          "#{@target_api_url}/projects",
+          "#{@target_api_url}/languages",
           query
         )
 
@@ -26,41 +26,39 @@ module Crowdin
         request.process_response!
       end
 
-      def get_project(project_id)
-        project_id || raise(ArgumentError, ":project_id is required")
+      def get_language(language_id)
+        language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects/#{project_id}",
-          query
+          "#{@target_api_url}/languages/#{language_id}"
         )
 
         request.process_request!
         request.process_response!
       end
 
-      def delete_project(project_id)
-        project_id || raise(ArgumentError, ":project_id is required")
+      def delete_custom_language(language_id)
+        language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(
           @connection,
           :delete,
-          "#{@target_api_url}/projects/#{project_id}",
-          query
+          "#{@target_api_url}/languages/#{language_id}"
         )
 
         request.process_request!
         request.process_response!
       end
 
-      def edit_project(project_id, query={})
-        project_id || raise(ArgumentError, ":project_id is required")
+      def edit_custom_language(language_id)
+        language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(
           @connection,
           :patch,
-          "#{@target_api_url}/projects/#{project_id}",
+          "#{@target_api_url}/languages/#{language_id}",
           query
         )
 

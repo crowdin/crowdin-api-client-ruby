@@ -9,8 +9,12 @@
 module Crowdin
   class Client
 
+    include API::Languages
     include API::Projects
+    include API::SourceFiles
     include API::Storages
+    include API::TranslationStatus
+    include API::Translations
 
     # Create a new Client object using the given settings.
     #

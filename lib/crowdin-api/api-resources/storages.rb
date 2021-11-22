@@ -4,15 +4,15 @@ module Crowdin
 
       # Get storages list.
       #
-      # == Parameters
+      # === Parameters
       #
       # Optional:
-      # * *:limit* [Integer 1..500] - A maximum number of items to retrieve, default - 25
-      # * *:offset* [Integer >= 0] - A starting offset in the collection, default - 0
+      # * +:limit+ [Integer 1..500] - A maximum number of items to retrieve, default - 25
+      # * +:offset+ [Integer >= 0] - A starting offset in the collection, default - 0
       #
-      # == Example
+      # === Example
       #
-      #  crowdin.list_projects(limit: 2)
+      #  crowdin.list_projects(limit: your_value)
       #
       def list_storages(query={})
         request = Web::Request.new(
@@ -28,14 +28,13 @@ module Crowdin
 
       # Add storage.
       #
-      # == Parameters
+      # === Parameters
       #
-      # Required:
-      # * *:file* [File] - File class object
+      # * +File+ - File class object
       #
-      # == Example
+      # === Example
       #
-      #  crowdin.add_storage(File.open('example.jpeg'))
+      #  crowdin.add_storage(File.open('your_filename.extension'))
       #
       def add_storage(file=nil)
         file && file.is_a?(File) || raise(ArgumentError, ':file as File class is required')
@@ -54,17 +53,16 @@ module Crowdin
 
       # Get storage information.
       #
-      # == Parameters
+      # === Parameters
       #
-      # Required:
-      # * *:storage_id* [Integer] - Storage Identifier. Get via list_storages
+      # * +:storage_id+ [Integer] - Storage Identifier. Get via list_storages
       #
-      # == Example
+      # === Example
       #
-      #  crowdin.get_storage(1)
+      #  crowdin.get_storage(your_storage_id)
       #
       def get_storage(storage_id=nil)
-        storage_id || raise(ArgumentError, ":storage_id is required")
+        storage_id || raise(ArgumentError, ':storage_id is required')
 
         request = Web::Request.new(
           @connection,
@@ -78,17 +76,16 @@ module Crowdin
 
       # Delete storage.
       #
-      # == Parameters
+      # === Parameters
       #
-      # Required:
-      # * *:storage_id* [Integer] - Storage Identifier. Get via list_storages
+      # * +:storage_id+ [Integer] - Storage Identifier. Get via list_storages
       #
-      # == Example
+      # === Example
       #
-      #  crowdin.delete_storage(1)
+      #  crowdin.delete_storage(your_storage_id)
       #
       def delete_storage(storage_id)
-        storage_id || raise(ArgumentError, ":storage_id is required")
+        storage_id || raise(ArgumentError, ':storage_id is required')
 
         request = Web::Request.new(
           @connection,
