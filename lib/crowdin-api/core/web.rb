@@ -1,7 +1,7 @@
 module Crowdin
   module Web
 
-    class Query
+    class Payload
       attr_reader :method, :query
 
       def initialize(method, query)
@@ -27,7 +27,7 @@ module Crowdin
         @connection = connection
         @method     = method
         @path       = path
-        @payload    = Query.new(method, query).perform
+        @payload    = Payload.new(method, query).perform
         @headers    = headers
         @output     = nil
       end
