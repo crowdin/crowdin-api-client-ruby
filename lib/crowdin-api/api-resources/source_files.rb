@@ -8,7 +8,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects#{project_id}/branches",
+          "#{@target_api_url}/projects/#{project_id}/branches",
           query
         )
 
@@ -22,7 +22,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :post,
-          "#{@target_api_url}/projects#{project_id}/branches",
+          "#{@target_api_url}/projects/#{project_id}/branches",
           query
         )
 
@@ -37,7 +37,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects#{project_id}/branches/#{branch_id}"
+          "#{@target_api_url}/projects/#{project_id}/branches/#{branch_id}"
         )
 
         request.process_request!
@@ -51,7 +51,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :delete,
-          "#{@target_api_url}/projects#{project_id}/branches/#{branch_id}"
+          "#{@target_api_url}/projects/#{project_id}/branches/#{branch_id}"
         )
 
         request.process_request!
@@ -65,7 +65,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :patch,
-          "#{@target_api_url}/projects#{project_id}/branches/#{branch_id}",
+          "#{@target_api_url}/projects/#{project_id}/branches/#{branch_id}",
           query
         )
 
@@ -79,7 +79,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects#{project_id}/directories",
+          "#{@target_api_url}/projects/#{project_id}/directories",
           query
         )
 
@@ -93,7 +93,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :post,
-          "#{@target_api_url}/projects#{project_id}/directories",
+          "#{@target_api_url}/projects/#{project_id}/directories",
           query
         )
 
@@ -108,7 +108,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects#{project_id}/directories/#{directory_id}"
+          "#{@target_api_url}/projects/#{project_id}/directories/#{directory_id}"
         )
 
         request.process_request!
@@ -122,7 +122,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :delete,
-          "#{@target_api_url}/projects#{project_id}/directories/#{directory_id}"
+          "#{@target_api_url}/projects/#{project_id}/directories/#{directory_id}"
         )
 
         request.process_request!
@@ -136,7 +136,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :patch,
-          "#{@target_api_url}/projects#{project_id}/directories/#{directory_id}",
+          "#{@target_api_url}/projects/#{project_id}/directories/#{directory_id}",
           query
         )
 
@@ -150,7 +150,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects#{project_id}/files",
+          "#{@target_api_url}/projects/#{project_id}/files",
           query
         )
 
@@ -164,7 +164,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :post,
-          "#{@target_api_url}/projects#{project_id}/files",
+          "#{@target_api_url}/projects/#{project_id}/files",
           query
         )
 
@@ -179,7 +179,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects#{project_id}/files/#{file_id}"
+          "#{@target_api_url}/projects/#{project_id}/files/#{file_id}"
         )
 
         request.process_request!
@@ -193,7 +193,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :put,
-          "#{@target_api_url}/projects#{project_id}/files/#{file_id}",
+          "#{@target_api_url}/projects/#{project_id}/files/#{file_id}",
           query
         )
 
@@ -208,7 +208,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :delete,
-          "#{@target_api_url}/projects#{project_id}/files/#{file_id}"
+          "#{@target_api_url}/projects/#{project_id}/files/#{file_id}"
         )
 
         request.process_request!
@@ -222,7 +222,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :patch,
-          "#{@target_api_url}/projects#{project_id}/files/#{file_id}",
+          "#{@target_api_url}/projects/#{project_id}/files/#{file_id}",
           query
         )
 
@@ -237,7 +237,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects#{project_id}/files/#{file_id}/download"
+          "#{@target_api_url}/projects/#{project_id}/files/#{file_id}/download"
         )
 
         request.process_request!
@@ -251,7 +251,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects#{project_id}/files/#{file_id}/revisions",
+          "#{@target_api_url}/projects/#{project_id}/files/#{file_id}/revisions",
           query
         )
 
@@ -267,7 +267,7 @@ module Crowdin
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects#{project_id}/files/#{file_id}/revisions/#{revision_id}"
+          "#{@target_api_url}/projects/#{project_id}/files/#{file_id}/revisions/#{revision_id}"
         )
 
         request.process_request!
