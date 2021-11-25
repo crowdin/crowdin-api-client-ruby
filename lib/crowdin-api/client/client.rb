@@ -16,6 +16,8 @@ module Crowdin
     include API::TranslationStatus
     include API::Translations
 
+    attr_accessor :project_id
+
     # Create a new Client object using the given settings.
     #
     # == Settings

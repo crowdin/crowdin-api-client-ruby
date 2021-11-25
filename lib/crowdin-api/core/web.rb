@@ -45,11 +45,15 @@ module Crowdin
       def process_response!
         log! "args: #{@response.request.args}"
 
-        doc = JSON.load(@response.body)
+        if @response.headers[:content_disposition]
+          write_file!
+        else
+          doc = JSON.load(@response.body)
 
-        log! "body: #{doc}"
+          log! "body: #{doc}"
 
-        doc
+          doc
+        end
       end
 
       private
@@ -58,8 +62,12 @@ module Crowdin
         #TODO
       end
 
-      def write_file!(output, response)
-        #TODO
+      def write_file!
+        filename = @output || @response.headers[:content_disposition][/attachment; filename="(.+?)"/, 1]
+        body = @response.body
+        file = open(filename, 'wb')
+        file.write(body)
+        file.close
       end
     end
 

@@ -36,7 +36,7 @@ module Crowdin
       #
       #  crowdin.add_storage(File.open('your_filename.extension'))
       #
-      def add_storage(file=nil)
+      def add_storage(file)
         file && file.is_a?(File) || raise(ArgumentError, ':file as File class is required')
 
         request = Web::Request.new(
@@ -61,7 +61,7 @@ module Crowdin
       #
       #  crowdin.get_storage(your_storage_id)
       #
-      def get_storage(storage_id=nil)
+      def get_storage(storage_id)
         storage_id || raise(ArgumentError, ':storage_id is required')
 
         request = Web::Request.new(
