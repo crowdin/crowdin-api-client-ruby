@@ -33,7 +33,7 @@ For more about Crowdin API v2 see the documentation:
 Add this line to your application's Gemfile:
 
 ```gemfile
-gem 'crowdin-api'
+gem 'crowdin-api', '~> 1.0.0'
 ```
 
 And then execute:
@@ -63,9 +63,9 @@ gem install crowdin-api
 require 'crowdin-api'
 
 # Create a new Crowdin Client object.
-crowdin = Crowdin::Client.new(api_key: api_key)
+crowdin = Crowdin::Client.new(api_token: your_api_token)
 # or you can create Enterprise instanse by specify your organization_domain
-crowdin = Crowdin::Client.new(api_key: api_key, organization_domain: your_organization_domain)
+crowdin = Crowdin::Client.new(api_token: your_api_token, organization_domain: your_organization_domain)
 
 # Also you can specify project_id to handle it in methods
 
