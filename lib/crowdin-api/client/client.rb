@@ -9,6 +9,11 @@
 module Crowdin
   class Client
 
+    # TODO
+    # handle status codes after request
+    # handle and parse validation erorrs after request
+    # cover comments to all methods
+
     include API::Languages
     include API::Projects
     include API::SourceFiles
