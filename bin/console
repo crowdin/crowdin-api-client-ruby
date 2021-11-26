@@ -8,13 +8,13 @@ require 'crowdin-api'
 
 api_key = 'YOUR_API_KEY'
 
-@crowdin = Crowdin::Client.new(api_key: api_key)
+@crowdin = Crowdin::Client.new(api_key: api_key, logger: true)
 
 # or Enterprise
 
 e_api_key = 'YOUR_ENTERPRISE_API_KEY'
 
-@e_crowdin = Crowdin::Client.new(api_key: e_api_key, organization_domain: 'YOUR_ORGANIZATION_DOMAIN')
+@e_crowdin = Crowdin::Client.new(api_key: e_api_key, organization_domain: 'YOUR_ORGANIZATION_DOMAIN', logger: true)
 
 require 'irb'
 IRB.start
