@@ -28,13 +28,13 @@ module Crowdin
     #
     # == Settings
     #
-    # * *api_key* [String] - the authentication API key can be found on the account settings page
+    # * *api_token* [String] - the authentication API token can be found on the account settings page
     # * *project_id* [Integer] - the project identifier, default - nil
     # * *logger* [Boolean] - flag to require and enable logger
     # * *organization_domain* [String] - the name of your organization, only for enterprise
     #
     def initialize(options = {})
-      @api_key    = options.delete(:api_key)
+      @api_token  = options.delete(:api_token)
       @project_id = options.delete(:project_id) || nil
       @logger     = options.delete(:logger)     || false
       @base_url   = options[:organization_domain] ?
@@ -50,7 +50,7 @@ module Crowdin
 
       options[:headers] = {
         'Accept'          => 'application/json',
-        'Authorization'   => "Bearer #{@api_key}",
+        'Authorization'   => "Bearer #{@api_token}",
         'Content-Type'    => 'application/json',
         'User-Agent'      => "crowdin-rb/#{Crowdin::Client::VERSION}",
         'X-Ruby-Version'  => RUBY_VERSION,
