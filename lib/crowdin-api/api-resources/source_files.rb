@@ -238,14 +238,18 @@ module Crowdin
         request.process_response!
       end
 
-      def download_file(file_id=nil, project_id=@project_id)
-        file_id    || raise(ArgumentError, ':file_id is required')
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def download_file(destination=nil, file_id=nil, project_id=@project_id)
+        destination || raise(ArgumentError, ':destination is required for downlaods')
+        file_id     || raise(ArgumentError, ':file_id is required')
+        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
           :get,
-          "#{@target_api_url}/projects/#{project_id}/files/#{file_id}/download"
+          "#{@target_api_url}/projects/#{project_id}/files/#{file_id}/download",
+          {},
+          {},
+          destination
         )
 
         request.process_request!

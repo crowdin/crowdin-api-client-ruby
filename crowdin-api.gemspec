@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_runtime_dependency 'rest-client', '~> 2.0'
+  gem.add_runtime_dependency 'open-uri', '~> 0.2.0'
 
   gem.add_development_dependency 'bundler', '~> 1.9'
   gem.add_development_dependency 'rspec', '~> 3.8'

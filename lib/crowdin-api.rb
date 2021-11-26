@@ -2,6 +2,7 @@
 require 'json'
 require 'logger'
 require 'rest-client'
+require 'open-uri'
 
 # Core modules
 require 'crowdin-api/core/web'
