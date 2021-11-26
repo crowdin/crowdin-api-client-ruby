@@ -30,14 +30,17 @@ module Crowdin
       #
       # === Parameters
       #
-      # * +File+ - File class object
+      # * +File+ - File class object or path to file
       #
       # === Example
       #
       #  crowdin.add_storage(File.open('your_filename.extension'))
+      #  crowdin.add_storage('your_filename.extension')
       #
-      def add_storage(file)
-        file && file.is_a?(File) || raise(ArgumentError, ':file as File class is required')
+      def add_storage(file=nil)
+        file || raise(ArgumentError, ':file is required')
+
+        file = file.is_a?(File) ? file : File.open(file)
 
         request = Web::Request.new(
           @connection,
@@ -61,7 +64,7 @@ module Crowdin
       #
       #  crowdin.get_storage(your_storage_id)
       #
-      def get_storage(storage_id)
+      def get_storage(storage_id=nil)
         storage_id || raise(ArgumentError, ':storage_id is required')
 
         request = Web::Request.new(
@@ -84,7 +87,7 @@ module Crowdin
       #
       #  crowdin.delete_storage(your_storage_id)
       #
-      def delete_storage(storage_id)
+      def delete_storage(storage_id=nil)
         storage_id || raise(ArgumentError, ':storage_id is required')
 
         request = Web::Request.new(

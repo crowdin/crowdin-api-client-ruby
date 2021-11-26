@@ -2,7 +2,7 @@ module Crowdin
   module API
     module SourceFiles
 
-      def list_branches(project_id=@project_id, query={})
+      def list_branches(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
@@ -16,7 +16,7 @@ module Crowdin
         request.process_response!
       end
 
-      def add_branch(project_id=@project_id, query={})
+      def add_branch(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
@@ -30,9 +30,9 @@ module Crowdin
         request.process_response!
       end
 
-      def get_branch(project_id=@project_id, branch_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def get_branch(branch_id=nil, project_id=@project_id)
         branch_id  || raise(ArgumentError, ':branch_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -44,9 +44,9 @@ module Crowdin
         request.process_response!
       end
 
-      def delete_branch(project_id=@project_id, branch_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def delete_branch(branch_id=nil, project_id=@project_id)
         branch_id  || raise(ArgumentError, ':branch_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -58,9 +58,11 @@ module Crowdin
         request.process_response!
       end
 
-      def edit_branch(project_id=@project_id, branch_id, query={})
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def edit_branch(branch_id=nil, query={})
+        project_id = query[:project_id] || @project_id
+
         branch_id  || raise(ArgumentError, ':branch_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -73,7 +75,7 @@ module Crowdin
         request.process_response!
       end
 
-      def list_directories(project_id=@project_id, query={})
+      def list_directories(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
@@ -87,7 +89,7 @@ module Crowdin
         request.process_response!
       end
 
-      def add_directory(project_id=@project_id, query={})
+      def add_directory(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
@@ -101,9 +103,9 @@ module Crowdin
         request.process_response!
       end
 
-      def get_directory(project_id=@project_id, directory_id)
-        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def get_directory(directory_id=nil, project_id=@project_id)
         directory_id || raise(ArgumentError, ':directory_id is required')
+        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -115,9 +117,9 @@ module Crowdin
         request.process_response!
       end
 
-      def delete_directory(project_id=@project_id, directory_id)
-        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def delete_directory(directory_id=nil, project_id=@project_id)
         directory_id || raise(ArgumentError, ':directory_id is required')
+        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -129,9 +131,11 @@ module Crowdin
         request.process_response!
       end
 
-      def edit_directory(project_id=@project_id, directory_id, query={})
-        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def edit_directory(directory_id=nil, query={})
+        project_id = query[:project_id] || @project_id
+
         directory_id || raise(ArgumentError, ':directory_id is required')
+        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -144,7 +148,7 @@ module Crowdin
         request.process_response!
       end
 
-      def list_files(project_id=@project_id, query={})
+      def list_files(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
@@ -158,7 +162,7 @@ module Crowdin
         request.process_response!
       end
 
-      def add_file(project_id=@project_id, query={})
+      def add_file(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
@@ -172,9 +176,9 @@ module Crowdin
         request.process_response!
       end
 
-      def get_file(project_id=@project_id, file_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def get_file(file_id=nil, project_id=@project_id)
         file_id    || raise(ArgumentError, ':file_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -186,9 +190,11 @@ module Crowdin
         request.process_response!
       end
 
-      def update_or_restore_file(project_id=@project_id, file_id, query={})
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def update_or_restore_file(file_id=nil, query={})
+        project_id = query[:project_id] || @project_id
+
         file_id    || raise(ArgumentError, ':file_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -201,9 +207,9 @@ module Crowdin
         request.process_response!
       end
 
-      def delete_file(project_id=@project_id, file_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def delete_file(file_id=nil, project_id=@project_id)
         file_id    || raise(ArgumentError, ':file_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -215,9 +221,11 @@ module Crowdin
         request.process_response!
       end
 
-      def edit_file(project_id=@project_id, file_id, query={})
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def edit_file(file_id=nil, query={})
+        project_id = query[:project_id] || @project_id
+
         file_id    || raise(ArgumentError, ':file_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -230,9 +238,9 @@ module Crowdin
         request.process_response!
       end
 
-      def download_file(project_id=@project_id, file_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def download_file(file_id=nil, project_id=@project_id)
         file_id    || raise(ArgumentError, ':file_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -244,9 +252,11 @@ module Crowdin
         request.process_response!
       end
 
-      def list_file_revisions(project_id=@project_id, file_id, query={})
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def list_file_revisions(file_id=nil, query={})
+        project_id = query[:project_id] || @project_id
+
         file_id    || raise(ArgumentError, ':file_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -259,10 +269,10 @@ module Crowdin
         request.process_response!
       end
 
-      def get_file_revision(project_id=@project_id, file_id, revision_id)
-        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def get_file_revision(file_id=nil, revision_id=nil, project_id=@project_id)
         file_id     || raise(ArgumentError, ':file_id is required')
         revision_id || raise(ArgumentError, ':revision_id is required')
+        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,

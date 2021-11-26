@@ -26,7 +26,7 @@ module Crowdin
         request.process_response!
       end
 
-      def get_project(project_id)
+      def get_project(project_id=nil)
         project_id || raise(ArgumentError, ':project_id is required')
 
         request = Web::Request.new(
@@ -39,7 +39,7 @@ module Crowdin
         request.process_response!
       end
 
-      def delete_project(project_id)
+      def delete_project(project_id=nil)
         project_id || raise(ArgumentError, ':project_id is required')
 
         request = Web::Request.new(
@@ -52,7 +52,7 @@ module Crowdin
         request.process_response!
       end
 
-      def edit_project(project_id, query={})
+      def edit_project(project_id=nil, query={})
         project_id || raise(ArgumentError, ':project_id is required')
 
         request = Web::Request.new(

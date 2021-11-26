@@ -26,7 +26,7 @@ module Crowdin
         request.process_response!
       end
 
-      def get_language(language_id)
+      def get_language(language_id=nil)
         language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(
@@ -39,7 +39,7 @@ module Crowdin
         request.process_response!
       end
 
-      def delete_custom_language(language_id)
+      def delete_custom_language(language_id=nil)
         language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(
@@ -52,7 +52,7 @@ module Crowdin
         request.process_response!
       end
 
-      def edit_custom_language(language_id)
+      def edit_custom_language(language_id=nil)
         language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(

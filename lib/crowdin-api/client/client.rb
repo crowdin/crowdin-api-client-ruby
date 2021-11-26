@@ -27,9 +27,9 @@ module Crowdin
     # * *base_url* [String] - the url of the Crowdin API, default - 'https://api.crowdin.com'
     #
     def initialize(options = {})
-      @api_key        = options.delete(:api_key)
-      @project_id     = options.delete(:project_id) || nil
-      @base_url       = options.delete(:base_url)   || 'https://api.crowdin.com'
+      @api_key    = options.delete(:api_key)
+      @project_id = options.delete(:project_id) || nil
+      @base_url   = options.delete(:base_url)   || 'https://api.crowdin.com'
 
       @target_api_url = '/api/v2'
 
@@ -55,8 +55,6 @@ module Crowdin
     def log!(message)
       log.debug(message)
     end
-
-    protected
 
     def log=(logger)
       @log = logger

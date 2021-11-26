@@ -2,9 +2,11 @@ module Crowdin
   module API
     module TranslationStatus
 
-      def get_branch_progress(project_id=@project_id, branch_id, query={})
-        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def get_branch_progress(branch_id=nil, query={})
+        project_id = query[:project_id] || @project_id
+
         branch_id   || raise(ArgumentError, ':file_id is required')
+        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -17,9 +19,11 @@ module Crowdin
         request.process_response!
       end
 
-      def get_directory_progress(project_id=@project_id, directory_id, query={})
-        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def get_directory_progress(directory_id=nil, query={})
+        project_id = query[:project_id] || @project_id
+
         directory_id || raise(ArgumentError, ':directory_id is required')
+        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -32,9 +36,11 @@ module Crowdin
         request.process_response!
       end
 
-      def get_file_progress(project_id=@project_id, file_id, query={})
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def get_file_progress(file_id=nil, query={})
+        project_id = query[:project_id] || @project_id
+
         file_id    || raise(ArgumentError, ':file_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -47,9 +53,11 @@ module Crowdin
         request.process_response!
       end
 
-      def get_language_progress(project_id=@project_id, language_id, query={})
-        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def get_language_progress(language_id=nil, query={})
+        project_id = query[:project_id] || @project_id
+
         language_id || raise(ArgumentError, ':language_id is required')
+        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -62,7 +70,7 @@ module Crowdin
         request.process_response!
       end
 
-      def get_project_progress(project_id=@project_id, query={})
+      def get_project_progress(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
@@ -76,7 +84,7 @@ module Crowdin
         request.process_response!
       end
 
-      def get_qa_progress(project_id=@project_id, query={})
+      def get_qa_progress(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(

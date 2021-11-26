@@ -2,9 +2,9 @@ module Crowdin
   module API
     module Translations
 
-      def pre_translation_status(project_id=@project_id, pre_translation_id)
-        project_id         || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def pre_translation_status(pre_translation_id=nil, project_id=@project_id)
         pre_translation_id || raise(ArgumentError, ':pre_translation_id is required')
+        project_id         || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -16,7 +16,7 @@ module Crowdin
         request.process_response!
       end
 
-      def apply_pre_translation(project_id=@project_id, query={})
+      def apply_pre_translation(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
@@ -30,9 +30,11 @@ module Crowdin
         request.process_response!
       end
 
-      def build_project_directory_translation(project_id=@project_id, directory_id, query={})
-        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def build_project_directory_translation(directory_id=nil, query={})
+        project_id = query[:project_id] || @project_id
+
         directory_id || raise(ArgumentError, ':directory_id is required')
+        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -45,11 +47,13 @@ module Crowdin
         request.process_response!
       end
 
-      def build_project_file_translation(project_id=@project_id, file_id, query={})
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
-        file_id    || raise(ArgumentError, ':file_id is required')
+      def build_project_file_translation(file_id=nil, query={})
+        project_id = query[:project_id] || @project_id
 
-        headers = params['eTag'] ? { 'If-None-Match' => query['eTag'] } : {}
+        file_id    || raise(ArgumentError, ':file_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+
+        headers = query[:eTag] ? { 'If-None-Match' => query[:eTag] } : {}
 
         request = Web::Request.new(
           @connection,
@@ -63,7 +67,7 @@ module Crowdin
         request.process_response!
       end
 
-      def list_project_builds(project_id=@project_id, query={})
+      def list_project_builds(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
@@ -77,7 +81,7 @@ module Crowdin
         request.process_response!
       end
 
-      def build_project_translation(project_id=@project_id, query={})
+      def build_project_translation(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
@@ -91,9 +95,11 @@ module Crowdin
         request.process_response!
       end
 
-      def upload_translations(project_id=@project_id, language_id, query={})
-        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def upload_translations(language_id=nil, query={})
+        project_id = query[:project_id] || @project_id
+
         language_id || raise(ArgumentError, ':language_id is required')
+        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -106,9 +112,9 @@ module Crowdin
         request.process_response!
       end
 
-      def download_project_translations(project_id=@project_id, build_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def download_project_translations(build_id=nil, project_id=@project_id)
         build_id   || raise(ArgumentError, ':build_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -120,9 +126,9 @@ module Crowdin
         request.process_response!
       end
 
-      def check_project_build_status(project_id=@project_id, build_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def check_project_build_status(build_id=nil, project_id=@project_id)
         build_id   || raise(ArgumentError, ':build_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -134,9 +140,9 @@ module Crowdin
         request.process_response!
       end
 
-      def cancel_build(project_id=@project_id, build_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def cancel_build(build_id=nil, project_id=@project_id)
         build_id   || raise(ArgumentError, ':build_id is required')
+        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
           @connection,
@@ -148,7 +154,7 @@ module Crowdin
         request.process_response!
       end
 
-      def export_project_translation(project_id=@project_id, query={})
+      def export_project_translation(query={}, project_id=@project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
