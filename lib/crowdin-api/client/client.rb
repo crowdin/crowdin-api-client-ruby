@@ -14,6 +14,8 @@ module Crowdin
     # handle and parse validation erorrs after request
     # cover comments to all methods
 
+
+    # For more information about method parameters see official crowdin api docs.
     include API::Languages
     include API::Projects
     include API::SourceFiles

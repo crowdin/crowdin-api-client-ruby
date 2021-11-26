@@ -14,6 +14,21 @@ module Crowdin
         request.process_response!
       end
 
+      # Add custom language.
+      #
+      # === Parameters
+      #
+      # * +:name+ [String] - Language name
+      # * +:code+ [String] - Custom language code
+      # * +:localeCode+ [String] - Custom language locale code
+      # * +:textDirection+ [String ltr/rtl] - Text direction in custom language
+      # * +:pluralCategoryNames+ [String] - Array with category names
+      # * +:threeLettersCode+ [String] - Custom language 3 letters code. Format: ISO 6393 code
+      #
+      # === Example
+      #
+      #  crowdin.add_custom_language(name: 'your_name', code: 'your_code' ..)
+      #
       def add_custom_language(query={})
         request = Web::Request.new(
           @connection,

@@ -35,6 +35,7 @@ module Crowdin
       # === Example
       #
       #  crowdin.add_storage(File.open('your_filename.extension'))
+      # or
       #  crowdin.add_storage('your_filename.extension')
       #
       def add_storage(file=nil)
