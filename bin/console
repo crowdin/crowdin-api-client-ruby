@@ -6,13 +6,15 @@ require 'crowdin-api'
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
-# Creds belong to korbyt.kirill@gmail.com (Using for testing)
+api_key = 'YOUR_API_KEY'
 
-api_key   = 'a639944337383760b764dea1cfe5e42e32138e4ebb67fe829256738cbc14af49666abfa2e09bddda'
-e_api_key = '5b1a06b2c74e1d762b966d258739204e752ce973a60f6f199aa7b6d5b6792263d34055459ed7ec1b'
+@crowdin = Crowdin::Client.new(api_key: api_key)
 
-@crowdin   = Crowdin::Client.new(api_key: api_key)
-@e_crowdin = Crowdin::Client.new(api_key: e_api_key, base_url: 'https://keshqq.api.crowdin.com')
+# or Enterprise
+
+e_api_key = 'YOUR_ENTERPRISE_API_KEY'
+
+@e_crowdin = Crowdin::Client.new(api_key: e_api_key, organization_domain: 'YOUR_ORGANIZATION_DOMAIN')
 
 require 'irb'
 IRB.start

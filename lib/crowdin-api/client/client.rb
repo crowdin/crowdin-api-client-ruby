@@ -34,7 +34,8 @@ module Crowdin
     def initialize(options = {})
       @api_key    = options.delete(:api_key)
       @project_id = options.delete(:project_id) || nil
-      @base_url   = options.delete(:base_url)   || 'https://api.crowdin.com'
+      @base_url   = options[:organization_domain] ?
+                      "https://#{options.delete(:organization_domain)}.api.crowdin.com" : 'https://api.crowdin.com'
 
       @target_api_url = '/api/v2'
 
