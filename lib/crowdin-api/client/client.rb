@@ -29,7 +29,7 @@ module Crowdin
     #
     # * *api_key* [String] - the authentication API key can be found on the account settings page
     # * *project_id* [String] - the project identifier, default - nil
-    # * *base_url* [String] - the url of the Crowdin API, default - 'https://api.crowdin.com'
+    # * *organization_domain* [String] - the name of your organization, only for enterprise
     #
     def initialize(options = {})
       @api_key    = options.delete(:api_key)

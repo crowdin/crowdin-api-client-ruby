@@ -30,7 +30,7 @@ module Crowdin
         @payload     = Payload.new(method, query).perform
         @headers     = headers
         @destination = destionation
-        @errors = []
+        @errors      = []
       end
 
       def process_request!
