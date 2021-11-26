@@ -13,8 +13,14 @@ module Crowdin
     # handle status codes after request
     # handle and parse validation erorrs after request
     # cover comments to all methods
+    # rubocop
 
-    # For more information about method parameters see official crowdin api docs.
+    # A wrapper and interface to the Crowdin api. Please visit the Crowdin developers
+    # site for a full explanation of what each of the Crowdin api methods
+    # expect and perform.
+    #
+    # https://support.crowdin.com/api/v2/
+    #
     include API::Languages
     include API::Projects
     include API::SourceFiles
@@ -52,9 +58,7 @@ module Crowdin
         'Accept'          => 'application/json',
         'Authorization'   => "Bearer #{@api_token}",
         'Content-Type'    => 'application/json',
-        'User-Agent'      => "crowdin-rb/#{Crowdin::Client::VERSION}",
-        'X-Ruby-Version'  => RUBY_VERSION,
-        'X-Ruby-Platform' => RUBY_PLATFORM
+        'User-Agent'      => "crowdin-rb/#{Crowdin::Client::VERSION}/#{RUBY_VERSION}/#{RUBY_PLATFORM}"
       }
 
       set_rest_client_proxy!

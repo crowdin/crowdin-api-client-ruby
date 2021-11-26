@@ -1,1 +1,1 @@
-RSpec.configure do |config|; end
+require 'crowdin-api'

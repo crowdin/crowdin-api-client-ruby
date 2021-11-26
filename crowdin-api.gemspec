@@ -15,12 +15,12 @@ Gem::Specification.new do |gem|
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.require_paths = ['lib']
 
-  gem.add_runtime_dependency 'rest-client', '~> 2.0'
-  gem.add_runtime_dependency 'open-uri', '~> 0.2.0'
+  gem.add_runtime_dependency 'rest-client', '>= 2.0.0', '< 2.1.0'
+  gem.add_runtime_dependency 'open-uri', '>= 0.1.0', '< 0.2.0'
 
-  gem.add_development_dependency 'bundler', '~> 1.9'
-  gem.add_development_dependency 'rspec', '~> 3.8'
-  gem.add_development_dependency 'webmock', '~> 3.6'
-  gem.add_development_dependency 'sinatra', '~> 2.0', '>= 2.0.5'
-  gem.add_development_dependency 'rake', '~> 11.2', '>= 11.2.2'
+  gem.add_development_dependency 'bundler'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'webmock'
+  gem.add_development_dependency 'sinatra'
+  gem.add_development_dependency 'rake'
 end

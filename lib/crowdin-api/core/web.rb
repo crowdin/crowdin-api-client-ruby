@@ -23,13 +23,13 @@ module Crowdin
     end
 
     class Request < Client
-      def initialize(connection, method, path, query={}, headers={}, destionation=nil)
+      def initialize(connection, method, path, query={}, headers={}, destination=nil)
         @connection  = connection
         @method      = method
         @path        = path
         @payload     = Payload.new(method, query).perform
         @headers     = headers
-        @destination = destionation
+        @destination = destination
         @errors      = []
       end
 
@@ -42,7 +42,7 @@ module Crowdin
         rescue
           log! $!.class
 
-          @errors <<  "Something went wrong while proccessing request. Details - #{$!.class.to_s}"
+          @errors << "Something went wrong while proccessing request. Details - #{$!.class.to_s}"
         end
       end
 
@@ -73,7 +73,7 @@ module Crowdin
 
       private
 
-      def parse_error!(errors); end
+      def parse_errors!(errors); end
 
       def get_errors
         @errors.join(';')
