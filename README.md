@@ -58,7 +58,25 @@ gem install crowdin-api
 
 ## Quick start
 
-**// TODO**
+### Initialization
+```ruby
+require 'crowdin-api'
+
+# Create a new Crowdin Client object.
+crowdin = Crowdin::Client.new(api_key: api_key)
+# or you can create Enterprise instanse by specify your organization_domain
+crowdin = Crowdin::Client.new(api_key: api_key, organization_domain: your_organization_domain)
+
+# Also you can specify project_id to handle it in methods
+
+# All Crowdin Client options:
+crowdin = Crowdin::Client.new(
+  api_key: api_key,
+  organization_domain: your_organization_domain,
+  project_id: your_project_id,
+  logger: true
+)
+```
 
 To generate a new token in Crowdin, follow these steps:
 - Go to *Account Settings* > *API* tab, *Personal Access Tokens* section, and click *New Token*.
@@ -67,6 +85,35 @@ To generate a new token in Crowdin, follow these steps:
 To generate a new token in Crowdin Enterprise, follow these steps:
 - Go to *Account Settings* > *Access tokens* tab and click *New token*.
 - Specify *Token Name*, select *Scopes* and *Projects*, click *Create*.
+
+### How to call methods
+```ruby
+# Create Project
+project = crowdin.add_project(name: 'YourProjectName', sourceLanguageId: 'YourLanguage')
+
+# Get list of Projects
+projects = client.list_projects
+
+# Get specified project
+project = client.get_project(your_project_id)
+
+# Get list of Projects with offset and limit
+projects = client.list_projects(offset: 10, limit: 20)
+
+# Add Storage
+adding_storage_response = crowdin.add_storage(File.open('your_filename.extension'))
+# or you can specify only filename
+adding_storage_response = crowdin.add_storage('your_filename.extension')
+
+# Download file
+filename = crowdin.download_file(your_destination, your_file_id, your_project_id)
+# your_destination - filename or full path to file
+# project_id is optional, as it can be initialized with a Crowdin Client
+
+# File revisions
+file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10, project_id: your_project_id })
+# project_id is optional, as it can be initialized with a Crowdin Client
+```
 
 ## Seeking Assistance
 
