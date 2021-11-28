@@ -1,13 +1,12 @@
 # Crowdin::API
 
-
-> **WARNING**: This is a development version: It contains the latest changes to support APIv2 of Crowdin but it's far from being finished. The documentation below is mostly outdated.
-
 A Ruby interface to the Crowdin API.
 
 For more about the Crowdin API see <https://support.crowdin.com/api/api-integration-setup/>.
 
 To experiment with that code, run `bin/console` for an interactive prompt.
+
+> **WARNING**: This is a development version: It contains the latest changes to support APIv2 of Crowdin but it's far from being finished. The documentation below is mostly outdated.
 
 ## Installation
 
