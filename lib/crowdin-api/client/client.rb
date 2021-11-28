@@ -35,22 +35,23 @@ module Crowdin
       @config = Crowdin::Configuration.new
       yield config
 
-      check_logger!
+      check_logger
+
       set_rest_client_proxy!
 
       build_options
       build_connection
     end
 
-    def log_message!(message)
-      return true unless config.logger
+    def log!(message)
+      return true unless config.logger_enabled?
 
-      log.debug(message)
+      logger.debug(message)
     end
 
-    def log=(logger)
-      @log = logger
-      config.logger = true
+    def logger=(logger)
+      @logger = logger
+      config.enable_logger = true
     end
 
     protected
@@ -70,12 +71,12 @@ module Crowdin
       ENV['http_proxy'] ? ::RestClient.proxy = ENV['http_proxy'] : false
     end
 
-    def check_logger!
-      config.logger ||= false
+    def check_logger
+      config.enable_logger ||= false
     end
 
-    def log
-      @log ||= Logger.new($stderr)
+    def logger
+      @logger ||= Logger.new($stderr)
     end
   end
 end

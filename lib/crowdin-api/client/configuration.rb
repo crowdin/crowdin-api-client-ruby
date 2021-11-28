@@ -5,7 +5,7 @@ module Crowdin
     attr_accessor :api_token
     attr_accessor :project_id
     attr_accessor :organization_domain
-    attr_accessor :logger
+    attr_accessor :enable_logger
 
     attr_reader :target_api_url
 
@@ -32,6 +32,10 @@ module Crowdin
 
     def base_url
       organization_domain ? "https://#{organization_domain}.api.crowdin.com" : 'https://api.crowdin.com'
+    end
+
+    def logger_enabled?
+      enable_logger
     end
   end
 end

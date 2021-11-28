@@ -26,7 +26,7 @@ module Crowdin
 
         client.connection[@full_path].send(@method, @payload, @headers) { |response, _, _| @response = response }
       rescue StandardError => error
-        client.log_message! error.class
+        client.log! error.class
 
         @errors << "Something went wrong while proccessing request. Details - #{error.class}"
       end
@@ -36,11 +36,11 @@ module Crowdin
 
         begin
           if @response
-            client.log_message! "args: #{@response.request.args}"
+            client.log! "args: #{@response.request.args}"
 
             doc = JSON.parse(@response.body)
 
-            client.log_message! "body: #{doc}"
+            client.log! "body: #{doc}"
 
             data =
               if doc['data'].is_a?(Hash) && doc['data']['url'] && doc['data']['url'].scan(/response-content-disposition/)
@@ -52,7 +52,7 @@ module Crowdin
             @errors.any? ? fetch_errors! : data
           end
         rescue StandardError => error
-          client.log_message! error
+          client.log! error
 
           @errors << "Something went wrong while proccessing response. Details - #{error.class}"
 
@@ -74,7 +74,7 @@ module Crowdin
 
         @destination
       rescue StandardError => error
-        client.log_message! error
+        client.log! error
 
         @errors << "Something went wrong while downloading file. Details - #{error.class}"
       end
