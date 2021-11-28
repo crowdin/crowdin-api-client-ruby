@@ -4,12 +4,14 @@ on:
   push:
 
 jobs:
-  test:
+  test-and-lint:
+    name: Test and lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
         ruby-version: ['2.6', '2.7', '3.0']
     steps:
+      - name: Checkout code
       - uses: actions/checkout@v2
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -17,5 +19,6 @@ jobs:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
       - name: Run tests and linter
-        run: bundle exec rubocop
-        run: bundle exec rake
+        run: |
+          bundle exec rubocop
+          bundle exec rake
