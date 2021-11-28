@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 describe 'Config instance' do
   it 'should have a project_id' do
     @crowdin = Crowdin::Client.new do |config|

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Crowdin
-  module API
+  module ApiResources
     module SourceFiles
       def list_branches(query = {}, project_id = config.project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
@@ -13,8 +13,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def add_branch(query = {}, project_id = config.project_id)
@@ -27,8 +26,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_branch(branch_id = nil, project_id = config.project_id)
@@ -41,8 +39,7 @@ module Crowdin
           "/projects/#{project_id}/branches/#{branch_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def delete_branch(branch_id = nil, project_id = config.project_id)
@@ -55,8 +52,7 @@ module Crowdin
           "/projects/#{project_id}/branches/#{branch_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def edit_branch(branch_id = nil, query = {})
@@ -72,8 +68,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def list_directories(query = {}, project_id = config.project_id)
@@ -86,8 +81,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def add_directory(query = {}, project_id = config.project_id)
@@ -100,8 +94,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_directory(directory_id = nil, project_id = config.project_id)
@@ -114,8 +107,7 @@ module Crowdin
           "/projects/#{project_id}/directories/#{directory_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def delete_directory(directory_id = nil, project_id = config.project_id)
@@ -128,8 +120,7 @@ module Crowdin
           "/projects/#{project_id}/directories/#{directory_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def edit_directory(directory_id = nil, query = {})
@@ -145,8 +136,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def list_files(query = {}, project_id = config.project_id)
@@ -159,8 +149,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       # Add custom language.
@@ -191,8 +180,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_file(file_id = nil, project_id = config.project_id)
@@ -205,8 +193,7 @@ module Crowdin
           "/projects/#{project_id}/files/#{file_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def update_or_restore_file(file_id = nil, query = {})
@@ -222,8 +209,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def delete_file(file_id = nil, project_id = config.project_id)
@@ -236,8 +222,7 @@ module Crowdin
           "/projects/#{project_id}/files/#{file_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def edit_file(file_id = nil, query = {})
@@ -253,8 +238,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def download_file(destination = nil, file_id = nil, project_id = config.project_id)
@@ -271,8 +255,7 @@ module Crowdin
           destination
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       # List file revisions.
@@ -309,8 +292,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_file_revision(file_id = nil, revision_id = nil, project_id = config.project_id)
@@ -324,8 +306,7 @@ module Crowdin
           "/projects/#{project_id}/files/#{file_id}/revisions/#{revision_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
     end
   end

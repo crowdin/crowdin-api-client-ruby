@@ -18,12 +18,12 @@ module Crowdin
     #
     # https://support.crowdin.com/api/v2/
     #
-    include API::Languages
-    include API::Projects
-    include API::SourceFiles
-    include API::Storages
-    include API::TranslationStatus
-    include API::Translations
+    include ApiResources::Languages
+    include ApiResources::Projects
+    include ApiResources::SourceFiles
+    include ApiResources::Storages
+    include ApiResources::TranslationStatus
+    include ApiResources::Translations
 
     attr_reader :config
     attr_reader :options
@@ -42,7 +42,7 @@ module Crowdin
       build_connection
     end
 
-    def log!(message)
+    def log_message!(message)
       return true unless config.logger
 
       log.debug(message)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Crowdin
-  module API
+  module ApiResources
     module Projects
       def list_projects(query = {})
         request = Web::Request.new(
@@ -11,8 +11,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def add_project(query = {})
@@ -23,8 +22,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_project(project_id = nil)
@@ -36,8 +34,7 @@ module Crowdin
           "/projects/#{project_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def delete_project(project_id = nil)
@@ -49,8 +46,7 @@ module Crowdin
           "/projects/#{project_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def edit_project(project_id = nil, query = {})
@@ -63,8 +59,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       # For Enterprise API only
@@ -77,8 +72,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def add_group(query = {})
@@ -89,8 +83,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_group(group_id = nil)
@@ -102,8 +95,7 @@ module Crowdin
           "/groups/#{group_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def delete_group(group_id = nil)
@@ -115,8 +107,7 @@ module Crowdin
           "/groups/#{group_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def edit_group(group_id = nil, query = {})
@@ -129,8 +120,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
     end
   end

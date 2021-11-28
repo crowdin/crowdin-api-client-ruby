@@ -7,7 +7,8 @@ require 'open-uri'
 require 'rest-client'
 
 # Core modules
-require 'crowdin-api/core/web'
+require 'crowdin-api/core/payload'
+require 'crowdin-api/core/request'
 require 'crowdin-api/core/errors'
 
 # Api modules

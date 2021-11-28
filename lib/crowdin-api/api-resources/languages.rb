@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Crowdin
-  module API
+  module ApiResources
     module Languages
       def list_languages(query = {})
         request = Web::Request.new(
@@ -11,8 +11,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       # Add custom language.
@@ -38,8 +37,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_language(language_id = nil)
@@ -51,8 +49,7 @@ module Crowdin
           "/languages/#{language_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def delete_custom_language(language_id = nil)
@@ -64,8 +61,7 @@ module Crowdin
           "/languages/#{language_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def edit_custom_language(language_id = nil)
@@ -78,8 +74,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
     end
   end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Crowdin
-  module API
+  module ApiResources
     module Translations
       def pre_translation_status(pre_translation_id = nil, project_id = config.project_id)
         pre_translation_id || raise(ArgumentError, ':pre_translation_id is required')
@@ -13,8 +13,7 @@ module Crowdin
           "/projects/#{project_id}/pre-translations/#{pre_translation_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def apply_pre_translation(query = {}, project_id = config.project_id)
@@ -27,8 +26,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def build_project_directory_translation(directory_id = nil, query = {})
@@ -44,8 +42,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def build_project_file_translation(file_id = nil, query = {})
@@ -64,8 +61,7 @@ module Crowdin
           headers
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def list_project_builds(query = {}, project_id = config.project_id)
@@ -78,8 +74,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def build_project_translation(query = {}, project_id = config.project_id)
@@ -92,8 +87,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def upload_translations(language_id = nil, query = {})
@@ -109,8 +103,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def download_project_translations(destinaton = nil, build_id = nil, project_id = config.project_id)
@@ -127,8 +120,7 @@ module Crowdin
           destinaton
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def check_project_build_status(build_id = nil, project_id = config.project_id)
@@ -141,8 +133,7 @@ module Crowdin
           "/projects/#{project_id}/translations/builds/#{build_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def cancel_build(build_id = nil, project_id = config.project_id)
@@ -155,8 +146,7 @@ module Crowdin
           "/projects/#{project_id}/translations/builds/#{build_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def export_project_translation(query = {}, project_id = config.project_id)
@@ -169,8 +159,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
     end
   end

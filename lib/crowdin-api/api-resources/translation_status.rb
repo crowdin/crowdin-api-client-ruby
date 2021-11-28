@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Crowdin
-  module API
+  module ApiResources
     module TranslationStatus
       def get_branch_progress(branch_id = nil, query = {})
         project_id = query[:project_id] || config.project_id
@@ -16,8 +16,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_directory_progress(directory_id = nil, query = {})
@@ -33,8 +32,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_file_progress(file_id = nil, query = {})
@@ -50,8 +48,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_language_progress(language_id = nil, query = {})
@@ -67,8 +64,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_project_progress(query = {}, project_id = config.project_id)
@@ -81,8 +77,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       def get_qa_progress(query = {}, project_id = config.project_id)
@@ -95,8 +90,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
     end
   end

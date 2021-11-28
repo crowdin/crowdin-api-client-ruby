@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Crowdin
-  module API
+  module ApiResources
     module Storages
       # Get storages list.
       #
@@ -23,8 +23,7 @@ module Crowdin
           query
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       # Add storage.
@@ -52,8 +51,7 @@ module Crowdin
           { 'Content-Type' => 'application/octet-stream', 'Crowdin-API-FileName' => File.basename(file) }
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       # Get storage information.
@@ -75,8 +73,7 @@ module Crowdin
           "/storages/#{storage_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
 
       # Delete storage.
@@ -98,8 +95,7 @@ module Crowdin
           "/storages/#{storage_id}"
         )
 
-        request.process_request!
-        request.process_response!
+        request.perform
       end
     end
   end

@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'crowdin-api'
+require 'optparse'
+
+# You can specify your arguments when execute this script
+#
+# Type ./bin/crowdin-console --help for more available arguments
+#
+# Example:
+#
+#  ./bin/crowdin-console --logger --api-token YOUR_API_TOKEN --project-id YOUR_PROJECT_ID
+#
+# or Enterpise API
+#
+#  ./bin/crowdin-console --enterprise --api-token YOUR_ENTERPRISE_API_TOKEN --organization-domain YOUR_DOMAIN
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: ./bin/crowdin-console --enterprise --api-token YOUR_API_TOKEN ..'
+
+  opts.on('--enterprise', 'Enterprise API')                      { |v| options[:enterprise] = v }
+  opts.on('--api-token TOKEN', 'API Token')                      { |v| options[:api_token] = v }
+  opts.on('--organization-domain DOMAIN', 'Organization Domain') { |v| options[:organization_domain] = v }
+  opts.on('--prohject-id ID', 'Project ID')                      { |v| options[:project_id] = v }
+  opts.on('--logger', 'Enable logger')                           { |v| options[:logger] = v }
+end.parse!
+
+options[:api_token] || raise(ArgumentError, '--api-token argument is required')
+
+if options[:enterprise]
+  options[:organization_domain] || raise(ArgumentError, '--organization-domain option is required for Enterprise mode')
+
+  @crowdin = Crowdin::Client.new do |config|
+    config.api_token           = options[:api_token]
+    config.organization_domain = options[:organization_domain]
+    config.logger              = options[:logger]              || false
+    config.project_id          = options[:project_id]          || nil
+  end
+else
+  @crowdin = Crowdin::Client.new do |config|
+    config.api_token  = options[:api_token]
+    config.logger     = options[:logger]     || false
+    config.project_id = options[:project_id] || nil
+  end
+end
+
+require 'irb'
+IRB.start
