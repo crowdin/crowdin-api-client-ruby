@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Crowdin
   module API
     module Storages
-
       # Get storages list.
       #
       # === Parameters
@@ -14,7 +15,7 @@ module Crowdin
       #
       #  crowdin.list_projects(limit: your_value)
       #
-      def list_storages(query={})
+      def list_storages(query = {})
         request = Web::Request.new(
           @connection,
           :get,
@@ -38,7 +39,7 @@ module Crowdin
       # or
       #  crowdin.add_storage('your_filename.extension')
       #
-      def add_storage(file=nil)
+      def add_storage(file = nil)
         file || raise(ArgumentError, ':file is required')
 
         file = file.is_a?(File) ? file : File.open(file)
@@ -65,7 +66,7 @@ module Crowdin
       #
       #  crowdin.get_storage(your_storage_id)
       #
-      def get_storage(storage_id=nil)
+      def get_storage(storage_id = nil)
         storage_id || raise(ArgumentError, ':storage_id is required')
 
         request = Web::Request.new(
@@ -88,7 +89,7 @@ module Crowdin
       #
       #  crowdin.delete_storage(your_storage_id)
       #
-      def delete_storage(storage_id=nil)
+      def delete_storage(storage_id = nil)
         storage_id || raise(ArgumentError, ':storage_id is required')
 
         request = Web::Request.new(
@@ -100,7 +101,6 @@ module Crowdin
         request.process_request!
         request.process_response!
       end
-
     end
   end
 end

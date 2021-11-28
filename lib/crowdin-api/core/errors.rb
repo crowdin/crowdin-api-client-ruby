@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Crowdin
   module Errors
-
     class Error < StandardError
       attr_reader :key, :error_code, :error_message
 
@@ -15,6 +16,5 @@ module Crowdin
         @message
       end
     end
-
   end
 end

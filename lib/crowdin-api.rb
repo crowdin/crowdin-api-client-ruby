@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 # Libs
 require 'json'
 require 'logger'
-require 'rest-client'
 require 'open-uri'
+require 'rest-client'
 
 # Core modules
 require 'crowdin-api/core/web'

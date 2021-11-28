@@ -1,4 +1,6 @@
-require 'crowdin-api'
+# frozen_string_literal: true
+
+require 'spec_helper'
 
 describe 'Client instance' do
   it 'should have a project_id' do

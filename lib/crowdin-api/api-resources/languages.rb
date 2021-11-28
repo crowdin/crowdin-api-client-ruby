@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module Crowdin
   module API
     module Languages
-
-      def list_languages(query={})
+      def list_languages(query = {})
         request = Web::Request.new(
           @connection,
           :get,
@@ -29,7 +30,7 @@ module Crowdin
       #
       #  crowdin.add_custom_language(name: 'your_name', code: 'your_code' ..)
       #
-      def add_custom_language(query={})
+      def add_custom_language(query = {})
         request = Web::Request.new(
           @connection,
           :post,
@@ -41,7 +42,7 @@ module Crowdin
         request.process_response!
       end
 
-      def get_language(language_id=nil)
+      def get_language(language_id = nil)
         language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(
@@ -54,7 +55,7 @@ module Crowdin
         request.process_response!
       end
 
-      def delete_custom_language(language_id=nil)
+      def delete_custom_language(language_id = nil)
         language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(
@@ -67,7 +68,7 @@ module Crowdin
         request.process_response!
       end
 
-      def edit_custom_language(language_id=nil)
+      def edit_custom_language(language_id = nil)
         language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(
@@ -80,7 +81,6 @@ module Crowdin
         request.process_request!
         request.process_response!
       end
-
     end
   end
 end
