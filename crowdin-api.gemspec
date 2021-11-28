@@ -9,10 +9,8 @@ Gem::Specification.new do |gem|
   gem.email       = ['support@crowdin.net']
   gem.homepage    = 'https://github.com/crowdin/crowdin-api/'
   gem.summary     = 'Client library to manage translations on Crowdin'
-  gem.description = 'Ruby Client for the Crowdin APIv2'
+  gem.description = 'Ruby Client for the Crowdin API. Documentation - https://support.crowdin.com/api/v2/.'
   gem.license     = 'MIT'
-
-  gem.post_install_message = 'Visit https://support.crowdin.com/api/v2/ for more information about Crowdin APIv2'
 
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
