@@ -71,10 +71,9 @@ crowdin = Crowdin::Client.new(api_token: your_api_token, organization_domain: yo
 
 # All Crowdin Client options:
 crowdin = Crowdin::Client.new(
-  api_key: api_key,
+  api_token: your_api_token,
   organization_domain: your_organization_domain,
-  project_id: your_project_id,
-  logger: true
+  project_id: your_project_id
 )
 ```
 
