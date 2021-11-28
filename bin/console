@@ -6,7 +6,7 @@ require 'crowdin-api'
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
-api_token = ''
+api_token = 'YOUR_API_TOKEN'
 
 @crowdin = Crowdin::Client.new(api_token: api_token)
 
