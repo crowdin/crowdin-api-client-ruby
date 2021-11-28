@@ -17,9 +17,9 @@ module Crowdin
       #
       def list_storages(query = {})
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/storages",
+          '/storages',
           query
         )
 
@@ -45,9 +45,9 @@ module Crowdin
         file = file.is_a?(File) ? file : File.open(file)
 
         request = Web::Request.new(
-          @connection,
+          self,
           :post,
-          "#{@target_api_url}/storages",
+          '/storages',
           file,
           { 'Content-Type' => 'application/octet-stream', 'Crowdin-API-FileName' => File.basename(file) }
         )
@@ -70,9 +70,9 @@ module Crowdin
         storage_id || raise(ArgumentError, ':storage_id is required')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/storages/#{storage_id}"
+          "/storages/#{storage_id}"
         )
 
         request.process_request!
@@ -93,9 +93,9 @@ module Crowdin
         storage_id || raise(ArgumentError, ':storage_id is required')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :delete,
-          "#{@target_api_url}/storages/#{storage_id}"
+          "/storages/#{storage_id}"
         )
 
         request.process_request!

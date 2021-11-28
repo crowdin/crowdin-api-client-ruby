@@ -5,9 +5,9 @@ module Crowdin
     module Projects
       def list_projects(query = {})
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/projects",
+          '/projects',
           query
         )
 
@@ -17,9 +17,9 @@ module Crowdin
 
       def add_project(query = {})
         request = Web::Request.new(
-          @connection,
+          self,
           :post,
-          "#{@target_api_url}/projects",
+          '/projects',
           query
         )
 
@@ -31,9 +31,9 @@ module Crowdin
         project_id || raise(ArgumentError, ':project_id is required')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/projects/#{project_id}"
+          "/projects/#{project_id}"
         )
 
         request.process_request!
@@ -44,9 +44,9 @@ module Crowdin
         project_id || raise(ArgumentError, ':project_id is required')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :delete,
-          "#{@target_api_url}/projects/#{project_id}"
+          "/projects/#{project_id}"
         )
 
         request.process_request!
@@ -57,9 +57,9 @@ module Crowdin
         project_id || raise(ArgumentError, ':project_id is required')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :patch,
-          "#{@target_api_url}/projects/#{project_id}",
+          "/projects/#{project_id}",
           query
         )
 
@@ -71,9 +71,9 @@ module Crowdin
 
       def list_groups(query = {})
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/groups",
+          '/groups',
           query
         )
 
@@ -83,9 +83,9 @@ module Crowdin
 
       def add_group(query = {})
         request = Web::Request.new(
-          @connection,
+          self,
           :post,
-          "#{@target_api_url}/groups",
+          '/groups',
           query
         )
 
@@ -97,9 +97,9 @@ module Crowdin
         group_id || raise(ArgumentError, ':group_id is required')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/groups/#{group_id}"
+          "/groups/#{group_id}"
         )
 
         request.process_request!
@@ -110,9 +110,9 @@ module Crowdin
         group_id || raise(ArgumentError, ':group_id is required')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :delete,
-          "#{@target_api_url}/groups/#{group_id}"
+          "/groups/#{group_id}"
         )
 
         request.process_request!
@@ -123,9 +123,9 @@ module Crowdin
         group_id || raise(ArgumentError, ':group_id is required')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :patch,
-          "#{@target_api_url}/groups/#{group_id}",
+          "/groups/#{group_id}",
           query
         )
 

@@ -23,11 +23,13 @@ module Crowdin
       end
     end
 
-    class Request < Client
-      def initialize(connection, method, path, query = {}, headers = {}, destination = nil)
-        @connection  = connection
+    class Request
+      attr_reader :client
+
+      def initialize(client, method, path, query = {}, headers = {}, destination = nil)
+        @client      = client
         @method      = method
-        @path        = path
+        @full_path   = client.config.target_api_url + path
         @payload     = Payload.new(method, query).perform
         @headers     = headers
         @destination = destination
@@ -35,12 +37,12 @@ module Crowdin
       end
 
       def process_request!
-        return @response = @connection[@path].send(@method)           if delete_request?
-        return @response = @connection[@path].send(@method, @payload) if get_request?
+        return @response = client.connection[@full_path].send(@method)           if delete_request?
+        return @response = client.connection[@full_path].send(@method, @payload) if get_request?
 
-        @connection[@path].send(@method, @payload, @headers) { |response, _, _| @response = response }
+        client.connection[@full_path].send(@method, @payload, @headers) { |response, _, _| @response = response }
       rescue StandardError
-        log! $!.class
+        client.log! $!.class
 
         @errors << "Something went wrong while proccessing request. Details - #{$!.class}"
       end
@@ -50,11 +52,11 @@ module Crowdin
 
         begin
           if @response
-            log! "args: #{@response.request.args}"
+            client.log! "args: #{@response.request.args}"
 
             doc = JSON.parse(@response.body)
 
-            log! "body: #{doc}"
+            client.log! "body: #{doc}"
 
             data =
               if doc['data'].is_a?(Hash) && doc['data']['url'] && doc['data']['url'].scan(/response-content-disposition/)
@@ -66,7 +68,7 @@ module Crowdin
             @errors.any? ? fetch_errors! : data
           end
         rescue StandardError
-          log! $!
+          client.log! $!
 
           @errors << "Something went wrong while proccessing response. Details - #{$!.class}"
 
@@ -88,7 +90,7 @@ module Crowdin
 
         @destination
       rescue StandardError
-        log! $!
+        client.log! $!
 
         @errors << "Something went wrong while downloading file. Details - #{$!.class}"
       end

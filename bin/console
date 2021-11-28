@@ -6,15 +6,18 @@ require 'crowdin-api'
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
-api_token = 'YOUR_API_TOKEN'
-
-@crowdin = Crowdin::Client.new(api_token: api_token)
+@crowdin = Crowdin::Client.new do |config|
+  config.api_token = 'YOUR_API_TOKEN'
+  config.logger = true
+end
 
 # or Enterprise
 
-e_api_token = 'YOUR_ENTERPRISE_API_TOKEN'
-
-@e_crowdin = Crowdin::Client.new(api_token: e_api_token, organization_domain: 'YOUR_ORGANIZATION_DOMAIN')
+@e_crowdin = Crowdin::Client.new do |config|
+  config.api_token = 'YOUR_ENTERPRISE_API_TOKEN'
+  config.organization_domain = 'YOUR_ORGANIZATION_DOMAIN'
+  config.logger = true
+end
 
 require 'irb'
 IRB.start

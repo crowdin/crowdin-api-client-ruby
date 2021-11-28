@@ -5,9 +5,9 @@ module Crowdin
     module Languages
       def list_languages(query = {})
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/languages",
+          '/languages',
           query
         )
 
@@ -32,9 +32,9 @@ module Crowdin
       #
       def add_custom_language(query = {})
         request = Web::Request.new(
-          @connection,
+          self,
           :post,
-          "#{@target_api_url}/languages",
+          '/languages',
           query
         )
 
@@ -46,9 +46,9 @@ module Crowdin
         language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/languages/#{language_id}"
+          "/languages/#{language_id}"
         )
 
         request.process_request!
@@ -59,9 +59,9 @@ module Crowdin
         language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :delete,
-          "#{@target_api_url}/languages/#{language_id}"
+          "/languages/#{language_id}"
         )
 
         request.process_request!
@@ -72,9 +72,9 @@ module Crowdin
         language_id || raise(ArgumentError, ':language_id is required')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :patch,
-          "#{@target_api_url}/languages/#{language_id}",
+          "/languages/#{language_id}",
           query
         )
 

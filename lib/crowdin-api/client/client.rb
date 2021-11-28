@@ -6,7 +6,9 @@
 #
 #   require 'crowdin-api'
 #
-#   crowdin = Crowdin::Client.new(api_key: API_KEY)
+#   crowdin = Crowdin::Client.new do |config|
+#     config.api_token = 'YOUR_API_TOKEN'
+#   end
 #
 module Crowdin
   class Client
@@ -23,56 +25,53 @@ module Crowdin
     include API::TranslationStatus
     include API::Translations
 
-    attr_accessor :project_id
+    attr_reader :config
+    attr_reader :options
+    attr_reader :connection
 
-    # Create a new Client object using the given settings.
-    #
-    # == Settings
-    #
-    # * *api_token* [String] - the authentication API token can be found on the account settings page
-    # * *project_id* [Integer] - the project identifier, default - nil
-    # * *organization_domain* [String] - the name of your organization, only for enterprise
-    #
-    def initialize(options = {})
-      @api_token  = options.delete(:api_token)
-      @project_id = options.delete(:project_id) || nil
-      @base_url   = if options[:organization_domain]
-                      "https://#{options.delete(:organization_domain)}.api.crowdin.com"
-                    else
-                      'https://api.crowdin.com'
-                    end
+    def initialize
+      raise ArgumentError, 'block with configurations not given' unless block_given?
 
-      @target_api_url = '/api/v2'
+      @config = Crowdin::Configuration.new
+      yield config
 
-      options = {
-        headers: {},
-        timeout: nil,
-        json: true
-      }
-
-      options[:headers] = {
-        'Accept' => 'application/json',
-        'Authorization' => "Bearer #{@api_token}",
-        'Content-Type' => 'application/json',
-        'User-Agent' => "crowdin-rb/#{Crowdin::Client::VERSION}/#{RUBY_VERSION}/#{RUBY_PLATFORM}"
-      }
-
+      check_logger!
       set_rest_client_proxy!
-      @connection = ::RestClient::Resource.new(@base_url, options)
+
+      build_options
+      build_connection
     end
 
     def log!(message)
+      return true unless config.logger
+
       log.debug(message)
     end
 
     def log=(logger)
       @log = logger
+      config.logger = true
+    end
+
+    protected
+
+    def build_options
+      @options = config.options
+      options[:headers] = config.headers
+    end
+
+    def build_connection
+      @connection = ::RestClient::Resource.new(config.base_url, options)
     end
 
     private
 
     def set_rest_client_proxy!
       ENV['http_proxy'] ? ::RestClient.proxy = ENV['http_proxy'] : false
+    end
+
+    def check_logger!
+      config.logger ||= false
     end
 
     def log

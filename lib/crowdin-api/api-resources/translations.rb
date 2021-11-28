@@ -3,27 +3,27 @@
 module Crowdin
   module API
     module Translations
-      def pre_translation_status(pre_translation_id = nil, project_id = @project_id)
+      def pre_translation_status(pre_translation_id = nil, project_id = config.project_id)
         pre_translation_id || raise(ArgumentError, ':pre_translation_id is required')
         project_id         || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/projects/#{project_id}/pre-translations/#{pre_translation_id}"
+          "/projects/#{project_id}/pre-translations/#{pre_translation_id}"
         )
 
         request.process_request!
         request.process_response!
       end
 
-      def apply_pre_translation(query = {}, project_id = @project_id)
+      def apply_pre_translation(query = {}, project_id = config.project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :post,
-          "#{@target_api_url}/projects/#{project_id}/pre-translations",
+          "/projects/#{project_id}/pre-translations",
           query
         )
 
@@ -32,15 +32,15 @@ module Crowdin
       end
 
       def build_project_directory_translation(directory_id = nil, query = {})
-        project_id = query[:project_id] || @project_id
+        project_id = query[:project_id] || config.project_id
 
         directory_id || raise(ArgumentError, ':directory_id is required')
         project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :post,
-          "#{@target_api_url}/projects/#{project_id}/translations/builds/directories/#{directory_id}",
+          "/projects/#{project_id}/translations/builds/directories/#{directory_id}",
           query
         )
 
@@ -49,7 +49,7 @@ module Crowdin
       end
 
       def build_project_file_translation(file_id = nil, query = {})
-        project_id = query[:project_id] || @project_id
+        project_id = query[:project_id] || config.project_id
 
         file_id    || raise(ArgumentError, ':file_id is required')
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
@@ -57,9 +57,9 @@ module Crowdin
         headers = query[:eTag] ? { 'If-None-Match' => query[:eTag] } : {}
 
         request = Web::Request.new(
-          @connection,
+          self,
           :post,
-          "#{@target_api_url}/projects/#{project_id}/translations/builds/files/#{file_id}",
+          "/projects/#{project_id}/translations/builds/files/#{file_id}",
           query,
           headers
         )
@@ -68,13 +68,13 @@ module Crowdin
         request.process_response!
       end
 
-      def list_project_builds(query = {}, project_id = @project_id)
+      def list_project_builds(query = {}, project_id = config.project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/projects/#{project_id}/translations/builds",
+          "/projects/#{project_id}/translations/builds",
           query
         )
 
@@ -82,13 +82,13 @@ module Crowdin
         request.process_response!
       end
 
-      def build_project_translation(query = {}, project_id = @project_id)
+      def build_project_translation(query = {}, project_id = config.project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :post,
-          "#{@target_api_url}/projects/#{project_id}/translations/builds",
+          "/projects/#{project_id}/translations/builds",
           query
         )
 
@@ -97,15 +97,15 @@ module Crowdin
       end
 
       def upload_translations(language_id = nil, query = {})
-        project_id = query[:project_id] || @project_id
+        project_id = query[:project_id] || config.project_id
 
         language_id || raise(ArgumentError, ':language_id is required')
         project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :post,
-          "#{@target_api_url}/projects/#{project_id}/translations/#{language_id}",
+          "/projects/#{project_id}/translations/#{language_id}",
           query
         )
 
@@ -113,15 +113,15 @@ module Crowdin
         request.process_response!
       end
 
-      def download_project_translations(destinaton = nil, build_id = nil, project_id = @project_id)
+      def download_project_translations(destinaton = nil, build_id = nil, project_id = config.project_id)
         destinaton || raise(ArgumentError, ':destination is required for downlaods')
         build_id   || raise(ArgumentError, ':build_id is required')
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/projects/#{project_id}/translations/builds/#{build_id}/download",
+          "/projects/#{project_id}/translations/builds/#{build_id}/download",
           {},
           {},
           destinaton
@@ -131,41 +131,41 @@ module Crowdin
         request.process_response!
       end
 
-      def check_project_build_status(build_id = nil, project_id = @project_id)
+      def check_project_build_status(build_id = nil, project_id = config.project_id)
         build_id   || raise(ArgumentError, ':build_id is required')
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :get,
-          "#{@target_api_url}/projects/#{project_id}/translations/builds/#{build_id}"
+          "/projects/#{project_id}/translations/builds/#{build_id}"
         )
 
         request.process_request!
         request.process_response!
       end
 
-      def cancel_build(build_id = nil, project_id = @project_id)
+      def cancel_build(build_id = nil, project_id = config.project_id)
         build_id   || raise(ArgumentError, ':build_id is required')
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :delete,
-          "#{@target_api_url}/projects/#{project_id}/translations/builds/#{build_id}"
+          "/projects/#{project_id}/translations/builds/#{build_id}"
         )
 
         request.process_request!
         request.process_response!
       end
 
-      def export_project_translation(query = {}, project_id = @project_id)
+      def export_project_translation(query = {}, project_id = config.project_id)
         project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
 
         request = Web::Request.new(
-          @connection,
+          self,
           :post,
-          "#{@target_api_url}/projects/#{project_id}/translations/exports",
+          "/projects/#{project_id}/translations/exports",
           query
         )
 

@@ -20,4 +20,5 @@ require 'crowdin-api/api-resources/translations'
 
 # Client
 require 'crowdin-api/client/version'
+require 'crowdin-api/client/configuration'
 require 'crowdin-api/client/client'
