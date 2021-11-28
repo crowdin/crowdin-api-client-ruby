@@ -25,11 +25,11 @@ describe 'Config instance' do
     expect(@crowdin.config.base_url).to_not be_nil
   end
 
-  it 'should have a logger set to false by default' do
+  it 'should have a enable_logger set to false by default' do
     @crowdin = Crowdin::Client.new do |config|
       config.api_token = 'api_token'
     end
 
-    expect(@crowdin.config.logger).eql? false
+    expect(@crowdin.config.enable_logger).eql? false
   end
 end
