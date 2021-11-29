@@ -6,20 +6,20 @@ require 'optparse'
 
 # You can specify your arguments when execute this script
 #
-# Type ./bin/crowdin-console --help for more available arguments
+# Type bundle exec crowdin-console --help for more available arguments
 #
 # Example:
 #
-#  ./bin/crowdin-console --enable-logger --api-token YOUR_API_TOKEN --project-id YOUR_PROJECT_ID
+#  bundle exec crowdin-console --enable-logger --api-token YOUR_API_TOKEN --project-id YOUR_PROJECT_ID
 #
 # or Enterpise API
 #
-#  ./bin/crowdin-console --enterprise --api-token YOUR_ENTERPRISE_API_TOKEN --organization-domain YOUR_DOMAIN
+#  bundle exec crowdin-console --enterprise --api-token YOUR_ENTERPRISE_API_TOKEN --organization-domain YOUR_DOMAIN
 
 options = {}
 
 OptionParser.new do |opts|
-  opts.banner = 'Usage: ./bin/crowdin-console --enterprise --api-token YOUR_API_TOKEN ..'
+  opts.banner = 'Usage: ./bin/crowdin-console --enable-logger --api-token YOUR_API_TOKEN ..'
 
   opts.on('--enterprise', 'Enterprise API')                      { |v| options[:enterprise] = v }
   opts.on('--api-token TOKEN', 'API Token')                      { |v| options[:api_token] = v }
