@@ -32,43 +32,35 @@ module Crowdin
       end
 
       def process_response!
-        return fetch_errors! if @errors.any?
+        return fetch_errors if @errors.any?
 
         begin
           if @response
-            client.log! "args: #{@response.request.args}"
-
             doc = JSON.parse(@response.body)
 
+            client.log! "args: #{@response.request.args}"
             client.log! "body: #{doc}"
 
-            data =
-              if doc['data'].is_a?(Hash) && doc['data']['url'] && doc['data']['url'].scan(/response-content-disposition/)
-                download_file!(doc['data']['url'])
-              else
-                doc
-              end
+            data = fetch_response_data(doc)
 
-            @errors.any? ? fetch_errors! : data
+            @errors.any? ? fetch_errors : data
           end
         rescue StandardError => error
           client.log! error
 
           @errors << "Something went wrong while proccessing response. Details - #{error.class}"
 
-          fetch_errors!
+          fetch_errors
         end
       end
 
       private
 
-      def parse_errors!(errors); end
-
-      def fetch_errors!
+      def fetch_errors
         @errors.join(';')
       end
 
-      def download_file!(url)
+      def download_file(url)
         download = URI.parse(url).open
         IO.copy_stream(download, @destination)
 
@@ -77,6 +69,14 @@ module Crowdin
         client.log! error
 
         @errors << "Something went wrong while downloading file. Details - #{error.class}"
+      end
+
+      def fetch_response_data(doc)
+        if doc['data'].is_a?(Hash) && doc['data']['url'] && doc['data']['url'].scan(/response-content-disposition/)
+          download_file(doc['data']['url'])
+        else
+          doc
+        end
       end
 
       def get_request?
