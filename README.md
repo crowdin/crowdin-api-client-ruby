@@ -16,7 +16,9 @@ For more about Crowdin API v2 see the documentation:
 [![Gem](https://img.shields.io/gem/dt/crowdin-api?cacheSeconds=1800)](https://rubygems.org/gems/crowdin-api)
 [![Gem](https://img.shields.io/gem/dtv/crowdin-api?cacheSeconds=1800)](https://rubygems.org/gems/crowdin-api)
 
-**// TODO: build, tests, coverage badges**
+[![Test and Lint](https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml/badge.svg)](https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml)
+[![Build and Publish](https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/build-and-publish.yml/badge.svg)](https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/build-and-publish.yml)
+[![codecov](https://codecov.io/gh/crowdin/crowdin-api-client-ruby/branch/master/graph/badge.svg?token=OJsyJwQbFM)](https://codecov.io/gh/crowdin/crowdin-api-client-ruby)
 
 [![GitHub issues](https://img.shields.io/github/issues/crowdin/crowdin-api-client-ruby?cacheSeconds=1800)](https://github.com/crowdin/crowdin-api-client-ruby/issues)
 [![GitHub](https://img.shields.io/github/license/crowdin/crowdin-api-client-ruby?cacheSeconds=18000)](https://github.com/crowdin/crowdin-api-client-ruby/blob/main/LICENSE)
@@ -24,6 +26,9 @@ For more about Crowdin API v2 see the documentation:
 ## Table of Contents
 * [Installation](#installation)
 * [Quick Start](#quick-start)
+  * [Initialization](#initialization)
+  * [How to call methods](#how-to-call-methods)
+  * [Command-Line Client](#command-line-client)
 * [Seeking Assistance](#seeking-assistance)
 * [Contributing](#contributing)
 * [License](#license)
@@ -66,7 +71,7 @@ require 'crowdin-api'
 crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourApiToken'
 end
-# or you can create Enterprise instanse by specify your organization_domain
+# or you can create Enterprise instance by specify your organization_domain
 crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourEnterpriseApiToken'
   config.organization_domain = 'YourOrganizationDomain'
@@ -92,6 +97,7 @@ To generate a new token in Crowdin Enterprise, follow these steps:
 - Specify *Token Name*, select *Scopes* and *Projects*, click *Create*.
 
 ### How to call methods
+
 ```ruby
 # Create Project
 project = crowdin.add_project(name: your_project_name, sourceLanguageId: your_language_id)
@@ -120,20 +126,18 @@ file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10, project_
 # project_id is optional, as it can be initialized with a Crowdin Client
 ```
 
----
-
-## Command-Line Client
+### Command-Line Client
 
 The Crowdin Ruby client support crowdin-console, where you can test endpoints easier
 
-```
-$ bundle exec crowdin-console --enable-logger --api-token YOUR_API_TOKEN --project-id YOUR_PROJECT_ID
+```console
+bundle exec crowdin-console --enable-logger --api-token API_TOKEN --project-id PROJECT_ID
 ```
 
-Or Enterprise
+Or Crowdin Enterprise
 
-```
-$ bundle exec crowdin-console --enable-logger --enterprise --api-token YOUR_ENTERPRISE_API_TOKEN --organization-domain YOUR_DOMAIN
+```console
+bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain YOUR_DOMAIN
 ```
 
 When execute you'll have IRB console with configured *@crowdin* instance
@@ -141,8 +145,6 @@ When execute you'll have IRB console with configured *@crowdin* instance
 ```
 > @crowdin.list_projects
 ```
-
----
 
 ## Seeking Assistance
 
@@ -157,7 +159,7 @@ If you want to contribute please read the [Contributing](/CONTRIBUTING.md) guide
 ## License
 
 <pre>
-The Crowdin Ruby client is licensed under the MIT License. 
+The Crowdin Ruby Client is licensed under the MIT License.
 See the LICENSE.md file distributed with this work for additional 
 information regarding copyright ownership.
 
