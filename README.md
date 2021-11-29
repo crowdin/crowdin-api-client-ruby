@@ -63,18 +63,24 @@ gem install crowdin-api
 require 'crowdin-api'
 
 # Create a new Crowdin Client object.
-crowdin = Crowdin::Client.new(api_token: your_api_token)
+crowdin = Crowdin::Client.new do |config|
+  config.api_token = 'YourApiToken'
+end
 # or you can create Enterprise instanse by specify your organization_domain
-crowdin = Crowdin::Client.new(api_token: your_api_token, organization_domain: your_organization_domain)
+crowdin = Crowdin::Client.new do |config|
+  config.api_token = 'YourEnterpriseApiToken'
+  config.organization_domain = 'YourOrganizationDomain'
+end
 
 # Also you can specify project_id to handle it in methods
 
-# All Crowdin Client options:
-crowdin = Crowdin::Client.new(
-  api_token: your_api_token,
-  organization_domain: your_organization_domain,
-  project_id: your_project_id
-)
+# All Crowdin Client config options:
+crowdin = Crowdin::Client.new do |config|
+  config.api_token = 'YourApiToken' # [String] required
+  config.organization_domain = 'YourOrganizationDomain' # [String] optional
+  config.project_id = 'YourProjectId' # [Integer] nil by default
+  config.enable_logger = true # [Boolean] false by default
+end
 ```
 
 To generate a new token in Crowdin, follow these steps:
@@ -88,7 +94,7 @@ To generate a new token in Crowdin Enterprise, follow these steps:
 ### How to call methods
 ```ruby
 # Create Project
-project = crowdin.add_project(name: 'YourProjectName', sourceLanguageId: 'YourLanguage')
+project = crowdin.add_project(name: your_project_name, sourceLanguageId: your_language_id)
 
 # Get list of Projects
 projects = client.list_projects
@@ -100,9 +106,9 @@ project = client.get_project(your_project_id)
 projects = client.list_projects(offset: 10, limit: 20)
 
 # Add Storage
-adding_storage_response = crowdin.add_storage(File.open('your_filename.extension'))
+adding_storage_response = crowdin.add_storage(File.open('YourFilename.extension'))
 # or you can specify only filename
-adding_storage_response = crowdin.add_storage('your_filename.extension')
+adding_storage_response = crowdin.add_storage('YourFilename.extension')
 
 # Download file
 filename = crowdin.download_file(your_destination, your_file_id, your_project_id)
