@@ -39,7 +39,7 @@ gem 'crowdin-api', '~> 1.0.0'
 And then execute:
 
 ```console
-bundle
+bundle install
 ```
 
 Or install it yourself as:
@@ -119,6 +119,30 @@ filename = crowdin.download_file(your_destination, your_file_id, your_project_id
 file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10, project_id: your_project_id })
 # project_id is optional, as it can be initialized with a Crowdin Client
 ```
+
+---
+
+## Command-Line Client
+
+The Crowdin Ruby client support crowdin-console, where you can test endpoints easier
+
+```
+$ bundle exec crowdin-console --enable-logger --api-token YOUR_API_TOKEN --project-id YOUR_PROJECT_ID
+```
+
+Or Enterprise
+
+```
+$ bundle exec crowdin-console --enable-logger --enterprise --api-token YOUR_ENTERPRISE_API_TOKEN --organization-domain YOUR_DOMAIN
+```
+
+When execute you'll have IRB console with configured *@crowdin* instance
+
+```
+> @crowdin.list_projects
+```
+
+---
 
 ## Seeking Assistance
 
