@@ -1,3 +1,9 @@
+# Ruby logs
 .ruby-version
-Gemfile.lock
 .idea
+
+# MacOS logs
+.DS_Store
+
+# Versioning
+Gemfile.lock

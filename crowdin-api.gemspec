@@ -1,31 +1,30 @@
-require File.expand_path('../lib/crowdin-api/version', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('lib/crowdin-api/client/version', __dir__)
 
 Gem::Specification.new do |gem|
-  gem.name = 'crowdin-api'
-  gem.version = Crowdin::API::VERSION
-  gem.license = 'MIT'
-  gem.summary = 'Client library to manage translations on Crowdin'
-  gem.description = 'Ruby Client for the Crowdin API'
+  gem.name        = 'crowdin-api'
+  gem.version     = Crowdin::Client::VERSION
+  gem.authors     = ['Crowdin']
+  gem.email       = ['support@crowdin.net']
+  gem.homepage    = 'https://github.com/crowdin/crowdin-api/'
+  gem.summary     = 'Client library to manage translations on Crowdin'
+  gem.description = 'Ruby Client for the Crowdin API. Documentation - https://support.crowdin.com/api/v2/.'
+  gem.license     = 'MIT'
 
-  gem.authors = ['Crowdin']
-  gem.email = ['support@crowdin.net']
-  gem.homepage = 'https://github.com/crowdin/crowdin-api/'
-
-  gem.files = Dir[
-    'README.md', 'LICENSE',
-    'lib/**/*.rb'
-  ]
+  gem.files         = `git ls-files`.split("\n")
+  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.require_paths = ['lib']
-  gem.executables = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files = gem.files.grep(%r{^(test|spec|features)/})
-  gem.extra_rdoc_files = ["README.md", "LICENSE"]
+  gem.bindir        = 'bin'
+  gem.executables   << 'crowdin-console'
 
-  gem.add_runtime_dependency 'rest-client', '~> 2.0'
+  gem.add_runtime_dependency 'open-uri', '>= 0.1.0', '< 0.2.0'
+  gem.add_runtime_dependency 'rest-client', '>= 2.0.0', '< 2.1.0'
 
-  gem.add_development_dependency 'bundler', '~> 1.9'
-  gem.add_development_dependency 'rspec', '~> 3.8'
-  gem.add_development_dependency 'webmock', '~> 3.6'
-  gem.add_development_dependency 'sinatra', '~> 2.0', '>= 2.0.5'
-  gem.add_development_dependency 'rake', '~> 11.2', '>= 11.2.2'
-  gem.add_development_dependency 'pry', '~> 0.12.2'
+  gem.add_development_dependency 'bundler', '~> 2.2', '>= 2.2.32'
+  gem.add_development_dependency 'rake', '~> 13.0', '>= 13.0.6'
+  gem.add_development_dependency 'rspec', '~> 3.10'
+  gem.add_development_dependency 'rubocop', '~> 1.23'
+  gem.add_development_dependency 'sinatra', '~> 2.1'
+  gem.add_development_dependency 'webmock', '~> 3.14'
 end
