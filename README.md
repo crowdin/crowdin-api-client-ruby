@@ -17,9 +17,7 @@ For more about Crowdin API v2 see the documentation:
 [![Gem](https://img.shields.io/gem/dtv/crowdin-api?cacheSeconds=1800)](https://rubygems.org/gems/crowdin-api)
 
 [![Test and Lint](https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml/badge.svg)](https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml)
-[![Build and Publish](https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/build-and-publish.yml/badge.svg)](https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/build-and-publish.yml)
 [![codecov](https://codecov.io/gh/crowdin/crowdin-api-client-ruby/branch/master/graph/badge.svg?token=OJsyJwQbFM)](https://codecov.io/gh/crowdin/crowdin-api-client-ruby)
-
 [![GitHub issues](https://img.shields.io/github/issues/crowdin/crowdin-api-client-ruby?cacheSeconds=1800)](https://github.com/crowdin/crowdin-api-client-ruby/issues)
 [![GitHub](https://img.shields.io/github/license/crowdin/crowdin-api-client-ruby?cacheSeconds=18000)](https://github.com/crowdin/crowdin-api-client-ruby/blob/main/LICENSE)
 
