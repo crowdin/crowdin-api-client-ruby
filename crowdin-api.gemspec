@@ -18,6 +18,8 @@ Gem::Specification.new do |gem|
   gem.bindir        = 'bin'
   gem.executables   << 'crowdin-console'
 
+  gem.required_ruby_version = '>= 2.4'
+
   gem.add_runtime_dependency 'open-uri', '>= 0.1.0', '< 0.2.0'
   gem.add_runtime_dependency 'rest-client', '>= 2.0.0', '< 2.1.0'
 
