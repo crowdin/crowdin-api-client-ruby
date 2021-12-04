@@ -31,7 +31,11 @@ module Crowdin
     end
 
     def base_url
-      organization_domain ? "https://#{organization_domain}.api.crowdin.com" : 'https://api.crowdin.com'
+      if organization_domain
+        !!organization_domain.scan(/.com/) ? organization_domain : "https://#{organization_domain}.api.crowdin.com"
+      else
+        'https://api.crowdin.com'
+      end
     end
 
     def logger_enabled?
