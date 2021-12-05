@@ -26,8 +26,7 @@ module Crowdin
     include ApiResources::Translations
 
     attr_reader :config
-    attr_reader :options
-    attr_reader :connection
+    attr_writer :logger
 
     def initialize
       raise ArgumentError, 'block with configurations not given' unless block_given?
@@ -39,7 +38,6 @@ module Crowdin
 
       set_rest_client_proxy!
 
-      build_options
       build_connection
     end
 
@@ -49,26 +47,22 @@ module Crowdin
       logger.debug(message)
     end
 
-    def logger=(logger)
-      @logger = logger
-      config.enable_logger = true
-    end
-
-    protected
-
-    def build_options
-      @options = config.options
-      options[:headers] = config.headers
-    end
-
-    def build_connection
-      @connection = ::RestClient::Resource.new(config.base_url, options)
+    def connection
+      @connection ||= build_connection
     end
 
     private
 
     def set_rest_client_proxy!
       ENV['http_proxy'] ? ::RestClient.proxy = ENV['http_proxy'] : false
+    end
+
+    def build_connection
+      ::RestClient::Resource.new(config.base_url, build_options)
+    end
+
+    def build_options
+      config.options.merge(headers: config.headers)
     end
 
     def check_logger

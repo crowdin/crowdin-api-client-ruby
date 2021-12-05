@@ -9,7 +9,7 @@ module Crowdin
         @client      = client
         @method      = method
         @full_path   = client.config.target_api_url + path
-        @payload     = Payload.new(method, query).perform
+        @payload     = perform_payload(query)
         @headers     = headers
         @destination = destination
         @errors      = []
@@ -19,6 +19,8 @@ module Crowdin
         process_request!
         process_response!
       end
+
+      private
 
       def process_request!
         return @response = client.connection[@full_path].delete        if delete_request?
@@ -54,10 +56,10 @@ module Crowdin
         end
       end
 
-      private
+      def perform_payload(query)
+        return query if query.is_a?(File)
 
-      def fetch_errors
-        @errors.join(';')
+        get_request? ? { params: fetch_cleared_query(query) } : fetch_cleared_query(query).to_json
       end
 
       def download_file(url)
@@ -71,12 +73,20 @@ module Crowdin
         @errors << "Something went wrong while downloading file. Details - #{error.class}"
       end
 
+      def fetch_errors
+        @errors.join(';')
+      end
+
       def fetch_response_data(doc)
-        if doc['data'].is_a?(Hash) && doc['data']['url'] && doc['data']['url'].scan(/response-content-disposition/)
+        if doc['data'].is_a?(Hash) && doc['data']['url'] && doc['data']['url'].include?('response-content-disposition')
           download_file(doc['data']['url'])
         else
           doc
         end
+      end
+
+      def fetch_cleared_query(query)
+        query.reject { |_, value| value.nil? }
       end
 
       def get_request?
