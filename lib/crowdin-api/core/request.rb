@@ -37,7 +37,7 @@ module Crowdin
         return fetch_errors if @errors.any?
 
         begin
-          if @response
+          if @response && !@response.body.empty?
             doc = JSON.parse(@response.body)
 
             client.log! "args: #{@response.request.args}"
@@ -46,6 +46,8 @@ module Crowdin
             data = fetch_response_data(doc)
 
             @errors.any? ? fetch_errors : data
+          elsif @response
+            @response.code
           end
         rescue StandardError => error
           client.log! error
