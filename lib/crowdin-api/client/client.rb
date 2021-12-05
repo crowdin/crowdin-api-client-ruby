@@ -26,6 +26,7 @@ module Crowdin
     include ApiResources::Translations
 
     attr_reader :config
+    attr_reader :connection
     attr_writer :logger
 
     def initialize
@@ -47,18 +48,14 @@ module Crowdin
       logger.debug(message)
     end
 
-    def connection
-      @connection ||= build_connection
+    def build_connection
+      @connection ||= ::RestClient::Resource.new(config.base_url, build_options)
     end
 
     private
 
     def set_rest_client_proxy!
       ENV['http_proxy'] ? ::RestClient.proxy = ENV['http_proxy'] : false
-    end
-
-    def build_connection
-      ::RestClient::Resource.new(config.base_url, build_options)
     end
 
     def build_options
