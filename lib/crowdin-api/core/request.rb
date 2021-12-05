@@ -28,7 +28,7 @@ module Crowdin
 
         client.connection[@full_path].send(@method, @payload, @headers) { |response, _, _| @response = response }
       rescue StandardError => error
-        client.log! error.class
+        client.log! error
 
         @errors << "Something went wrong while proccessing request. Details - #{error.class}"
       end
@@ -37,17 +37,20 @@ module Crowdin
         return fetch_errors if @errors.any?
 
         begin
-          if @response && !@response.body.empty?
-            doc = JSON.parse(@response.body)
-
+          if @response
             client.log! "args: #{@response.request.args}"
-            client.log! "body: #{doc}"
 
-            data = fetch_response_data(doc)
+            if @response.body.empty?
+              @response.code
+            else
+              doc = JSON.parse(@response.body)
 
-            @errors.any? ? fetch_errors : data
-          elsif @response
-            @response.code
+              client.log! "body: #{doc}"
+
+              data = fetch_response_data(doc)
+
+              @errors.any? ? fetch_errors : data
+            end
           end
         rescue StandardError => error
           client.log! error
