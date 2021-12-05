@@ -66,7 +66,7 @@ module Crowdin
     end
 
     def check_logger
-      config.enable_logger ||= false
+      config.enable_logger ? logger : config.enable_logger = false
     end
 
     def logger
