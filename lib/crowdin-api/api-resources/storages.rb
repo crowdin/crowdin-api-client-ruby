@@ -34,14 +34,14 @@ module Crowdin
       #
       # === Example
       #
-      #  crowdin.add_storage(File.open('your_filename.extension'))
+      #  crowdin.add_storage(File.open('your_filename.extension', 'r'))
       # or
       #  crowdin.add_storage('your_filename.extension')
       #
       def add_storage(file = nil)
         file || raise(ArgumentError, ':file is required')
 
-        file = file.is_a?(File) ? file : File.open(file)
+        file = file.is_a?(File) ? file : File.open(file, 'r')
 
         request = Web::Request.new(
           self,

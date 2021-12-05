@@ -110,9 +110,9 @@ project = client.get_project(your_project_id)
 projects = client.list_projects(offset: 10, limit: 20)
 
 # Add Storage
-adding_storage_response = crowdin.add_storage(File.open('YourFilename.extension'))
+storage = crowdin.add_storage(File.open('YourFilename.extension', 'r'))
 # or you can specify only filename
-adding_storage_response = crowdin.add_storage('YourFilename.extension')
+storage = crowdin.add_storage('YourFilename.extension')
 
 # Download file
 filename = crowdin.download_file(your_destination, your_file_id, your_project_id)
