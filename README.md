@@ -101,13 +101,13 @@ To generate a new token in Crowdin Enterprise, follow these steps:
 project = crowdin.add_project(name: your_project_name, sourceLanguageId: your_language_id)
 
 # Get list of Projects
-projects = client.list_projects
+projects = crowdin.list_projects
 
 # Get specified project
-project = client.get_project(your_project_id)
+project = crowdin.get_project(your_project_id)
 
 # Get list of Projects with offset and limit
-projects = client.list_projects(offset: 10, limit: 20)
+projects = crowdin.list_projects(offset: 10, limit: 20)
 
 # Add Storage
 storage = crowdin.add_storage(File.open('YourFilename.extension', 'r'))
@@ -135,7 +135,7 @@ bundle exec crowdin-console --enable-logger --api-token API_TOKEN --project-id P
 Or Crowdin Enterprise
 
 ```console
-bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain YOUR_DOMAIN
+bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain YOUR_DOMAIN --project-id PROJECT_ID
 ```
 
 When execute you'll have IRB console with configured *@crowdin* instance
