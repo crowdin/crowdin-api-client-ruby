@@ -25,6 +25,8 @@ module Crowdin
     include ApiResources::TranslationStatus
     include ApiResources::Translations
 
+    include Errors::ApiErrorsRaiser
+
     attr_reader :config
     attr_reader :connection
     attr_writer :logger

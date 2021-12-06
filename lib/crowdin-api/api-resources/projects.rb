@@ -62,9 +62,11 @@ module Crowdin
         request.perform
       end
 
-      # For Enterprise API only
+      # For Enterprise mode only
 
       def list_groups(query = {})
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+
         request = Web::Request.new(
           self,
           :get,
@@ -76,6 +78,8 @@ module Crowdin
       end
 
       def add_group(query = {})
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+
         request = Web::Request.new(
           self,
           :post,
@@ -87,6 +91,8 @@ module Crowdin
       end
 
       def get_group(group_id = nil)
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+
         group_id || raise(ArgumentError, ':group_id is required')
 
         request = Web::Request.new(
@@ -99,6 +105,8 @@ module Crowdin
       end
 
       def delete_group(group_id = nil)
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+
         group_id || raise(ArgumentError, ':group_id is required')
 
         request = Web::Request.new(
@@ -111,6 +119,8 @@ module Crowdin
       end
 
       def edit_group(group_id = nil, query = {})
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+
         group_id || raise(ArgumentError, ':group_id is required')
 
         request = Web::Request.new(

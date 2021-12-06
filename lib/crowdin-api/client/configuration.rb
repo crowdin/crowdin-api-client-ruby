@@ -31,11 +31,15 @@ module Crowdin
     end
 
     def base_url
-      if organization_domain
+      if enterprise_mode?
         organization_domain.include?('.com') ? organization_domain : "https://#{organization_domain}.api.crowdin.com"
       else
         'https://api.crowdin.com'
       end
+    end
+
+    def enterprise_mode?
+      !!organization_domain
     end
 
     def logger_enabled?
