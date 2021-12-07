@@ -91,7 +91,16 @@ module Crowdin
       end
 
       def fetch_cleared_query(query)
-        query.reject { |_, value| value.nil? }
+        case query
+        when Array
+          query.each do |el|
+            el.reject! { |_, value| value.nil? }
+          end
+        when Hash
+          query.reject { |_, value| value.nil? }
+        else
+          query
+        end
       end
 
       def get_request?
