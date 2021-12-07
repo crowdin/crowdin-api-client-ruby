@@ -27,49 +27,50 @@ module Crowdin
 
     include Errors::ApiErrorsRaiser
 
+    attr_accessor :logger
+
     attr_reader :config
     attr_reader :connection
-    attr_writer :logger
+    attr_reader :options
 
-    def initialize
-      raise ArgumentError, 'block with configurations not given' unless block_given?
-
-      @config = Crowdin::Configuration.new
-      yield config
+    def initialize(&block)
+      build_configuration(&block)
 
       check_logger
-
-      set_rest_client_proxy!
+      check_rest_client_proxy
 
       build_connection
     end
 
     def log!(message)
-      return true unless config.logger_enabled?
+      !config.logger_enabled? || logger.debug(message)
+    end
 
-      logger.debug(message)
+    private
+
+    def build_configuration
+      @config = Crowdin::Configuration.new
+      yield config if block_given?
     end
 
     def build_connection
       @connection ||= ::RestClient::Resource.new(config.base_url, build_options)
     end
 
-    private
+    def build_options
+      @options ||= config.options.merge(headers: config.headers)
+    end
 
-    def set_rest_client_proxy!
+    def set_default_logger
+      @logger ||= Logger.new($stderr)
+    end
+
+    def check_rest_client_proxy
       ENV['http_proxy'] ? ::RestClient.proxy = ENV['http_proxy'] : false
     end
 
-    def build_options
-      config.options.merge(headers: config.headers)
-    end
-
     def check_logger
-      config.enable_logger ? logger : config.enable_logger = false
-    end
-
-    def logger
-      @logger ||= Logger.new($stderr)
+      config.logger_enabled? ? set_default_logger : config.enable_logger = false
     end
   end
 end

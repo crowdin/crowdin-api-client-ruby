@@ -9,6 +9,8 @@ module Crowdin
 
     attr_reader :target_api_url
 
+    alias logger_enabled? enable_logger
+
     def initialize
       @target_api_url = '/api/v2'
     end
@@ -40,10 +42,6 @@ module Crowdin
 
     def enterprise_mode?
       !!organization_domain
-    end
-
-    def logger_enabled?
-      self.enable_logger
     end
   end
 end
