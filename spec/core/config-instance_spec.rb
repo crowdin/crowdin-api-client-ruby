@@ -21,50 +21,50 @@ describe 'Config instance' do
   end
 
   it '#target_api_url should equal /api/v2 by default' do
-    expect(@crowdin.config.target_api_url).eql? '/api/v2'
+    expect(@crowdin.config.target_api_url).to eq('/api/v2')
   end
 
-  it '.logger_enabled? should be false by default' do
-    expect(@crowdin.config.logger_enabled?).eql? false
+  it '#logger_enabled? should be false by default' do
+    expect(@crowdin.config.logger_enabled?).to be_falsey
   end
 
-  it '.logger_enabled?' do
+  it '#logger_enabled? should equal specified argument' do
     @crowdin = Crowdin::Client.new do |config|
       config.enable_logger = true
     end
 
-    expect(@crowdin.config.logger_enabled?).eql? true
+    expect(@crowdin.config.logger_enabled?).to be_truthy
   end
 
-  it '.enterprise_mode? should be false by default' do
-    expect(@crowdin.config.enterprise_mode?).eql? false
+  it '#enterprise_mode? should be false by default' do
+    expect(@crowdin.config.enterprise_mode?).to be_falsey
   end
 
-  it '.enterprise_mode?' do
+  it '#enterprise_mode? should equal specified arguments' do
     @crowdin = Crowdin::Client.new do |config|
       config.organization_domain = 'organization_domain'
     end
 
-    expect(@crowdin.config.enterprise_mode?).eql? true
+    expect(@crowdin.config.enterprise_mode?).to be_truthy
   end
 
-  it '.base_url should equal https://api.crowdin.com by default' do
-    expect(@crowdin.config.base_url).eql? 'https://api.crowdin.com'
+  it '#base_url should equal https://api.crowdin.com by default' do
+    expect(@crowdin.config.base_url).to eql('https://api.crowdin.com')
   end
 
-  it '.base_url should equal specified organization domain' do
+  it '#base_url should equal specified organization domain' do
     @crowdin = Crowdin::Client.new do |config|
       config.organization_domain = 'organization_domain'
     end
 
-    expect(@crowdin.config.base_url).eql? 'https://organization_domain.api.crowdin.com'
+    expect(@crowdin.config.base_url).to eql('https://organization_domain.api.crowdin.com')
   end
 
-  it '.base_url should equal full specified organization domain when user specify full url (with .com)' do
+  it '#base_url should equal full specified organization domain when user specify full url (with .com)' do
     @crowdin = Crowdin::Client.new do |config|
       config.organization_domain = 'organization_domain.com'
     end
 
-    expect(@crowdin.config.base_url).eql? 'organization_domain.com'
+    expect(@crowdin.config.base_url).to eql('organization_domain.com')
   end
 end
