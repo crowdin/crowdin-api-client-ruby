@@ -65,25 +65,31 @@ gem install crowdin-api
 ```ruby
 require 'crowdin-api'
 
-# Create a new Crowdin Client object.
+# Initialize a new Client instance with config options
 crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourApiToken'
 end
-# or you can create Enterprise instance by specify your organization_domain
+
+# Or you can intialize Enterprise Client instance by specifying your organization_domain in config options
 crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourEnterpriseApiToken'
   config.organization_domain = 'YourOrganizationDomain'
 end
+# Note: we use full specified organization domain if that includes .com
+# config.organization_domain = your_domain -> https://your_domain.api.crowdin.com
+# config.organization_domain = your_domain.com -> your_domain.com
 
-# Also you can specify project_id to handle it in methods
-
-# All Crowdin Client config options:
+# All supported Crowdin Client config options now:
 crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourApiToken' # [String] required
   config.organization_domain = 'YourOrganizationDomain' # [String] optional
   config.project_id = 'YourProjectId' # [Integer] nil by default
   config.enable_logger = true # [Boolean] false by default
 end
+# Note: Client will initialize default Logger instance if you have specify enable_logger to true,
+# you can change it by crowdin.logger = YourLogger
+
+# Also you can specify proxy by adding it to ENV['http_proxy'] before Client initialization
 ```
 
 To generate a new token in Crowdin, follow these steps:
@@ -94,7 +100,7 @@ To generate a new token in Crowdin Enterprise, follow these steps:
 - Go to *Account Settings* > *Access tokens* tab and click *New token*.
 - Specify *Token Name*, select *Scopes* and *Projects*, click *Create*.
 
-### How to call methods
+### Usage
 
 ```ruby
 # Create Project
@@ -129,14 +135,15 @@ file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10, project_
 The Crowdin Ruby client support crowdin-console, where you can test endpoints easier
 
 ```console
-bundle exec crowdin-console --enable-logger --api-token API_TOKEN --project-id PROJECT_ID
+$ bundle exec crowdin-console --enable-logger --api-token API_TOKEN --project-id PROJECT_ID
 ```
 
 Or Crowdin Enterprise
 
 ```console
-bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain YOUR_DOMAIN --project-id PROJECT_ID
+$ bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain YOUR_DOMAIN --project-id PROJECT_ID
 ```
+Note: you can specify full organization domain by adding .com
 
 When execute you'll have IRB console with configured *@crowdin* instance
 
