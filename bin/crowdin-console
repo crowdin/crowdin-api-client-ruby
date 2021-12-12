@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'bundler/setup'
 require 'crowdin-api'
 require 'optparse'
 
-# You can specify your arguments when execute this script
+#
+# You can specify your arguments while executing this script
 #
 # Type bundle exec crowdin-console --help for more available arguments
 #
@@ -12,9 +12,12 @@ require 'optparse'
 #
 #  bundle exec crowdin-console --enable-logger --api-token YOUR_API_TOKEN --project-id YOUR_PROJECT_ID
 #
-# or Enterpise API
+# or Enterpise API:
 #
 #  bundle exec crowdin-console --enterprise --api-token YOUR_ENTERPRISE_API_TOKEN --organization-domain YOUR_DOMAIN
+#
+
+include Crowdin::Errors::ApiErrorsRaiser
 
 options = {}
 
@@ -28,10 +31,10 @@ OptionParser.new do |opts|
   opts.on('--enable-logger', 'Enable logger')                    { |v| options[:enable_logger] = v }
 end.parse!
 
-options[:api_token] || raise(ArgumentError, '--api-token argument is required')
+options[:api_token] || raise_api_token_is_required_error
 
 if options[:enterprise]
-  options[:organization_domain] || raise(ArgumentError, '--organization-domain option is required for Enterprise mode')
+  options[:organization_domain] || raise_organization_domain_is_required_error
 
   @crowdin = Crowdin::Client.new do |config|
     config.api_token           = options[:api_token]

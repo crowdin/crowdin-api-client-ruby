@@ -109,11 +109,11 @@ project = crowdin.add_project(name: your_project_name, sourceLanguageId: your_la
 # Get list of Projects
 projects = crowdin.list_projects
 
-# Get specified project
-project = crowdin.get_project(your_project_id)
-
 # Get list of Projects with offset and limit
 projects = crowdin.list_projects(offset: 10, limit: 20)
+
+# Get specified project
+project = crowdin.get_project(your_project_id)
 
 # Add Storage
 storage = crowdin.add_storage(File.open('YourFilename.extension', 'r'))

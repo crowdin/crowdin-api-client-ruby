@@ -1,14 +1,17 @@
 # frozen_string_literal: true
 
+#
 # The Crowdin::Client library is used for interactions with a crowdin.com website.
 #
 # == Example
 #
-#   require 'crowdin-api'
+#  require 'crowdin-api'
 #
-#   crowdin = Crowdin::Client.new do |config|
-#     config.api_token = 'YOUR_API_TOKEN'
-#   end
+#  crowdin = Crowdin::Client.new do |config|
+#    config.api_token = 'YOUR_API_TOKEN'
+#  end
+#
+#  crowdin.list_projects
 #
 module Crowdin
   class Client
@@ -62,6 +65,7 @@ module Crowdin
     end
 
     def set_default_logger
+      require 'logger'
       @logger ||= Logger.new($stderr)
     end
 

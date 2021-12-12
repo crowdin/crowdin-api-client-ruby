@@ -166,7 +166,7 @@ module Crowdin
       #
       #  crowdin.add_file(storage_id: your_storage_id, name: 'your_filename')
       #
-      # or you can use the specified project_id
+      # or you can specify project_id
       #
       #  crowdin.add_file({}, your_project_id)
       #
@@ -275,7 +275,7 @@ module Crowdin
       #
       #  crowdin.list_file_revisions(your_file_id, { limit: your_value })
       #
-      # or you can use the specified project_id
+      # or you can cpecify project_id
       #
       #  crowdin.list_file_revisions(your_file_id, { project_id: your_project_id ..})
       #
