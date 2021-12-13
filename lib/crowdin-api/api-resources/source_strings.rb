@@ -29,9 +29,7 @@ module Crowdin
         request.perform
       end
 
-      def get_string(string_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
+      def get_string(string_id = nil, query = {}, project_id = config.project_id)
         string_id  || raise_parameter_is_required_error(:string_id)
         project_id || raise_project_id_is_required_error
 
@@ -58,9 +56,7 @@ module Crowdin
         request.perform
       end
 
-      def edit_string(string_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
+      def edit_string(string_id = nil, query = {}, project_id = config.project_id)
         string_id  || raise_parameter_is_required_error(:string_id)
         project_id || raise_project_id_is_required_error
 
