@@ -27,6 +27,7 @@ module Crowdin
     include ApiResources::Storages
     include ApiResources::TranslationStatus
     include ApiResources::Translations
+    include ApiResources::Workflows
 
     include Errors::ApiErrorsRaiser
 

@@ -17,6 +17,7 @@ require 'crowdin-api/api-resources/source_files'
 require 'crowdin-api/api-resources/storages'
 require 'crowdin-api/api-resources/translation_status'
 require 'crowdin-api/api-resources/translations'
+require 'crowdin-api/api-resources/workflows'
 
 # Client
 require 'crowdin-api/client/version'
