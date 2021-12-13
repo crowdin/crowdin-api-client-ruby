@@ -93,11 +93,11 @@ module Crowdin
       def fetch_cleared_query(query)
         case query
         when Array
-          query.each do |el|
-            el.reject! { |_, value| value.nil? }
-          end.reject!(&:empty?)
+          query.map do |el|
+            el.reject { |_, value| value.nil? }
+          end.reject(&:empty?)
         when Hash
-          query.reject! { |_, value| value.nil? }
+          query.reject { |_, value| value.nil? }
         else
           query
         end
