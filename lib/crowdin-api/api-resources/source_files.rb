@@ -55,9 +55,7 @@ module Crowdin
         request.perform
       end
 
-      def edit_branch(branch_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
+      def edit_branch(branch_id = nil, query = {}, project_id = config.project_id)
         branch_id  || raise_parameter_is_required_error(:branch_id)
         project_id || raise_project_id_is_required_error
 
@@ -123,9 +121,7 @@ module Crowdin
         request.perform
       end
 
-      def edit_directory(directory_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
+      def edit_directory(directory_id = nil, query = {}, project_id = config.project_id)
         directory_id || raise_parameter_is_required_error(:directory_id)
         project_id   || raise_project_id_is_required_error
 
@@ -168,7 +164,7 @@ module Crowdin
       #
       # or you can specify project_id
       #
-      #  crowdin.add_file({}, your_project_id)
+      #  crowdin.add_file({ storage_id: your_storage_id, name: 'your_filename' }, your_project_id)
       #
       def add_file(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
@@ -196,9 +192,7 @@ module Crowdin
         request.perform
       end
 
-      def update_or_restore_file(file_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
+      def update_or_restore_file(file_id = nil, query = {}, project_id = config.project_id)
         file_id    || raise_parameter_is_required_error(:file_id)
         project_id || raise_project_id_is_required_error
 
@@ -225,9 +219,7 @@ module Crowdin
         request.perform
       end
 
-      def edit_file(file_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
+      def edit_file(file_id = nil, query = {}, project_id = config.project_id)
         file_id    || raise_parameter_is_required_error(:file_id)
         project_id || raise_project_id_is_required_error
 
@@ -273,15 +265,13 @@ module Crowdin
       #
       # when you're initialized Crowdin Client with a project_id
       #
-      #  crowdin.list_file_revisions(your_file_id, { limit: your_value })
+      #  crowdin.list_file_revisions(your_file_id, limit: your_value)
       #
       # or you can specify project_id
       #
-      #  crowdin.list_file_revisions(your_file_id, { project_id: your_project_id })
+      #  crowdin.list_file_revisions(your_file_id, { limit: your_value }, your_project_id)
       #
-      def list_file_revisions(file_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
+      def list_file_revisions(file_id = nil, query = {}, project_id = config.project_id)
         file_id    || raise_parameter_is_required_error(:file_id)
         project_id || raise_project_id_is_required_error
 
