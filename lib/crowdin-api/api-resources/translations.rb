@@ -4,7 +4,7 @@ module Crowdin
   module ApiResources
     module Translations
       def pre_translation_status(pre_translation_id = nil, project_id = config.project_id)
-        pre_translation_id || raise(ArgumentError, ':pre_translation_id is required')
+        pre_translation_id || raise_parameter_is_required_error(:pre_translation_id)
         project_id         || raise_project_id_is_required_error
 
         request = Web::Request.new(
@@ -32,7 +32,7 @@ module Crowdin
       def build_project_directory_translation(directory_id = nil, query = {})
         project_id = query[:project_id] || config.project_id
 
-        directory_id || raise(ArgumentError, ':directory_id is required')
+        directory_id || raise_parameter_is_required_error(:directory_id)
         project_id   || raise_project_id_is_required_error
 
         request = Web::Request.new(
@@ -48,7 +48,7 @@ module Crowdin
       def build_project_file_translation(file_id = nil, query = {})
         project_id = query[:project_id] || config.project_id
 
-        file_id    || raise(ArgumentError, ':file_id is required')
+        file_id    || raise_parameter_is_required_error(:file_id)
         project_id || raise_project_id_is_required_error
 
         headers = query[:eTag] ? { 'If-None-Match' => query[:eTag] } : {}
@@ -93,7 +93,7 @@ module Crowdin
       def upload_translations(language_id = nil, query = {})
         project_id = query[:project_id] || config.project_id
 
-        language_id || raise(ArgumentError, ':language_id is required')
+        language_id || raise_parameter_is_required_error(:language_id)
         project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
@@ -106,10 +106,10 @@ module Crowdin
         request.perform
       end
 
-      def download_project_translations(destinaton = nil, build_id = nil, project_id = config.project_id)
-        destinaton || raise(ArgumentError, ':destination is required for downlaods')
-        build_id   || raise(ArgumentError, ':build_id is required')
-        project_id || raise_project_id_is_required_error
+      def download_project_translations(destination = nil, build_id = nil, project_id = config.project_id)
+        destination || raise_parameter_is_required_error(:destination)
+        build_id    || raise_parameter_is_required_error(:build_id)
+        project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -117,14 +117,14 @@ module Crowdin
           "/projects/#{project_id}/translations/builds/#{build_id}/download",
           {},
           {},
-          destinaton
+          destination
         )
 
         request.perform
       end
 
       def check_project_build_status(build_id = nil, project_id = config.project_id)
-        build_id   || raise(ArgumentError, ':build_id is required')
+        build_id   || raise_parameter_is_required_error(:build_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
@@ -137,7 +137,7 @@ module Crowdin
       end
 
       def cancel_build(build_id = nil, project_id = config.project_id)
-        build_id   || raise(ArgumentError, ':build_id is required')
+        build_id   || raise_parameter_is_required_error(:build_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
