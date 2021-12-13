@@ -95,9 +95,9 @@ module Crowdin
         when Array
           query.each do |el|
             el.reject! { |_, value| value.nil? }
-          end
+          end.reject!(&:empty?)
         when Hash
-          query.reject { |_, value| value.nil? }
+          query.reject! { |_, value| value.nil? }
         else
           query
         end
