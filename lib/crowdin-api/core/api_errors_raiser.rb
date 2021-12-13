@@ -16,6 +16,7 @@ module Crowdin
       end
 
       # crowdin-console errors
+
       def raise_api_token_is_required_error
         raise(ArgumentError, '--api-token option is required')
       end

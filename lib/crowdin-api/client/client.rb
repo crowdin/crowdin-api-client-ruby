@@ -28,6 +28,7 @@ module Crowdin
     include ApiResources::TranslationStatus
     include ApiResources::Translations
     include ApiResources::Workflows
+    include ApiResources::SourceStrings
 
     include Errors::ApiErrorsRaiser
 
