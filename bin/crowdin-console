@@ -4,9 +4,9 @@ require 'crowdin-api'
 require 'optparse'
 
 #
-# You can specify your arguments while executing this script
+# You can specify your options while executing this script
 #
-# Type bundle exec crowdin-console --help for more available arguments
+# Type bundle exec crowdin-console --help for more available options
 #
 # Example:
 #

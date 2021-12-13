@@ -17,7 +17,7 @@ module Crowdin
 
       # crowdin-console errors
       def raise_api_token_is_required_error
-        raise(ArgumentError, '--api-token argument is required')
+        raise(ArgumentError, '--api-token option is required')
       end
 
       def raise_organization_domain_is_required_error
