@@ -7,7 +7,7 @@ module Crowdin
         project_id = query[:project_id] || config.project_id
 
         branch_id   || raise(ArgumentError, ':file_id is required')
-        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -23,7 +23,7 @@ module Crowdin
         project_id = query[:project_id] || config.project_id
 
         directory_id || raise(ArgumentError, ':directory_id is required')
-        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id   || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -39,7 +39,7 @@ module Crowdin
         project_id = query[:project_id] || config.project_id
 
         file_id    || raise(ArgumentError, ':file_id is required')
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -55,7 +55,7 @@ module Crowdin
         project_id = query[:project_id] || config.project_id
 
         language_id || raise(ArgumentError, ':language_id is required')
-        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -68,7 +68,7 @@ module Crowdin
       end
 
       def get_project_progress(query = {}, project_id = config.project_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -81,7 +81,7 @@ module Crowdin
       end
 
       def get_qa_progress(query = {}, project_id = config.project_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
