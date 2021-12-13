@@ -8,7 +8,11 @@ module Crowdin
       end
 
       def raise_project_id_is_required_error
-        raise(ArgumentError, 'For this request :project_id is required in parameters or while Client initialization')
+        raise(ArgumentError, ':project_id is required in parameters or while Client initialization')
+      end
+
+      def raise_parameter_is_required_error(parameter)
+        raise(ArgumentError, ":#{parameter} is required")
       end
 
       # crowdin-console errors
