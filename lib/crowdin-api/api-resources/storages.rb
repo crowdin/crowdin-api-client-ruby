@@ -39,7 +39,7 @@ module Crowdin
       #  crowdin.add_storage('your_filename.extension')
       #
       def add_storage(file = nil)
-        file || raise(ArgumentError, ':file is required')
+        file || raise_parameter_is_required_error(:file)
 
         file = file.is_a?(File) ? file : File.open(file, 'r')
 
@@ -65,7 +65,7 @@ module Crowdin
       #  crowdin.get_storage(your_storage_id)
       #
       def get_storage(storage_id = nil)
-        storage_id || raise(ArgumentError, ':storage_id is required')
+        storage_id || raise_parameter_is_required_error(:storage_id)
 
         request = Web::Request.new(
           self,
@@ -87,7 +87,7 @@ module Crowdin
       #  crowdin.delete_storage(your_storage_id)
       #
       def delete_storage(storage_id = nil)
-        storage_id || raise(ArgumentError, ':storage_id is required')
+        storage_id || raise_parameter_is_required_error(:storage_id)
 
         request = Web::Request.new(
           self,
