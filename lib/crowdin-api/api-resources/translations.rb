@@ -29,9 +29,7 @@ module Crowdin
         request.perform
       end
 
-      def build_project_directory_translation(directory_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
+      def build_project_directory_translation(directory_id = nil, query = {}, project_id = config.project_id)
         directory_id || raise_parameter_is_required_error(:directory_id)
         project_id   || raise_project_id_is_required_error
 
@@ -45,9 +43,7 @@ module Crowdin
         request.perform
       end
 
-      def build_project_file_translation(file_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
+      def build_project_file_translation(file_id = nil, query = {}, project_id = config.project_id)
         file_id    || raise_parameter_is_required_error(:file_id)
         project_id || raise_project_id_is_required_error
 
@@ -90,9 +86,7 @@ module Crowdin
         request.perform
       end
 
-      def upload_translations(language_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
+      def upload_translations(language_id = nil, query = {}, project_id = config.project_id)
         language_id || raise_parameter_is_required_error(:language_id)
         project_id  || raise_project_id_is_required_error
 
