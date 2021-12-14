@@ -9,6 +9,9 @@ module Crowdin
 
     attr_reader :target_api_url
 
+    alias logger_enabled?  enable_logger
+    alias enterprise_mode? organization_domain
+
     def initialize
       @target_api_url = '/api/v2'
     end
@@ -31,11 +34,11 @@ module Crowdin
     end
 
     def base_url
-      organization_domain ? "https://#{organization_domain}.api.crowdin.com" : 'https://api.crowdin.com'
-    end
-
-    def logger_enabled?
-      enable_logger
+      if enterprise_mode?
+        organization_domain.include?('.com') ? organization_domain : "https://#{organization_domain}.api.crowdin.com"
+      else
+        'https://api.crowdin.com'
+      end
     end
   end
 end

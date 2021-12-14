@@ -26,7 +26,7 @@ module Crowdin
       end
 
       def get_project(project_id = nil)
-        project_id || raise(ArgumentError, ':project_id is required')
+        project_id || raise_parameter_is_required_error(:project_id)
 
         request = Web::Request.new(
           self,
@@ -38,7 +38,7 @@ module Crowdin
       end
 
       def delete_project(project_id = nil)
-        project_id || raise(ArgumentError, ':project_id is required')
+        project_id || raise_parameter_is_required_error(:project_id)
 
         request = Web::Request.new(
           self,
@@ -50,7 +50,7 @@ module Crowdin
       end
 
       def edit_project(project_id = nil, query = {})
-        project_id || raise(ArgumentError, ':project_id is required')
+        project_id || raise_parameter_is_required_error(:project_id)
 
         request = Web::Request.new(
           self,
@@ -62,9 +62,11 @@ module Crowdin
         request.perform
       end
 
-      # For Enterprise API only
+      # For Enterprise mode only
 
       def list_groups(query = {})
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+
         request = Web::Request.new(
           self,
           :get,
@@ -76,6 +78,8 @@ module Crowdin
       end
 
       def add_group(query = {})
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+
         request = Web::Request.new(
           self,
           :post,
@@ -87,7 +91,8 @@ module Crowdin
       end
 
       def get_group(group_id = nil)
-        group_id || raise(ArgumentError, ':group_id is required')
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        group_id                || raise_parameter_is_required_error(:group_id)
 
         request = Web::Request.new(
           self,
@@ -99,7 +104,8 @@ module Crowdin
       end
 
       def delete_group(group_id = nil)
-        group_id || raise(ArgumentError, ':group_id is required')
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        group_id                || raise_parameter_is_required_error(:group_id)
 
         request = Web::Request.new(
           self,
@@ -111,7 +117,8 @@ module Crowdin
       end
 
       def edit_group(group_id = nil, query = {})
-        group_id || raise(ArgumentError, ':group_id is required')
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        group_id                || raise_parameter_is_required_error(:group_id)
 
         request = Web::Request.new(
           self,

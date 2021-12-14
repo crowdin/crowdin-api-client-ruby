@@ -1,14 +1,17 @@
 # frozen_string_literal: true
 
+#
 # The Crowdin::Client library is used for interactions with a crowdin.com website.
 #
 # == Example
 #
-#   require 'crowdin-api'
+#  require 'crowdin-api'
 #
-#   crowdin = Crowdin::Client.new do |config|
-#     config.api_token = 'YOUR_API_TOKEN'
-#   end
+#  crowdin = Crowdin::Client.new do |config|
+#    config.api_token = 'YOUR_API_TOKEN'
+#  end
+#
+#  crowdin.list_projects
 #
 module Crowdin
   class Client
@@ -24,59 +27,56 @@ module Crowdin
     include ApiResources::Storages
     include ApiResources::TranslationStatus
     include ApiResources::Translations
+    include ApiResources::Workflows
+    include ApiResources::SourceStrings
+
+    include Errors::ApiErrorsRaiser
+
+    attr_accessor :logger
 
     attr_reader :config
-    attr_reader :options
     attr_reader :connection
+    attr_reader :options
 
-    def initialize
-      raise ArgumentError, 'block with configurations not given' unless block_given?
-
-      @config = Crowdin::Configuration.new
-      yield config
+    def initialize(&block)
+      build_configuration(&block)
 
       check_logger
+      check_rest_client_proxy
 
-      set_rest_client_proxy!
-
-      build_options
       build_connection
     end
 
     def log!(message)
-      return true unless config.logger_enabled?
-
-      logger.debug(message)
-    end
-
-    def logger=(logger)
-      @logger = logger
-      config.enable_logger = true
-    end
-
-    protected
-
-    def build_options
-      @options = config.options
-      options[:headers] = config.headers
-    end
-
-    def build_connection
-      @connection = ::RestClient::Resource.new(config.base_url, options)
+      !config.logger_enabled? || logger.debug(message)
     end
 
     private
 
-    def set_rest_client_proxy!
+    def build_configuration
+      @config = Crowdin::Configuration.new
+      yield config if block_given?
+    end
+
+    def build_connection
+      @connection ||= ::RestClient::Resource.new(config.base_url, build_options)
+    end
+
+    def build_options
+      @options ||= config.options.merge(headers: config.headers)
+    end
+
+    def set_default_logger
+      require 'logger'
+      @logger ||= Logger.new($stderr)
+    end
+
+    def check_rest_client_proxy
       ENV['http_proxy'] ? ::RestClient.proxy = ENV['http_proxy'] : false
     end
 
     def check_logger
-      config.enable_logger ||= false
-    end
-
-    def logger
-      @logger ||= Logger.new($stderr)
+      config.logger_enabled? ? set_default_logger : config.enable_logger = false
     end
   end
 end

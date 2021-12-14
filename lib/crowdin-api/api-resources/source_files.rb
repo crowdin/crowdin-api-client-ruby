@@ -4,7 +4,7 @@ module Crowdin
   module ApiResources
     module SourceFiles
       def list_branches(query = {}, project_id = config.project_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -17,7 +17,7 @@ module Crowdin
       end
 
       def add_branch(query = {}, project_id = config.project_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -30,8 +30,8 @@ module Crowdin
       end
 
       def get_branch(branch_id = nil, project_id = config.project_id)
-        branch_id  || raise(ArgumentError, ':branch_id is required')
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        branch_id  || raise_parameter_is_required_error(:branch_id)
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -43,8 +43,8 @@ module Crowdin
       end
 
       def delete_branch(branch_id = nil, project_id = config.project_id)
-        branch_id  || raise(ArgumentError, ':branch_id is required')
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        branch_id  || raise_parameter_is_required_error(:branch_id)
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -55,11 +55,9 @@ module Crowdin
         request.perform
       end
 
-      def edit_branch(branch_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
-        branch_id  || raise(ArgumentError, ':branch_id is required')
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def edit_branch(branch_id = nil, query = {}, project_id = config.project_id)
+        branch_id  || raise_parameter_is_required_error(:branch_id)
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -72,7 +70,7 @@ module Crowdin
       end
 
       def list_directories(query = {}, project_id = config.project_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -85,7 +83,7 @@ module Crowdin
       end
 
       def add_directory(query = {}, project_id = config.project_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -98,8 +96,8 @@ module Crowdin
       end
 
       def get_directory(directory_id = nil, project_id = config.project_id)
-        directory_id || raise(ArgumentError, ':directory_id is required')
-        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        directory_id || raise_parameter_is_required_error(:directory_id)
+        project_id   || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -111,8 +109,8 @@ module Crowdin
       end
 
       def delete_directory(directory_id = nil, project_id = config.project_id)
-        directory_id || raise(ArgumentError, ':directory_id is required')
-        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        directory_id || raise_parameter_is_required_error(:directory_id)
+        project_id   || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -123,11 +121,9 @@ module Crowdin
         request.perform
       end
 
-      def edit_directory(directory_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
-        directory_id || raise(ArgumentError, ':directory_id is required')
-        project_id   || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def edit_directory(directory_id = nil, query = {}, project_id = config.project_id)
+        directory_id || raise_parameter_is_required_error(:directory_id)
+        project_id   || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -140,7 +136,7 @@ module Crowdin
       end
 
       def list_files(query = {}, project_id = config.project_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -166,12 +162,12 @@ module Crowdin
       #
       #  crowdin.add_file(storage_id: your_storage_id, name: 'your_filename')
       #
-      # or you can use the specified project_id
+      # or you can specify project_id
       #
-      #  crowdin.add_file({}, your_project_id)
+      #  crowdin.add_file({ storage_id: your_storage_id, name: 'your_filename' }, your_project_id)
       #
       def add_file(query = {}, project_id = config.project_id)
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -184,8 +180,8 @@ module Crowdin
       end
 
       def get_file(file_id = nil, project_id = config.project_id)
-        file_id    || raise(ArgumentError, ':file_id is required')
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        file_id    || raise_parameter_is_required_error(:file_id)
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -196,11 +192,9 @@ module Crowdin
         request.perform
       end
 
-      def update_or_restore_file(file_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
-        file_id    || raise(ArgumentError, ':file_id is required')
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def update_or_restore_file(file_id = nil, query = {}, project_id = config.project_id)
+        file_id    || raise_parameter_is_required_error(:file_id)
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -213,8 +207,8 @@ module Crowdin
       end
 
       def delete_file(file_id = nil, project_id = config.project_id)
-        file_id    || raise(ArgumentError, ':file_id is required')
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        file_id    || raise_parameter_is_required_error(:file_id)
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -225,11 +219,9 @@ module Crowdin
         request.perform
       end
 
-      def edit_file(file_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
-        file_id    || raise(ArgumentError, ':file_id is required')
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def edit_file(file_id = nil, query = {}, project_id = config.project_id)
+        file_id    || raise_parameter_is_required_error(:file_id)
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -242,9 +234,9 @@ module Crowdin
       end
 
       def download_file(destination = nil, file_id = nil, project_id = config.project_id)
-        destination || raise(ArgumentError, ':destination is required for downlaods')
-        file_id     || raise(ArgumentError, ':file_id is required')
-        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        destination || raise_parameter_is_required_error(:destination)
+        file_id     || raise_parameter_is_required_error(:file_id)
+        project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -273,17 +265,15 @@ module Crowdin
       #
       # when you're initialized Crowdin Client with a project_id
       #
-      #  crowdin.list_file_revisions(your_file_id, { limit: your_value })
+      #  crowdin.list_file_revisions(your_file_id, limit: your_value)
       #
-      # or you can use the specified project_id
+      # or you can specify project_id
       #
-      #  crowdin.list_file_revisions(your_file_id, { project_id: your_project_id ..})
+      #  crowdin.list_file_revisions(your_file_id, { limit: your_value }, your_project_id)
       #
-      def list_file_revisions(file_id = nil, query = {})
-        project_id = query[:project_id] || config.project_id
-
-        file_id    || raise(ArgumentError, ':file_id is required')
-        project_id || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+      def list_file_revisions(file_id = nil, query = {}, project_id = config.project_id)
+        file_id    || raise_parameter_is_required_error(:file_id)
+        project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
@@ -296,9 +286,9 @@ module Crowdin
       end
 
       def get_file_revision(file_id = nil, revision_id = nil, project_id = config.project_id)
-        file_id     || raise(ArgumentError, ':file_id is required')
-        revision_id || raise(ArgumentError, ':revision_id is required')
-        project_id  || raise(ArgumentError, ':project_id is required in parameters or when initialize Client')
+        file_id     || raise_parameter_is_required_error(:file_id)
+        revision_id || raise_parameter_is_required_error(:revision_id)
+        project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,

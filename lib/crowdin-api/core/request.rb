@@ -9,7 +9,7 @@ module Crowdin
         @client      = client
         @method      = method
         @full_path   = client.config.target_api_url + path
-        @payload     = Payload.new(method, query).perform
+        @payload     = perform_payload(query)
         @headers     = headers
         @destination = destination
         @errors      = []
@@ -20,13 +20,15 @@ module Crowdin
         process_response!
       end
 
+      private
+
       def process_request!
         return @response = client.connection[@full_path].delete        if delete_request?
         return @response = client.connection[@full_path].get(@payload) if get_request?
 
         client.connection[@full_path].send(@method, @payload, @headers) { |response, _, _| @response = response }
       rescue StandardError => error
-        client.log! error.class
+        client.log! error
 
         @errors << "Something went wrong while proccessing request. Details - #{error.class}"
       end
@@ -36,14 +38,19 @@ module Crowdin
 
         begin
           if @response
-            doc = JSON.parse(@response.body)
-
             client.log! "args: #{@response.request.args}"
-            client.log! "body: #{doc}"
 
-            data = fetch_response_data(doc)
+            if @response.body.empty?
+              @response.code
+            else
+              doc = JSON.parse(@response.body)
 
-            @errors.any? ? fetch_errors : data
+              client.log! "body: #{doc}"
+
+              data = fetch_response_data(doc)
+
+              @errors.any? ? fetch_errors : data
+            end
           end
         rescue StandardError => error
           client.log! error
@@ -54,10 +61,10 @@ module Crowdin
         end
       end
 
-      private
+      def perform_payload(query)
+        return query if query.is_a?(File)
 
-      def fetch_errors
-        @errors.join(';')
+        get_request? ? { params: fetch_cleared_query(query) } : fetch_cleared_query(query).to_json
       end
 
       def download_file(url)
@@ -71,11 +78,28 @@ module Crowdin
         @errors << "Something went wrong while downloading file. Details - #{error.class}"
       end
 
+      def fetch_errors
+        @errors.join(';')
+      end
+
       def fetch_response_data(doc)
-        if doc['data'].is_a?(Hash) && doc['data']['url'] && doc['data']['url'].scan(/response-content-disposition/)
+        if doc['data'].is_a?(Hash) && doc['data']['url'] && doc['data']['url'].include?('response-content-disposition')
           download_file(doc['data']['url'])
         else
           doc
+        end
+      end
+
+      def fetch_cleared_query(query)
+        case query
+        when Array
+          query.map do |el|
+            el.reject { |_, value| value.nil? }
+          end.reject(&:empty?)
+        when Hash
+          query.reject { |_, value| value.nil? }
+        else
+          query
         end
       end
 
