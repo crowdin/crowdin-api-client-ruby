@@ -10,7 +10,7 @@ For more about Crowdin API v2 see the documentation:
 - [Crowdin](https://support.crowdin.com/api/v2/)
 - [Crowdin Enterprise](https://support.crowdin.com/enterprise/api/)
 
-### Status
+## Status
 
 [![Gem](https://img.shields.io/gem/v/crowdin-api?logo=ruby&cacheSeconds=1800)](https://rubygems.org/gems/crowdin-api)
 [![Gem](https://img.shields.io/gem/dt/crowdin-api?cacheSeconds=1800)](https://rubygems.org/gems/crowdin-api)
@@ -30,6 +30,9 @@ For more about Crowdin API v2 see the documentation:
 * [Seeking Assistance](#seeking-assistance)
 * [Contributing](#contributing)
 * [License](#license)
+
+## Requirements
+* Ruby >= 2.4
 
 ## Installation
 
