@@ -3,6 +3,7 @@
 module Crowdin
   module ApiResources
     module Storages
+      #
       # Get storages list.
       #
       # === Parameters
@@ -26,6 +27,7 @@ module Crowdin
         request.perform
       end
 
+      #
       # Add storage.
       #
       # === Parameters
@@ -54,6 +56,7 @@ module Crowdin
         request.perform
       end
 
+      #
       # Get storage information.
       #
       # === Parameters
@@ -76,6 +79,7 @@ module Crowdin
         request.perform
       end
 
+      #
       # Delete storage.
       #
       # === Parameters

@@ -78,7 +78,7 @@ crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourEnterpriseApiToken'
   config.organization_domain = 'YourOrganizationDomain'
 end
-# Note: we use full specified organization domain if that includes .com
+# Note: we use full specified organization domain if that includes '.com'
 # config.organization_domain = your_domain -> https://your_domain.api.crowdin.com
 # config.organization_domain = your_domain.com -> your_domain.com
 
@@ -120,7 +120,7 @@ project = crowdin.get_project(your_project_id)
 
 # Add Storage
 storage = crowdin.add_storage(File.open('YourFilename.extension', 'r'))
-# or you can specify only filename
+# or you can specify only path to file
 storage = crowdin.add_storage('YourFilename.extension')
 
 # Download file
@@ -146,9 +146,9 @@ $ bundle exec crowdin-console --enable-logger --api-token API_TOKEN --project-id
 Or Crowdin Enterprise
 
 ```console
-$ bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain YOUR_DOMAIN --project-id PROJECT_ID
+$ bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain DOMAIN --project-id PROJECT_ID
 ```
-Note: you can specify full organization domain by adding .com
+Note: you can specify full organization domain by adding '.com'
 
 When execute you'll have IRB console with configured *@crowdin* instance
 

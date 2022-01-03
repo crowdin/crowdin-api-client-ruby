@@ -14,29 +14,45 @@
 #  crowdin.list_projects
 #
 module Crowdin
+  #
+  # A wrapper and interface to the Crowdin api. Please visit the Crowdin developers site
+  # for a full explanation of what each of the Crowdin api methods expect and perform.
+  #
+  # https://support.crowdin.com/api/v2/
+  #
   class Client
-    # A wrapper and interface to the Crowdin api. Please visit the Crowdin developers
-    # site for a full explanation of what each of the Crowdin api methods
-    # expect and perform.
-    #
-    # https://support.crowdin.com/api/v2/
-    #
+    include ApiResources::Storages
     include ApiResources::Languages
     include ApiResources::Projects
+    include ApiResources::Workflows # Enterprise
     include ApiResources::SourceFiles
-    include ApiResources::Storages
-    include ApiResources::TranslationStatus
     include ApiResources::Translations
-    include ApiResources::Workflows
     include ApiResources::SourceStrings
+    # Sting Translations
+    # String Comments
+    # Screenshots
+    # Glossaries
+    # Translation Memory
+    # Machine Translation Engines # Enterprise
+    include ApiResources::TranslationStatus
+    # Reports
+    # Tasks
+    # Issues
+    # Users
+    # Teams # Enterprise
+    # Vendors # Enterprise
+    # Webhooks
+    # Dictionaries
+    # Distributions
+    # Labels
 
     include Errors::ApiErrorsRaiser
-
-    attr_accessor :logger
+    include Errors::ClientErrorsRaiser
 
     attr_reader :config
     attr_reader :connection
     attr_reader :options
+    attr_reader :logger
 
     def initialize(&block)
       build_configuration(&block)
@@ -49,6 +65,11 @@ module Crowdin
 
     def log!(message)
       !config.logger_enabled? || logger.debug(message)
+    end
+
+    def logger=(logger)
+      raise_logger_are_not_enabled_error unless config.logger_enabled?
+      @logger = logger
     end
 
     private

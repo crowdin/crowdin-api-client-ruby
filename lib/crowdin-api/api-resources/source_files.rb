@@ -148,6 +148,7 @@ module Crowdin
         request.perform
       end
 
+      #
       # Add custom language.
       #
       # === Parameters
@@ -250,6 +251,7 @@ module Crowdin
         request.perform
       end
 
+      #
       # List file revisions.
       #
       # === Parameters

@@ -9,8 +9,7 @@ module Crowdin
 
     attr_reader :target_api_url
 
-    alias logger_enabled?  enable_logger
-    alias enterprise_mode? organization_domain
+    alias logger_enabled? enable_logger
 
     def initialize
       @target_api_url = '/api/v2'
@@ -20,16 +19,16 @@ module Crowdin
       {
         headers: {},
         timeout: nil,
-        json: true
+        json:    true
       }
     end
 
     def headers
       {
-        'Accept' => 'application/json',
+        'Accept'        => 'application/json',
         'Authorization' => "Bearer #{api_token}",
-        'Content-Type' => 'application/json',
-        'User-Agent' => "crowdin-rb/#{Crowdin::Client::VERSION}/#{RUBY_VERSION}/#{RUBY_PLATFORM}"
+        'Content-Type'  => 'application/json',
+        'User-Agent'    => "crowdin-rb/#{Crowdin::Client::VERSION}/#{RUBY_VERSION}/#{RUBY_PLATFORM}"
       }
     end
 
@@ -40,5 +39,10 @@ module Crowdin
         'https://api.crowdin.com'
       end
     end
+
+    def organization_domain?
+      !!organization_domain
+    end
+    alias enterprise_mode? organization_domain?
   end
 end

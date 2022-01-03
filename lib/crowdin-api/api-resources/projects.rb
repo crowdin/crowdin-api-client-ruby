@@ -62,7 +62,9 @@ module Crowdin
         request.perform
       end
 
-      # For Enterprise mode only
+      #
+      # -- For Enterprise mode only --
+      #
 
       def list_groups(query = {})
         config.enterprise_mode? || raise_only_for_enterprise_mode_error

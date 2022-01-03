@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# -- For Enterprise mode only --
+#
 module Crowdin
   module ApiResources
     module Workflows
@@ -32,6 +35,8 @@ module Crowdin
       end
 
       def list_workflow_templates(query = {})
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+
         request = Web::Request.new(
           self,
           :get,
