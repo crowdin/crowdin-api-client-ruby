@@ -70,7 +70,7 @@ module Crowdin
       def download_file(url)
         download = URI.parse(url).open
         destination = @destination || download.meta['content-disposition']
-                                              .match(/filename=(\"?)(.+)\1/)[2]
+                                              .match(/filename=("?)(.+)\1/)[2]
 
         IO.copy_stream(download, destination)
 
