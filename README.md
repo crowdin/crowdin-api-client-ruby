@@ -39,7 +39,7 @@ For more about Crowdin API v2 see the documentation:
 Add this line to your application's Gemfile:
 
 ```gemfile
-gem 'crowdin-api', '~> 1.1.0'
+gem 'crowdin-api', '~> 1.2.0'
 ```
 
 And then execute:
@@ -73,7 +73,8 @@ crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourApiToken'
 end
 
-# Or you can intialize Enterprise Client instance by specifying your organization_domain in config options
+# Or you can intialize Enterprise Client instance by specifying your
+# organization_domain in config options
 crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourEnterpriseApiToken'
   config.organization_domain = 'YourOrganizationDomain'
@@ -125,7 +126,8 @@ storage = crowdin.add_storage('YourFilename.extension')
 
 # Download file
 filename = crowdin.download_file(your_file_id, your_destination, your_project_id)
-# your_destination - filename or full path to file, default - saving to currect directory with default filename
+# your_destination - filename or full path to file, optional
+# without destination option - saving to currect directory with default filename
 # project_id is optional, as it can be initialized with a Crowdin Client
 
 # File revisions
