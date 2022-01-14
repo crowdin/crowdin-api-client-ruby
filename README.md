@@ -124,8 +124,8 @@ storage = crowdin.add_storage(File.open('YourFilename.extension', 'r'))
 storage = crowdin.add_storage('YourFilename.extension')
 
 # Download file
-filename = crowdin.download_file(your_destination, your_file_id, your_project_id)
-# your_destination - filename or full path to file
+filename = crowdin.download_file(your_file_id, your_destination, your_project_id)
+# your_destination - filename or full path to file, default - saving to currect directory with default filename
 # project_id is optional, as it can be initialized with a Crowdin Client
 
 # File revisions
