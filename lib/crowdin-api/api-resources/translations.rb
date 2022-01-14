@@ -100,7 +100,7 @@ module Crowdin
         request.perform
       end
 
-      def download_project_translations(destination = nil, build_id = nil, project_id = config.project_id)
+      def download_project_translations(build_id = nil, destination = nil, project_id = config.project_id)
         destination || raise_parameter_is_required_error(:destination)
         build_id    || raise_parameter_is_required_error(:build_id)
         project_id  || raise_project_id_is_required_error
@@ -143,14 +143,16 @@ module Crowdin
         request.perform
       end
 
-      def export_project_translation(query = {}, project_id = config.project_id)
+      def export_project_translation(query = {}, destination = nil, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
           :post,
           "/projects/#{project_id}/translations/exports",
-          query
+          query,
+          {},
+          destination
         )
 
         request.perform
