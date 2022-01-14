@@ -69,9 +69,12 @@ module Crowdin
 
       def download_file(url)
         download = URI.parse(url).open
-        IO.copy_stream(download, @destination)
+        destination = @destination || download.meta['content-disposition']
+                                              .match(/filename=("?)(.+)\1/)[2]
 
-        @destination
+        IO.copy_stream(download, destination)
+
+        destination
       rescue StandardError => error
         client.log! error
 
