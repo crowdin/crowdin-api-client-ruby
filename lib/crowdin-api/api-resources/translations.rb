@@ -101,7 +101,6 @@ module Crowdin
       end
 
       def download_project_translations(build_id = nil, destination = nil, project_id = config.project_id)
-        destination || raise_parameter_is_required_error(:destination)
         build_id    || raise_parameter_is_required_error(:build_id)
         project_id  || raise_project_id_is_required_error
 
