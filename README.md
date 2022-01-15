@@ -90,8 +90,8 @@ crowdin = Crowdin::Client.new do |config|
   config.project_id = 'YourProjectId' # [Integer] nil by default
   config.enable_logger = true # [Boolean] false by default
 end
-# Note: Client will initialize default Logger instance if you have specify enable_logger to true,
-# you can change it by crowdin.logger = YourLogger
+# Note: Client will initialize default Logger instance if you have specify
+# enable_logger to true, you can change it by crowdin.logger = YourLogger
 
 # Also you can specify proxy by adding it to ENV['http_proxy'] before Client initialization
 ```
@@ -125,9 +125,9 @@ storage = crowdin.add_storage(File.open('YourFilename.extension', 'r'))
 storage = crowdin.add_storage('YourFilename.extension')
 
 # Download file
-filename = crowdin.download_file(your_file_id, your_destination, your_project_id)
-# your_destination - filename or full path to file, optional
-# without destination option - saving to current directory with a default filename
+file = crowdin.download_file(your_file_id, your_destination, your_project_id)
+# your_destination - filename or absolute path to file, optional
+# Without destination option method will save file to current directory with a default filename
 # project_id is optional, as it can be initialized with a Crowdin Client
 
 # File revisions
