@@ -22,10 +22,11 @@ For more about Crowdin API v2 see the documentation:
 [![GitHub](https://img.shields.io/github/license/crowdin/crowdin-api-client-ruby?cacheSeconds=1800)](https://github.com/crowdin/crowdin-api-client-ruby/blob/main/LICENSE)
 
 ## Table of Contents
+* [Requirements](#requirements)
 * [Installation](#installation)
 * [Quick Start](#quick-start)
   * [Initialization](#initialization)
-  * [How to call methods](#how-to-call-methods)
+  * [Usage](#usage)
   * [Command-Line Client](#command-line-client)
 * [Seeking Assistance](#seeking-assistance)
 * [Contributing](#contributing)
