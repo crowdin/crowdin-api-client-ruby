@@ -30,7 +30,7 @@ module Crowdin
       rescue StandardError => error
         client.log! error
 
-        @errors << "Something went wrong while proccessing request. Details - #{error.class}"
+        @errors << "Something went wrong while request proccessing. Details - #{error.class}"
       end
 
       def process_response!
@@ -55,7 +55,7 @@ module Crowdin
         rescue StandardError => error
           client.log! error
 
-          @errors << "Something went wrong while proccessing response. Details - #{error.class}"
+          @errors << "Something went wrong while response proccessing. Details - #{error.class}"
 
           fetch_errors
         end

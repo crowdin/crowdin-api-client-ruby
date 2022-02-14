@@ -49,6 +49,20 @@ module Crowdin
         request.perform
       end
 
+      #
+      # Edit project.
+      #
+      # === Parameters
+      #
+      # * +:projectId+ [Integer] - Project Identifier. Get via list_projects. Can be initialized with the Crowdin Client
+      # * +:value+ [String] - String or Array of strings.
+      # * +:op+ [String] - Path operation to perform.
+      # * +:projectId+ [String <json-pointer>] - Enum, for instance '/name'. Full list you can see on the developers site.
+      #
+      # === Example
+      #
+      #  crowdin.edit_project(project_id, [{op: 'replace', path: '/name', value: 'your_new_project_name'}])
+      #
       def edit_project(project_id = nil, query = {})
         project_id || raise_parameter_is_required_error(:project_id)
 
@@ -62,9 +76,7 @@ module Crowdin
         request.perform
       end
 
-      #
       # -- For Enterprise mode only --
-      #
 
       def list_groups(query = {})
         config.enterprise_mode? || raise_only_for_enterprise_mode_error

@@ -1,53 +1,45 @@
 # frozen_string_literal: true
 
 #
-# The Crowdin::Client library is used for interactions with a crowdin.com website.
+# A wrapper and interface to the Crowdin API. Please visit the Crowdin developers site
+# for a full explanation of what each of the Crowdin api methods expect and perform.
 #
-# == Example
-#
-#  require 'crowdin-api'
-#
-#  crowdin = Crowdin::Client.new do |config|
-#    config.api_token = 'YOUR_API_TOKEN'
-#  end
-#
-#  crowdin.list_projects
+# https://support.crowdin.com/api/v2/
+# https://support.crowdin.com/enterprise/api/
 #
 module Crowdin
   #
-  # A wrapper and interface to the Crowdin api. Please visit the Crowdin developers site
-  # for a full explanation of what each of the Crowdin api methods expect and perform.
+  # === Example
   #
-  # https://support.crowdin.com/api/v2/
+  #  require 'crowdin-api'
+  #
+  #  crowdin = Crowdin::Client.new do |config|
+  #    config.api_token = 'YOUR_API_TOKEN'
+  #  end
+  #
+  #  crowdin.list_projects
   #
   class Client
-    include ApiResources::Storages
-    include ApiResources::Languages
-    include ApiResources::Projects
-    include ApiResources::Workflows # Enterprise
-    include ApiResources::SourceFiles
-    include ApiResources::Translations
-    include ApiResources::SourceStrings
-    # Sting Translations
-    # String Comments
-    # Screenshots
-    # Glossaries
-    # Translation Memory
-    # Machine Translation Engines # Enterprise
-    include ApiResources::TranslationStatus
-    # Reports
-    # Tasks
-    # Issues
-    # Users
-    # Teams # Enterprise
-    # Vendors # Enterprise
-    # Webhooks
-    # Dictionaries
-    # Distributions
-    # Labels
+    extend Utils
 
-    include Errors::ApiErrorsRaiser
-    include Errors::ClientErrorsRaiser
+    # API Resources modules
+    API_RESOURCES_MODULES = %i[Storages Languages Projects Workflows SourceFiles Translations SourceStrings
+                               StringTranslations StringComments Screenshots Glossaries TranslationMemory
+                               MachineTranslationEngines Reports Tasks Users Teams Vendors Webhooks
+                               Dictionaries Distributions Labels TranslationStatus].freeze
+
+    # Error Raisers modules
+    ERROR_RAISERS_MODULES = %i[ApiErrorsRaiser ClientErrorsRaiser].freeze
+
+    # Processing all API Resources modules to include them to the Client
+    API_RESOURCES_MODULES.each do |module_name|
+      Client.send(:include, fetch_module_full_name_from_string("Crowdin::ApiResources::#{module_name}"))
+    end
+
+    # Processing all Error Raisers modules to include them to the Client
+    ERROR_RAISERS_MODULES.each do |module_name|
+      Client.send(:include, fetch_module_full_name_from_string("Crowdin::Errors::#{module_name}"))
+    end
 
     attr_reader :config
     attr_reader :connection

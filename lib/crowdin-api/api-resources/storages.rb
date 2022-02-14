@@ -32,7 +32,7 @@ module Crowdin
       #
       # === Parameters
       #
-      # * +File+ - File class object or path to file
+      # * +File+ - File class object or full path to file
       #
       # === Example
       #

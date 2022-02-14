@@ -17,7 +17,6 @@ require 'optparse'
 #  bundle exec crowdin-console --enterprise --api-token YOUR_ENTERPRISE_API_TOKEN --organization-domain YOUR_DOMAIN
 #
 
-require 'crowdin-api/core/clc_errors_raiser'
 include Crowdin::Errors::ClcErrorsRaiser
 
 options = {}
@@ -40,8 +39,8 @@ if options[:enterprise]
   @crowdin = Crowdin::Client.new do |config|
     config.api_token           = options[:api_token]
     config.organization_domain = options[:organization_domain]
-    config.enable_logger       = options[:enable_logger]       || false
-    config.project_id          = options[:project_id]          || nil
+    config.enable_logger       = options[:enable_logger] || false
+    config.project_id          = options[:project_id]    || nil
   end
 else
   @crowdin = Crowdin::Client.new do |config|

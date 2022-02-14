@@ -120,15 +120,20 @@ projects = crowdin.list_projects(offset: 10, limit: 20)
 # Get specified project
 project = crowdin.get_project(your_project_id)
 
+# Edit project
+project = crowdin.edit_project(project_id, [{op: 'replace',
+                                             path: '/name',
+                                             value: 'your_new_project_name'}])
+
 # Add Storage
 storage = crowdin.add_storage(File.open('YourFilename.extension', 'r'))
-# or you can specify only path to file
+# or you can specify only absolute path to file
 storage = crowdin.add_storage('YourFilename.extension')
 
 # Download file
 file = crowdin.download_file(your_file_id, your_destination, your_project_id)
 # your_destination - filename or absolute path to file, optional
-# Without destination option method will save file to current directory with a default filename
+# Without destination option file will be saved to the current directory with a default filename
 # project_id is optional, as it can be initialized with a Crowdin Client
 
 # File revisions

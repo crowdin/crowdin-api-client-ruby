@@ -1,12 +1,12 @@
 # Ignore Ruby logs
-.ruby-version
 .idea
 
 # Ignore MacOS logs
 .DS_Store
 
-# Ignore versioning file
+# Ignore versioning files
 Gemfile.lock
+.ruby-version
 
 # Ignore tests coverage folder
 coverage
