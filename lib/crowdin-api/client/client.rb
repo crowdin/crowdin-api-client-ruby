@@ -1,42 +1,50 @@
 # frozen_string_literal: true
 
 #
-# The Crowdin::Client library is used for interactions with a crowdin.com website.
+# A wrapper and interface to the Crowdin API. Please visit the Crowdin developers site
+# for a full explanation of what each of the Crowdin api methods expect and perform.
 #
-# == Example
-#
-#  require 'crowdin-api'
-#
-#  crowdin = Crowdin::Client.new do |config|
-#    config.api_token = 'YOUR_API_TOKEN'
-#  end
-#
-#  crowdin.list_projects
+# https://support.crowdin.com/api/v2/
+# https://support.crowdin.com/enterprise/api/
 #
 module Crowdin
+  #
+  # === Example
+  #
+  #  require 'crowdin-api'
+  #
+  #  crowdin = Crowdin::Client.new do |config|
+  #    config.api_token = 'YOUR_API_TOKEN'
+  #  end
+  #
+  #  crowdin.list_projects
+  #
   class Client
-    # A wrapper and interface to the Crowdin api. Please visit the Crowdin developers
-    # site for a full explanation of what each of the Crowdin api methods
-    # expect and perform.
-    #
-    # https://support.crowdin.com/api/v2/
-    #
-    include ApiResources::Languages
-    include ApiResources::Projects
-    include ApiResources::SourceFiles
-    include ApiResources::Storages
-    include ApiResources::TranslationStatus
-    include ApiResources::Translations
-    include ApiResources::Workflows
-    include ApiResources::SourceStrings
+    extend Utils
 
-    include Errors::ApiErrorsRaiser
+    # API Resources modules
+    API_RESOURCES_MODULES = %i[Storages Languages Projects Workflows SourceFiles Translations SourceStrings
+                               StringTranslations StringComments Screenshots Glossaries TranslationMemory
+                               MachineTranslationEngines Reports Tasks Users Teams Vendors Webhooks
+                               Dictionaries Distributions Labels TranslationStatus].freeze
 
-    attr_accessor :logger
+    # Error Raisers modules
+    ERROR_RAISERS_MODULES = %i[ApiErrorsRaiser ClientErrorsRaiser].freeze
+
+    # Processing all API Resources modules to include them to the Client
+    API_RESOURCES_MODULES.each do |module_name|
+      Client.send(:include, fetch_module_full_name_from_string("Crowdin::ApiResources::#{module_name}"))
+    end
+
+    # Processing all Error Raisers modules to include them to the Client
+    ERROR_RAISERS_MODULES.each do |module_name|
+      Client.send(:include, fetch_module_full_name_from_string("Crowdin::Errors::#{module_name}"))
+    end
 
     attr_reader :config
     attr_reader :connection
     attr_reader :options
+    attr_reader :logger
 
     def initialize(&block)
       build_configuration(&block)
@@ -49,6 +57,11 @@ module Crowdin
 
     def log!(message)
       !config.logger_enabled? || logger.debug(message)
+    end
+
+    def logger=(logger)
+      raise_logger_are_not_enabled_error unless config.logger_enabled?
+      @logger = logger
     end
 
     private

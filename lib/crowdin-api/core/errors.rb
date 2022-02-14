@@ -2,6 +2,7 @@
 
 module Crowdin
   module Errors
-    class OnlyForEnterpriseMode < StandardError; end
+    class OnlyForEnterpriseModeError < StandardError; end
+    class LoggerAreNotEnabledError   < StandardError; end
   end
 end

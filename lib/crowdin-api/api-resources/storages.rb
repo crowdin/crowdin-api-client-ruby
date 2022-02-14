@@ -3,6 +3,7 @@
 module Crowdin
   module ApiResources
     module Storages
+      #
       # Get storages list.
       #
       # === Parameters
@@ -26,11 +27,12 @@ module Crowdin
         request.perform
       end
 
+      #
       # Add storage.
       #
       # === Parameters
       #
-      # * +File+ - File class object or path to file
+      # * +File+ - File class object or full path to file
       #
       # === Example
       #
@@ -54,6 +56,7 @@ module Crowdin
         request.perform
       end
 
+      #
       # Get storage information.
       #
       # === Parameters
@@ -76,6 +79,7 @@ module Crowdin
         request.perform
       end
 
+      #
       # Delete storage.
       #
       # === Parameters

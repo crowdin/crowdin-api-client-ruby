@@ -148,6 +148,7 @@ module Crowdin
         request.perform
       end
 
+      #
       # Add custom language.
       #
       # === Parameters
@@ -234,7 +235,6 @@ module Crowdin
       end
 
       def download_file(file_id = nil, destination = nil, project_id = config.project_id)
-        destination || raise_parameter_is_required_error(:destination)
         file_id     || raise_parameter_is_required_error(:file_id)
         project_id  || raise_project_id_is_required_error
 
@@ -250,6 +250,7 @@ module Crowdin
         request.perform
       end
 
+      #
       # List file revisions.
       #
       # === Parameters

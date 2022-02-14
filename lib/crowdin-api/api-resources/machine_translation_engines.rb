@@ -3,56 +3,68 @@
 module Crowdin
   module ApiResources
     # -- For Enterprise mode only --
-    module Workflows
-      def list_workflow_steps(query = {}, project_id = config.project_id)
+    module MachineTranslationEngines
+      def list_mts(query = {})
         config.enterprise_mode? || raise_only_for_enterprise_mode_error
-        project_id              || raise_project_id_is_required_error
 
         request = Web::Request.new(
           self,
           :get,
-          "/projects/#{project_id}/workflow-steps",
+          '/mts',
           query
         )
 
         request.perform
       end
 
-      def get_workflow_step(step_id = nil, project_id = config.project_id)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
-        step_id                 || raise_parameter_is_required_error(:step_id)
-        project_id              || raise_project_id_is_required_error
-
-        request = Web::Request.new(
-          self,
-          :get,
-          "/projects/#{project_id}/workflow-steps/#{step_id}"
-        )
-
-        request.perform
-      end
-
-      def list_workflow_templates(query = {})
+      def add_mt(query = {})
         config.enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
           self,
-          :get,
-          '/workflow-templates',
+          :post,
+          '/mts',
           query
         )
 
         request.perform
       end
 
-      def get_workflow_template(template_id = nil)
+      def get_mt(mt_id = nil)
         config.enterprise_mode? || raise_only_for_enterprise_mode_error
-        template_id             || raise_parameter_is_required_error(:template_id)
+        mt_id                   || raise_parameter_is_required_error(:mt_id)
 
         request = Web::Request.new(
           self,
           :get,
-          "/workflow-templates/#{template_id}"
+          "/mts/#{mt_id}"
+        )
+
+        request.perform
+      end
+
+      def delete_mt(mt_id = nil)
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        mt_id                   || raise_parameter_is_required_error(:mt_id)
+
+        request = Web::Request.new(
+          self,
+          :delete,
+          "/mts/#{mt_id}"
+        )
+
+        request.perform
+      end
+
+      def edit_mt(mt_id = nil, query = {})
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        mt_id                   || raise_parameter_is_required_error(:mt_id)
+
+        request = Web::Request.new(
+          self,
+          :patch,
+          "/mts/#{mt_id}",
+          query
         )
 
         request.perform

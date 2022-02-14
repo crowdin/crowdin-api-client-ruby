@@ -17,7 +17,7 @@ require 'optparse'
 #  bundle exec crowdin-console --enterprise --api-token YOUR_ENTERPRISE_API_TOKEN --organization-domain YOUR_DOMAIN
 #
 
-include Crowdin::Errors::ApiErrorsRaiser
+include Crowdin::Errors::ClcErrorsRaiser
 
 options = {}
 
@@ -27,7 +27,7 @@ OptionParser.new do |opts|
   opts.on('--enterprise', 'Enterprise API')                      { |v| options[:enterprise] = v }
   opts.on('--api-token TOKEN', 'API Token')                      { |v| options[:api_token] = v }
   opts.on('--organization-domain DOMAIN', 'Organization Domain') { |v| options[:organization_domain] = v }
-  opts.on('--project-id ID', 'Project ID')                      { |v| options[:project_id] = v }
+  opts.on('--project-id ID', 'Project ID')                       { |v| options[:project_id] = v }
   opts.on('--enable-logger', 'Enable logger')                    { |v| options[:enable_logger] = v }
 end.parse!
 
@@ -39,8 +39,8 @@ if options[:enterprise]
   @crowdin = Crowdin::Client.new do |config|
     config.api_token           = options[:api_token]
     config.organization_domain = options[:organization_domain]
-    config.enable_logger       = options[:enable_logger]       || false
-    config.project_id          = options[:project_id]          || nil
+    config.enable_logger       = options[:enable_logger] || false
+    config.project_id          = options[:project_id]    || nil
   end
 else
   @crowdin = Crowdin::Client.new do |config|

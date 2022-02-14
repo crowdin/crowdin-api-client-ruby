@@ -10,7 +10,7 @@ For more about Crowdin API v2 see the documentation:
 - [Crowdin](https://support.crowdin.com/api/v2/)
 - [Crowdin Enterprise](https://support.crowdin.com/enterprise/api/)
 
-### Status
+## Status
 
 [![Gem](https://img.shields.io/gem/v/crowdin-api?logo=ruby&cacheSeconds=1800)](https://rubygems.org/gems/crowdin-api)
 [![Gem](https://img.shields.io/gem/dt/crowdin-api?cacheSeconds=1800)](https://rubygems.org/gems/crowdin-api)
@@ -22,21 +22,25 @@ For more about Crowdin API v2 see the documentation:
 [![GitHub](https://img.shields.io/github/license/crowdin/crowdin-api-client-ruby?cacheSeconds=1800)](https://github.com/crowdin/crowdin-api-client-ruby/blob/main/LICENSE)
 
 ## Table of Contents
+* [Requirements](#requirements)
 * [Installation](#installation)
 * [Quick Start](#quick-start)
   * [Initialization](#initialization)
-  * [How to call methods](#how-to-call-methods)
+  * [Usage](#usage)
   * [Command-Line Client](#command-line-client)
 * [Seeking Assistance](#seeking-assistance)
 * [Contributing](#contributing)
 * [License](#license)
+
+## Requirements
+* Ruby >= 2.4
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```gemfile
-gem 'crowdin-api', '~> 1.1.0'
+gem 'crowdin-api', '~> 1.2.0'
 ```
 
 And then execute:
@@ -70,12 +74,13 @@ crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourApiToken'
 end
 
-# Or you can intialize Enterprise Client instance by specifying your organization_domain in config options
+# Or you can intialize Enterprise Client instance by specifying your
+# organization_domain in config options
 crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourEnterpriseApiToken'
   config.organization_domain = 'YourOrganizationDomain'
 end
-# Note: we use full specified organization domain if that includes .com
+# Note: we use full specified organization domain if that includes '.com'
 # config.organization_domain = your_domain -> https://your_domain.api.crowdin.com
 # config.organization_domain = your_domain.com -> your_domain.com
 
@@ -86,8 +91,8 @@ crowdin = Crowdin::Client.new do |config|
   config.project_id = 'YourProjectId' # [Integer] nil by default
   config.enable_logger = true # [Boolean] false by default
 end
-# Note: Client will initialize default Logger instance if you have specify enable_logger to true,
-# you can change it by crowdin.logger = YourLogger
+# Note: Client will initialize default Logger instance if you have specify
+# enable_logger to true, you can change it by crowdin.logger = YourLogger
 
 # Also you can specify proxy by adding it to ENV['http_proxy'] before Client initialization
 ```
@@ -115,14 +120,20 @@ projects = crowdin.list_projects(offset: 10, limit: 20)
 # Get specified project
 project = crowdin.get_project(your_project_id)
 
+# Edit project
+project = crowdin.edit_project(project_id, [{op: 'replace',
+                                             path: '/name',
+                                             value: 'your_new_project_name'}])
+
 # Add Storage
 storage = crowdin.add_storage(File.open('YourFilename.extension', 'r'))
-# or you can specify only filename
+# or you can specify only absolute path to file
 storage = crowdin.add_storage('YourFilename.extension')
 
 # Download file
-filename = crowdin.download_file(your_file_id, your_destination, your_project_id)
-# your_destination - filename or full path to file, default - saving to currect directory with default filename
+file = crowdin.download_file(your_file_id, your_destination, your_project_id)
+# your_destination - filename or absolute path to file, optional
+# Without destination option file will be saved to the current directory with a default filename
 # project_id is optional, as it can be initialized with a Crowdin Client
 
 # File revisions
@@ -143,9 +154,9 @@ $ bundle exec crowdin-console --enable-logger --api-token API_TOKEN --project-id
 Or Crowdin Enterprise
 
 ```console
-$ bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain YOUR_DOMAIN --project-id PROJECT_ID
+$ bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain DOMAIN --project-id PROJECT_ID
 ```
-Note: you can specify full organization domain by adding .com
+Note: you can specify full organization domain by adding '.com'
 
 When execute you'll have IRB console with configured *@crowdin* instance
 
