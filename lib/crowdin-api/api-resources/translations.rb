@@ -43,7 +43,7 @@ module Crowdin
         request.perform
       end
 
-      def build_project_file_translation(file_id = nil, query = {}, project_id = config.project_id)
+      def build_project_file_translation(file_id = nil, query = {}, destination = nil, project_id = config.project_id)
         file_id    || raise_parameter_is_required_error(:file_id)
         project_id || raise_project_id_is_required_error
 
@@ -54,7 +54,8 @@ module Crowdin
           :post,
           "/projects/#{project_id}/translations/builds/files/#{file_id}",
           query,
-          headers
+          headers,
+          destination
         )
 
         request.perform
