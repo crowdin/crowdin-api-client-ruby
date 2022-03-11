@@ -121,9 +121,9 @@ projects = crowdin.list_projects(offset: 10, limit: 20)
 project = crowdin.get_project(your_project_id)
 
 # Edit project
-project = crowdin.edit_project(project_id, [{op: 'replace',
-                                             path: '/name',
-                                             value: 'your_new_project_name'}])
+project = crowdin.edit_project(project_id, [{ op: 'replace',
+                                              path: '/name',
+                                              value: 'your_new_project_name' }])
 
 # Add Storage
 storage = crowdin.add_storage(File.open('YourFilename.extension', 'r'))
