@@ -5,11 +5,11 @@ module Crowdin
     attr_accessor :api_token
     attr_accessor :project_id
     attr_accessor :organization_domain
+
     attr_accessor :enable_logger
+    alias logger_enabled? enable_logger
 
     attr_reader :target_api_url
-
-    alias logger_enabled? enable_logger
 
     def initialize
       @target_api_url = '/api/v2'
