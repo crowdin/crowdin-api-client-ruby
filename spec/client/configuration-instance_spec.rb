@@ -66,7 +66,7 @@ describe 'Config instance' do
         config.organization_domain = 'organization_domain.com'
       end
 
-      expect(@crowdin.config.base_url).to eq('organization_domain.com')
+      expect(@crowdin.config.base_url).to eq('https://organization_domain.com')
     end
   end
 end
