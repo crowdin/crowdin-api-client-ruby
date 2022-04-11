@@ -82,7 +82,7 @@ crowdin = Crowdin::Client.new do |config|
 end
 # Note: we use full specified organization domain if that includes '.com'
 # config.organization_domain = your_domain -> https://your_domain.api.crowdin.com
-# config.organization_domain = your_domain.com -> your_domain.com
+# config.organization_domain = your_domain.com -> https://your_domain.com
 
 # All supported Crowdin Client config options now:
 crowdin = Crowdin::Client.new do |config|

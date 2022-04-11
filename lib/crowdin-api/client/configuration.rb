@@ -34,7 +34,11 @@ module Crowdin
 
     def base_url
       if enterprise_mode?
-        organization_domain.include?('.com') ? organization_domain : "https://#{organization_domain}.api.crowdin.com"
+        if organization_domain.include?('.com')
+          "https://#{organization_domain}"
+        else
+          "https://#{organization_domain}.api.crowdin.com"
+        end
       else
         'https://api.crowdin.com'
       end
