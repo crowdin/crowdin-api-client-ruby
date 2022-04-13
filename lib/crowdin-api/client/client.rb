@@ -44,7 +44,7 @@ module Crowdin
       build_connection
     end
 
-    def log!(message)
+    def log(message)
       !config.logger_enabled? || logger.debug(message)
     end
 

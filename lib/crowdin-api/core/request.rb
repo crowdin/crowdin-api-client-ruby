@@ -16,36 +16,36 @@ module Crowdin
       end
 
       def perform
-        process_request!
-        process_response!
+        process_request
+        process_response
       end
 
       private
 
-      def process_request!
+      def process_request
         return @response = client.connection[@full_path].delete        if delete_request?
         return @response = client.connection[@full_path].get(@payload) if get_request?
 
         client.connection[@full_path].send(@method, @payload, @headers) { |response, _, _| @response = response }
       rescue StandardError => error
-        client.log! error
+        client.log error
 
         @errors << "Something went wrong while request proccessing. Details - #{error.class}"
       end
 
-      def process_response!
+      def process_response
         return fetch_errors if @errors.any?
 
         begin
           if @response
-            client.log! "args: #{@response.request.args}"
+            client.log "args: #{@response.request.args}"
 
             if @response.body.empty?
               @response.code
             else
               doc = JSON.parse(@response.body)
 
-              client.log! "body: #{doc}"
+              client.log "body: #{doc}"
 
               data = fetch_response_data(doc)
 
@@ -53,7 +53,7 @@ module Crowdin
             end
           end
         rescue StandardError => error
-          client.log! error
+          client.log error
 
           @errors << "Something went wrong while response proccessing. Details - #{error.class}"
 
@@ -76,7 +76,7 @@ module Crowdin
 
         destination
       rescue StandardError => error
-        client.log! error
+        client.log error
 
         @errors << "Something went wrong while downloading file. Details - #{error.class}"
       end
