@@ -112,6 +112,19 @@ module Crowdin
         request.perform
       end
 
+      def invite_user(query = {})
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+
+        request = Web::Request.new(
+          self,
+          :post,
+          '/users',
+          query
+        )
+
+        request.perform
+      end
+
       def get_user(user_id = nil)
         config.enterprise_mode? || raise_only_for_enterprise_mode_error
         user_id                 || raise_parameter_is_required_error(:user_id)
@@ -120,6 +133,33 @@ module Crowdin
           self,
           :get,
           "/users/#{user_id}"
+        )
+
+        request.perform
+      end
+
+      def delete_user(user_id = nil)
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        user_id                 || raise_parameter_is_required_error(:user_id)
+
+        request = Web::Request.new(
+          self,
+          :delete,
+          "/users/#{user_id}"
+        )
+
+        request.perform
+      end
+
+      def edit_user(user_id = nil, query = {})
+        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        user_id                 || raise_parameter_is_required_error(:user_id)
+
+        request = Web::Request.new(
+          self,
+          :patch,
+          "/users/#{user_id}",
+          query
         )
 
         request.perform
