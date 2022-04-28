@@ -48,7 +48,7 @@ module Crowdin
       # -- For Enterprise mode only --
 
       def generate_group_report(group_id = nil, query = {})
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         group_id                || raise_parameter_is_required_error(:group_id)
 
         request = Web::Request.new(
@@ -62,7 +62,7 @@ module Crowdin
       end
 
       def check_group_report_generation_status(group_id = nil, report_id = nil)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         group_id                || raise_parameter_is_required_error(:group_id)
         report_id               || raise_parameter_is_required_error(:report_id)
 
@@ -76,7 +76,7 @@ module Crowdin
       end
 
       def download_group_report(group_id = nil, report_id = nil, destination = nil)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         group_id                || raise_parameter_is_required_error(:group_id)
         report_id               || raise_parameter_is_required_error(:report_id)
 
@@ -93,7 +93,7 @@ module Crowdin
       end
 
       def generate_organization_report(query = {})
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
           self,
@@ -106,7 +106,7 @@ module Crowdin
       end
 
       def check_organization_report_generation_status(report_id = nil)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         report_id               || raise_parameter_is_required_error(:report_id)
 
         request = Web::Request.new(
@@ -119,7 +119,7 @@ module Crowdin
       end
 
       def download_organization_report(report_id = nil, destination = nil)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         report_id               || raise_parameter_is_required_error(:report_id)
 
         request = Web::Request.new(

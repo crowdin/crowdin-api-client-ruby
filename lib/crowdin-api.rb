@@ -23,7 +23,7 @@ require 'crowdin-api/core/request'
 
 # API modules
 Crowdin::API_RESOURCES_MODULES.each do |api_resource|
-  require "crowdin-api/api-resources/#{api_resource.to_s.gsub(/([a-z\d])([A-Z])/, '\1_\2').downcase}"
+  require "crowdin-api/api_resources/#{api_resource.to_s.gsub(/([a-z\d])([A-Z])/, '\1_\2').downcase}"
 rescue LoadError
   # Ignored
 end

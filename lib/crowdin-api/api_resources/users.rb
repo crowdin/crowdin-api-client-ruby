@@ -42,7 +42,7 @@ module Crowdin
       # -- For Enterprise mode only --
 
       def add_project_member(query = {}, project_id = config.project_id)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         project_id              || raise_project_id_is_required_error
 
         request = Web::Request.new(
@@ -56,7 +56,7 @@ module Crowdin
       end
 
       def get_project_member_permissions(member_id = nil, project_id = config.project_id)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         member_id               || raise_parameter_is_required_error(:member_id)
         project_id              || raise_project_id_is_required_error
 
@@ -70,7 +70,7 @@ module Crowdin
       end
 
       def replace_project_permissions(member_id = nil, query = {}, project_id = config.project_id)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         member_id               || raise_parameter_is_required_error(:member_id)
         project_id              || raise_project_id_is_required_error
 
@@ -85,7 +85,7 @@ module Crowdin
       end
 
       def delete_member_from_project(member_id = nil, query = {}, project_id = config.project_id)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         member_id               || raise_parameter_is_required_error(:member_id)
         project_id              || raise_project_id_is_required_error
 
@@ -100,7 +100,7 @@ module Crowdin
       end
 
       def list_users(query = {})
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
           self,
@@ -113,7 +113,7 @@ module Crowdin
       end
 
       def invite_user(query = {})
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
           self,
@@ -126,7 +126,7 @@ module Crowdin
       end
 
       def get_user(user_id = nil)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         user_id                 || raise_parameter_is_required_error(:user_id)
 
         request = Web::Request.new(
@@ -139,7 +139,7 @@ module Crowdin
       end
 
       def delete_user(user_id = nil)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         user_id                 || raise_parameter_is_required_error(:user_id)
 
         request = Web::Request.new(
@@ -152,7 +152,7 @@ module Crowdin
       end
 
       def edit_user(user_id = nil, query = {})
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         user_id                 || raise_parameter_is_required_error(:user_id)
 
         request = Web::Request.new(

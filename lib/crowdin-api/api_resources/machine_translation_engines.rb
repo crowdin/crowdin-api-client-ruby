@@ -42,7 +42,7 @@ module Crowdin
       # -- For Enterprise mode only --
 
       def edit_mt(mt_id = nil, query = {})
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         mt_id                   || raise_parameter_is_required_error(:mt_id)
 
         request = Web::Request.new(
@@ -56,7 +56,7 @@ module Crowdin
       end
 
       def add_mt(query = {})
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
           self,
@@ -69,7 +69,7 @@ module Crowdin
       end
 
       def delete_mt(mt_id = nil)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         mt_id                   || raise_parameter_is_required_error(:mt_id)
 
         request = Web::Request.new(

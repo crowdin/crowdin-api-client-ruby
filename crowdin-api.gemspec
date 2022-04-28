@@ -13,7 +13,6 @@ Gem::Specification.new do |gem|
   gem.license     = 'MIT'
 
   gem.files         = `git ls-files`.split("\n")
-  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.require_paths = ['lib']
   gem.bindir        = 'bin'
   gem.executables   << 'crowdin-console'
@@ -28,7 +27,8 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rake', '~> 13.0', '>= 13.0.6'
   gem.add_development_dependency 'rspec', '~> 3.10'
   gem.add_development_dependency 'rubocop', '~> 1.23'
-
-  gem.add_development_dependency 'sinatra', '~> 2.1'
+  gem.add_development_dependency 'vcr', '~> 6.0'
   gem.add_development_dependency 'webmock', '~> 3.14'
+
+  gem.add_development_dependency 'pry'
 end

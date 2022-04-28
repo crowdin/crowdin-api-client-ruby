@@ -61,7 +61,7 @@ module Crowdin
       #
       # === Example
       #
-      #  crowdin.edit_project(project_id, [{op: 'replace', path: '/name', value: 'your_new_project_name'}])
+      #  crowdin.edit_project(project_id, [{ op: 'replace', path: '/name', value: 'your_new_project_name' }])
       #
       def edit_project(project_id = nil, query = {})
         project_id || raise_parameter_is_required_error(:project_id)
@@ -79,7 +79,7 @@ module Crowdin
       # -- For Enterprise mode only --
 
       def list_groups(query = {})
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
           self,
@@ -92,7 +92,7 @@ module Crowdin
       end
 
       def add_group(query = {})
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
           self,
@@ -105,7 +105,7 @@ module Crowdin
       end
 
       def get_group(group_id = nil)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         group_id                || raise_parameter_is_required_error(:group_id)
 
         request = Web::Request.new(
@@ -118,7 +118,7 @@ module Crowdin
       end
 
       def delete_group(group_id = nil)
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         group_id                || raise_parameter_is_required_error(:group_id)
 
         request = Web::Request.new(
@@ -131,7 +131,7 @@ module Crowdin
       end
 
       def edit_group(group_id = nil, query = {})
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
         group_id                || raise_parameter_is_required_error(:group_id)
 
         request = Web::Request.new(

@@ -33,20 +33,20 @@ module Crowdin
     end
 
     def base_url
-      if enterprise_mode?
-        if organization_domain.include?('.com')
-          "https://#{organization_domain}"
+      @base_url ||=
+        if organization_domain?
+          if organization_domain.include?('.com')
+            "https://#{organization_domain}"
+          else
+            "https://#{organization_domain}.api.crowdin.com"
+          end
         else
-          "https://#{organization_domain}.api.crowdin.com"
+          'https://api.crowdin.com'
         end
-      else
-        'https://api.crowdin.com'
-      end
     end
 
     def organization_domain?
       !!organization_domain
     end
-    alias enterprise_mode? organization_domain?
   end
 end

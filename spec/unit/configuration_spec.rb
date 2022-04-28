@@ -36,7 +36,7 @@ describe 'Config instance' do
 
   describe '#enterprise_mode?' do
     it 'should equal false by default' do
-      expect(@crowdin.config.enterprise_mode?).to be_falsey
+      expect(@crowdin.enterprise_mode?).to be_falsey
     end
 
     it 'should equal true if user specify organization domain' do
@@ -44,7 +44,7 @@ describe 'Config instance' do
         config.organization_domain = 'organization_domain'
       end
 
-      expect(@crowdin.config.enterprise_mode?).to be_truthy
+      expect(@crowdin.enterprise_mode?).to be_truthy
     end
   end
 

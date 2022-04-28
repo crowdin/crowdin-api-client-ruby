@@ -5,7 +5,7 @@ module Crowdin
     # -- For Enterprise mode only --
     module Vendors
       def list_vendors(query = {})
-        config.enterprise_mode? || raise_only_for_enterprise_mode_error
+        enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
           self,
