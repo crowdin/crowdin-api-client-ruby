@@ -8,25 +8,23 @@ module Crowdin
         project_id         || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/pre-translations/#{pre_translation_id}"
+          "#{config.target_api_url}/projects/#{project_id}/pre-translations/#{pre_translation_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def apply_pre_translation(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/pre-translations",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/pre-translations",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def build_project_directory_translation(directory_id = nil, query = {}, project_id = config.project_id)
@@ -34,13 +32,12 @@ module Crowdin
         project_id   || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/translations/builds/directories/#{directory_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/translations/builds/directories/#{directory_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def build_project_file_translation(file_id = nil, query = {}, destination = nil, project_id = config.project_id)
@@ -50,41 +47,36 @@ module Crowdin
         headers = query[:eTag] ? { 'If-None-Match' => query[:eTag] } : {}
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/translations/builds/files/#{file_id}",
-          query,
-          headers,
-          destination
+          "#{config.target_api_url}/projects/#{project_id}/translations/builds/files/#{file_id}",
+          { params: query, headers: headers }
         )
-
-        request.perform
+        Web::SendRequest.new(request, destination).perform
       end
 
       def list_project_builds(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/translations/builds",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/translations/builds",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def build_project_translation(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/translations/builds",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/translations/builds",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def upload_translations(language_id = nil, query = {}, project_id = config.project_id)
@@ -92,13 +84,12 @@ module Crowdin
         project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/translations/#{language_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/translations/#{language_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def download_project_translations(build_id = nil, destination = nil, project_id = config.project_id)
@@ -106,15 +97,11 @@ module Crowdin
         project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/translations/builds/#{build_id}/download",
-          {},
-          {},
-          destination
+          "#{config.target_api_url}/projects/#{project_id}/translations/builds/#{build_id}/download"
         )
-
-        request.perform
+        Web::SendRequest.new(request, destination).perform
       end
 
       def check_project_build_status(build_id = nil, project_id = config.project_id)
@@ -122,12 +109,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/translations/builds/#{build_id}"
+          "#{config.target_api_url}/projects/#{project_id}/translations/builds/#{build_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def cancel_build(build_id = nil, project_id = config.project_id)
@@ -135,27 +121,23 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/translations/builds/#{build_id}"
+          "#{config.target_api_url}/projects/#{project_id}/translations/builds/#{build_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def export_project_translation(query = {}, destination = nil, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/translations/exports",
-          query,
-          {},
-          destination
+          "#{config.target_api_url}/projects/#{project_id}/translations/exports",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request, destination).perform
       end
     end
   end

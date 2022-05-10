@@ -7,26 +7,24 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/approvals",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/approvals",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_approval(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/approvals",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/approvals",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_approval(approval_id = nil, project_id = config.project_id)
@@ -34,12 +32,11 @@ module Crowdin
         project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/approvals/#{approval_id}"
+          "#{config.target_api_url}/projects/#{project_id}/approvals/#{approval_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def remove_approval(approval_id = nil, project_id = config.project_id)
@@ -47,12 +44,11 @@ module Crowdin
         project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/approvals/#{approval_id}"
+          "#{config.target_api_url}/projects/#{project_id}/approvals/#{approval_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def list_language_translations(language_id = nil, query = {}, project_id = config.project_id)
@@ -60,54 +56,40 @@ module Crowdin
         project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/languages/#{language_id}/translations",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/languages/#{language_id}/translations",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def list_string_translations(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/translations",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/translations",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_translation(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/translations",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/translations",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
-      # For now Rest Client Resource aren't support payload for DELETE requests.
-      # So we have workaround through Rest Client Execute for this case
       def delete_string_translations(query = {}, project_id = config.project_id)
-        # project_id || raise_project_id_is_required_error
-        #
-        # request = Web::Request.new(
-        #   self,
-        #   :delete,
-        #   "/projects/#{project_id}/translations",
-        #   query
-        # )
-        #
-        # request.perform
+        project_id || raise_project_id_is_required_error
 
         response = ::RestClient::Request.execute(
           {
@@ -117,77 +99,70 @@ module Crowdin
           }.merge(@options)
         )
 
-        begin
-          JSON.parse(response)
-        rescue
-          {}
-        end
+        response.body.empty? ? response.code : JSON.parse(response.body)
+      rescue StandardError => e
+        e.message
       end
 
-      def get_translation(trnslation_id = nil, query = {}, project_id = config.project_id)
-        trnslation_id || raise_parameter_is_required_error(:trnslation_id)
-        project_id    || raise_project_id_is_required_error
+      def get_translation(translation_id = nil, query = {}, project_id = config.project_id)
+        translation_id || raise_parameter_is_required_error(:translation_id)
+        project_id     || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/translations/#{trnslation_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/translations/#{translation_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
-      def restore_translation(trnslation_id = nil, project_id = config.project_id)
-        trnslation_id || raise_parameter_is_required_error(:trnslation_id)
-        project_id    || raise_project_id_is_required_error
+      def restore_translation(translation_id = nil, project_id = config.project_id)
+        translation_id || raise_parameter_is_required_error(:translation_id)
+        project_id     || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :put,
-          "/projects/#{project_id}/translations/#{trnslation_id}"
+          "#{config.target_api_url}/projects/#{project_id}/translations/#{translation_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
-      def delete_translation(trnslation_id = nil, project_id = config.project_id)
-        trnslation_id || raise_parameter_is_required_error(:trnslation_id)
-        project_id    || raise_project_id_is_required_error
+      def delete_translation(translation_id = nil, project_id = config.project_id)
+        translation_id || raise_parameter_is_required_error(:translation_id)
+        project_id     || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/translations/#{trnslation_id}"
+          "#{config.target_api_url}/projects/#{project_id}/translations/#{translation_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def list_translation_votes(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/votes",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/votes",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_vote(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/votes",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/votes",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_vote(vote_id = nil, project_id = config.project_id)
@@ -195,12 +170,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/votes/#{vote_id}"
+          "#{config.target_api_url}/projects/#{project_id}/votes/#{vote_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_screenshot(vote_id = nil, project_id = config.project_id)
@@ -208,12 +182,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/votes/#{vote_id}"
+          "#{config.target_api_url}/projects/#{project_id}/votes/#{vote_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
     end
   end

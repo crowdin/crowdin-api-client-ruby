@@ -24,11 +24,9 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'bundler', '~> 2.2', '>= 2.2.32'
   gem.add_development_dependency 'codecov', '~> 0.6.0'
+  gem.add_development_dependency 'pry', '~> 0.14.1'
   gem.add_development_dependency 'rake', '~> 13.0', '>= 13.0.6'
   gem.add_development_dependency 'rspec', '~> 3.10'
   gem.add_development_dependency 'rubocop', '~> 1.23'
-  gem.add_development_dependency 'vcr', '~> 6.0'
   gem.add_development_dependency 'webmock', '~> 3.14'
-
-  gem.add_development_dependency 'pry'
 end

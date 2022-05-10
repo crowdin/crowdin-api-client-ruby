@@ -5,75 +5,56 @@ module Crowdin
     module Projects
       def list_projects(query = {})
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          '/projects',
-          query
+          "#{config.target_api_url}/projects",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_project(query = {})
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          '/projects',
-          query
+          "#{config.target_api_url}/projects",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_project(project_id = nil)
         project_id || raise_parameter_is_required_error(:project_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}"
+          "#{config.target_api_url}/projects/#{project_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_project(project_id = nil)
         project_id || raise_parameter_is_required_error(:project_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}"
+          "#{config.target_api_url}/projects/#{project_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
-      #
-      # Edit project.
-      #
-      # === Parameters
-      #
-      # * +:projectId+ [Integer] - Project Identifier. Get via list_projects. Can be initialized with the Crowdin Client
-      # * +:value+ [String] - String or Array of strings.
-      # * +:op+ [String] - Path operation to perform.
-      # * +:projectId+ [String <json-pointer>] - Enum, for instance '/name'. Full list you can see on the developers site.
-      #
-      # === Example
-      #
-      #  crowdin.edit_project(project_id, [{ op: 'replace', path: '/name', value: 'your_new_project_name' }])
-      #
       def edit_project(project_id = nil, query = {})
         project_id || raise_parameter_is_required_error(:project_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/projects/#{project_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       # -- For Enterprise mode only --
@@ -82,66 +63,61 @@ module Crowdin
         enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          '/groups',
-          query
+          "#{config.target_api_url}/groups",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_group(query = {})
         enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          '/groups',
-          query
+          "#{config.target_api_url}/groups",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_group(group_id = nil)
         enterprise_mode? || raise_only_for_enterprise_mode_error
-        group_id                || raise_parameter_is_required_error(:group_id)
+        group_id         || raise_parameter_is_required_error(:group_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/groups/#{group_id}"
+          "#{config.target_api_url}/groups/#{group_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_group(group_id = nil)
         enterprise_mode? || raise_only_for_enterprise_mode_error
-        group_id                || raise_parameter_is_required_error(:group_id)
+        group_id         || raise_parameter_is_required_error(:group_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/groups/#{group_id}"
+          "#{config.target_api_url}/groups/#{group_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_group(group_id = nil, query = {})
         enterprise_mode? || raise_only_for_enterprise_mode_error
-        group_id                || raise_parameter_is_required_error(:group_id)
+        group_id         || raise_parameter_is_required_error(:group_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/groups/#{group_id}",
-          query
+          "#{config.target_api_url}/groups/#{group_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
     end
   end

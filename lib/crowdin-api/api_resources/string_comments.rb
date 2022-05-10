@@ -7,26 +7,24 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/comments",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/comments",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_string_comment(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/comments",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/comments",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_string_comment(string_comment_id = nil, project_id = config.project_id)
@@ -34,12 +32,11 @@ module Crowdin
         project_id        || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/comments/#{string_comment_id}"
+          "#{config.target_api_url}/projects/#{project_id}/comments/#{string_comment_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_string_comment(string_comment_id = nil, project_id = config.project_id)
@@ -47,12 +44,11 @@ module Crowdin
         project_id        || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/comments/#{string_comment_id}"
+          "#{config.target_api_url}/projects/#{project_id}/comments/#{string_comment_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_string_comment(string_comment_id = nil, query = {}, project_id = config.project_id)
@@ -60,13 +56,12 @@ module Crowdin
         project_id        || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/projects/#{project_id}/comments/#{string_comment_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/comments/#{string_comment_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
     end
   end

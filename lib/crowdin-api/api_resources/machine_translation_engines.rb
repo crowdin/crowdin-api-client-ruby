@@ -5,80 +5,74 @@ module Crowdin
     module MachineTranslationEngines
       def list_mts(query = {})
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          '/mts',
-          query
+          "#{config.target_api_url}/mts",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_mt(mt_id = nil)
         mt_id || raise_parameter_is_required_error(:mt_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/mts/#{mt_id}"
+          "#{config.target_api_url}/mts/#{mt_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def translate_via_mt(mt_id = nil, query = {})
         mt_id || raise_parameter_is_required_error(:mt_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/mts/#{mt_id}/translations",
-          query
+          "#{config.target_api_url}/mts/#{mt_id}/translations",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       # -- For Enterprise mode only --
 
       def edit_mt(mt_id = nil, query = {})
         enterprise_mode? || raise_only_for_enterprise_mode_error
-        mt_id                   || raise_parameter_is_required_error(:mt_id)
+        mt_id            || raise_parameter_is_required_error(:mt_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/mts/#{mt_id}",
-          query
+          "#{config.target_api_url}/mts/#{mt_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_mt(query = {})
         enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          '/mts',
-          query
+          "#{config.target_api_url}/mts",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_mt(mt_id = nil)
         enterprise_mode? || raise_only_for_enterprise_mode_error
-        mt_id                   || raise_parameter_is_required_error(:mt_id)
+        mt_id            || raise_parameter_is_required_error(:mt_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/mts/#{mt_id}"
+          "#{config.target_api_url}/mts/#{mt_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
     end
   end

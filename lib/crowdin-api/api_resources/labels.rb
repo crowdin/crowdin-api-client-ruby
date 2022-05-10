@@ -3,30 +3,28 @@
 module Crowdin
   module ApiResources
     module Labels
-      def list_lables(query = {}, project_id = config.project_id)
+      def list_labels(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/labels",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/labels",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_label(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/labels",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/labels",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_label(label_id = nil, project_id = config.project_id)
@@ -34,12 +32,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/labels/#{label_id}"
+          "#{config.target_api_url}/projects/#{project_id}/labels/#{label_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_label(label_id = nil, project_id = config.project_id)
@@ -47,12 +44,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/labels/#{label_id}"
+          "#{config.target_api_url}/projects/#{project_id}/labels/#{label_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_label(label_id = nil, query = {}, project_id = config.project_id)
@@ -60,13 +56,12 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/projects/#{project_id}/labels/#{label_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/labels/#{label_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def assign_label_to_strings(label_id = nil, query = {}, project_id = config.project_id)
@@ -74,29 +69,17 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/labels/#{label_id}/strings",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/labels/#{label_id}/strings",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
-      # For now Rest Client Resource aren't support payload for DELETE requests.
-      # So we have workaround through Rest Client Execute for this case
       def unassign_label_from_strings(label_id = nil, query = {}, project_id = config.project_id)
-        # label_id   || raise_parameter_is_required_error(:label_id)
-        # project_id || raise_project_id_is_required_error
-        #
-        # request = Web::Request.new(
-        #   self,
-        #   :delete,
-        #   "/projects/#{project_id}/labels/#{label_id}",
-        #   query
-        # )
-        #
-        # request.perform
+        label_id   || raise_parameter_is_required_error(:label_id)
+        project_id || raise_project_id_is_required_error
 
         response = ::RestClient::Request.execute(
           {
@@ -106,11 +89,9 @@ module Crowdin
           }.merge(@options)
         )
 
-        begin
-          JSON.parse(response)
-        rescue
-          {}
-        end
+        response.body.empty? ? response.code : JSON.parse(response.body)
+      rescue StandardError => e
+        e.message
       end
     end
   end

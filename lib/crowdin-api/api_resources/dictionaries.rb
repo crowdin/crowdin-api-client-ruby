@@ -7,13 +7,12 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/dictionaries",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/dictionaries",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_dictionary(language_id = nil, query = {}, project_id = config.project_id)
@@ -21,13 +20,12 @@ module Crowdin
         project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/projects/#{project_id}/dictionaries/#{language_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/dictionaries/#{language_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
     end
   end

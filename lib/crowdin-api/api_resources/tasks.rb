@@ -7,26 +7,24 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/tasks",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/tasks",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_task(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/tasks",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/tasks",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def export_task_strings(task_id = nil, destination = nil, project_id = config.project_id)
@@ -34,15 +32,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/tasks/#{task_id}/exports",
-          {},
-          {},
-          destination
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/exports"
         )
-
-        request.perform
+        Web::SendRequest.new(request, destination).perform
       end
 
       def get_task(task_id = nil, project_id = config.project_id)
@@ -50,12 +44,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/tasks/#{task_id}"
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_task(task_id = nil, project_id = config.project_id)
@@ -63,12 +56,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/tasks/#{task_id}"
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_task(task_id = nil, query = {}, project_id = config.project_id)
@@ -76,37 +68,34 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/projects/#{project_id}/tasks/#{task_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def list_user_tasks(query = {})
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          '/user/tasks',
-          query
+          "#{config.target_api_url}/user/tasks",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_task_archived_status(task_id = nil, query = {})
         task_id || raise_parameter_is_required_error(:task_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/user/tasks/#{task_id}",
-          query
+          "#{config.target_api_url}/user/tasks/#{task_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
     end
   end

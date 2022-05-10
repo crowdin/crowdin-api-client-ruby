@@ -6,6 +6,7 @@ require 'codecov'
 SimpleCov.start
 SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
+require 'webmock/rspec'
 require 'crowdin-api'
 
 RSpec.shared_context 'crowdin_client_options' do
@@ -13,8 +14,14 @@ RSpec.shared_context 'crowdin_client_options' do
   let(:project_id) { 1 }
   let(:organization_domain) { 'domain' }
   let(:full_organization_domain) { 'domain.com' }
+  let(:target_api_url) { 'api/v2' }
 end
 
 RSpec.configure do |config|
   config.include_context 'crowdin_client_options'
+
+  config.before(:each) do |spec|
+    @crowdin = Crowdin::Client.new { |cfg| cfg.organization_domain = 'domain' } if spec.metadata[:enterprise]
+    @crowdin = Crowdin::Client.new if spec.metadata[:default]
+  end
 end

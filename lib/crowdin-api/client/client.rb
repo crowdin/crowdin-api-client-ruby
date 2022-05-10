@@ -34,7 +34,7 @@ module Crowdin
     attr_reader :config
     # Instance with established connection through RestClient to the Crowdin API
     attr_reader :connection
-    # Instance with options and headers for connection
+    # Instance with options and headers for RestClient connection
     attr_reader :options
     # Logger instance
     attr_reader :logger
@@ -42,23 +42,25 @@ module Crowdin
     def initialize(&block)
       build_configuration(&block)
 
-      check_logger
-      check_rest_client_proxy
+      update_logger
+      update_rest_client_proxy
 
       build_connection
     end
 
     def log(message)
-      !config.logger_enabled? || logger.debug(message)
+      !logger_enabled? || logger.debug(message)
     end
 
     def logger=(logger)
-      raise_logger_are_not_enabled_error unless config.logger_enabled?
+      raise_logger_are_not_enabled_error unless logger_enabled?
+
       @logger = logger
+      update_rest_client_logger
     end
 
     def enterprise_mode?
-      config.organization_domain?
+      !!config.organization_domain
     end
 
     def logger_enabled?
@@ -83,14 +85,19 @@ module Crowdin
 
       def set_default_logger
         require 'logger'
-        @logger ||= Logger.new($stderr)
+        @logger ||= Logger.new($stdout)
+        update_rest_client_logger
       end
 
-      def check_rest_client_proxy
+      def update_rest_client_logger
+        ::RestClient.log = @logger
+      end
+
+      def update_rest_client_proxy
         ENV['http_proxy'] ? ::RestClient.proxy = ENV.fetch('http_proxy') : false
       end
 
-      def check_logger
+      def update_logger
         config.logger_enabled? ? set_default_logger : config.enable_logger = false
       end
   end

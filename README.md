@@ -40,7 +40,7 @@ For more about Crowdin API v2 see the documentation:
 Add this line to your application's Gemfile:
 
 ```gemfile
-gem 'crowdin-api', '~> 1.2.2'
+gem 'crowdin-api', '~> 1.3.0'
 ```
 
 And then execute:
@@ -74,7 +74,7 @@ crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourApiToken'
 end
 
-# Or you can intialize Enterprise Client instance by specifying your
+# Or you can initialize Enterprise Client instance by specifying your
 # organization_domain in config options
 crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourEnterpriseApiToken'
@@ -141,6 +141,8 @@ file = crowdin.download_file(your_file_id, your_destination, your_project_id)
 file_revisions = crowdin.list_file_revisions(your_file_id, limit: 10)
 # or you can specify your project_id
 file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10 }, your_project_id)
+
+# Note: more examples you can find in spec folder
 ```
 
 ### Command-Line Client

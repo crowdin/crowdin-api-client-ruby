@@ -7,26 +7,24 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/branches",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/branches",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_branch(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/branches",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/branches",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_branch(branch_id = nil, project_id = config.project_id)
@@ -34,12 +32,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/branches/#{branch_id}"
+          "#{config.target_api_url}/projects/#{project_id}/branches/#{branch_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_branch(branch_id = nil, project_id = config.project_id)
@@ -47,12 +44,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/branches/#{branch_id}"
+          "#{config.target_api_url}/projects/#{project_id}/branches/#{branch_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_branch(branch_id = nil, query = {}, project_id = config.project_id)
@@ -60,39 +56,36 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/projects/#{project_id}/branches/#{branch_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/branches/#{branch_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def list_directories(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/directories",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/directories",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_directory(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/directories",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/directories",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_directory(directory_id = nil, project_id = config.project_id)
@@ -100,12 +93,11 @@ module Crowdin
         project_id   || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/directories/#{directory_id}"
+          "#{config.target_api_url}/projects/#{project_id}/directories/#{directory_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_directory(directory_id = nil, project_id = config.project_id)
@@ -113,12 +105,11 @@ module Crowdin
         project_id   || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/directories/#{directory_id}"
+          "#{config.target_api_url}/projects/#{project_id}/directories/#{directory_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_directory(directory_id = nil, query = {}, project_id = config.project_id)
@@ -126,58 +117,36 @@ module Crowdin
         project_id   || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/projects/#{project_id}/directories/#{directory_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/directories/#{directory_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def list_files(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/files",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/files",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
-      #
-      # Add custom language.
-      #
-      # === Parameters
-      #
-      # * +:projectId+ [Integer] - Project Identifier. Get via list_projects. Can be initialized with the Crowdin Client
-      # * +:storageId+ [Integer] - Storage Identifier. Get via list_storages
-      # * +:name+ [String] - File name. Note: Can't contain \ / : * ? " < > | symbols. ZIP files are not allowed.
-      #
-      # === Example
-      #
-      # when you're initialized Crowdin Client with a project_id
-      #
-      #  crowdin.add_file(storage_id: your_storage_id, name: 'your_filename')
-      #
-      # or you can specify project_id
-      #
-      #  crowdin.add_file({ storage_id: your_storage_id, name: 'your_filename' }, your_project_id)
-      #
       def add_file(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/files",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/files",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_file(file_id = nil, project_id = config.project_id)
@@ -185,12 +154,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/files/#{file_id}"
+          "#{config.target_api_url}/projects/#{project_id}/files/#{file_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def update_or_restore_file(file_id = nil, query = {}, project_id = config.project_id)
@@ -198,13 +166,12 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :put,
-          "/projects/#{project_id}/files/#{file_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/files/#{file_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_file(file_id = nil, project_id = config.project_id)
@@ -212,12 +179,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/files/#{file_id}"
+          "#{config.target_api_url}/projects/#{project_id}/files/#{file_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_file(file_id = nil, query = {}, project_id = config.project_id)
@@ -225,13 +191,12 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/projects/#{project_id}/files/#{file_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/files/#{file_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def download_file(file_id = nil, destination = nil, project_id = config.project_id)
@@ -239,51 +204,24 @@ module Crowdin
         project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/files/#{file_id}/download",
-          {},
-          {},
-          destination
+          "#{config.target_api_url}/projects/#{project_id}/files/#{file_id}/download"
         )
-
-        request.perform
+        Web::SendRequest.new(request, destination).perform
       end
 
-      #
-      # List file revisions.
-      #
-      # === Parameters
-      #
-      # * +:projectId+ [Integer] - Project Identifier. Get via list_projects. Can be initialized with the Crowdin Client
-      # * +:fileId+ [Integer] - File Identifier. Get via list_files
-      #
-      # Optional:
-      # * +:limit+ [Integer 1..500] - A maximum number of items to retrieve, default - 25
-      # * +:offset+ [Integer >= 0] - A starting offset in the collection, default - 0
-      #
-      # === Example
-      #
-      # when you're initialized Crowdin Client with a project_id
-      #
-      #  crowdin.list_file_revisions(your_file_id, limit: your_value)
-      #
-      # or you can specify project_id
-      #
-      #  crowdin.list_file_revisions(your_file_id, { limit: your_value }, your_project_id)
-      #
       def list_file_revisions(file_id = nil, query = {}, project_id = config.project_id)
         file_id    || raise_parameter_is_required_error(:file_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/files/#{file_id}/revisions",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/files/#{file_id}/revisions",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_file_revision(file_id = nil, revision_id = nil, project_id = config.project_id)
@@ -292,12 +230,11 @@ module Crowdin
         project_id  || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/files/#{file_id}/revisions/#{revision_id}"
+          "#{config.target_api_url}/projects/#{project_id}/files/#{file_id}/revisions/#{revision_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
     end
   end

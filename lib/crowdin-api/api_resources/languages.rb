@@ -5,77 +5,56 @@ module Crowdin
     module Languages
       def list_languages(query = {})
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          '/languages',
-          query
+          "#{config.target_api_url}/languages",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
-      #
-      # Add custom language.
-      #
-      # === Parameters
-      #
-      # * +:name+ [String] - Language name
-      # * +:code+ [String] - Custom language code
-      # * +:localeCode+ [String] - Custom language locale code
-      # * +:textDirection+ [String ltr/rtl] - Text direction in custom language
-      # * +:pluralCategoryNames+ [String] - Array with category names
-      # * +:threeLettersCode+ [String] - Custom language 3 letters code. Format: ISO 6393 code
-      #
-      # === Example
-      #
-      #  crowdin.add_custom_language(name: 'your_name', code: 'your_code' ..)
-      #
       def add_custom_language(query = {})
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          '/languages',
-          query
+          "#{config.target_api_url}/languages",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_language(language_id = nil)
         language_id || raise_parameter_is_required_error(:language_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/languages/#{language_id}"
+          "#{config.target_api_url}/languages/#{language_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_custom_language(language_id = nil)
         language_id || raise_parameter_is_required_error(:language_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/languages/#{language_id}"
+          "#{config.target_api_url}/languages/#{language_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
-      def edit_custom_language(language_id = nil)
+      def edit_custom_language(language_id = nil, query = {})
         language_id || raise_parameter_is_required_error(:language_id)
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/languages/#{language_id}",
-          query
+          "#{config.target_api_url}/languages/#{language_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
     end
   end

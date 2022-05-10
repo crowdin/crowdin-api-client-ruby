@@ -7,26 +7,24 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/screenshots",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/screenshots",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_screenshot(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/screenshots",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/screenshots",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_screenshot(screenshot_id = nil, project_id = config.project_id)
@@ -34,12 +32,11 @@ module Crowdin
         project_id    || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/screenshots/#{screenshot_id}"
+          "#{config.target_api_url}/projects/#{project_id}/screenshots/#{screenshot_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def update_screenshot(screenshot_id = nil, query = {}, project_id = config.project_id)
@@ -47,13 +44,12 @@ module Crowdin
         project_id    || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :put,
-          "/projects/#{project_id}/screenshots/#{screenshot_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/screenshots/#{screenshot_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_screenshot(screenshot_id = nil, project_id = config.project_id)
@@ -61,12 +57,11 @@ module Crowdin
         project_id    || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/screenshots/#{screenshot_id}"
+          "#{config.target_api_url}/projects/#{project_id}/screenshots/#{screenshot_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_screenshot(screenshot_id = nil, query = {}, project_id = config.project_id)
@@ -74,13 +69,12 @@ module Crowdin
         project_id    || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/projects/#{project_id}/screenshots/#{screenshot_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/screenshots/#{screenshot_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def list_tags(screenshot_id = nil, query = {}, project_id = config.project_id)
@@ -88,28 +82,25 @@ module Crowdin
         project_id    || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/screenshots/#{screenshot_id}/tags",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/screenshots/#{screenshot_id}/tags",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
-      # Auto tag
       def replace_tags(screenshot_id = nil, query = {}, project_id = config.project_id)
         screenshot_id || raise_parameter_is_required_error(:screenshot_id)
         project_id    || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :put,
-          "/projects/#{project_id}/screenshots/#{screenshot_id}/tags",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/screenshots/#{screenshot_id}/tags",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_tag(screenshot_id = nil, query = {}, project_id = config.project_id)
@@ -117,13 +108,12 @@ module Crowdin
         project_id    || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/screenshots/#{screenshot_id}/tags",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/screenshots/#{screenshot_id}/tags",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def clear_tags(screenshot_id = nil, project_id = config.project_id)
@@ -131,12 +121,11 @@ module Crowdin
         project_id    || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/screenshots/#{screenshot_id}/tags"
+          "#{config.target_api_url}/projects/#{project_id}/screenshots/#{screenshot_id}/tags"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_tag(screenshot_id = nil, tag_id = nil, project_id = config.project_id)
@@ -145,12 +134,11 @@ module Crowdin
         project_id    || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/screenshots/#{screenshot_id}/tags/#{tag_id}"
+          "#{config.target_api_url}/projects/#{project_id}/screenshots/#{screenshot_id}/tags/#{tag_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_tag(screenshot_id = nil, tag_id = nil, project_id = config.project_id)
@@ -159,12 +147,11 @@ module Crowdin
         project_id    || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/screenshots/#{screenshot_id}/tags/#{tag_id}"
+          "#{config.target_api_url}/projects/#{project_id}/screenshots/#{screenshot_id}/tags/#{tag_id}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_tag(screenshot_id = nil, tag_id = nil, query = {}, project_id = config.project_id)
@@ -173,13 +160,12 @@ module Crowdin
         project_id    || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/projects/#{project_id}/screenshots/#{screenshot_id}/tags/#{tag_id}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/screenshots/#{screenshot_id}/tags/#{tag_id}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
     end
   end

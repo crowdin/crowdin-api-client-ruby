@@ -7,26 +7,24 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/distributions",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/distributions",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def add_distribution(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/distributions",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/distributions",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def get_distribution(hash = nil, project_id = config.project_id)
@@ -34,12 +32,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/distributions/#{hash}"
+          "#{config.target_api_url}/projects/#{project_id}/distributions/#{hash}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def delete_distribution(hash = nil, project_id = config.project_id)
@@ -47,12 +44,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :delete,
-          "/projects/#{project_id}/distributions/#{hash}"
+          "#{config.target_api_url}/projects/#{project_id}/distributions/#{hash}"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def edit_distribution(hash = nil, query = {}, project_id = config.project_id)
@@ -60,26 +56,24 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :patch,
-          "/projects/#{project_id}/distributions/#{hash}",
-          query
+          "#{config.target_api_url}/projects/#{project_id}/distributions/#{hash}",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
-      def get_destribution_release(hash = nil, project_id = config.project_id)
+      def get_distribution_release(hash = nil, project_id = config.project_id)
         hash       || raise_parameter_is_required_error(:hash)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          "/projects/#{project_id}/distributions/#{hash}/release"
+          "#{config.target_api_url}/projects/#{project_id}/distributions/#{hash}/release"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
 
       def release_distribution(hash = nil, project_id = config.project_id)
@@ -87,12 +81,11 @@ module Crowdin
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :post,
-          "/projects/#{project_id}/distributions/#{hash}/release"
+          "#{config.target_api_url}/projects/#{project_id}/distributions/#{hash}/release"
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
     end
   end

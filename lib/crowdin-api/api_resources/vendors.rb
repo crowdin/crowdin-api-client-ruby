@@ -2,19 +2,19 @@
 
 module Crowdin
   module ApiResources
-    # -- For Enterprise mode only --
     module Vendors
+      # -- For Enterprise mode only --
+
       def list_vendors(query = {})
         enterprise_mode? || raise_only_for_enterprise_mode_error
 
         request = Web::Request.new(
-          self,
+          connection,
           :get,
-          '/vendors',
-          query
+          "#{config.target_api_url}/vendors",
+          { params: query }
         )
-
-        request.perform
+        Web::SendRequest.new(request).perform
       end
     end
   end

@@ -34,7 +34,7 @@ module Crowdin
 
     def base_url
       @base_url ||=
-        if organization_domain?
+        if !!organization_domain
           if organization_domain.include?('.com')
             "https://#{organization_domain}"
           else
@@ -43,10 +43,6 @@ module Crowdin
         else
           'https://api.crowdin.com'
         end
-    end
-
-    def organization_domain?
-      !!organization_domain
     end
   end
 end
