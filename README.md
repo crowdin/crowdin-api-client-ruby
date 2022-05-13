@@ -40,7 +40,7 @@ For more about Crowdin API v2 see the documentation:
 Add this line to your application's Gemfile:
 
 ```gemfile
-gem 'crowdin-api', '~> 1.2.1'
+gem 'crowdin-api', '~> 1.3.0'
 ```
 
 And then execute:
@@ -74,7 +74,7 @@ crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourApiToken'
 end
 
-# Or you can intialize Enterprise Client instance by specifying your
+# Or you can initialize Enterprise Client instance by specifying your
 # organization_domain in config options
 crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourEnterpriseApiToken'
@@ -82,7 +82,7 @@ crowdin = Crowdin::Client.new do |config|
 end
 # Note: we use full specified organization domain if that includes '.com'
 # config.organization_domain = your_domain -> https://your_domain.api.crowdin.com
-# config.organization_domain = your_domain.com -> your_domain.com
+# config.organization_domain = your_domain.com -> https://your_domain.com
 
 # All supported Crowdin Client config options now:
 crowdin = Crowdin::Client.new do |config|
@@ -121,9 +121,9 @@ projects = crowdin.list_projects(offset: 10, limit: 20)
 project = crowdin.get_project(your_project_id)
 
 # Edit project
-project = crowdin.edit_project(project_id, [{op: 'replace',
-                                             path: '/name',
-                                             value: 'your_new_project_name'}])
+project = crowdin.edit_project(project_id, [{ op: 'replace',
+                                              path: '/name',
+                                              value: 'your_new_project_name' }])
 
 # Add Storage
 storage = crowdin.add_storage(File.open('YourFilename.extension', 'r'))
@@ -141,6 +141,8 @@ file = crowdin.download_file(your_file_id, your_destination, your_project_id)
 file_revisions = crowdin.list_file_revisions(your_file_id, limit: 10)
 # or you can specify your project_id
 file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10 }, your_project_id)
+
+# Note: more examples you can find in spec folder
 ```
 
 ### Command-Line Client

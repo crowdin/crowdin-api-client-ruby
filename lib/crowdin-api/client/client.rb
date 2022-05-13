@@ -20,76 +20,85 @@ module Crowdin
   #  crowdin.list_projects
   #
   class Client
-    extend Utils
-
-    # API Resources modules
-    API_RESOURCES_MODULES = %i[Storages Languages Projects Workflows SourceFiles Translations SourceStrings
-                               StringTranslations StringComments Screenshots Glossaries TranslationMemory
-                               MachineTranslationEngines Reports Tasks Users Teams Vendors Webhooks
-                               Dictionaries Distributions Labels TranslationStatus].freeze
-
-    # Error Raisers modules
-    ERROR_RAISERS_MODULES = %i[ApiErrorsRaiser ClientErrorsRaiser].freeze
-
-    # Processing all API Resources modules to include them to the Client
+    # Processing API Resources modules to include them to the Client
     API_RESOURCES_MODULES.each do |module_name|
-      Client.send(:include, fetch_module_full_name_from_string("Crowdin::ApiResources::#{module_name}"))
+      Client.send(:include, Object.const_get("Crowdin::ApiResources::#{module_name}"))
     end
 
-    # Processing all Error Raisers modules to include them to the Client
+    # Processing Error Raisers modules to include them to the Client
     ERROR_RAISERS_MODULES.each do |module_name|
-      Client.send(:include, fetch_module_full_name_from_string("Crowdin::Errors::#{module_name}"))
+      Client.send(:include, Object.const_get("Crowdin::Errors::#{module_name}"))
     end
 
+    # Config instance that includes configuration options for the Client
     attr_reader :config
+    # Instance with established connection through RestClient to the Crowdin API
     attr_reader :connection
+    # Instance with options and headers for RestClient connection
     attr_reader :options
+    # Logger instance
     attr_reader :logger
 
     def initialize(&block)
       build_configuration(&block)
 
-      check_logger
-      check_rest_client_proxy
+      update_logger
+      update_rest_client_proxy
 
       build_connection
     end
 
-    def log!(message)
-      !config.logger_enabled? || logger.debug(message)
+    def log(message)
+      !logger_enabled? || logger.debug(message)
     end
 
     def logger=(logger)
-      raise_logger_are_not_enabled_error unless config.logger_enabled?
+      raise_logger_are_not_enabled_error unless logger_enabled?
+
       @logger = logger
+      update_rest_client_logger
+    end
+
+    def enterprise_mode?
+      !!config.organization_domain
+    end
+
+    def logger_enabled?
+      config.logger_enabled?
     end
 
     private
 
-    def build_configuration
-      @config = Crowdin::Configuration.new
-      yield config if block_given?
-    end
+      def build_configuration
+        @config = Crowdin::Configuration.new
+        yield config if block_given?
+      end
 
-    def build_connection
-      @connection ||= ::RestClient::Resource.new(config.base_url, build_options)
-    end
+      def build_connection
+        build_options
+        @connection ||= ::RestClient::Resource.new(config.base_url, options)
+      end
 
-    def build_options
-      @options ||= config.options.merge(headers: config.headers)
-    end
+      def build_options
+        @options ||= config.options.merge(headers: config.headers)
+      end
 
-    def set_default_logger
-      require 'logger'
-      @logger ||= Logger.new($stderr)
-    end
+      def set_default_logger
+        require 'logger'
+        @logger ||= Logger.new($stdout)
+        update_rest_client_logger
+      end
 
-    def check_rest_client_proxy
-      ENV['http_proxy'] ? ::RestClient.proxy = ENV['http_proxy'] : false
-    end
+      def update_rest_client_logger
+        ::RestClient.log = @logger
+      end
 
-    def check_logger
-      config.logger_enabled? ? set_default_logger : config.enable_logger = false
-    end
+      def update_rest_client_proxy
+        ENV['http_proxy'] ? ::RestClient.proxy = ENV.fetch('http_proxy') : false
+      end
+
+      def update_logger
+        config.logger_enabled? ? set_default_logger : config.enable_logger = false
+      end
   end
 end
