@@ -38,13 +38,13 @@ describe Crowdin::ApiResources::Webhooks do
       end
     end
 
-    describe '#edit_screenshot' do
+    describe '#edit_webhook' do
       let(:webhook_id) { 1 }
 
       it 'when request are valid', :default do
         stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/webhooks/#{webhook_id}")
-        edit_screenshot = @crowdin.edit_screenshot(webhook_id, {}, project_id)
-        expect(edit_screenshot).to eq(200)
+        edit_webhook = @crowdin.edit_webhook(webhook_id, {}, project_id)
+        expect(edit_webhook).to eq(200)
       end
     end
   end

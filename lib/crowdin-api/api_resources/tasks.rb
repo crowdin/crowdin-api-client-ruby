@@ -91,7 +91,7 @@ module Crowdin
 
         request = Web::Request.new(
           connection,
-          :get,
+          :patch,
           "#{config.target_api_url}/user/tasks/#{task_id}",
           { params: query }
         )

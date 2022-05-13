@@ -51,7 +51,7 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def edit_screenshot(webhook_id = nil, query = {}, project_id = config.project_id)
+      def edit_webhook(webhook_id = nil, query = {}, project_id = config.project_id)
         webhook_id || raise_parameter_is_required_error(:webhook_id)
         project_id || raise_project_id_is_required_error
 
