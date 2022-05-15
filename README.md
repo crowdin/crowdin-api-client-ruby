@@ -40,7 +40,7 @@ For more about Crowdin API v2 see the documentation:
 Add this line to your application's Gemfile:
 
 ```gemfile
-gem 'crowdin-api', '~> 1.3.0'
+gem 'crowdin-api', '~> 1.4.0'
 ```
 
 And then execute:
