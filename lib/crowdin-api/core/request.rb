@@ -29,29 +29,24 @@ module Crowdin
         connection.delete
       end
 
-      def patch?
-        method.eql?(:patch)
-      end
-
-      def patch
-        connection.patch(prepare_payload(payload[:params]), payload[:headers]) { |response, _, _| response }
+      def process_with_body
+        connection.send(method, prepare_payload(payload[:params]), payload[:headers]) { |response, _, _| response }
       end
 
       def post?
         method.eql?(:post)
       end
+      alias post process_with_body
 
-      def post
-        connection.post(prepare_payload(payload[:params]), payload[:headers]) { |response, _, _| response }
+      def patch?
+        method.eql?(:patch)
       end
+      alias patch process_with_body
 
       def put?
         method.eql?(:put)
       end
-
-      def put
-        connection.put(prepare_payload(payload[:params]), payload[:headers]) { |response, _, _| response }
-      end
+      alias put process_with_body
 
       private
 
