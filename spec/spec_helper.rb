@@ -21,7 +21,10 @@ RSpec.configure do |config|
   config.include_context 'crowdin_client_options'
 
   config.before(:each) do |spec|
-    @crowdin = Crowdin::Client.new { |cfg| cfg.organization_domain = 'domain' } if spec.metadata[:enterprise]
-    @crowdin = Crowdin::Client.new if spec.metadata[:default]
+    @crowdin = if spec.metadata[:enterprise]
+                 Crowdin::Client.new { |cfg| cfg.organization_domain = organization_domain }
+               else # default
+                 Crowdin::Client.new
+               end
   end
 end

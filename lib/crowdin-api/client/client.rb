@@ -85,6 +85,7 @@ module Crowdin
 
       def set_default_logger
         require 'logger'
+
         @logger ||= Logger.new($stdout)
         update_rest_client_logger
       end
