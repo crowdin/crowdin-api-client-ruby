@@ -21,6 +21,7 @@ require 'crowdin-api/core/errors'
 require 'crowdin-api/core/errors_raisers'
 require 'crowdin-api/core/request'
 require 'crowdin-api/core/send_request'
+require 'crowdin-api/core/fetch_all_extensions'
 
 # API modules
 Crowdin::API_RESOURCES_MODULES.each do |api_resource|

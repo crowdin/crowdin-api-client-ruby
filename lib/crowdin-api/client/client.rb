@@ -30,6 +30,8 @@ module Crowdin
       Client.send(:include, Object.const_get("Crowdin::Errors::#{module_name}"))
     end
 
+    include Web::FetchAllExtensions
+
     # Config instance that includes configuration options for the Client
     attr_reader :config
     # Instance with established connection through RestClient to the Crowdin API
@@ -65,6 +67,61 @@ module Crowdin
 
     def logger_enabled?
       config.logger_enabled?
+    end
+
+    #
+    # FetchAll options:
+    # * limit, Integer, default: 500 | How many records need to load per one request
+    # * offset, Integer, default: 0
+    # * request_delay, Integer (seconds), default: 0 | Delay between requests
+    #
+    # === Example
+    #
+    #  @crowdin.fetch_all(:list_projects)
+    #
+    # with specified options
+    #
+    #  @crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 })
+    #
+    # playing with response per fetch
+    #
+    #  @crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 }) { |response| puts response['data'] }
+    #
+    def fetch_all(api_resource, opts = {})
+      unless Web::FetchAllExtensions::API_RESOURCES_FOR_FETCH_ALL.include?(api_resource)
+        raise(Errors::FetchAllProcessingError, "#{api_resource} aren't supported in FetchAll")
+      end
+
+      limit = opts[:limit] || Web::FetchAllExtensions::MAX_ITEMS_COUNT_PER_REQUEST
+      offset = opts[:offset] || 0
+      request_delay = opts[:request_delay] || 0
+
+      result = []
+      loop do
+        response = case api_resource
+        when :list_terms
+          send(api_resource, opts[:glossary_id], { limit: limit, offset: offset })
+        when :list_file_revisions
+          send(api_resource, opts[:file_id], { limit: limit, offset: offset })
+        else
+          send(api_resource, { limit: limit, offset: offset })
+        end
+
+        if response.is_a?(String) && response.match('Something went wrong')
+          raise(Errors::FetchAllProcessingError, response)
+        else
+          yield response if block_given?
+          deserialized_response = response['data']
+          result.concat(deserialized_response)
+          offset += deserialized_response.size
+          break if deserialized_response.size < limit
+        end
+
+        sleep request_delay
+      end
+      result
+    rescue StandardError => e
+      raise(Errors::FetchAllProcessingError, "FetchAll wasn't processed. Details - #{e.message}")
     end
 
     private
