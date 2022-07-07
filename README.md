@@ -27,6 +27,7 @@ For more about Crowdin API v2 see the documentation:
 * [Quick Start](#quick-start)
   * [Initialization](#initialization)
   * [Usage](#usage)
+  * [Fetch All](#fetch-all)
   * [Command-Line Client](#command-line-client)
 * [Seeking Assistance](#seeking-assistance)
 * [Contributing](#contributing)
@@ -66,6 +67,7 @@ gem install crowdin-api
 ## Quick start
 
 ### Initialization
+
 ```ruby
 require 'crowdin-api'
 
@@ -143,6 +145,24 @@ file_revisions = crowdin.list_file_revisions(your_file_id, limit: 10)
 file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10 }, your_project_id)
 
 # Note: more examples you can find in spec folder
+```
+
+### Fetch All
+
+You also can fetch all records from paginatable methods using `fetch_all` method (where we have limit and offset in arguments).
+
+```ruby
+# FetchAll options:
+# * limit, Integer, default: 500 | How many records need to load per one request
+# * offset, Integer, default: 0
+# * request_delay, Integer (seconds), default: 0 | Delay between requests
+
+# Example and use cases:
+@crowdin.fetch_all(:list_projects)
+# with specified options
+@crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 }) 
+# playing with response per fetch
+@crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 }) { |response| puts response['data'] }
 ```
 
 ### Command-Line Client
