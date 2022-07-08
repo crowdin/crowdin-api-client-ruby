@@ -89,7 +89,7 @@ module Crowdin
     #
     def fetch_all(api_resource, opts = {})
       unless Web::FetchAllExtensions::API_RESOURCES_FOR_FETCH_ALL.include?(api_resource)
-        raise(Errors::FetchAllProcessingError, "#{api_resource} aren't supported in FetchAll")
+        raise(Errors::FetchAllProcessingError, "#{api_resource} method aren't supported for FetchAll")
       end
 
       limit = opts[:limit] || Web::FetchAllExtensions::MAX_ITEMS_COUNT_PER_REQUEST

@@ -149,7 +149,7 @@ file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10 }, your_p
 
 ### Fetch All
 
-You also can fetch all records from paginatable methods use `fetch_all` method (where we have limit and offset in arguments).
+You also can fetch all records from paginatable methods using `fetch_all` method (where we have limit and offset in arguments).
 
 ```ruby
 # FetchAll options:
