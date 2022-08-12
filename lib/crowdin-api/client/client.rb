@@ -119,11 +119,11 @@ module Crowdin
       loop do
         response = case api_resource
         when :list_terms
-          send(api_resource, opts[:glossary_id], { limit: limit, offset: offset })
+          send(api_resource, opts[:glossary_id], { limit: limit, offset: offset }.merge(opts))
         when :list_file_revisions
-          send(api_resource, opts[:file_id], { limit: limit, offset: offset })
+          send(api_resource, opts[:file_id], { limit: limit, offset: offset }.merge(opts))
         else
-          send(api_resource, { limit: limit, offset: offset })
+          send(api_resource, { limit: limit, offset: offset }.merge(opts))
         end
 
         if response.is_a?(String) && response.match('Something went wrong')
