@@ -122,7 +122,7 @@ module Crowdin
         end
 
         if response.is_a?(String) && response.match('Something went wrong')
-          if retry_tries_count > 0
+          if retry_tries_count.positive?
             retry_error_messages.each do |message|
               break if response.match(message)
             end
