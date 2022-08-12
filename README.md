@@ -166,7 +166,7 @@ You also can fetch all records from paginatable methods using `fetch_all` method
 # Note: the block actually don't make any effect to finite result
  
 # also you can specify retry configuration to handle some exceptions
-@crowdin.fetch_all(:list_projects, {}, { request_delay: 2, tries_count: 3, error_messages: ['401'] })
+@crowdin.fetch_all(:list_projects, {}, { request_delay: 2, retries_count: 3, error_messages: ['401'] })
 # fetch all execution will be terminated if response error are same as in error_messages array
 # otherwise system will retry so many times, as indicated at tries_count
 ```

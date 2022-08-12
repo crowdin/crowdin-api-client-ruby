@@ -92,7 +92,12 @@ module Crowdin
     #
     # also you can specify retry configuration to handle some exceptions
     #
-    #  @crowdin.fetch_all(:list_projects, {}, { request_delay: 2, tries_count: 3, error_messages: ['401'] })
+    # Retry configuration options:
+    # * request_delay, Integer (seconds), default: 0 | Delay between retries
+    # * retries_count, Integer, default: 0
+    # * error_messages, Array
+    #
+    #  @crowdin.fetch_all(:list_projects, {}, { request_delay: 2, retries_count: 3, error_messages: ['401'] })
     #
     # fetch all execution will be terminated if response error are same as in error_messages array
     # otherwise system will retry so many times, as indicated at tries_count
@@ -107,7 +112,7 @@ module Crowdin
       request_delay = opts[:request_delay] || 0
 
       retry_request_delay = retry_opts[:request_delay] || 0
-      retry_tries_count = retry_opts[:tries_count] || 0
+      retries_count = retry_opts[:retries_count] || 0
       retry_error_messages = retry_opts[:error_messages] || []
 
       result = []
@@ -122,12 +127,12 @@ module Crowdin
         end
 
         if response.is_a?(String) && response.match('Something went wrong')
-          if retry_tries_count.positive?
+          if retries_count.positive?
             retry_error_messages.each do |message|
               break if response.match(message)
             end
 
-            retry_tries_count -= 1
+            retries_count -= 1
             sleep retry_request_delay
           else
             raise(Errors::FetchAllProcessingError, response)
