@@ -72,8 +72,11 @@ module Crowdin
     #
     # FetchAll options:
     # * limit, Integer, default: 500 | How many records need to load per one request
-    # * offset, Integer, default: 0
+    # * offset, Integer, default: 0 | How many records need to skip
     # * request_delay, Integer (seconds), default: 0 | Delay between requests
+    #
+    #
+    # Note: Please, specify project_id while Client initialization if you need to use methods that need it within FetchAll
     #
     # === Example
     #
@@ -83,11 +86,18 @@ module Crowdin
     #
     #  @crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 })
     #
-    # playing with response per fetch
+    # playing with response per fetch. Note: the block actually don't make any effect to finite result
     #
     #  @crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 }) { |response| puts response['data'] }
     #
-    def fetch_all(api_resource, opts = {})
+    # also you can specify retry configuration to handle some exceptions
+    #
+    #  @crowdin.fetch_all(:list_projects, {}, { request_delay: 2, tries_count: 3, error_messages: ['401'] })
+    #
+    # fetch all execution will be terminated if response error are same as in error_messages array
+    # otherwise system will retry so many times, as indicated at tries_count
+    #
+    def fetch_all(api_resource, opts = {}, retry_opts = {})
       unless Web::FetchAllExtensions::API_RESOURCES_FOR_FETCH_ALL.include?(api_resource)
         raise(Errors::FetchAllProcessingError, "#{api_resource} method aren't supported for FetchAll")
       end
@@ -95,6 +105,10 @@ module Crowdin
       limit = opts[:limit] || Web::FetchAllExtensions::MAX_ITEMS_COUNT_PER_REQUEST
       offset = opts[:offset] || 0
       request_delay = opts[:request_delay] || 0
+
+      retry_request_delay = retry_opts[:request_delay] || 0
+      retry_tries_count = retry_opts[:tries_count] || 0
+      retry_error_messages = retry_opts[:error_messages] || []
 
       result = []
       loop do
@@ -108,7 +122,16 @@ module Crowdin
         end
 
         if response.is_a?(String) && response.match('Something went wrong')
-          raise(Errors::FetchAllProcessingError, response)
+          if retry_tries_count > 0
+            retry_error_messages.each do |message|
+              break if response.match(message)
+            end
+
+            retry_tries_count -= 1
+            sleep retry_request_delay
+          else
+            raise(Errors::FetchAllProcessingError, response)
+          end
         else
           yield response if block_given?
           deserialized_response = response['data']
