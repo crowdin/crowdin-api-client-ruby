@@ -5,7 +5,7 @@ module Crowdin
   API_RESOURCES_MODULES = %i[Storages Languages Projects Workflows SourceFiles Translations SourceStrings
                              StringTranslations StringComments Screenshots Glossaries TranslationMemory
                              MachineTranslationEngines Reports Tasks Users Teams Vendors Webhooks
-                             Dictionaries Distributions Labels TranslationStatus].freeze
+                             Dictionaries Distributions Labels TranslationStatus Bundles].freeze
 
   # Error Raisers modules
   ERROR_RAISERS_MODULES = %i[ApiErrorsRaiser ClientErrorsRaiser].freeze
@@ -21,6 +21,7 @@ require 'crowdin-api/core/errors'
 require 'crowdin-api/core/errors_raisers'
 require 'crowdin-api/core/request'
 require 'crowdin-api/core/send_request'
+require 'crowdin-api/core/fetch_all_extensions'
 
 # API modules
 Crowdin::API_RESOURCES_MODULES.each do |api_resource|

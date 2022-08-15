@@ -177,7 +177,7 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def edit_screenshot(vote_id = nil, project_id = config.project_id)
+      def cancel_vote(vote_id = nil, project_id = config.project_id)
         vote_id    || raise_parameter_is_required_error(:vote_id)
         project_id || raise_project_id_is_required_error
 

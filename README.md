@@ -27,6 +27,7 @@ For more about Crowdin API v2 see the documentation:
 * [Quick Start](#quick-start)
   * [Initialization](#initialization)
   * [Usage](#usage)
+  * [Fetch all records](#fetch-all-records)
   * [Command-Line Client](#command-line-client)
 * [Seeking Assistance](#seeking-assistance)
 * [Contributing](#contributing)
@@ -40,7 +41,7 @@ For more about Crowdin API v2 see the documentation:
 Add this line to your application's Gemfile:
 
 ```gemfile
-gem 'crowdin-api', '~> 1.3.0'
+gem 'crowdin-api', '~> 1.4.0'
 ```
 
 And then execute:
@@ -66,6 +67,7 @@ gem install crowdin-api
 ## Quick start
 
 ### Initialization
+
 ```ruby
 require 'crowdin-api'
 
@@ -143,6 +145,33 @@ file_revisions = crowdin.list_file_revisions(your_file_id, limit: 10)
 file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10 }, your_project_id)
 
 # Note: more examples you can find in spec folder
+```
+
+### Fetch all records
+
+There is a possibility to fetch all records from paginatable methods using `fetch_all` method.
+
+```ruby
+# FetchAll options:
+# * limit, Integer, default: 500 | How many records need to load per one request
+# * offset, Integer, default: 0
+# * request_delay, Integer (seconds), default: 0 | Delay between requests. To specify a delay in milliseconds use float values like 0.100
+
+# Examples:
+
+@crowdin.fetch_all(:list_projects)
+
+# with options
+@crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 })
+
+# playing with response per fetch
+# Note: the block actually don't make any effect to finite result
+@crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 }) { |response| puts response['data'] }
+
+# also, you could specify a retry configuration to handle some exceptions
+# fetch all execution will be terminated if response status code is the same as one of the error_messages array value
+# otherwise, the request will be retried so many times, as indicated at retries_count
+@crowdin.fetch_all(:list_projects, {}, { request_delay: 2, retries_count: 3, error_messages: ['401'] })
 ```
 
 ### Command-Line Client
