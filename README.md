@@ -27,7 +27,7 @@ For more about Crowdin API v2 see the documentation:
 * [Quick Start](#quick-start)
   * [Initialization](#initialization)
   * [Usage](#usage)
-  * [Fetch All](#fetch-all)
+  * [Fetch all records](#fetch-all-records)
   * [Command-Line Client](#command-line-client)
 * [Seeking Assistance](#seeking-assistance)
 * [Contributing](#contributing)
@@ -147,28 +147,31 @@ file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10 }, your_p
 # Note: more examples you can find in spec folder
 ```
 
-### Fetch All
+### Fetch all records
 
-You also can fetch all records from paginatable methods using `fetch_all` method (where we have limit and offset in arguments).
+There is a possibility to fetch all records from paginatable methods using `fetch_all` method.
 
 ```ruby
 # FetchAll options:
 # * limit, Integer, default: 500 | How many records need to load per one request
 # * offset, Integer, default: 0
-# * request_delay, Integer (seconds), default: 0 | Delay between requests
+# * request_delay, Integer (seconds), default: 0 | Delay between requests. To specify a delay in milliseconds use float values like 0.100
 
-# Example and use cases:
+# Examples:
+
 @crowdin.fetch_all(:list_projects)
-# with specified options
-@crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 }) 
+
+# with options
+@crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 })
+
 # playing with response per fetch
-@crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 }) { |response| puts response['data'] }
 # Note: the block actually don't make any effect to finite result
- 
-# also you can specify retry configuration to handle some exceptions
+@crowdin.fetch_all(:list_projects, { limit: 10, request_delay: 1 }) { |response| puts response['data'] }
+
+# also, you could specify a retry configuration to handle some exceptions
+# fetch all execution will be terminated if response status code is the same as one of the error_messages array value
+# otherwise, the request will be retried so many times, as indicated at retries_count
 @crowdin.fetch_all(:list_projects, {}, { request_delay: 2, retries_count: 3, error_messages: ['401'] })
-# fetch all execution will be terminated if response error are same as in error_messages array
-# otherwise system will retry so many times, as indicated at tries_count
 ```
 
 ### Command-Line Client
