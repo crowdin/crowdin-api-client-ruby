@@ -17,6 +17,10 @@ module Crowdin
 
       def add_bundle(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
+        %i(name format sourcePatterns exportPattern).each do |param|
+          query[param] || raise_parameter_is_required_error(param)
+        end
+
 
         request = Web::Request.new(
           connection,
