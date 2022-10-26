@@ -13,7 +13,7 @@ describe Crowdin::ApiResources::Bundles do
     describe '#add_bundle' do
       it 'when request are valid', :default do
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/bundles")
-        add_bundle = @crowdin.add_bundle({}, project_id)
+        add_bundle = @crowdin.add_bundle({ name: '', format: '', sourcePatterns: [], exportPattern: '' }, project_id)
         expect(add_bundle).to eq(200)
       end
     end
