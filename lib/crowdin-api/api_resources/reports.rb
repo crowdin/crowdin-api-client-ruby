@@ -115,6 +115,70 @@ module Crowdin
         )
         Web::SendRequest.new(request, destination).perform
       end
+
+      def list_report_settings_templates(query = {}, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/projects/#{project_id}/reports/settings-templates",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def add_report_settings_template(query = {}, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+        %i[name currency unit mode config].each do |param|
+          query[param] || raise_parameter_is_required_error(param)
+        end
+
+        request = Web::Request.new(
+          connection,
+          :post,
+          "#{config.target_api_url}/projects/#{project_id}/reports/settings-templates",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def get_report_settings_template(template_id = nil, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+        template_id || raise_parameter_is_required_error(:template_id)
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/projects/#{project_id}/reports/settings-templates/#{template_id}"
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def edit_report_settings_template(query = {}, template_id = nil, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+        template_id || raise_parameter_is_required_error(:template_id)
+
+        request = Web::Request.new(
+          connection,
+          :patch,
+          "#{config.target_api_url}/projects/#{project_id}/reports/settings-templates/#{template_id}",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def delete_report_settings_template(template_id = nil, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+        template_id || raise_parameter_is_required_error(:template_id)
+
+        request = Web::Request.new(
+          connection,
+          :delete,
+          "#{config.target_api_url}/projects/#{project_id}/reports/settings-templates/#{template_id}"
+        )
+        Web::SendRequest.new(request).perform
+      end
     end
   end
 end

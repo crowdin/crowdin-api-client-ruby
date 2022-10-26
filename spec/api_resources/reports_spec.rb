@@ -92,4 +92,54 @@ describe Crowdin::ApiResources::Reports do
       end
     end
   end
+
+  describe 'Setting Templates endpoints' do
+    describe 'List Report Settings templates' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports/settings-templates")
+        settings_templates = @crowdin.list_report_settings_templates({}, project_id)
+        expect(settings_templates).to eq(200)
+      end
+    end
+
+    describe 'Add Report Settings template' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports/settings-templates")
+        settings_templates = @crowdin.add_report_settings_template(
+          { name: '', currency: '', unit: '', mode: '', config: '' }, project_id
+        )
+        expect(settings_templates).to eq(200)
+      end
+    end
+
+    describe 'Get Report Settings template' do
+      let(:template_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports/settings-templates/#{template_id}")
+        settings_templates = @crowdin.get_report_settings_template(template_id, project_id)
+        expect(settings_templates).to eq(200)
+      end
+    end
+
+    describe 'Get Report Settings template' do
+      let(:template_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports/settings-templates/#{template_id}")
+        settings_templates = @crowdin.edit_report_settings_template({}, template_id, project_id)
+        expect(settings_templates).to eq(200)
+      end
+    end
+
+    describe 'Get Report Settings template' do
+      let(:template_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports/settings-templates/#{template_id}")
+        settings_templates = @crowdin.delete_report_settings_template(template_id, project_id)
+        expect(settings_templates).to eq(200)
+      end
+    end
+  end
 end
