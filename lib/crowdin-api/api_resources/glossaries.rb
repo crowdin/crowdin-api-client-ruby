@@ -194,6 +194,55 @@ module Crowdin
         )
         Web::SendRequest.new(request).perform
       end
+
+      def list_concepts(glossary_id = nil, query = {})
+        glossary_id || raise_parameter_is_required_error(:glossary_id)
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/glossaries/#{glossary_id}/concepts",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def get_concept(glossary_id = nil, concept_id = nil)
+        glossary_id || raise_parameter_is_required_error(:glossary_id)
+        concept_id || raise_parameter_is_required_error(:concept_id)
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/glossaries/#{glossary_id}/concepts/#{concept_id}"
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def update_concept(glossary_id = nil, concept_id = nil, query = {})
+        glossary_id || raise_parameter_is_required_error(:glossary_id)
+        concept_id || raise_parameter_is_required_error(:concept_id)
+
+        request = Web::Request.new(
+          connection,
+          :put,
+          "#{config.target_api_url}/glossaries/#{glossary_id}/concepts/#{concept_id}",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def delete_concept(glossary_id = nil, concept_id = nil)
+        glossary_id || raise_parameter_is_required_error(:glossary_id)
+        concept_id || raise_parameter_is_required_error(:concept_id)
+
+        request = Web::Request.new(
+          connection,
+          :delete,
+          "#{config.target_api_url}/glossaries/#{glossary_id}/concepts/#{concept_id}"
+        )
+        Web::SendRequest.new(request).perform
+      end
     end
   end
 end

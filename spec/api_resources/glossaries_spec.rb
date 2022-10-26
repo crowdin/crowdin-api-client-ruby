@@ -163,5 +163,48 @@ describe Crowdin::ApiResources::Glossaries do
         expect(edit_term).to eq(200)
       end
     end
+
+    describe '#list_concepts' do
+      let(:glossary_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/glossaries/#{glossary_id}/concepts")
+        concepts = @crowdin.list_concepts(glossary_id)
+        expect(concepts).to eq(200)
+      end
+    end
+
+    describe '#get_concept' do
+      let(:glossary_id) { 1 }
+      let(:concept_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/glossaries/#{glossary_id}/concepts/#{concept_id}")
+        concept = @crowdin.get_concept(glossary_id, concept_id)
+        expect(concept).to eq(200)
+      end
+    end
+
+    describe '#update_concept' do
+      let(:glossary_id) { 1 }
+      let(:concept_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:put, "https://api.crowdin.com/#{target_api_url}/glossaries/#{glossary_id}/concepts/#{concept_id}")
+        concept = @crowdin.update_concept(glossary_id, concept_id)
+        expect(concept).to eq(200)
+      end
+    end
+
+    describe '#update_concept' do
+      let(:glossary_id) { 1 }
+      let(:concept_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/glossaries/#{glossary_id}/concepts/#{concept_id}")
+        concept = @crowdin.delete_concept(glossary_id, concept_id)
+        expect(concept).to eq(200)
+      end
+    end
   end
 end
