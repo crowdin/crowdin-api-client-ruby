@@ -2,4 +2,7 @@
 
 source 'https://rubygems.org'
 
+# For Documentation
+gem 'yard', '~> 0.9.28'
+
 gemspec

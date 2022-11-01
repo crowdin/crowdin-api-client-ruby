@@ -1,0 +1,27 @@
+name: Docs
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby 2.6
+        uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
+        with:
+          ruby-version: 2.6
+      - run: bundle install
+      - name: Generate Docs
+        run: yardoc lib/crowdin-api/api_resources/*.rb
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          branch: gh-pages
+          folder: doc

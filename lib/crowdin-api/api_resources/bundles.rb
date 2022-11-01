@@ -3,6 +3,10 @@
 module Crowdin
   module ApiResources
     module Bundles
+      
+      # @param query [Hash] Request Body
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.getMany  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.getMany  Enterprise API Documentation}
       def list_bundles(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
@@ -15,6 +19,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      # @param query [Hash] Request Body
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.post  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.post  Enterprise API Documentation}
       def add_bundle(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
         %i[name format sourcePatterns exportPattern].each do |param|
@@ -30,6 +37,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      # @param bundle_id [Integer] Bundle ID
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.get  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.get  Enterprise API Documentation}
       def get_bundle(bundle_id, project_id = config.project_id)
         bundle_id  || raise_parameter_is_required_error(:bundle_id)
         project_id || raise_project_id_is_required_error
@@ -42,6 +52,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      # @param bundle_id [Integer] Bundle ID
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.delete  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.delete  Enterprise API Documentation}
       def delete_bundle(bundle_id, project_id = config.project_id)
         bundle_id  || raise_parameter_is_required_error(:bundle_id)
         project_id || raise_project_id_is_required_error
@@ -54,6 +67,10 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      # @param bundle_id [Integer] Bundle ID
+      # @param query [Hash] Request Body
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.patch  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.patch  Enterprise API Documentation}
       def edit_bundle(bundle_id, query = {}, project_id = config.project_id)
         bundle_id  || raise_parameter_is_required_error(:bundle_id)
         project_id || raise_project_id_is_required_error
@@ -67,6 +84,10 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      # @param bundle_id [Integer] Bundle ID
+      # @param query [Hash] Request Body
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.files.getMany  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.files.getMany  Enterprise API Documentation}
       def bundle_list_files(bundle_id, query = {}, project_id = config.project_id)
         bundle_id  || raise_parameter_is_required_error(:bundle_id)
         project_id || raise_project_id_is_required_error
