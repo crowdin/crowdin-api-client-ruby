@@ -3,7 +3,6 @@
 module Crowdin
   module ApiResources
     module Bundles
-      
       # @param query [Hash] Request Body
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.getMany  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.getMany  Enterprise API Documentation}

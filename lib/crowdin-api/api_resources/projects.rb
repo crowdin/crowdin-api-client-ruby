@@ -3,7 +3,6 @@
 module Crowdin
   module ApiResources
     module Projects
-
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.getMany  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.getMany  Enterprise API Documentation}
       # @param query [Hash] Request Body

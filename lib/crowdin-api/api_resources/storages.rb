@@ -3,7 +3,6 @@
 module Crowdin
   module ApiResources
     module Storages
-
       # @param query [Hash] Request Body
       # * {https://developer.crowdin.com/api/v2/#operation/api.storages.getMany  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.storages.getMany  Enterprise API Documentation}
