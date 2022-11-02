@@ -8,9 +8,6 @@ on:
 jobs:
   docs:
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby 2.6
@@ -18,10 +15,17 @@ jobs:
         with:
           ruby-version: 2.6
       - run: bundle install
+
+      - name: Cleanup the Readme
+        run: |
+          sed -i /\<div/d README.md
+          sed -i /\<\\/div/d README.md
+
       - name: Generate Docs
         run: yardoc lib/crowdin-api/api_resources/*.rb
+
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: gh-pages
           folder: doc
