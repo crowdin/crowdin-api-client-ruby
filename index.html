@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<p><a href="https://crowdin.com"><p align='center'><img src='https://support.crowdin.com/assets/logos/crowdin-dark-symbol.png' data-canonical-src='https://support.crowdin.com/assets/logos/crowdin-dark-symbol.png' width='150' height='150' align='center'/></p></a></p>
+
+<h1 id="label-Crowdin+Ruby+client">Crowdin Ruby client</h1>
+
+<p>The Crowdin Ruby client is a lightweight interface to the Crowdin API v2. It provides common services for making API requests.</p>
+
+<p>Crowdin API is a full-featured RESTful API that helps you to integrate localization into your development process. The endpoints that we use allow you to easily make calls to retrieve information and to execute actions needed.</p>
+<div align="center">
+
+[**`Crowdin API`**](https://developer.crowdin.com/api/v2/) &nbsp;|&nbsp;
+[**`Crowdin Enterprise API`**](https://developer.crowdin.com/enterprise/api/v2/)
+
+[![Gem](https://img.shields.io/gem/v/crowdin-api?logo=ruby&cacheSeconds=1800)](https://rubygems.org/gems/crowdin-api)
+[![Gem](https://img.shields.io/gem/dt/crowdin-api?cacheSeconds=1800)](https://rubygems.org/gems/crowdin-api)
+[![Gem](https://img.shields.io/gem/dtv/crowdin-api?cacheSeconds=1800)](https://rubygems.org/gems/crowdin-api)
+
+[![Test and Lint](https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml/badge.svg)](https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml)
+[![codecov](https://codecov.io/gh/crowdin/crowdin-api-client-ruby/branch/main/graph/badge.svg?token=OJsyJwQbFM)](https://codecov.io/gh/crowdin/crowdin-api-client-ruby)
+[![GitHub issues](https://img.shields.io/github/issues/crowdin/crowdin-api-client-ruby?cacheSeconds=1800)](https://github.com/crowdin/crowdin-api-client-ruby/issues)
+[![GitHub](https://img.shields.io/github/license/crowdin/crowdin-api-client-ruby?cacheSeconds=1800)](https://github.com/crowdin/crowdin-api-client-ruby/blob/main/LICENSE)
+
+</div>
+<h2 id="label-Table+of+Contents">Table of Contents</h2>
+<ul><li>
+<p><a href="#requirements">Requirements</a></p>
+</li><li>
+<p><a href="#installation">Installation</a></p>
+</li><li>
+<p><a href="#quick-start">Quick Start</a></p>
+</li><li>
+<p><a href="#initialization">Initialization</a></p>
+</li><li>
+<p><a href="#usage">Usage</a></p>
+</li><li>
+<p><a href="#fetch-all-records">Fetch all records</a></p>
+</li><li>
+<p><a href="#command-line-client">Command-Line Client</a></p>
+</li><li>
+<p><a href="#seeking-assistance">Seeking Assistance</a></p>
+</li><li>
+<p><a href="#contributing">Contributing</a></p>
+</li><li>
+<p><a href="#license">License</a></p>
+</li></ul>
+
+<h2 id="label-Requirements">Requirements</h2>
+<ul><li>
+<p>Ruby &gt;= 2.4</p>
+</li></ul>
+
+<h2 id="label-Installation">Installation</h2>
+
+<p>Add this line to your application&#39;s Gemfile:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>crowdin-api</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>~&gt; 1.4.0</span><span class='tstring_end'>&#39;</span></span>
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_install'>install</span>
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='op'>-</span><span class='id identifier rubyid_api'>api</span>
+</code></pre>
+<hr>
+
+<p>:bookmark_tabs: For versions <em>0.6.0</em> and lower see the <a href="https://github.com/crowdin/crowdin-api-client-ruby/tree/api/v1">branch api/v1</a>. Please note that these versions are no longer supported.</p>
+
+<p>:exclamation: Migration from version <em>0.6.0</em> to <em>1.x.x</em> requires changes in your code.</p>
+<hr>
+
+<h2 id="label-Quick+start">Quick start</h2>
+
+<h3 id="label-Initialization">Initialization</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>crowdin-api</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='comment'># Initialize a new Client instance with config options
+</span><span class='id identifier rubyid_crowdin'>crowdin</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Crowdin.html" title="Crowdin (module)">Crowdin</a></span></span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_api_token'>api_token</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>YourApiToken</span><span class='tstring_end'>&#39;</span></span>
+<span class='kw'>end</span>
+
+<span class='comment'># Or you can initialize Enterprise Client instance by specifying your
+</span><span class='comment'># organization_domain in config options
+</span><span class='id identifier rubyid_crowdin'>crowdin</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Crowdin.html" title="Crowdin (module)">Crowdin</a></span></span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_api_token'>api_token</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>YourEnterpriseApiToken</span><span class='tstring_end'>&#39;</span></span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_organization_domain'>organization_domain</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>YourOrganizationDomain</span><span class='tstring_end'>&#39;</span></span>
+<span class='kw'>end</span>
+<span class='comment'># Note: we use full specified organization domain if that includes &#39;.com&#39;
+</span><span class='comment'># config.organization_domain = your_domain -&gt; https://your_domain.api.crowdin.com
+</span><span class='comment'># config.organization_domain = your_domain.com -&gt; https://your_domain.com
+</span>
+<span class='comment'># All supported Crowdin Client config options now:
+</span><span class='id identifier rubyid_crowdin'>crowdin</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Crowdin.html" title="Crowdin (module)">Crowdin</a></span></span><span class='op'>::</span><span class='const'>Client</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_config'>config</span><span class='op'>|</span>
+  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_api_token'>api_token</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>YourApiToken</span><span class='tstring_end'>&#39;</span></span> <span class='comment'># [String] required
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_organization_domain'>organization_domain</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>YourOrganizationDomain</span><span class='tstring_end'>&#39;</span></span> <span class='comment'># [String] optional
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>YourProjectId</span><span class='tstring_end'>&#39;</span></span> <span class='comment'># [Integer] nil by default
+</span>  <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_enable_logger'>enable_logger</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='comment'># [Boolean] false by default
+</span><span class='kw'>end</span>
+<span class='comment'># Note: Client will initialize default Logger instance if you have specify
+</span><span class='comment'># enable_logger to true, you can change it by crowdin.logger = YourLogger
+</span>
+<span class='comment'># Also you can specify proxy by adding it to ENV[&#39;http_proxy&#39;] before Client initialization
+</span></code></pre>
+
+<p>To generate a new token in Crowdin, follow these steps: - Go to <em>Account Settings</em> &gt; <em>API</em> tab, <em>Personal Access Tokens</em> section, and click <em>New Token</em>. - Specify <em>Token Name</em> and click <em>Create</em>.</p>
+
+<p>To generate a new token in Crowdin Enterprise, follow these steps: - Go to <em>Account Settings</em> &gt; <em>Access tokens</em> tab and click <em>New token</em>. - Specify <em>Token Name</em>, select <em>Scopes</em> and <em>Projects</em>, click <em>Create</em>.</p>
+
+<h3 id="label-Usage">Usage</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># Create Project
+</span><span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_add_project'>add_project</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='id identifier rubyid_your_project_name'>your_project_name</span><span class='comma'>,</span> <span class='label'>sourceLanguageId:</span> <span class='id identifier rubyid_your_language_id'>your_language_id</span><span class='rparen'>)</span>
+
+<span class='comment'># Get list of Projects
+</span><span class='id identifier rubyid_projects'>projects</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_list_projects'>list_projects</span>
+
+<span class='comment'># Get list of Projects with offset and limit
+</span><span class='id identifier rubyid_projects'>projects</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_list_projects'>list_projects</span><span class='lparen'>(</span><span class='label'>offset:</span> <span class='int'>10</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='int'>20</span><span class='rparen'>)</span>
+
+<span class='comment'># Get specified project
+</span><span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_get_project'>get_project</span><span class='lparen'>(</span><span class='id identifier rubyid_your_project_id'>your_project_id</span><span class='rparen'>)</span>
+
+<span class='comment'># Edit project
+</span><span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_edit_project'>edit_project</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='lbrace'>{</span> <span class='label'>op:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>replace</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                                              <span class='label'>path:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/name</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                                              <span class='label'>value:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>your_new_project_name</span><span class='tstring_end'>&#39;</span></span> <span class='rbrace'>}</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+
+<span class='comment'># Add Storage
+</span><span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_add_storage'>add_storage</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>YourFilename.extension</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>r</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='comment'># or you can specify only absolute path to file
+</span><span class='id identifier rubyid_storage'>storage</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_add_storage'>add_storage</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>YourFilename.extension</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+<span class='comment'># Download file
+</span><span class='id identifier rubyid_file'>file</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_download_file'>download_file</span><span class='lparen'>(</span><span class='id identifier rubyid_your_file_id'>your_file_id</span><span class='comma'>,</span> <span class='id identifier rubyid_your_destination'>your_destination</span><span class='comma'>,</span> <span class='id identifier rubyid_your_project_id'>your_project_id</span><span class='rparen'>)</span>
+<span class='comment'># your_destination - filename or absolute path to file, optional
+</span><span class='comment'># Without destination option file will be saved to the current directory with a default filename
+</span><span class='comment'># project_id is optional, as it can be initialized with a Crowdin Client
+</span>
+<span class='comment'># File revisions
+</span><span class='comment'># with initialized project_id in your Client
+</span><span class='id identifier rubyid_file_revisions'>file_revisions</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_list_file_revisions'>list_file_revisions</span><span class='lparen'>(</span><span class='id identifier rubyid_your_file_id'>your_file_id</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='int'>10</span><span class='rparen'>)</span>
+<span class='comment'># or you can specify your project_id
+</span><span class='id identifier rubyid_file_revisions'>file_revisions</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_list_file_revisions'>list_file_revisions</span><span class='lparen'>(</span><span class='id identifier rubyid_your_file_id'>your_file_id</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='label'>limit:</span> <span class='int'>10</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_your_project_id'>your_project_id</span><span class='rparen'>)</span>
+
+<span class='comment'># Note: more examples you can find in spec folder
+</span></code></pre>
+
+<h3 id="label-Fetch+all+records">Fetch all records</h3>
+
+<p>There is a possibility to fetch all records from paginatable methods using <code>fetch_all</code> method.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='comment'># FetchAll options:
+</span><span class='comment'># * limit, Integer, default: 500 | How many records need to load per one request
+</span><span class='comment'># * offset, Integer, default: 0
+</span><span class='comment'># * request_delay, Integer (seconds), default: 0 | Delay between requests. To specify a delay in milliseconds use float values like 0.100
+</span>
+<span class='comment'># Examples:
+</span>
+<span class='ivar'>@crowdin</span><span class='period'>.</span><span class='id identifier rubyid_fetch_all'>fetch_all</span><span class='lparen'>(</span><span class='symbol'>:list_projects</span><span class='rparen'>)</span>
+
+<span class='comment'># with options
+</span><span class='ivar'>@crowdin</span><span class='period'>.</span><span class='id identifier rubyid_fetch_all'>fetch_all</span><span class='lparen'>(</span><span class='symbol'>:list_projects</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='label'>limit:</span> <span class='int'>10</span><span class='comma'>,</span> <span class='label'>request_delay:</span> <span class='int'>1</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+
+<span class='comment'># playing with response per fetch
+</span><span class='comment'># Note: the block actually don&#39;t make any effect to finite result
+</span><span class='ivar'>@crowdin</span><span class='period'>.</span><span class='id identifier rubyid_fetch_all'>fetch_all</span><span class='lparen'>(</span><span class='symbol'>:list_projects</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='label'>limit:</span> <span class='int'>10</span><span class='comma'>,</span> <span class='label'>request_delay:</span> <span class='int'>1</span> <span class='rbrace'>}</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_response'>response</span><span class='op'>|</span> <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_response'>response</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>data</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
+
+<span class='comment'># also, you could specify a retry configuration to handle some exceptions
+</span><span class='comment'># fetch all execution will be terminated if response status code is the same as one of the error_messages array value
+</span><span class='comment'># otherwise, the request will be retried so many times, as indicated at retries_count
+</span><span class='ivar'>@crowdin</span><span class='period'>.</span><span class='id identifier rubyid_fetch_all'>fetch_all</span><span class='lparen'>(</span><span class='symbol'>:list_projects</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='label'>request_delay:</span> <span class='int'>2</span><span class='comma'>,</span> <span class='label'>retries_count:</span> <span class='int'>3</span><span class='comma'>,</span> <span class='label'>error_messages:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>401</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+</code></pre>
+
+<h3 id="label-Command-Line+Client">Command-Line Client</h3>
+
+<p>The Crowdin Ruby client support crowdin-console, where you can test endpoints easier</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle exec crowdin-console --enable-logger --api-token API_TOKEN --project-id PROJECT_ID
+</code></pre>
+
+<p>Or Crowdin Enterprise</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain DOMAIN --project-id PROJECT_ID
+</code></pre>
+
+<p>Note: you can specify full organization domain by adding &#39;.com&#39;</p>
+
+<p>When execute you&#39;ll have IRB console with configured <em>@crowdin</em> instance</p>
+
+<pre class="code ruby"><code class="ruby">&gt; @crowdin.list_projects
+</code></pre>
+
+<h2 id="label-Seeking+Assistance">Seeking Assistance</h2>
+
+<p>If you find any problems or would like to suggest a feature, please read the <a href="/CONTRIBUTING.md#how-can-i-contribute">How can I contribute</a> section in our contributing guidelines.</p>
+
+<p>Need help working with Crowdin Ruby client or have any questions? <a href="https://crowdin.com/contacts">Contact</a> Customer Success Service.</p>
+
+<h2 id="label-Contributing">Contributing</h2>
+
+<p>If you want to contribute please read the <a href="/CONTRIBUTING.md">Contributing</a> guidelines.</p>
+
+<h2 id="label-License">License</h2>
+<pre class="code ruby"><code class="ruby">
+The Crowdin Ruby Client is licensed under the MIT License.
+See the LICENSE.md file distributed with this work for additional 
+information regarding copyright ownership.
+
+Except as contained in the LICENSE file, the name(s) of the above copyright
+holders shall not be used in advertising or otherwise to promote the sale,
+use or other dealings in this Software without prior written authorization.
+</code></pre></div></div>
+
+      <div id="footer">
+  Generated on Wed Nov  2 07:53:42 2022 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.28 (ruby-2.6.7).
+</div>
+
+    </div>
+  </body>
+</html>
