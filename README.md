@@ -6,6 +6,9 @@ The Crowdin Ruby client is a lightweight interface to the Crowdin API v2. It pro
 
 Crowdin API is a full-featured RESTful API that helps you to integrate localization into your development process. The endpoints that we use allow you to easily make calls to retrieve information and to execute actions needed.
 
+<div align="center">
+
+[**`API Client Docs`**](http://crowdin.github.io/crowdin-api-client-ruby/) &nbsp;|&nbsp;
 [**`Crowdin API`**](https://developer.crowdin.com/api/v2/) &nbsp;|&nbsp;
 [**`Crowdin Enterprise API`**](https://developer.crowdin.com/enterprise/api/v2/)
 
@@ -18,6 +21,7 @@ Crowdin API is a full-featured RESTful API that helps you to integrate localizat
 [![GitHub issues](https://img.shields.io/github/issues/crowdin/crowdin-api-client-ruby?cacheSeconds=1800)](https://github.com/crowdin/crowdin-api-client-ruby/issues)
 [![GitHub](https://img.shields.io/github/license/crowdin/crowdin-api-client-ruby?cacheSeconds=1800)](https://github.com/crowdin/crowdin-api-client-ruby/blob/main/LICENSE)
 
+</div>
 
 ## Table of Contents
 * [Requirements](#requirements)
