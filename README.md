@@ -43,7 +43,7 @@ Crowdin API is a full-featured RESTful API that helps you to integrate localizat
 Add this line to your application's Gemfile:
 
 ```gemfile
-gem 'crowdin-api', '~> 1.4.0'
+gem 'crowdin-api', '~> 1.5.0'
 ```
 
 And then execute:
