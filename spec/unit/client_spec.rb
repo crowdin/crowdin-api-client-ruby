@@ -82,4 +82,10 @@ describe 'Crowdin Client' do
       expect(@crowdin.config.base_url).to eq("https://#{full_organization_domain}")
     end
   end
+
+  describe 'Crowdin Client fetch_all' do
+    it 'should raise error if fetch_all is called for unsupported methods' do
+      expect { @crowdin.fetch_all(:add_bundle).to raise_error(Crowdin::Errors::FetchAllProcessingError) }
+    end
+  end
 end

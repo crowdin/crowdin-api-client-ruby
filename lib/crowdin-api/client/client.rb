@@ -103,7 +103,7 @@ module Crowdin
     # otherwise system will retry so many times, as indicated at tries_count
     #
     def fetch_all(api_resource, opts = {}, retry_opts = {})
-      unless Web::FetchAllExtensions::API_RESOURCES_FOR_FETCH_ALL.include?(api_resource)
+      unless api_resource.to_s.start_with?('list_')
         raise(Errors::FetchAllProcessingError, "#{api_resource} method aren't supported for FetchAll")
       end
 
