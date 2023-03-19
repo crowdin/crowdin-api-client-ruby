@@ -206,5 +206,22 @@ describe Crowdin::ApiResources::Glossaries do
         expect(concept).to eq(200)
       end
     end
+
+    describe '#search_glossaries_concordance' do
+      let(:project_id) { 1 }
+
+      it 'returns 200 when request is valid', :default do
+        query = { source_language_id: "en", target_language_id: "ar", expression: "Hello world!" }
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/glossaries/concordance")
+        search_glossaries_concordance = @crowdin.search_glossaries_concordance(project_id, query)
+        expect(search_glossaries_concordance).to eq(200)
+      end
+
+      it 'raises ArgumentError when request is missing required query parameter', :default do
+        query = { source_language_id: "en", target_language_id: "ar" }
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/glossaries/concordance")
+        expect{ @crowdin.search_glossaries_concordance(project_id, query) }.to raise_error(ArgumentError, ":expression is required")
+      end
+    end
   end
 end
