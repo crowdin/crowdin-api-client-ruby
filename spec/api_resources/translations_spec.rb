@@ -103,24 +103,5 @@ describe Crowdin::ApiResources::Translations do
         expect(export_project_translation).to eq(200)
       end
     end
-
-    describe '#add_translation_alignment' do
-      let(:project_id) { 1 }
-
-      it 'returns 200 when request is valid', :default do
-        query = { source_language_id: 'en', target_language_id: 'ar', text: 'Hello world!' }
-        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/translations/alignment")
-        add_translation_alignment = @crowdin.add_translation_alignment(project_id, query)
-        expect(add_translation_alignment).to eq(200)
-      end
-
-      it 'raises ArgumentError when request is missing required query parameter', :default do
-        query = { source_language_id: 'en', target_language_id: 'ar' }
-        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/translations/alignment")
-        expect do
-          @crowdin.add_translation_alignment(project_id, query)
-        end.to raise_error(ArgumentError, ':text is required')
-      end
-    end
   end
 end

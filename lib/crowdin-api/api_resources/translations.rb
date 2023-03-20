@@ -139,22 +139,6 @@ module Crowdin
         )
         Web::SendRequest.new(request, destination).perform
       end
-
-      def add_translation_alignment(project_id = nil, query = {})
-        project_id || raise_parameter_is_required_error(:project_id)
-
-        %i[source_language_id target_language_id text].each do |param|
-          query[param] || raise_parameter_is_required_error(param)
-        end
-
-        request = Web::Request.new(
-          connection,
-          :post,
-          "#{config.target_api_url}/projects/#{project_id}/translations/alignment",
-          { params: query }
-        )
-        Web::SendRequest.new(request).perform
-      end
     end
   end
 end
