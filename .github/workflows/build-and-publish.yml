@@ -12,12 +12,15 @@ jobs:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
       - name: Set up Ruby 2.6
-        uses: ruby/setup-ruby@477b21f02be01bcb8030d50f37cfec92bfa615b6
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
+
       - run: bundle install
+
       - name: Publish to RubyGems
         run: |
           mkdir -p $HOME/.gem
