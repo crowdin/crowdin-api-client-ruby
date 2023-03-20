@@ -115,16 +115,20 @@ describe Crowdin::ApiResources::TranslationMemory do
       let(:project_id) { 1 }
 
       it 'returns 200 when request is valid', :default do
-        query = { source_language_id: "en", target_language_id: "ar", expression: "Hello world!", auto_substitution: true, min_relevant: 60 }
+        query = { source_language_id: 'en', target_language_id: 'ar', expression: 'Hello world!',
+                  auto_substitution: true, min_relevant: 60 }
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/tms/concordance")
         search_tms_concordance = @crowdin.search_tms_concordance(project_id, query)
         expect(search_tms_concordance).to eq(200)
       end
 
       it 'raises ArgumentError when request is missing required query parameter', :default do
-        query = { source_language_id: "en", target_language_id: "ar", expression: "Hello world!", auto_substitution: true }
+        query = { source_language_id: 'en', target_language_id: 'ar', expression: 'Hello world!',
+                  auto_substitution: true }
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/tms/concordance")
-        expect{ @crowdin.search_tms_concordance(project_id, query) }.to raise_error(ArgumentError, ":min_relevant is required")
+        expect do
+          @crowdin.search_tms_concordance(project_id, query)
+        end.to raise_error(ArgumentError, ':min_relevant is required')
       end
     end
   end
