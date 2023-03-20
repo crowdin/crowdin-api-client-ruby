@@ -128,7 +128,7 @@ module Crowdin
       end
 
       def search_tms_concordance(project_id = nil, query = {})
-        project_id || raise_parameter_is_required_error(:project_id)
+        project_id || raise_project_id_is_required_error
 
         %i[source_language_id target_language_id expression auto_substitution min_relevant].each do |param|
           query[param] || raise_parameter_is_required_error(param)
