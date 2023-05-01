@@ -36,6 +36,38 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      # @param query [Hash] Request Body
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.exports.post  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.exports.post  Enterprise API Documentation}
+      def export_bundle(query = {}, project_id = config.project_id, bundle_id)
+        bundle_id  || raise_parameter_is_required_error(:bundle_id)
+        project_id || raise_project_id_is_required_error
+        
+        request = Web::Request.new(
+          connection,
+          :post,
+          "#{config.target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      # @param bundle_id [Integer] Bundle ID
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.exports.download.get  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.exports.download.get  Enterprise API Documentation}
+      def download_bundle(project_id = config.project_id, bundle_id, export_id)
+        bundle_id  || raise_parameter_is_required_error(:bundle_id)
+        export_id  || raise_parameter_is_required_error(:export_id)        
+        project_id || raise_project_id_is_required_error
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports/#{export_id}/download"
+        )
+        Web::SendRequest.new(request).perform
+      end
+            
       # @param bundle_id [Integer] Bundle ID
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.get  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.get  Enterprise API Documentation}
