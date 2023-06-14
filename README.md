@@ -2,7 +2,7 @@
 
 # Crowdin Ruby client
 
-The Crowdin Ruby client is a lightweight interface to the Crowdin API v2. It provides common services for making API requests.
+The Crowdin Ruby client is a lightweight interface to the Crowdin API. It provides common services for making API requests.
 
 Crowdin API is a full-featured RESTful API that helps you to integrate localization into your development process. The endpoints that we use allow you to easily make calls to retrieve information and to execute actions needed.
 
@@ -22,18 +22,6 @@ Crowdin API is a full-featured RESTful API that helps you to integrate localizat
 [![GitHub](https://img.shields.io/github/license/crowdin/crowdin-api-client-ruby?cacheSeconds=1800)](https://github.com/crowdin/crowdin-api-client-ruby/blob/main/LICENSE)
 
 </div>
-
-## Table of Contents
-* [Requirements](#requirements)
-* [Installation](#installation)
-* [Quick Start](#quick-start)
-  * [Initialization](#initialization)
-  * [Usage](#usage)
-  * [Fetch all records](#fetch-all-records)
-  * [Command-Line Client](#command-line-client)
-* [Seeking Assistance](#seeking-assistance)
-* [Contributing](#contributing)
-* [License](#license)
 
 ## Requirements
 * Ruby >= 2.4
@@ -57,14 +45,6 @@ Or install it yourself as:
 ```console
 gem install crowdin-api
 ```
-
----
-
-:bookmark_tabs: For versions *0.6.0* and lower see the [branch api/v1](https://github.com/crowdin/crowdin-api-client-ruby/tree/api/v1). Please note that these versions are no longer supported.
-
-:exclamation: Migration from version *0.6.0* to *1.x.x* requires changes in your code.
-
----
 
 ## Quick start
 
@@ -201,11 +181,9 @@ When execute you'll have IRB console with configured *@crowdin* instance
 
 If you find any problems or would like to suggest a feature, please read the [How can I contribute](/CONTRIBUTING.md#how-can-i-contribute) section in our contributing guidelines.
 
-Need help working with Crowdin Ruby client or have any questions? [Contact](https://crowdin.com/contacts) Customer Success Service.
-
 ## Contributing
 
-If you want to contribute please read the [Contributing](/CONTRIBUTING.md) guidelines.
+If you would like to contribute please read the [Contributing](/CONTRIBUTING.md) guidelines.
 
 ## License
 
