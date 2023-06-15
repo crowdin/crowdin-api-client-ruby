@@ -6,7 +6,7 @@
 <title>
   Module: Crowdin::ApiResources::TranslationMemory
   
-    &mdash; Documentation by YARD 0.9.28
+    &mdash; Documentation by YARD 0.9.34
   
 </title>
 
@@ -322,6 +322,28 @@
   <span class="summary_signature">
     
       <a href="#list_tms-instance_method" title="#list_tms (instance method)">#<strong>list_tms</strong>(query = {})  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#search_tms_concordance-instance_method" title="#search_tms_concordance (instance method)">#<strong>search_tms_concordance</strong>(project_id = nil, query = {})  &#x21d2; Object </a>
     
 
     
@@ -839,14 +861,68 @@
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="search_tms_concordance-instance_method">
+  
+    #<strong>search_tms_concordance</strong>(project_id = nil, query = {})  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/translation_memory.rb', line 130</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_search_tms_concordance'>search_tms_concordance</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
+
+  <span class='qsymbols_beg'>%i[</span><span class='tstring_content'>source_language_id</span><span class='words_sep'> </span><span class='tstring_content'>target_language_id</span><span class='words_sep'> </span><span class='tstring_content'>expression</span><span class='words_sep'> </span><span class='tstring_content'>auto_substitution</span><span class='words_sep'> </span><span class='tstring_content'>min_relevant</span><span class='tstring_end'>]</span></span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_param'>param</span><span class='op'>|</span>
+    <span class='id identifier rubyid_query'>query</span><span class='lbracket'>[</span><span class='id identifier rubyid_param'>param</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='id identifier rubyid_param'>param</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>Web</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_connection'>connection</span><span class='comma'>,</span>
+    <span class='symbol'>:post</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_target_api_url'>target_api_url</span><span class='embexpr_end'>}</span><span class='tstring_content'>/projects/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_id'>project_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/tms/concordance</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='lbrace'>{</span> <span class='label'>params:</span> <span class='id identifier rubyid_query'>query</span> <span class='rbrace'>}</span>
+  <span class='rparen'>)</span>
+  <span class='const'>Web</span><span class='op'>::</span><span class='const'>SendRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_request'>request</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_perform'>perform</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Fri Nov  4 10:09:19 2022 by
+  Generated on Thu Jun 15 12:55:36 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.28 (ruby-2.6.7).
+  0.9.34 (ruby-2.6.10).
 </div>
 
     </div>
