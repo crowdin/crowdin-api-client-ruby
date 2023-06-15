@@ -19,6 +19,8 @@ describe Crowdin::ApiResources::Bundles do
     end
 
     describe '#export_bundle' do
+      let(:bundle_id) { 1 }
+
       it 'when request are valid', :default do
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports")
         export_bundle = @crowdin.export_bundle({ name: '', format: '', sourcePatterns: [], exportPattern: '' },
@@ -32,13 +34,16 @@ describe Crowdin::ApiResources::Bundles do
       let(:export_id) { 1 }
 
       it 'when request are valid', :default do
-        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/bundles/#{bundleId}/exports/#{exportId}")
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports/#{export_id}")
         @crowdin.check_bundle_export_status(project_id, bundle_id, export_id)
         expect(check_bundle_export_status).to eq(200)
       end
     end
 
     describe '#download_bundle' do
+      let(:bundle_id) { 1 }
+      let(:export_id) { 1 }
+
       it 'when request are valid', :default do
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports/#{export_id}/download")
         download_bundle = @crowdin.download_bundle(project_id, bundle_id, export_id)
