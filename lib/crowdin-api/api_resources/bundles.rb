@@ -63,7 +63,7 @@ module Crowdin
         request = Web::Request.new(
           connection,
           :get,
-          "#{config.target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports/#{export_id}/"
+          "#{config.target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports/#{export_id}"
         )
         Web::SendRequest.new(request).perform
       end
