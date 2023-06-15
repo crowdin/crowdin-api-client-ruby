@@ -20,7 +20,6 @@ describe Crowdin::ApiResources::Bundles do
 
     describe '#export_bundle' do
       let(:bundle_id) { 1 }
-      
       it 'when request are valid', :default do
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports")
         export_bundle = @crowdin.export_bundle(bundle_id, project_id)
