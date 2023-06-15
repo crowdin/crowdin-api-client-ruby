@@ -33,7 +33,7 @@ describe Crowdin::ApiResources::Bundles do
 
       it 'when request are valid', :default do
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports/#{export_id}")
-        @crowdin.check_bundle_export_status(bundle_id, export_id, project_id)
+        check_bundle_export_status = @crowdin.check_bundle_export_status(bundle_id, export_id, project_id)
         expect(check_bundle_export_status).to eq(200)
       end
     end
