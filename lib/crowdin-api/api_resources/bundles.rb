@@ -52,6 +52,7 @@ module Crowdin
       end
 
       # @param bundle_id [Integer] Bundle ID
+      # @param export_id [String] Export ID
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.exports.get  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.exports.get  Enterprise API Documentation}
       def check_bundle_export_status(bundle_id, export_id, project_id = config.project_id)
