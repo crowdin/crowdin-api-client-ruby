@@ -36,18 +36,17 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      # @param query [Hash] Request Body
+      # @param bundle_id [Integer] Bundle ID
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.exports.post  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.exports.post  Enterprise API Documentation}
-      def export_bundle(bundle_id, query = {}, project_id = config.project_id)
+      def export_bundle(bundle_id, project_id = config.project_id)
         bundle_id  || raise_parameter_is_required_error(:bundle_id)
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
           connection,
           :post,
-          "#{config.target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports",
-          { params: query }
+          "#{config.target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports"
         )
         Web::SendRequest.new(request).perform
       end
