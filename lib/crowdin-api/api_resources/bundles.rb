@@ -55,7 +55,7 @@ module Crowdin
       # @param bundle_id [Integer] Bundle ID
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.exports.get  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.exports.get  Enterprise API Documentation}
-      def check_bundle_export_status(bundle_id = nil, export_id = nil, project_id = config.project_id)
+      def check_bundle_export_status(bundle_id, export_id, project_id = config.project_id)
         bundle_id || raise_parameter_is_required_error(:bundle_id)
         export_id || raise_parameter_is_required_error(:export_id)
         project_id || raise_project_id_is_required_error
@@ -63,7 +63,7 @@ module Crowdin
         request = Web::Request.new(
           connection,
           :get,
-          "#{config.target_api_url}/projects/#{project_id}/bundles/#{bundleId}/exports/#{exportId}"
+          "#{config.target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports/#{export_id}/"
         )
         Web::SendRequest.new(request).perform
       end
