@@ -88,8 +88,8 @@ describe 'Crowdin Client' do
       expect { @crowdin.fetch_all(:add_bundle).to raise_error(Crowdin::Errors::FetchAllProcessingError) }
     end
   end
-  
-    describe 'Crowdin Client fetch_all' do
+
+  describe 'Crowdin Client fetch_all' do
     it 'should raise error if fetch_all is called for unsupported methods' do
       expect { @crowdin.fetch_all(:export_bundle).to raise_error(Crowdin::Errors::FetchAllProcessingError) }
     end
