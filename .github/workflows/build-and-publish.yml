@@ -1,9 +1,8 @@
 name: Build and Publish
 
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types: [published]
 
 jobs:
   build-and-publish:

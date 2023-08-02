@@ -1,0 +1,31 @@
+{
+  "git": {
+    "push": true,
+    "commit": true,
+    "commitMessage": "chore: version ${version} [skip ci]",
+    "requireBranch": "main",
+    "tag": true
+  },
+  "github": {
+    "release": true,
+    "autoGenerate": true,
+    "releaseName": "${version}"
+  },
+  "plugins": {
+    "@j-ulrich/release-it-regex-bumper": {
+      "in": "lib/crowdin-api/client/version.rb",
+      "out": [
+        {
+          "file": "README.md",
+          "search": "gem 'crowdin-api', '~> \\d+\\.\\d+\\.\\d+'",
+          "replace": "gem 'crowdin-api', '~> {{versionWithoutPrerelease}}'"
+        },
+        {
+          "file": "lib/crowdin-api/client/version.rb",
+          "search": "VERSION = '\\d+\\.\\d+\\.\\d+'",
+          "replace": "VERSION = '{{versionWithoutPrerelease}}'"
+        }
+      ]
+    }
+  }
+}
