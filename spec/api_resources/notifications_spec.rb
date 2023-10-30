@@ -41,7 +41,7 @@ describe Crowdin::ApiResources::Notifications do
         end.to raise_error(ArgumentError, ':message is required')
       end
 
-      it 'raises ArgumentError when request is missing required query parameter', :default do
+      it 'raises ArgumentError when request is missing project_id parameter', :default do
         query =  { message: "New notification message" }
         expect do
           @crowdin.send_notifications_to_project_members(nil, query)
