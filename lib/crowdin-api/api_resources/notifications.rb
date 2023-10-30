@@ -16,6 +16,7 @@ module Crowdin
         )
         Web::SendRequest.new(request).perform
       end
+
       def send_notification_to_organization_member(query = {})
         enterprise_mode? || raise_only_for_enterprise_mode_error
 
