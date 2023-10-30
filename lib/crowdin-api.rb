@@ -5,7 +5,7 @@ module Crowdin
   API_RESOURCES_MODULES = %i[Storages Languages Projects Workflows SourceFiles Translations SourceStrings
                              StringTranslations StringComments Screenshots Glossaries TranslationMemory
                              MachineTranslationEngines Reports Tasks Users Teams Vendors Webhooks
-                             Dictionaries Distributions Labels TranslationStatus Bundles].freeze
+                             Dictionaries Distributions Labels TranslationStatus Bundles Notifications].freeze
 
   # Error Raisers modules
   ERROR_RAISERS_MODULES = %i[ApiErrorsRaiser ClientErrorsRaiser].freeze
