@@ -17,7 +17,7 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def send_notification_to_organization_member(query = {})
+      def send_notification_to_organization_members(query = {})
         enterprise_mode? || raise_only_for_enterprise_mode_error
 
         %i[message].each do |param|
@@ -33,7 +33,7 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def send_notifications_to_project_members(project_id = nil, query = {})
+      def send_notifications_to_project_members(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
         %i[message].each do |param|
