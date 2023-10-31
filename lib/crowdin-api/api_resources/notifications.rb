@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 module Crowdin
   module ApiResources
     module Notifications
-
       def send_notification_to_authenticated_user(query = {})
-
         %i[message].each do |param|
           query[param] || raise_parameter_is_required_error(param)
         end
@@ -48,7 +48,6 @@ module Crowdin
         )
         Web::SendRequest.new(request).perform
       end
-
     end
   end
 end
