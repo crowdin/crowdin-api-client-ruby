@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 describe Crowdin::ApiResources::Applications do
-  let(:application_identifier) {"identifier of the application"}
-  let(:path) {"application implemented path"}
+  let(:application_identifier) { 'identifier of the application' }
+  let(:path) { 'application implemented path' }
   describe 'Default endpoints' do
-
     describe '#get_application_data' do
       it 'when request are valid', :default do
         stub_request(:get, "https://api/crowdin.com/#{target_api_url}/applications/#{application_identifier}/api/#{path}")
@@ -44,6 +43,5 @@ describe Crowdin::ApiResources::Applications do
         expect(get_application_data).to eq(200)
       end
     end
-
   end
 end

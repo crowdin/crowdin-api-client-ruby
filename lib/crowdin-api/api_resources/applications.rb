@@ -3,10 +3,9 @@
 module Crowdin
   module ApiResources
     module Applications
-
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.applications.api.get  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.applications.api.get  API Documentation}
-      def get_application_data(query = {}, application_identifier = nil, path = nil )
+      def get_application_data(application_identifier = nil, path = nil)
         application_identifier || raise_parameter_is_required_error(:application_identifier)
         application_identifier || raise_parameter_is_required_error(:path)
 
@@ -62,7 +61,6 @@ module Crowdin
         )
         Web::SendRequest.new(request).perform
       end
-
 
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.applications.api.patch  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.applications.api.patch  API Documentation}
