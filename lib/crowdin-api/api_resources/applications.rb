@@ -40,7 +40,7 @@ module Crowdin
 
         request = Web::Request.new(
           connection,
-          :put,
+          :post,
           "#{config.target_api_url}/applications/#{application_identifier}/api/#{path}",
           { params: query }
         )
