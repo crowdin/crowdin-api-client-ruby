@@ -5,7 +5,6 @@
 .DS_Store
 
 # Ignore versioning files
-Gemfile.lock
 .ruby-version
 
 # Ignore tests coverage folder
