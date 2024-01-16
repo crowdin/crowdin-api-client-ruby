@@ -3,7 +3,7 @@ PATH
   specs:
     crowdin-api (1.6.0)
       open-uri (>= 0.1.0, < 0.2.0)
-      rest-client (>= 2.0.0, < 2.1.0)
+      rest-client (>= 2.0.0, < 2.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -21,6 +21,7 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     hashdiff (1.1.0)
+    http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
     json (2.7.1)
@@ -42,7 +43,8 @@ GEM
     rainbow (3.1.1)
     rake (13.1.0)
     regexp_parser (2.8.3)
-    rest-client (2.0.2)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
