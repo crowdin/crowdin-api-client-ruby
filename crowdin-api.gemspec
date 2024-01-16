@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = '>= 2.4'
 
-  gem.add_runtime_dependency 'open-uri', '>= 0.1.0', '< 0.2.0'
+  gem.add_runtime_dependency 'open-uri', '>= 0.1.0', '< 0.5.0'
   gem.add_runtime_dependency 'rest-client', '>= 2.0.0', '< 2.2.0'
 
   gem.add_development_dependency 'bundler', '~> 2.2', '>= 2.2.32'
