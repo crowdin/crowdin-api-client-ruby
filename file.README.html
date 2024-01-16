@@ -58,7 +58,7 @@
       </div>
 
       <div id="content"><div id='filecontents'>
-<p><a href="https://crowdin.com"><p align='center'><img src='https://support.crowdin.com/assets/logos/crowdin-dark-symbol.png' data-canonical-src='https://support.crowdin.com/assets/logos/crowdin-dark-symbol.png' width='150' height='150' align='center'/></p></a></p>
+<p>&lt;p align=“center”&gt; &lt;picture&gt; &lt;source media=“(prefers-color-scheme: dark)” srcset=“<img src="https://support.crowdin.com/assets/logos/symbol/png/crowdin-symbol-cWhite.png" />”&gt; &lt;source media=“(prefers-color-scheme: light)” srcset=“<img src="https://support.crowdin.com/assets/logos/symbol/png/crowdin-symbol-cDark.png" />”&gt; &lt;img width=“150” height=“150” src=“<img src="https://support.crowdin.com/assets/logos/symbol/png/crowdin-symbol-cDark.png" />”&gt; &lt;/picture&gt; &lt;/p&gt;</p>
 
 <h1 id="label-Crowdin+Ruby+client">Crowdin Ruby client</h1>
 
@@ -66,11 +66,9 @@
 
 <p>Crowdin API is a full-featured RESTful API that helps you to integrate localization into your development process. The endpoints that we use allow you to easily make calls to retrieve information and to execute actions needed.</p>
 
-<p><a href="http://crowdin.github.io/crowdin-api-client-ruby/">API Client Docs</a>  |  <a href="https://developer.crowdin.com/api/v2/">Crowdin API</a>  |  <a href="https://developer.crowdin.com/enterprise/api/v2/">Crowdin Enterprise API</a></p>
+<p>Client Docs</code></strong><a href="http://crowdin.github.io/crowdin-api-client-ruby/"></a>  | API</code></strong><a href="https://developer.crowdin.com/api/v2/"></a>  | Enterprise API</code></strong><a href="https://developer.crowdin.com/enterprise/api/v2/"></a></p>
 
-<p><a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/v/crowdin-api?logo=ruby&cacheSeconds=1800"></a> <a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/dt/crowdin-api?cacheSeconds=1800"></a> <a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/dtv/crowdin-api?cacheSeconds=1800"></a></p>
-
-<p><a href="https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml"><img src="https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml/badge.svg"></a> <a href="https://codecov.io/gh/crowdin/crowdin-api-client-ruby"><img src="https://codecov.io/gh/crowdin/crowdin-api-client-ruby/branch/main/graph/badge.svg?token=OJsyJwQbFM"></a> <a href="https://github.com/crowdin/crowdin-api-client-ruby/issues"><img src="https://img.shields.io/github/issues/crowdin/crowdin-api-client-ruby?cacheSeconds=1800"></a> <a href="https://github.com/crowdin/crowdin-api-client-ruby/blob/main/LICENSE"><img src="https://img.shields.io/github/license/crowdin/crowdin-api-client-ruby?cacheSeconds=1800"></a></p>
+<p><a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/v/crowdin-api?logo=ruby&amp;cacheSeconds=1800"></a> <a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/dt/crowdin-api?cacheSeconds=1800"></a> <a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/dtv/crowdin-api?cacheSeconds=1800"></a> <a href="https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml"><img src="https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml/badge.svg"></a> <a href="https://codecov.io/gh/crowdin/crowdin-api-client-ruby"><img src="https://codecov.io/gh/crowdin/crowdin-api-client-ruby/branch/main/graph/badge.svg?token=OJsyJwQbFM"></a> <a href="https://github.com/crowdin/crowdin-api-client-ruby/blob/main/LICENSE"><img src="https://img.shields.io/github/license/crowdin/crowdin-api-client-ruby?cacheSeconds=1800"></a></p>
 
 <h2 id="label-Requirements">Requirements</h2>
 <ul><li>
@@ -79,9 +77,9 @@
 
 <h2 id="label-Installation">Installation</h2>
 
-<p>Add this line to your application&#39;s Gemfile:</p>
+<p>Add this line to your application’s Gemfile:</p>
 
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>crowdin-api</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>~&gt; 1.6.0</span><span class='tstring_end'>&#39;</span></span>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>crowdin-api</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>~&gt; 1.7.0</span><span class='tstring_end'>&#39;</span></span>
 </code></pre>
 
 <p>And then execute:</p>
@@ -209,20 +207,20 @@
 <pre class="code ruby"><code class="ruby">$ bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain DOMAIN --project-id PROJECT_ID
 </code></pre>
 
-<p>Note: you can specify full organization domain by adding &#39;.com&#39;</p>
+<p>Note: you can specify full organization domain by adding ‘.com’</p>
 
-<p>When execute you&#39;ll have IRB console with configured <em>@crowdin</em> instance</p>
+<p>When execute you’ll have IRB console with configured <em>@crowdin</em> instance</p>
 
 <pre class="code ruby"><code class="ruby">&gt; @crowdin.list_projects
 </code></pre>
 
 <h2 id="label-Seeking+Assistance">Seeking Assistance</h2>
 
-<p>If you find any problems or would like to suggest a feature, please read the <a href="/CONTRIBUTING.md#how-can-i-contribute">How can I contribute</a> section in our contributing guidelines.</p>
+<p>If you find any problems or would like to suggest a feature, please read the <a href="/CONTRIBUTING_md.html#how-can-i-contribute">How can I contribute</a> section in our contributing guidelines.</p>
 
 <h2 id="label-Contributing">Contributing</h2>
 
-<p>If you would like to contribute please read the <a href="/CONTRIBUTING.md">Contributing</a> guidelines.</p>
+<p>If you would like to contribute please read the <a href="/CONTRIBUTING_md.html">Contributing</a> guidelines.</p>
 
 <h2 id="label-License">License</h2>
 <pre class="code ruby"><code class="ruby">
@@ -236,9 +234,9 @@ use or other dealings in this Software without prior written authorization.
 </code></pre></div></div>
 
       <div id="footer">
-  Generated on Thu Jun 15 12:55:35 2023 by
+  Generated on Tue Jan 16 09:25:12 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-2.6.10).
+  0.9.34 (ruby-3.3.0).
 </div>
 
     </div>
