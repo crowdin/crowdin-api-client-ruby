@@ -5,9 +5,10 @@ module Crowdin
     class SendRequest
       attr_reader :request
 
-      def initialize(request, file_destination = nil)
+      def initialize(request, file_destination = nil, download: false)
         @request          = request
         @file_destination = file_destination
+        @download         = download
         @errors           = []
       end
 
@@ -44,7 +45,7 @@ module Crowdin
         end
 
         def fetch_response_data(doc)
-          if doc['data'].is_a?(Hash) && doc['data']['url'] && doc['data']['url'].include?('response-content-disposition')
+          if @download && doc['data'].is_a?(Hash) && doc.dig('data', 'url')&.include?('response-content-disposition')
             download_file(doc['data']['url'])
           else
             doc

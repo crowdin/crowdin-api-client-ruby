@@ -27,7 +27,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def download_report(report_id = nil, destination = nil, project_id = config.project_id)
+      def download_report(
+        report_id = nil, destination = nil, project_id = config.project_id, download: config.download_enabled?
+      )
         report_id  || raise_parameter_is_required_error(:report_id)
         project_id || raise_project_id_is_required_error
 
@@ -36,7 +38,7 @@ module Crowdin
           :get,
           "#{config.target_api_url}/projects/#{project_id}/reports/#{report_id}/download"
         )
-        Web::SendRequest.new(request, destination).perform
+        Web::SendRequest.new(request, destination, download: download).perform
       end
 
       # -- For Enterprise mode only --
@@ -67,7 +69,7 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def download_group_report(group_id = nil, report_id = nil, destination = nil)
+      def download_group_report(group_id = nil, report_id = nil, destination = nil, download: config.download_enabled?)
         enterprise_mode? || raise_only_for_enterprise_mode_error
         group_id         || raise_parameter_is_required_error(:group_id)
         report_id        || raise_parameter_is_required_error(:report_id)
@@ -77,7 +79,7 @@ module Crowdin
           :get,
           "#{config.target_api_url}/groups/#{group_id}/reports/#{report_id}/download"
         )
-        Web::SendRequest.new(request, destination).perform
+        Web::SendRequest.new(request, destination, download: download).perform
       end
 
       def generate_organization_report(query = {})
@@ -104,7 +106,7 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def download_organization_report(report_id = nil, destination = nil)
+      def download_organization_report(report_id = nil, destination = nil, download: config.download_enabled?)
         enterprise_mode? || raise_only_for_enterprise_mode_error
         report_id        || raise_parameter_is_required_error(:report_id)
 
@@ -113,7 +115,7 @@ module Crowdin
           :get,
           "#{config.target_api_url}/reports/#{report_id}/download"
         )
-        Web::SendRequest.new(request, destination).perform
+        Web::SendRequest.new(request, destination, download: download).perform
       end
 
       def list_report_settings_templates(query = {}, project_id = config.project_id)

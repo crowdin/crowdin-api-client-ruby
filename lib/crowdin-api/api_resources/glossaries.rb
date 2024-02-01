@@ -58,7 +58,7 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def export_glossary(query = {}, glossary_id = nil, destination = nil)
+      def export_glossary(query = {}, glossary_id = nil, destination = nil, download: config.download_enabled?)
         glossary_id || raise_parameter_is_required_error(:glossary_id)
 
         request = Web::Request.new(
@@ -67,7 +67,7 @@ module Crowdin
           "#{config.target_api_url}/glossaries/#{glossary_id}/exports",
           { params: query }
         )
-        Web::SendRequest.new(request, destination).perform
+        Web::SendRequest.new(request, destination, download: download).perform
       end
 
       def check_glossary_export_status(glossary_id = nil, export_id = nil)
@@ -82,7 +82,7 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def download_glossary(glossary_id = nil, export_id = nil, destination = nil)
+      def download_glossary(glossary_id = nil, export_id = nil, destination = nil, download: config.download_enabled?)
         glossary_id || raise_parameter_is_required_error(:glossary_id)
         export_id   || raise_parameter_is_required_error(:export_id)
 
@@ -91,7 +91,7 @@ module Crowdin
           :get,
           "#{config.target_api_url}/glossaries/#{glossary_id}/exports/#{export_id}/download"
         )
-        Web::SendRequest.new(request, destination).perform
+        Web::SendRequest.new(request, destination, download: download).perform
       end
 
       def import_glossary(glossary_id = nil, query = {})

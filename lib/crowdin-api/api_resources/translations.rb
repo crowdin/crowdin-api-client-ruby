@@ -40,7 +40,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def build_project_file_translation(file_id = nil, query = {}, destination = nil, project_id = config.project_id)
+      def build_project_file_translation(
+        file_id = nil, query = {}, destination = nil, project_id = config.project_id, download: config.download_enabled?
+      )
         file_id    || raise_parameter_is_required_error(:file_id)
         project_id || raise_project_id_is_required_error
 
@@ -52,7 +54,7 @@ module Crowdin
           "#{config.target_api_url}/projects/#{project_id}/translations/builds/files/#{file_id}",
           { params: query, headers: headers }
         )
-        Web::SendRequest.new(request, destination).perform
+        Web::SendRequest.new(request, destination, download: download).perform
       end
 
       def list_project_builds(query = {}, project_id = config.project_id)
@@ -92,7 +94,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def download_project_translations(build_id = nil, destination = nil, project_id = config.project_id)
+      def download_project_translations(
+        build_id = nil, destination = nil, project_id = config.project_id, download: config.download_enabled?
+      )
         build_id    || raise_parameter_is_required_error(:build_id)
         project_id  || raise_project_id_is_required_error
 
@@ -101,7 +105,7 @@ module Crowdin
           :get,
           "#{config.target_api_url}/projects/#{project_id}/translations/builds/#{build_id}/download"
         )
-        Web::SendRequest.new(request, destination).perform
+        Web::SendRequest.new(request, destination, download: download).perform
       end
 
       def check_project_build_status(build_id = nil, project_id = config.project_id)
@@ -128,7 +132,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def export_project_translation(query = {}, destination = nil, project_id = config.project_id)
+      def export_project_translation(
+        query = {}, destination = nil, project_id = config.project_id, download: config.download_enabled?
+      )
         project_id || raise_project_id_is_required_error
 
         request = Web::Request.new(
@@ -137,7 +143,7 @@ module Crowdin
           "#{config.target_api_url}/projects/#{project_id}/translations/exports",
           { params: query }
         )
-        Web::SendRequest.new(request, destination).perform
+        Web::SendRequest.new(request, destination, download: download).perform
       end
     end
   end

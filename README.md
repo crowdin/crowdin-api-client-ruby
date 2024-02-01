@@ -77,6 +77,7 @@ crowdin = Crowdin::Client.new do |config|
   config.api_token = 'YourApiToken' # [String] required
   config.organization_domain = 'YourOrganizationDomain' # [String] optional
   config.project_id = 'YourProjectId' # [Integer] nil by default
+  config.enable_download = false # [Boolean] true by default, immediately downloads the file and returns the dest path as the response
   config.enable_logger = true # [Boolean] false by default
 end
 # Note: Client will initialize default Logger instance if you have specify

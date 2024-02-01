@@ -27,7 +27,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def export_task_strings(task_id = nil, destination = nil, project_id = config.project_id)
+      def export_task_strings(
+        task_id = nil, destination = nil, project_id = config.project_id, download: config.download_enabled?
+      )
         task_id    || raise_parameter_is_required_error(:task_id)
         project_id || raise_project_id_is_required_error
 
@@ -36,7 +38,7 @@ module Crowdin
           :post,
           "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/exports"
         )
-        Web::SendRequest.new(request, destination).perform
+        Web::SendRequest.new(request, destination, download: download).perform
       end
 
       def get_task(task_id = nil, project_id = config.project_id)

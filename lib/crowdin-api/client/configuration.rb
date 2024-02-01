@@ -6,12 +6,16 @@ module Crowdin
     attr_accessor :project_id
     attr_accessor :organization_domain
 
+    attr_accessor :enable_download
+    alias download_enabled? enable_download
+
     attr_accessor :enable_logger
     alias logger_enabled? enable_logger
 
     attr_reader :target_api_url
 
     def initialize
+      @enable_download = true
       @target_api_url = '/api/v2'
     end
 

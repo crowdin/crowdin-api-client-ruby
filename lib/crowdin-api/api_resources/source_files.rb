@@ -255,7 +255,9 @@ module Crowdin
       # @param destination [String] Destination of File
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.files.download.get API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.files.download.get Enterprise API Documentation}
-      def download_file(file_id = nil, destination = nil, project_id = config.project_id)
+      def download_file(
+        file_id = nil, destination = nil, project_id = config.project_id, download: config.download_enabled?
+      )
         file_id     || raise_parameter_is_required_error(:file_id)
         project_id  || raise_project_id_is_required_error
 
@@ -264,7 +266,7 @@ module Crowdin
           :get,
           "#{config.target_api_url}/projects/#{project_id}/files/#{file_id}/download"
         )
-        Web::SendRequest.new(request, destination).perform
+        Web::SendRequest.new(request, destination, download: download).perform
       end
 
       # @param query [Hash] Request Body

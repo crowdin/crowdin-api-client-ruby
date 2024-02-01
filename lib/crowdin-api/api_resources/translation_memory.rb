@@ -91,7 +91,7 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def download_tm(tm_id = nil, export_id = nil, destination = nil)
+      def download_tm(tm_id = nil, export_id = nil, destination = nil, download: config.download_enabled?)
         tm_id     || raise_parameter_is_required_error(:tm_id)
         export_id || raise_parameter_is_required_error(:export_id)
 
@@ -100,7 +100,7 @@ module Crowdin
           :get,
           "#{config.target_api_url}/tms/#{tm_id}/exports/#{export_id}/download"
         )
-        Web::SendRequest.new(request, destination).perform
+        Web::SendRequest.new(request, destination, download: download).perform
       end
 
       def import_tm(tm_id = nil, query = {})
