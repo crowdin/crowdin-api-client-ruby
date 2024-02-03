@@ -22,7 +22,7 @@ module Crowdin
       def add_storage(file = nil)
         file || raise_parameter_is_required_error(:file)
 
-        file ||= File.open(file, 'r')
+        file = File.open(file, 'r')
         headers = { 'Content-Type' => 'application/octet-stream', 'Crowdin-API-FileName' => File.basename(file) }
 
         request = Web::Request.new(

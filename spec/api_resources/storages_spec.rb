@@ -11,10 +11,26 @@ describe Crowdin::ApiResources::Storages do
     end
 
     describe '#add_storage' do
-      it 'when request are valid', :default do
+      subject(:add_storage) { @crowdin.add_storage(file) }
+
+      let(:file) { 'README.md' }
+
+      it 'uploads the file to the storage', :default do
+        expected_response = 'expected_response'
+
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/storages")
-        add_storage = @crowdin.add_storage('README.md')
-        expect(add_storage).to eq(200)
+          .with(
+            body: File.read(file),
+            headers: {
+              'Content-Type' => 'application/octet-stream',
+              'Crowdin-API-FileName' => File.basename(file)
+            }
+          )
+          .to_return(
+            body: JSON.dump(expected_response)
+          )
+
+        is_expected.to eq(expected_response)
       end
     end
 
