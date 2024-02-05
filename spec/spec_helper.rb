@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-require 'codecov'
+require 'simplecov-cobertura'
 
 SimpleCov.start
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
 
 require 'webmock/rspec'
 require 'crowdin-api'
