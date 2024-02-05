@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    crowdin-api (1.6.0)
+    crowdin-api (1.7.0)
       open-uri (>= 0.1.0, < 0.2.0)
       rest-client (>= 2.0.0, < 2.2.0)
 
@@ -92,6 +92,7 @@ GEM
     yard (0.9.34)
 
 PLATFORMS
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES

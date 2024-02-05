@@ -24,6 +24,11 @@
           "file": "lib/crowdin-api/client/version.rb",
           "search": "VERSION = '\\d+\\.\\d+\\.\\d+'",
           "replace": "VERSION = '{{versionWithoutPrerelease}}'"
+        },
+        {
+          "file": "Gemfile.lock",
+          "search": "crowdin-api \\(\\d+\\.\\d+\\.\\d+\\)",
+          "replace": "crowdin-api ({{versionWithoutPrerelease}})"
         }
       ]
     }
