@@ -30,5 +30,6 @@ jobs:
 
       - name: Publish code coverage report
         uses: codecov/codecov-action@v3
+        if: matrix.ruby-version == '3.0'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
