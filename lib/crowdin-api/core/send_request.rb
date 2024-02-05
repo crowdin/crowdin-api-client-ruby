@@ -44,7 +44,7 @@ module Crowdin
         end
 
         def fetch_response_data(doc)
-          if doc['data'].is_a?(Hash) && doc['data']['url'] && doc['data']['url'].include?('response-content-disposition')
+          if @file_destination && doc['data'].is_a?(Hash) && doc['data']['url']
             download_file(doc['data']['url'])
           else
             doc
@@ -53,8 +53,7 @@ module Crowdin
 
         def download_file(url)
           download    = URI.parse(url).open
-          destination = @file_destination || download.meta['content-disposition']
-                                                     .match(/filename=("?)(.+)\1/)[2]
+          destination = @file_destination
 
           IO.copy_stream(download, destination)
 
