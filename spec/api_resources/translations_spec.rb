@@ -31,12 +31,49 @@ describe Crowdin::ApiResources::Translations do
     end
 
     describe '#build_project_file_translation' do
-      let(:file_id) { 1 }
+      subject(:build_project_file_translation) do
+        @crowdin.build_project_file_translation(file_id, query, destination, project_id)
+      end
 
-      it 'when request are valid', :default do
+      let(:file_id) { 1 }
+      let(:query) { { targetLanguageId: target_language_id } }
+      let(:destination) { nil }
+
+      let(:target_language_id) { 'expected_language_id' }
+
+      it 'builds project file translation', :default do
+        expected_response = 'expected_response'
+
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/translations/builds/files/#{file_id}")
-        build_project_file_translation = @crowdin.build_project_file_translation(file_id, {}, nil, project_id)
-        expect(build_project_file_translation).to eq(200)
+          .with(
+            body: JSON.dump(query)
+          )
+          .to_return(
+            body: JSON.dump(expected_response)
+          )
+
+        is_expected.to eq(expected_response)
+      end
+
+      context 'when the `eTag` query param is passed' do
+        let(:query) { { targetLanguageId: 'expected_language_id', eTag: etag } }
+
+        let(:etag) { 'expected_etag' }
+
+        it 'builds project file translation for new changes after the passed `eTag`', :default do
+          expected_response = 'expected_response'
+
+          stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/translations/builds/files/#{file_id}")
+            .with(
+              body: JSON.dump({ targetLanguageId: target_language_id }),
+              headers: { 'If-None-Match' => etag }
+            )
+            .to_return(
+              body: JSON.dump(expected_response)
+            )
+
+          is_expected.to eq(expected_response)
+        end
       end
     end
 
