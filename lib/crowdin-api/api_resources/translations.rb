@@ -44,7 +44,8 @@ module Crowdin
         file_id    || raise_parameter_is_required_error(:file_id)
         project_id || raise_project_id_is_required_error
 
-        headers = query[:eTag] ? { 'If-None-Match' => query[:eTag] } : {}
+        etag = query.delete(:eTag)
+        headers = etag ? { 'If-None-Match' => etag } : {}
 
         request = Web::Request.new(
           connection,
