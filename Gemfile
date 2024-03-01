@@ -3,6 +3,6 @@
 source 'https://rubygems.org'
 
 # For Documentation
-gem 'yard', '~> 0.9.35'
+gem 'yard', '~> 0.9.36'
 
 gemspec

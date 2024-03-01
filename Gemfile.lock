@@ -90,7 +90,7 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    yard (0.9.35)
+    yard (0.9.36)
 
 PLATFORMS
   arm64-darwin-23
@@ -106,7 +106,7 @@ DEPENDENCIES
   simplecov (~> 0.22)
   simplecov-cobertura (~> 2.1)
   webmock (~> 3.14)
-  yard (~> 0.9.35)
+  yard (~> 0.9.36)
 
 BUNDLED WITH
    2.4.22
