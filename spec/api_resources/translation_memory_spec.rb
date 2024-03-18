@@ -2,8 +2,9 @@
 
 describe Crowdin::ApiResources::TranslationMemory do
   describe 'Default endpoints' do
+
     describe '#list_tms' do
-      it 'when request are valid', :default do
+      it 'returns 200 when request is valid', :default do
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/tms")
         list_tms = @crowdin.list_tms
         expect(list_tms).to eq(200)
@@ -11,7 +12,7 @@ describe Crowdin::ApiResources::TranslationMemory do
     end
 
     describe '#add_tm' do
-      it 'when request are valid', :default do
+      it 'returns 200 when request is valid', :default do
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/tms")
         add_tm = @crowdin.add_tm
         expect(add_tm).to eq(200)
@@ -21,7 +22,7 @@ describe Crowdin::ApiResources::TranslationMemory do
     describe '#get_tm' do
       let(:tm_id) { 1 }
 
-      it 'when request are valid', :default do
+      it 'returns 200 when request is valid', :default do
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}")
         get_tm = @crowdin.get_tm(tm_id)
         expect(get_tm).to eq(200)
@@ -31,7 +32,7 @@ describe Crowdin::ApiResources::TranslationMemory do
     describe '#delete_tm' do
       let(:tm_id) { 1 }
 
-      it 'when request are valid', :default do
+      it 'returns 200 when request is valid', :default do
         stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}")
         delete_tm = @crowdin.delete_tm(tm_id)
         expect(delete_tm).to eq(200)
@@ -41,7 +42,7 @@ describe Crowdin::ApiResources::TranslationMemory do
     describe '#edit_tm' do
       let(:tm_id) { 1 }
 
-      it 'when request are valid', :default do
+      it 'returns 200 when request is valid', :default do
         stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}")
         edit_tm = @crowdin.edit_tm(tm_id)
         expect(edit_tm).to eq(200)
@@ -51,7 +52,7 @@ describe Crowdin::ApiResources::TranslationMemory do
     describe '#clear_tm' do
       let(:tm_id) { 1 }
 
-      it 'when request are valid', :default do
+      it 'returns 200 when request is valid', :default do
         stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}/segments")
         clear_tm = @crowdin.clear_tm(tm_id)
         expect(clear_tm).to eq(200)
@@ -61,7 +62,7 @@ describe Crowdin::ApiResources::TranslationMemory do
     describe '#export_tm' do
       let(:tm_id) { 1 }
 
-      it 'when request are valid', :default do
+      it 'returns 200 when request is valid', :default do
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}/exports")
         export_tm = @crowdin.export_tm(tm_id)
         expect(export_tm).to eq(200)
@@ -72,7 +73,7 @@ describe Crowdin::ApiResources::TranslationMemory do
       let(:tm_id) { 1 }
       let(:export_id) { 1 }
 
-      it 'when request are valid', :default do
+      it 'returns 200 when request is valid', :default do
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}/exports/#{export_id}")
         check_tm_export_status = @crowdin.check_tm_export_status(tm_id, export_id)
         expect(check_tm_export_status).to eq(200)
@@ -83,7 +84,7 @@ describe Crowdin::ApiResources::TranslationMemory do
       let(:tm_id) { 1 }
       let(:export_id) { 1 }
 
-      it 'when request are valid', :default do
+      it 'returns 200 when request is valid', :default do
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}/exports/#{export_id}/download")
         download_tm = @crowdin.download_tm(tm_id, export_id)
         expect(download_tm).to eq(200)
@@ -93,7 +94,7 @@ describe Crowdin::ApiResources::TranslationMemory do
     describe '#import_tm' do
       let(:tm_id) { 1 }
 
-      it 'when request are valid', :default do
+      it 'returns 200 when request is valid', :default do
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}/imports")
         import_tm = @crowdin.import_tm(tm_id)
         expect(import_tm).to eq(200)
@@ -104,7 +105,7 @@ describe Crowdin::ApiResources::TranslationMemory do
       let(:tm_id) { 1 }
       let(:import_id) { 1 }
 
-      it 'when request are valid', :default do
+      it 'returns 200 when request is valid', :default do
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}/imports/#{import_id}")
         check_tm_import_status = @crowdin.check_tm_import_status(tm_id, import_id)
         expect(check_tm_import_status).to eq(200)
@@ -115,21 +116,64 @@ describe Crowdin::ApiResources::TranslationMemory do
       let(:project_id) { 1 }
 
       it 'returns 200 when request is valid', :default do
-        query = { source_language_id: 'en', target_language_id: 'ar', expression: 'Hello world!',
+        query = { source_language_id: 'en', target_language_id: 'ar', expressions: ['Hello world!'],
                   auto_substitution: true, min_relevant: 60 }
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/tms/concordance")
-        search_tms_concordance = @crowdin.search_tms_concordance(project_id, query)
+        search_tms_concordance = @crowdin.search_tms_concordance(query, project_id)
         expect(search_tms_concordance).to eq(200)
       end
 
       it 'raises ArgumentError when request is missing required query parameter', :default do
-        query = { source_language_id: 'en', target_language_id: 'ar', expression: 'Hello world!',
+        query = { source_language_id: 'en', target_language_id: 'ar', expressions: ['Hello world!'],
                   auto_substitution: true }
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/tms/concordance")
         expect do
-          @crowdin.search_tms_concordance(project_id, query)
+          @crowdin.search_tms_concordance(query, project_id)
         end.to raise_error(ArgumentError, ':min_relevant is required')
       end
     end
+
+    describe '#list_tm_segments' do
+      let(:tm_id) { 1 }
+
+      it 'returns 200 when request is valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}/segments")
+        list_tm_segments = @crowdin.list_tm_segments(tm_id, {})
+        expect(list_tm_segments).to eq(200)
+      end
+    end
+
+    describe '#create_tm_segment' do
+      let(:tm_id) { 1 }
+
+      it 'returns 200 when request is valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}/segments")
+        create_tm_segment = @crowdin.create_tm_segment(tm_id, {})
+        expect(create_tm_segment).to eq(200)
+      end
+    end
+
+    describe '#get_tm_segment' do
+      let(:tm_id) { 1 }
+      let(:segment_id) { 1 }
+
+      it 'returns 200 when request is valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}/segments/#{segment_id}")
+        get_tm_segment = @crowdin.get_tm_segment(tm_id, segment_id)
+        expect(get_tm_segment).to eq(200)
+      end
+    end
+
+    describe '#delete_tm_segment' do
+      let(:tm_id) { 1 }
+      let(:segment_id) { 1 }
+
+      it 'returns 200 when request is valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/tms/#{tm_id}/segments/#{segment_id}")
+        delete_tm_segment = @crowdin.delete_tm_segment(tm_id, segment_id)
+        expect(delete_tm_segment).to eq(200)
+      end
+    end
+
   end
 end

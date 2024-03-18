@@ -3,6 +3,7 @@
 module Crowdin
   module ApiResources
     module Projects
+
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.getMany  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.getMany  Enterprise API Documentation}
       # @param query [Hash] Request Body
@@ -20,6 +21,10 @@ module Crowdin
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.post  Enterprise API Documentation}
       # @param query [Hash] Request Body
       def add_project(query = {})
+        %i[name sourceLanguageId].each do |param|
+          query[param] || raise_parameter_is_required_error(param)
+        end
+
         request = Web::Request.new(
           connection,
           :post,
@@ -146,6 +151,7 @@ module Crowdin
         )
         Web::SendRequest.new(request).perform
       end
+
     end
   end
 end

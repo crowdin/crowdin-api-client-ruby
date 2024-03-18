@@ -3,6 +3,7 @@
 module Crowdin
   module ApiResources
     module TranslationMemory
+
       def list_tms(query = {})
         request = Web::Request.new(
           connection,
@@ -127,10 +128,10 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def search_tms_concordance(project_id = nil, query = {})
+      def search_tms_concordance(query = {}, project_id = nil)
         project_id || raise_project_id_is_required_error
 
-        %i[source_language_id target_language_id expression auto_substitution min_relevant].each do |param|
+        %i[source_language_id target_language_id expressions auto_substitution min_relevant].each do |param|
           query[param] || raise_parameter_is_required_error(param)
         end
 
@@ -142,6 +143,55 @@ module Crowdin
         )
         Web::SendRequest.new(request).perform
       end
+
+      def list_tm_segments(tm_id = nil, query = {})
+        tm_id || raise_parameter_is_required_error(:tm_id)
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/tms/#{tm_id}/segments",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def create_tm_segment(tm_id = nil, query = {})
+        tm_id || raise_parameter_is_required_error(:tm_id)
+
+        request = Web::Request.new(
+          connection,
+          :post,
+          "#{config.target_api_url}/tms/#{tm_id}/segments",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def get_tm_segment(tm_id = nil, segment_id = nil)
+        tm_id      || raise_parameter_is_required_error(:tm_id)
+        segment_id || raise_parameter_is_required_error(:segment_id)
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/tms/#{tm_id}/segments/#{segment_id}"
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def delete_tm_segment(tm_id = nil, segment_id = nil)
+        tm_id      || raise_parameter_is_required_error(:tm_id)
+        segment_id || raise_parameter_is_required_error(:segment_id)
+
+        request = Web::Request.new(
+          connection,
+          :delete,
+          "#{config.target_api_url}/tms/#{tm_id}/segments/#{segment_id}"
+        )
+        Web::SendRequest.new(request).perform
+      end
+
     end
   end
 end

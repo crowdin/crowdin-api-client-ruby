@@ -3,6 +3,7 @@
 module Crowdin
   module ApiResources
     module SourceFiles
+
       # @param query [Hash] Request Body
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.branches.getMany  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.branches.getMany  Enterprise API Documentation}
@@ -300,6 +301,19 @@ module Crowdin
         )
         Web::SendRequest.new(request).perform
       end
+
+      def download_file_preview(file_id = nil, project_id = config.project_id)
+        file_id     || raise_parameter_is_required_error(:file_id)
+        project_id  || raise_project_id_is_required_error
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/projects/#{project_id}/files/#{file_id}/preview"
+        )
+        Web::SendRequest.new(request).perform
+      end
+
     end
   end
 end
