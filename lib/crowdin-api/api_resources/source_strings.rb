@@ -3,6 +3,7 @@
 module Crowdin
   module ApiResources
     module SourceStrings
+
       def list_strings(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
@@ -64,6 +65,19 @@ module Crowdin
         )
         Web::SendRequest.new(request).perform
       end
+
+      def string_batch_operations(query = {}, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+
+        request = Web::Request.new(
+          connection,
+          :patch,
+          "#{config.target_api_url}/projects/#{project_id}/strings",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
     end
   end
 end
