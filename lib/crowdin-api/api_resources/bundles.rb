@@ -70,9 +70,10 @@ module Crowdin
 
       # @param bundle_id [Integer] Bundle ID
       # @param export_id [String] Export ID
+      # @param destination [String] Destination of File
       # * {https://developer.crowdin.com/api/v2/#operation/api.projects.bundles.exports.download.get  API Documentation}
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.bundles.exports.download.get  Enterprise API Documentation}
-      def download_bundle(bundle_id, export_id, project_id = config.project_id)
+      def download_bundle(bundle_id, export_id, destination = nil, project_id = config.project_id)
         bundle_id  || raise_parameter_is_required_error(:bundle_id)
         export_id  || raise_parameter_is_required_error(:export_id)
         project_id || raise_project_id_is_required_error
@@ -82,7 +83,7 @@ module Crowdin
           :get,
           "#{config.target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports/#{export_id}/download"
         )
-        Web::SendRequest.new(request).perform
+        Web::SendRequest.new(request, destination).perform
       end
 
       # @param bundle_id [Integer] Bundle ID
