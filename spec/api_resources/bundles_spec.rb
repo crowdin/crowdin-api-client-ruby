@@ -44,7 +44,7 @@ describe Crowdin::ApiResources::Bundles do
 
       it 'when request are valid', :default do
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/bundles/#{bundle_id}/exports/#{export_id}/download")
-        download_bundle = @crowdin.download_bundle(bundle_id, export_id, project_id)
+        download_bundle = @crowdin.download_bundle(bundle_id, export_id, nil, project_id)
         expect(download_bundle).to eq(200)
       end
     end
