@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 describe 'Crowdin Client' do
+  let(:crowdin_client) { Crowdin::Client.new }
+
   it 'should have a list of API Resources' do
     expect(Crowdin::API_RESOURCES_MODULES).to_not be_nil
   end
@@ -21,6 +23,7 @@ describe 'Crowdin Client' do
     it 'should have options and headers for RestClient', :default do
       expect(@crowdin.options.class).to eq(Hash)
       expect(@crowdin.options).to include(:headers)
+      expect(@crowdin.options).to include(timeout: nil)
     end
 
     it 'should have a Config instance', :default do
@@ -92,6 +95,28 @@ describe 'Crowdin Client' do
   describe 'Crowdin Client fetch_all' do
     it 'should raise error if fetch_all is called for unsupported methods' do
       expect { @crowdin.fetch_all(:export_bundle).to raise_error(Crowdin::Errors::FetchAllProcessingError) }
+    end
+  end
+
+  describe 'connection' do
+    subject(:connection) { crowdin_client.connection }
+
+    it 'timeout is disabled by default' do
+      is_expected.to have_attributes(options: include(timeout: be_nil))
+    end
+
+    context 'when new request timeout config is set' do
+      let(:new_request_timeout) { 60 }
+
+      let(:crowdin_client) do
+        Crowdin::Client.new do |config|
+          config.request_timeout = new_request_timeout
+        end
+      end
+
+      it 'timeout option is changed to new value' do
+        is_expected.to have_attributes(options: include(timeout: new_request_timeout))
+      end
     end
   end
 end

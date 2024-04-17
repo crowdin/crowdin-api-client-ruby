@@ -78,6 +78,7 @@ crowdin = Crowdin::Client.new do |config|
   config.organization_domain = 'YourOrganizationDomain' # [String] optional
   config.project_id = 'YourProjectId' # [Integer] nil by default
   config.enable_logger = true # [Boolean] false by default
+  config.request_timeout = 60 # [nil, Integer] disabled by default
 end
 # Note: Client will initialize default Logger instance if you have specify
 # enable_logger to true, you can change it by crowdin.logger = YourLogger
