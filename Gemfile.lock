@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    crowdin-api (1.9.0)
+    crowdin-api (1.10.0)
       open-uri (>= 0.1.0, < 0.2.0)
       rest-client (>= 2.0.0, < 2.2.0)
 
