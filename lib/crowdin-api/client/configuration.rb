@@ -5,6 +5,7 @@ module Crowdin
     attr_accessor :api_token
     attr_accessor :project_id
     attr_accessor :organization_domain
+    attr_accessor :request_timeout
 
     attr_accessor :enable_logger
     alias logger_enabled? enable_logger
@@ -18,7 +19,7 @@ module Crowdin
     def options
       {
         headers: {},
-        timeout: nil,
+        timeout: request_timeout,
         json:    true
       }
     end
