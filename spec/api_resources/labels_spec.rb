@@ -66,6 +66,12 @@ describe Crowdin::ApiResources::Labels do
         unassign_label_from_strings = @crowdin.unassign_label_from_strings(label_id, {}, project_id)
         expect(unassign_label_from_strings).to eq(200)
       end
+
+      it 'returns error message when request was processed with an error' do
+        allow(RestClient::Request).to receive(:execute).and_raise('Error')
+        unassign_label_from_strings = @crowdin.unassign_label_from_strings(label_id, {}, project_id)
+        expect(unassign_label_from_strings).to eq('Error')
+      end
     end
 
     describe '#assign_label_to_screenshots' do
@@ -85,6 +91,12 @@ describe Crowdin::ApiResources::Labels do
         stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/labels/#{label_id}/screenshots")
         unassign_label_from_screenshots = @crowdin.unassign_label_from_screenshots(label_id, {}, project_id)
         expect(unassign_label_from_screenshots).to eq(200)
+      end
+
+      it 'returns error message when request was processed with an error' do
+        allow(RestClient::Request).to receive(:execute).and_raise('Error')
+        unassign_label_from_screenshots = @crowdin.unassign_label_from_screenshots(label_id, {}, project_id)
+        expect(unassign_label_from_screenshots).to eq('Error')
       end
     end
   end
