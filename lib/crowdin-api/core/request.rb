@@ -26,7 +26,7 @@ module Crowdin
       end
 
       def delete
-        connection.delete
+        connection.delete(prepare_payload(payload[:params]))
       end
 
       def process_with_body
@@ -60,7 +60,7 @@ module Crowdin
         def prepare_payload(params)
           return params if params.is_a?(File)
 
-          get? ? { params: fetch_cleared_params(params) } : fetch_cleared_params(params).to_json
+          get? || delete? ? { params: fetch_cleared_params(params) } : fetch_cleared_params(params).to_json
         end
 
         def fetch_cleared_params(params)
