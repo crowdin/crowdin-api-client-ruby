@@ -51,6 +51,18 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      def remove_string_approvals(query = {}, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+
+        request = Web::Request.new(
+          connection,
+          :delete,
+          "#{config.target_api_url}/projects/#{project_id}/approvals",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
       def list_language_translations(language_id = nil, query = {}, project_id = config.project_id)
         language_id || raise_parameter_is_required_error(:language_id)
         project_id  || raise_project_id_is_required_error
