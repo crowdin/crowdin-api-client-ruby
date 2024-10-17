@@ -38,6 +38,14 @@ describe Crowdin::ApiResources::StringTranslations do
       end
     end
 
+    describe '#remove_string_approvals' do
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/approvals")
+        remove_string_approvals = @crowdin.remove_string_approvals({}, project_id)
+        expect(remove_string_approvals).to eq(200)
+      end
+    end
+
     describe '#list_language_translations' do
       let(:language_id) { 1 }
 

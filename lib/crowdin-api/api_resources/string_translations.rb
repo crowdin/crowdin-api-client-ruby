@@ -51,6 +51,18 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      def remove_string_approvals(query = {}, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+
+        request = Web::Request.new(
+          connection,
+          :delete,
+          "#{config.target_api_url}/projects/#{project_id}/approvals",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
       def list_language_translations(language_id = nil, query = {}, project_id = config.project_id)
         language_id || raise_parameter_is_required_error(:language_id)
         project_id  || raise_project_id_is_required_error
@@ -91,17 +103,13 @@ module Crowdin
       def delete_string_translations(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
 
-        response = ::RestClient::Request.execute(
-          {
-            method: :delete,
-            url: config.base_url + config.target_api_url + "/projects/#{project_id}/translations",
-            payload: query.to_json
-          }.merge(@options)
+        request = Web::Request.new(
+          connection,
+          :delete,
+          "#{config.target_api_url}/projects/#{project_id}/translations",
+          { params: query }
         )
-
-        response.body.empty? ? response.code : JSON.parse(response.body)
-      rescue StandardError => e
-        e.message
+        Web::SendRequest.new(request).perform
       end
 
       def get_translation(translation_id = nil, query = {}, project_id = config.project_id)
