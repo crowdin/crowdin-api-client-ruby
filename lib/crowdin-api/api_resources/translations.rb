@@ -27,6 +27,31 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      def list_pre_translations(query = {}, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/projects/#{project_id}/pre-translations",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def edit_pre_translations(pre_translation_id = nil, query = {}, project_id = config.project_id)
+        pre_translation_id || raise_parameter_is_required_error(:pre_translation_id)
+        project_id         || raise_project_id_is_required_error
+
+        request = Web::Request.new(
+          connection,
+          :patch,
+          "#{config.target_api_url}/projects/#{project_id}/pre-translations/#{pre_translation_id}",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
       def build_project_directory_translation(directory_id = nil, query = {}, project_id = config.project_id)
         directory_id || raise_parameter_is_required_error(:directory_id)
         project_id   || raise_project_id_is_required_error

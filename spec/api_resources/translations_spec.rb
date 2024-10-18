@@ -20,6 +20,24 @@ describe Crowdin::ApiResources::Translations do
       end
     end
 
+    describe '#list_pre_translations' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/pre-translations")
+        list_pre_translations = @crowdin.list_pre_translations({}, project_id)
+        expect(list_pre_translations).to eq(200)
+      end
+    end
+
+    describe '#edit_pre_translations' do
+      let(:pre_translation_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/pre-translations/#{pre_translation_id}")
+        edit_pre_translations = @crowdin.edit_pre_translations(pre_translation_id, {}, project_id)
+        expect(edit_pre_translations).to eq(200)
+      end
+    end
+
     describe '#build_project_directory_translation' do
       let(:directory_id) { 1 }
 
