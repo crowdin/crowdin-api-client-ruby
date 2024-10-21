@@ -269,8 +269,8 @@ module Crowdin
 
       # @param file_id [Integer] File ID
       # @param destination [String] Destination of File
-      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.files.download.get API Documentation}
-      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.files.download.get Enterprise API Documentation}
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.files.preview.get API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.files.preview.get Enterprise API Documentation}
       def download_file_preview(file_id = nil, destination = nil, project_id = config.project_id)
         file_id     || raise_parameter_is_required_error(:file_id)
         project_id  || raise_project_id_is_required_error
