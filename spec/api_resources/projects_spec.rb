@@ -94,6 +94,107 @@ describe Crowdin::ApiResources::Projects do
         expect { @crowdin.edit_project }.to raise_error(ArgumentError)
       end
     end
+
+    describe '#list_project_strings_exporter_settings' do
+      let(:project_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/strings-exporter-settings")
+        list_project_strings_exporter_settings = @crowdin.list_project_strings_exporter_settings(project_id)
+        expect(list_project_strings_exporter_settings).to eq(200)
+      end
+
+      it 'when the request is invalid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/strings-exporter-settings")
+        expect { @crowdin.list_project_strings_exporter_settings }.to raise_error(ArgumentError)
+      end
+    end
+
+    describe '#add_project_strings_exporter_settings' do
+      let(:project_id) { 1 }
+      let(:body) do
+        {
+          format: 'json',
+          settings: {
+            convertPlaceholders: true,
+            convertLineBreaks: true,
+          }
+        }
+      end
+
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/strings-exporter-settings")
+          .with(body: body.to_json)
+        add_project_strings_exporter_settings = @crowdin.add_project_strings_exporter_settings(project_id, body)
+        expect(add_project_strings_exporter_settings).to eq(200)
+      end
+
+      it 'when the request is invalid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/strings-exporter-settings")
+        expect { @crowdin.add_project_strings_exporter_settings }.to raise_error(ArgumentError)
+      end
+    end
+
+    describe '#get_project_strings_exporter_settings' do
+      let(:project_id) { 1 }
+      let(:system_strings_exporter_settings_id) { 1 }
+      let(:path) { "projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}" }
+
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/#{path}")
+        get_project_strings_exporter_settings = @crowdin.get_project_strings_exporter_settings(project_id, system_strings_exporter_settings_id)
+        expect(get_project_strings_exporter_settings).to eq(200)
+      end
+
+      it 'when the request is invalid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/#{path}")
+        expect { @crowdin.get_project_strings_exporter_settings }.to raise_error(ArgumentError)
+      end
+    end
+
+    describe '#delete_project_strings_exporter_settings' do
+      let(:project_id) { 1 }
+      let(:system_strings_exporter_settings_id) { 1 }
+      let(:path) { "projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}" }
+
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/#{path}")
+        delete_project_strings_exporter_settings = @crowdin.delete_project_strings_exporter_settings(project_id, system_strings_exporter_settings_id)
+        expect(delete_project_strings_exporter_settings).to eq(200)
+      end
+
+      it 'when the request is invalid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/#{path}")
+        expect { @crowdin.delete_project_strings_exporter_settings }.to raise_error(ArgumentError)
+      end
+    end
+
+    describe '#edit_project_strings_exporter_settings' do
+      let(:project_id) { 1 }
+      let(:system_strings_exporter_settings_id) { 1 }
+      let(:body) do
+        {
+          format: 'json',
+          settings: {
+            convertPlaceholders: true,
+            convertLineBreaks: true,
+          }
+        }
+      end
+      let(:path) { "projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}" }
+
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/#{path}")
+          .with(body: body.to_json)
+        edit_project_strings_exporter_settings = @crowdin.edit_project_strings_exporter_settings(project_id, system_strings_exporter_settings_id, body)
+        expect(edit_project_strings_exporter_settings).to eq(200)
+      end
+
+      it 'when the request is invalid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/#{path}")
+        expect { @crowdin.edit_project_strings_exporter_settings }.to raise_error(ArgumentError)
+      end
+    end
   end
 
   describe 'Enterprise endpoints' do
