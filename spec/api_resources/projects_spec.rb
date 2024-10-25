@@ -117,7 +117,7 @@ describe Crowdin::ApiResources::Projects do
           format: 'json',
           settings: {
             convertPlaceholders: true,
-            convertLineBreaks: true,
+            convertLineBreaks: true
           }
         }
       end
@@ -142,7 +142,8 @@ describe Crowdin::ApiResources::Projects do
 
       it 'when request are valid', :default do
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/#{path}")
-        get_project_strings_exporter_settings = @crowdin.get_project_strings_exporter_settings(project_id, system_strings_exporter_settings_id)
+        get_project_strings_exporter_settings = @crowdin
+          .get_project_strings_exporter_settings(project_id, system_strings_exporter_settings_id)
         expect(get_project_strings_exporter_settings).to eq(200)
       end
 
@@ -159,7 +160,8 @@ describe Crowdin::ApiResources::Projects do
 
       it 'when request are valid', :default do
         stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/#{path}")
-        delete_project_strings_exporter_settings = @crowdin.delete_project_strings_exporter_settings(project_id, system_strings_exporter_settings_id)
+        delete_project_strings_exporter_settings = @crowdin
+          .delete_project_strings_exporter_settings(project_id, system_strings_exporter_settings_id)
         expect(delete_project_strings_exporter_settings).to eq(200)
       end
 
@@ -177,7 +179,7 @@ describe Crowdin::ApiResources::Projects do
           format: 'json',
           settings: {
             convertPlaceholders: true,
-            convertLineBreaks: true,
+            convertLineBreaks: true
           }
         }
       end
@@ -186,7 +188,8 @@ describe Crowdin::ApiResources::Projects do
       it 'when request are valid', :default do
         stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/#{path}")
           .with(body: body.to_json)
-        edit_project_strings_exporter_settings = @crowdin.edit_project_strings_exporter_settings(project_id, system_strings_exporter_settings_id, body)
+        edit_project_strings_exporter_settings = @crowdin
+          .edit_project_strings_exporter_settings(project_id, system_strings_exporter_settings_id, body)
         expect(edit_project_strings_exporter_settings).to eq(200)
       end
 

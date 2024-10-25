@@ -82,7 +82,7 @@ module Crowdin
         request = Web::Request.new(
           connection,
           :get,
-          "#{config.target_api_url}/projects/#{project_id}/strings-exporter-settings",
+          "#{config.target_api_url}/projects/#{project_id}/strings-exporter-settings"
         )
         Web::SendRequest.new(request).perform
       end
@@ -111,11 +111,12 @@ module Crowdin
         project_id || raise_parameter_is_required_error(:project_id)
         system_strings_exporter_settings_id || raise_parameter_is_required_error(:system_strings_exporter_settings_id)
 
+        path = "projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}"
         request = Web::Request.new(
           connection,
           :get,
-          "#{config.target_api_url}/projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}",
-          )
+          "#{config.target_api_url}/#{path}"
+        )
         Web::SendRequest.new(request).perform
       end
 
@@ -127,11 +128,12 @@ module Crowdin
         project_id || raise_parameter_is_required_error(:project_id)
         system_strings_exporter_settings_id || raise_parameter_is_required_error(:system_strings_exporter_settings_id)
 
+        path = "projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}"
         request = Web::Request.new(
           connection,
           :delete,
-          "#{config.target_api_url}/projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}",
-          )
+          "#{config.target_api_url}/#{path}"
+        )
         Web::SendRequest.new(request).perform
       end
 
@@ -144,10 +146,11 @@ module Crowdin
         project_id || raise_parameter_is_required_error(:project_id)
         system_strings_exporter_settings_id || raise_parameter_is_required_error(:system_strings_exporter_settings_id)
 
+        path = "projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}"
         request = Web::Request.new(
           connection,
           :patch,
-          "#{config.target_api_url}/projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}",
+          "#{config.target_api_url}/#{path}",
           params: query
         )
         Web::SendRequest.new(request).perform
