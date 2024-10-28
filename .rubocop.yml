@@ -6,3 +6,7 @@ AllCops:
 
 Gemspec/DevelopmentDependencies:
   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'

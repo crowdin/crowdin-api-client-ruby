@@ -73,6 +73,89 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      # @param project_id [Integer] Project ID
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.strings-exporter-settings.getMany  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.strings-exporter-settings.getMany  Enterprise API Documentation}
+      def list_project_strings_exporter_settings(project_id = nil)
+        project_id || raise_parameter_is_required_error(:project_id)
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/projects/#{project_id}/strings-exporter-settings"
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      # @param project_id [Integer] Project ID
+      # @param query [Hash] Request Body
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.strings-exporter-settings.post  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.strings-exporter-settings.post  Enterprise API Documentation}
+      def add_project_strings_exporter_settings(project_id = nil, query = {})
+        project_id || raise_parameter_is_required_error(:project_id)
+
+        request = Web::Request.new(
+          connection,
+          :post,
+          "#{config.target_api_url}/projects/#{project_id}/strings-exporter-settings",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      # @param project_id [Integer] Project ID
+      # @param system_strings_exporter_settings_id [Integer] Request Body
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.strings-exporter-settings.get  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.strings-exporter-settings.get  Enterprise API Documentation}
+      def get_project_strings_exporter_settings(project_id = nil, system_strings_exporter_settings_id = nil)
+        project_id || raise_parameter_is_required_error(:project_id)
+        system_strings_exporter_settings_id || raise_parameter_is_required_error(:system_strings_exporter_settings_id)
+
+        path = "projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}"
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/#{path}"
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      # @param project_id [Integer] Project ID
+      # @param system_strings_exporter_settings_id [Integer] Request Body
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.strings-exporter-settings.delete  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.strings-exporter-settings.delete  Enterprise API Documentation}
+      def delete_project_strings_exporter_settings(project_id = nil, system_strings_exporter_settings_id = nil)
+        project_id || raise_parameter_is_required_error(:project_id)
+        system_strings_exporter_settings_id || raise_parameter_is_required_error(:system_strings_exporter_settings_id)
+
+        path = "projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}"
+        request = Web::Request.new(
+          connection,
+          :delete,
+          "#{config.target_api_url}/#{path}"
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      # @param project_id [Integer] Project ID
+      # @param system_strings_exporter_settings_id [Integer] Request Body
+      # @param query [Hash] Request Body
+      # * {https://developer.crowdin.com/api/v2/#operation/api.projects.strings-exporter-settings.patch  API Documentation}
+      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.strings-exporter-settings.patch  Enterprise API Documentation}
+      def edit_project_strings_exporter_settings(project_id = nil, system_strings_exporter_settings_id = nil, query = {})
+        project_id || raise_parameter_is_required_error(:project_id)
+        system_strings_exporter_settings_id || raise_parameter_is_required_error(:system_strings_exporter_settings_id)
+
+        path = "projects/#{project_id}/strings-exporter-settings/#{system_strings_exporter_settings_id}"
+        request = Web::Request.new(
+          connection,
+          :patch,
+          "#{config.target_api_url}/#{path}",
+          params: query
+        )
+        Web::SendRequest.new(request).perform
+      end
+
       # -- For Enterprise mode only --
 
       # @param query [Hash] Request Body
