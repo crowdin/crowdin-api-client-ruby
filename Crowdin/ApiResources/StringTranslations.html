@@ -431,6 +431,28 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#remove_string_approvals-instance_method" title="#remove_string_approvals (instance method)">#<strong>remove_string_approvals</strong>(query = {}, project_id = config.project_id)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#restore_translation-instance_method" title="#restore_translation (instance method)">#<strong>restore_translation</strong>(translation_id = nil, project_id = config.project_id)  &#x21d2; Object </a>
     
 
@@ -520,20 +542,20 @@
       <pre class="lines">
 
 
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89</pre>
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_translation'>add_translation</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
@@ -566,24 +588,24 @@
       <pre class="lines">
 
 
-192
-193
-194
-195
-196
-197
-198
-199
 200
 201
 202
 203
 204
 205
-206</pre>
+206
+207
+208
+209
+210
+211
+212
+213
+214</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 192</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 200</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_translation_alignment'>add_translation_alignment</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
@@ -620,20 +642,20 @@
       <pre class="lines">
 
 
-156
-157
-158
-159
-160
-161
-162
-163
 164
 165
-166</pre>
+166
+167
+168
+169
+170
+171
+172
+173
+174</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 164</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_vote'>add_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
@@ -666,20 +688,20 @@
       <pre class="lines">
 
 
-180
-181
-182
-183
-184
-185
-186
-187
 188
 189
-190</pre>
+190
+191
+192
+193
+194
+195
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 180</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 188</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cancel_vote'>cancel_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_vote_id'>vote_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_vote_id'>vote_id</span>    <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:vote_id</span><span class='rparen'>)</span>
@@ -712,39 +734,31 @@
       <pre class="lines">
 
 
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
 103
 104
-105</pre>
+105
+106
+107
+108
+109
+110
+111
+112
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 103</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_string_translations'>delete_string_translations</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
 
-  <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>RestClient</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span><span class='lparen'>(</span>
-    <span class='lbrace'>{</span>
-      <span class='label'>method:</span> <span class='symbol'>:delete</span><span class='comma'>,</span>
-      <span class='label'>url:</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_base_url'>base_url</span> <span class='op'>+</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_target_api_url'>target_api_url</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/projects/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_id'>project_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/translations</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
-      <span class='label'>payload:</span> <span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span>
-    <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='ivar'>@options</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>Web</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_connection'>connection</span><span class='comma'>,</span>
+    <span class='symbol'>:delete</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_target_api_url'>target_api_url</span><span class='embexpr_end'>}</span><span class='tstring_content'>/projects/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_id'>project_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/translations</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='lbrace'>{</span> <span class='label'>params:</span> <span class='id identifier rubyid_query'>query</span> <span class='rbrace'>}</span>
   <span class='rparen'>)</span>
-
-  <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='op'>?</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span> <span class='op'>:</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
-<span class='kw'>rescue</span> <span class='const'>StandardError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
-  <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span>
+  <span class='const'>Web</span><span class='op'>::</span><span class='const'>SendRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_request'>request</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_perform'>perform</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -766,20 +780,20 @@
       <pre class="lines">
 
 
-132
-133
-134
-135
-136
-137
-138
-139
 140
 141
-142</pre>
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_translation'>delete_translation</span><span class='lparen'>(</span><span class='id identifier rubyid_translation_id'>translation_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_translation_id'>translation_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:translation_id</span><span class='rparen'>)</span>
@@ -858,21 +872,21 @@
       <pre class="lines">
 
 
-107
-108
-109
-110
-111
-112
-113
-114
 115
 116
 117
-118</pre>
+118
+119
+120
+121
+122
+123
+124
+125
+126</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_translation'>get_translation</span><span class='lparen'>(</span><span class='id identifier rubyid_translation_id'>translation_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_translation_id'>translation_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:translation_id</span><span class='rparen'>)</span>
@@ -906,20 +920,20 @@
       <pre class="lines">
 
 
-168
-169
-170
-171
-172
-173
-174
-175
 176
 177
-178</pre>
+178
+179
+180
+181
+182
+183
+184
+185
+186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 168</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 176</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_vote'>get_vote</span><span class='lparen'>(</span><span class='id identifier rubyid_vote_id'>vote_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_vote_id'>vote_id</span>    <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:vote_id</span><span class='rparen'>)</span>
@@ -952,21 +966,21 @@
       <pre class="lines">
 
 
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65</pre>
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_language_translations'>list_language_translations</span><span class='lparen'>(</span><span class='id identifier rubyid_language_id'>language_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_language_id'>language_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:language_id</span><span class='rparen'>)</span>
@@ -1000,20 +1014,20 @@
       <pre class="lines">
 
 
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77</pre>
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_string_translations'>list_string_translations</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
@@ -1092,20 +1106,20 @@
       <pre class="lines">
 
 
-144
-145
-146
-147
-148
-149
-150
-151
 152
 153
-154</pre>
+154
+155
+156
+157
+158
+159
+160
+161
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 144</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 152</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_translation_votes'>list_translation_votes</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
@@ -1170,6 +1184,52 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="remove_string_approvals-instance_method">
+  
+    #<strong>remove_string_approvals</strong>(query = {}, project_id = config.project_id)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_remove_string_approvals'>remove_string_approvals</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
+
+  <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>Web</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_connection'>connection</span><span class='comma'>,</span>
+    <span class='symbol'>:delete</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_target_api_url'>target_api_url</span><span class='embexpr_end'>}</span><span class='tstring_content'>/projects/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_id'>project_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/approvals</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='lbrace'>{</span> <span class='label'>params:</span> <span class='id identifier rubyid_query'>query</span> <span class='rbrace'>}</span>
+  <span class='rparen'>)</span>
+  <span class='const'>Web</span><span class='op'>::</span><span class='const'>SendRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_request'>request</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_perform'>perform</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="restore_translation-instance_method">
   
     #<strong>restore_translation</strong>(translation_id = nil, project_id = config.project_id)  &#x21d2; <tt>Object</tt> 
@@ -1184,20 +1244,20 @@
       <pre class="lines">
 
 
-120
-121
-122
-123
-124
-125
-126
-127
 128
 129
-130</pre>
+130
+131
+132
+133
+134
+135
+136
+137
+138</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_translations.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_restore_translation'>restore_translation</span><span class='lparen'>(</span><span class='id identifier rubyid_translation_id'>translation_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_translation_id'>translation_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:translation_id</span><span class='rparen'>)</span>
@@ -1220,9 +1280,9 @@
 </div>
 
       <div id="footer">
-  Generated on Fri May 10 12:26:14 2024 by
+  Generated on Fri Nov  1 13:27:57 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.3.1).
+  0.9.36 (ruby-3.3.5).
 </div>
 
     </div>
