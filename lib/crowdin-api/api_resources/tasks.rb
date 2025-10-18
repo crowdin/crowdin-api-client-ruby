@@ -97,6 +97,73 @@ module Crowdin
         )
         Web::SendRequest.new(request).perform
       end
+
+      def list_task_comments(project_id = config.project_id, task_id = nil, query = {})
+        project_id || raise_project_id_is_required_error
+        task_id    || raise_parameter_is_required_error(:task_id)
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def get_task_comment(project_id = config.project_id, task_id = nil, comment_id = nil)
+        project_id || raise_project_id_is_required_error
+        task_id    || raise_parameter_is_required_error(:task_id)
+        comment_id || raise_parameter_is_required_error(:comment_id)
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments/#{comment_id}"
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      def add_task_comment(project_id = config.project_id, task_id = nil, body = {})
+        project_id || raise_project_id_is_required_error
+        task_id    || raise_parameter_is_required_error(:task_id)
+
+        request = Web::Request.new(
+          connection,
+          :post,
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments",
+          { params: body }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+    def edit_task_comment(project_id = config.project_id, task_id = nil, comment_id = nil, body = [])
+  project_id || raise_project_id_is_required_error
+  task_id    || raise_parameter_is_required_error(:task_id)
+  comment_id || raise_parameter_is_required_error(:comment_id)
+
+  request = Web::Request.new(
+    connection,
+    :patch,
+    "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments/#{comment_id}",
+    { params: body }
+  )
+  
+  Web::SendRequest.new(request).perform
+end
+
+      def delete_task_comment(project_id = config.project_id, task_id = nil, comment_id = nil)
+        project_id || raise_project_id_is_required_error
+        task_id    || raise_parameter_is_required_error(:task_id)
+        comment_id || raise_parameter_is_required_error(:comment_id)
+
+        request = Web::Request.new(
+          connection,
+          :delete,
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments/#{comment_id}"
+        )
+        Web::SendRequest.new(request).perform
+      end
     end
   end
 end
