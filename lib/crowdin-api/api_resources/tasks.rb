@@ -98,7 +98,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def list_task_comments(project_id = config.project_id, task_id = nil, query = {})
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.getMany  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.getMany  Enterprise API Documentation}
+      def list_task_comments(task_id = nil, query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
         task_id    || raise_parameter_is_required_error(:task_id)
 
@@ -111,7 +113,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def get_task_comment(project_id = config.project_id, task_id = nil, comment_id = nil)
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.get  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.get  Enterprise API Documentation}
+      def get_task_comment(task_id = nil, comment_id = nil, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
         task_id    || raise_parameter_is_required_error(:task_id)
         comment_id || raise_parameter_is_required_error(:comment_id)
@@ -124,7 +128,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def add_task_comment(project_id = config.project_id, task_id = nil, body = {})
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.post  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.post  Enterprise API Documentation}
+      def add_task_comment(task_id = nil, body = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
         task_id    || raise_parameter_is_required_error(:task_id)
 
@@ -137,7 +143,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      def edit_task_comment(project_id = config.project_id, task_id = nil, comment_id = nil, body = [])
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.patch  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.patch  Enterprise API Documentation}
+      def edit_task_comment(task_id = nil, comment_id = nil, body = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
         task_id    || raise_parameter_is_required_error(:task_id)
         comment_id || raise_parameter_is_required_error(:comment_id)
@@ -148,11 +156,12 @@ module Crowdin
           "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments/#{comment_id}",
           { params: body }
         )
-
         Web::SendRequest.new(request).perform
       end
 
-      def delete_task_comment(project_id = config.project_id, task_id = nil, comment_id = nil)
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.delete  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.delete  Enterprise API Documentation}
+      def delete_task_comment(task_id = nil, comment_id = nil, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
         task_id    || raise_parameter_is_required_error(:task_id)
         comment_id || raise_parameter_is_required_error(:comment_id)
