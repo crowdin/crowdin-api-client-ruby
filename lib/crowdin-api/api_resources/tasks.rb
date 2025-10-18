@@ -137,20 +137,20 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-    def edit_task_comment(project_id = config.project_id, task_id = nil, comment_id = nil, body = [])
-  project_id || raise_project_id_is_required_error
-  task_id    || raise_parameter_is_required_error(:task_id)
-  comment_id || raise_parameter_is_required_error(:comment_id)
+      def edit_task_comment(project_id = config.project_id, task_id = nil, comment_id = nil, body = [])
+        project_id || raise_project_id_is_required_error
+        task_id    || raise_parameter_is_required_error(:task_id)
+        comment_id || raise_parameter_is_required_error(:comment_id)
 
-  request = Web::Request.new(
-    connection,
-    :patch,
-    "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments/#{comment_id}",
-    { params: body }
-  )
-  
-  Web::SendRequest.new(request).perform
-end
+        request = Web::Request.new(
+          connection,
+          :patch,
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments/#{comment_id}",
+          { params: body }
+        )
+
+        Web::SendRequest.new(request).perform
+      end
 
       def delete_task_comment(project_id = config.project_id, task_id = nil, comment_id = nil)
         project_id || raise_project_id_is_required_error
