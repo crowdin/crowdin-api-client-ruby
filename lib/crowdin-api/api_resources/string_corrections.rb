@@ -43,7 +43,6 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      # * {https://support.crowdin.com/developer/api/v2/#tag/String-Corrections/operation/api.projects.corrections.deleteMany API Documentation}
       # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.deleteMany Enterprise API Documentation}
       def delete_corrections(query = {}, project_id = config.project_id)
         project_id || raise_project_id_is_required_error
