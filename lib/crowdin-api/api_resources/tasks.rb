@@ -97,6 +97,82 @@ module Crowdin
         )
         Web::SendRequest.new(request).perform
       end
+
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.getMany  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.getMany  Enterprise API Documentation}
+      def list_task_comments(task_id = nil, query = {}, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+        task_id    || raise_parameter_is_required_error(:task_id)
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments",
+          { params: query }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.get  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.get  Enterprise API Documentation}
+      def get_task_comment(task_id = nil, comment_id = nil, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+        task_id    || raise_parameter_is_required_error(:task_id)
+        comment_id || raise_parameter_is_required_error(:comment_id)
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments/#{comment_id}"
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.post  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.post  Enterprise API Documentation}
+      def add_task_comment(task_id = nil, body = {}, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+        task_id    || raise_parameter_is_required_error(:task_id)
+
+        request = Web::Request.new(
+          connection,
+          :post,
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments",
+          { params: body }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.patch  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.patch  Enterprise API Documentation}
+      def edit_task_comment(task_id = nil, comment_id = nil, body = {}, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+        task_id    || raise_parameter_is_required_error(:task_id)
+        comment_id || raise_parameter_is_required_error(:comment_id)
+
+        request = Web::Request.new(
+          connection,
+          :patch,
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments/#{comment_id}",
+          { params: body }
+        )
+        Web::SendRequest.new(request).perform
+      end
+
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.delete  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.delete  Enterprise API Documentation}
+      def delete_task_comment(task_id = nil, comment_id = nil, project_id = config.project_id)
+        project_id || raise_project_id_is_required_error
+        task_id    || raise_parameter_is_required_error(:task_id)
+        comment_id || raise_parameter_is_required_error(:comment_id)
+
+        request = Web::Request.new(
+          connection,
+          :delete,
+          "#{config.target_api_url}/projects/#{project_id}/tasks/#{task_id}/comments/#{comment_id}"
+        )
+        Web::SendRequest.new(request).perform
+      end
     end
   end
 end
