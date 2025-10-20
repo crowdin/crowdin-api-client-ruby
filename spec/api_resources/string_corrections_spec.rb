@@ -13,7 +13,7 @@ describe Crowdin::ApiResources::StringCorrections do
         expect(list_corrections).to eq(200)
       end
 
-      it 'when request is valid with optional parameters', :default do
+      it 'when request is valid', :default do
         query = { stringId: string_id, limit: 50, offset: 10, orderBy: 'createdAt desc', denormalizePlaceholders: 1 }
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/corrections")
           .with(query: query)
@@ -31,7 +31,7 @@ describe Crowdin::ApiResources::StringCorrections do
         expect(add_correction).to eq(200)
       end
 
-      it 'when request is valid without optional plural category', :default do
+      it 'when request is valid', :default do
         body = { stringId: 35_434, text: 'This string has been corrected' }
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/corrections")
           .with(body: body)
@@ -47,7 +47,7 @@ describe Crowdin::ApiResources::StringCorrections do
         expect(get_correction).to eq(200)
       end
 
-      it 'when request is valid with denormalizePlaceholders', :default do
+      it 'when request is valid', :default do
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/corrections/#{correction_id}")
           .with(query: { denormalizePlaceholders: 1 })
         get_correction = @crowdin.get_correction(correction_id, { denormalizePlaceholders: 1 }, project_id)
