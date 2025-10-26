@@ -52,6 +52,8 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Translations/operation/api.projects.pre-translations.report.getReport  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Translations/operation/api.projects.pre-translations.report.getReport Enterprise API Documentation}
       def pre_translation_report(pre_translation_id = nil, project_id = config.project_id)
         pre_translation_id || raise_parameter_is_required_error(:pre_translation_id)
         project_id || raise_project_id_is_required_error
