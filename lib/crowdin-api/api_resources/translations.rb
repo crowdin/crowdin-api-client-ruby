@@ -52,6 +52,20 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
+      # * {https://support.crowdin.com/developer/api/v2/#tag/Translations/operation/api.projects.pre-translations.report.getReport  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Translations/operation/api.projects.pre-translations.report.getReport Enterprise API Documentation}
+      def pre_translation_report(pre_translation_id = nil, project_id = config.project_id)
+        pre_translation_id || raise_parameter_is_required_error(:pre_translation_id)
+        project_id || raise_project_id_is_required_error
+
+        request = Web::Request.new(
+          connection,
+          :get,
+          "#{config.target_api_url}/projects/#{project_id}/pre-translations/#{pre_translation_id}/report"
+        )
+        Web::SendRequest.new(request).perform
+      end
+
       def build_project_directory_translation(directory_id = nil, query = {}, project_id = config.project_id)
         directory_id || raise_parameter_is_required_error(:directory_id)
         project_id   || raise_project_id_is_required_error

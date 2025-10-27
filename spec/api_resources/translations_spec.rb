@@ -38,6 +38,16 @@ describe Crowdin::ApiResources::Translations do
       end
     end
 
+    describe '#pre_translation_report' do
+      let(:pre_translation_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/pre-translations/#{pre_translation_id}/report")
+        pre_translation_report = @crowdin.pre_translation_report(pre_translation_id, project_id)
+        expect(pre_translation_report).to eq(200)
+      end
+    end
+
     describe '#build_project_directory_translation' do
       let(:directory_id) { 1 }
 
