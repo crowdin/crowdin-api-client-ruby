@@ -77,7 +77,7 @@ module Crowdin
 
       # @param query [Hash] Request Body
       # @param glossary_id [Integer] Glossary Identifier
-      # @param destination File destination
+      # @param destination [String] File destination
       # * {https://support.crowdin.com/developer/api/v2/#tag/Glossaries/operation/api.glossaries.exports.post  API Documentation}
       # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Glossaries/operation/api.glossaries.exports.post  Enterprise API Documentation}
       def export_glossary(query = {}, glossary_id = nil, destination = nil)
@@ -110,7 +110,7 @@ module Crowdin
 
       # @param glossary_id [Integer] Glossary Identifier
       # @param export_id [String] Export Identifier, consists of 36 characters
-      # @param destination File destination
+      # @param destination [String] File destination
       # * {https://support.crowdin.com/developer/api/v2/#tag/Glossaries/operation/api.glossaries.exports.download.download  API Documentation}
       # * {https://support.crowdin.com/developer/enterprise/api/v2/#tag/Glossaries/operation/api.glossaries.exports.download.download  Enterprise API Documentation}
       def download_glossary(glossary_id = nil, export_id = nil, destination = nil)
