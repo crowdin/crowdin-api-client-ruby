@@ -115,7 +115,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.post" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.post" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
   
 </li>
 
@@ -137,7 +140,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.delete" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.delete" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
   
 </li>
 
@@ -159,7 +165,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.patch" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.patch" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
   
 </li>
 
@@ -181,7 +190,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.get" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.get" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
   
 </li>
 
@@ -203,7 +215,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.release.get" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.release.get" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
   
 </li>
 
@@ -225,7 +240,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.getMany" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.getMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
   
 </li>
 
@@ -247,7 +265,10 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.release.post" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.release.post" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
   
 </li>
 
@@ -270,26 +291,62 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.post" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.post" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Request Body</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-18
-19
-20
-21
-22
-23
 24
 25
 26
 27
-28</pre>
+28
+29
+30
+31
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_distribution'>add_distribution</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
@@ -316,26 +373,62 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.delete" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.delete" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hash</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52</pre>
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_distribution'>delete_distribution</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hash'>hash</span>       <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:hash</span><span class='rparen'>)</span>
@@ -362,27 +455,81 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.patch" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.patch" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hash</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Request Body</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65</pre>
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_edit_distribution'>edit_distribution</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hash'>hash</span>       <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:hash</span><span class='rparen'>)</span>
@@ -410,26 +557,62 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.get" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.get" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hash</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-30
-31
-32
-33
-34
-35
-36
-37
-38
 39
-40</pre>
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 39</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_distribution'>get_distribution</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hash'>hash</span>       <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:hash</span><span class='rparen'>)</span>
@@ -456,26 +639,62 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.release.get" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.release.get" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hash</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77</pre>
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_distribution_release'>get_distribution_release</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hash'>hash</span>       <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:hash</span><span class='rparen'>)</span>
@@ -502,15 +721,48 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.getMany" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.getMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Request Body</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-6
-7
-8
 9
 10
 11
@@ -518,10 +770,13 @@
 13
 14
 15
-16</pre>
+16
+17
+18
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 9</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_distributions'>list_distributions</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
@@ -548,26 +803,62 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Distributions/operation/api.projects.distributions.release.post" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Distributions/operation/api.projects.distributions.release.post" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hash</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89</pre>
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/distributions.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_release_distribution'>release_distribution</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_hash'>hash</span>       <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:hash</span><span class='rparen'>)</span>
@@ -590,9 +881,9 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Nov  1 13:27:57 2024 by
+  Generated on Wed Nov 12 08:13:15 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.3.5).
+  0.9.36 (ruby-3.4.7).
 </div>
 
     </div>

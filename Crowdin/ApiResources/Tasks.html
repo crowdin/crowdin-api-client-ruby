@@ -123,6 +123,31 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#add_task_comment-instance_method" title="#add_task_comment (instance method)">#<strong>add_task_comment</strong>(task_id = nil, body = {}, project_id = config.project_id)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.post" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.post" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#delete_task-instance_method" title="#delete_task (instance method)">#<strong>delete_task</strong>(task_id = nil, project_id = config.project_id)  &#x21d2; Object </a>
     
 
@@ -138,6 +163,31 @@
 
   
     <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_task_comment-instance_method" title="#delete_task_comment (instance method)">#<strong>delete_task_comment</strong>(task_id = nil, comment_id = nil, project_id = config.project_id)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.delete" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.delete" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
   
 </li>
 
@@ -189,6 +239,31 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#edit_task_comment-instance_method" title="#edit_task_comment (instance method)">#<strong>edit_task_comment</strong>(task_id = nil, comment_id = nil, body = {}, project_id = config.project_id)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.patch" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.patch" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#export_task_strings-instance_method" title="#export_task_strings (instance method)">#<strong>export_task_strings</strong>(task_id = nil, destination = nil, project_id = config.project_id)  &#x21d2; Object </a>
     
 
@@ -226,6 +301,56 @@
 
   
     <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_task_comment-instance_method" title="#get_task_comment (instance method)">#<strong>get_task_comment</strong>(task_id = nil, comment_id = nil, project_id = config.project_id)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.get" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.get" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_task_comments-instance_method" title="#list_task_comments (instance method)">#<strong>list_task_comments</strong>(task_id = nil, query = {}, project_id = config.project_id)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.getMany" target="_parent" title="API Documentation">API Documentation</a> * <a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.getMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+</li></ul>
+</div></span>
   
 </li>
 
@@ -330,6 +455,68 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="add_task_comment-instance_method">
+  
+    #<strong>add_task_comment</strong>(task_id = nil, body = {}, project_id = config.project_id)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.post" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.post" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/tasks.rb', line 133</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_task_comment'>add_task_comment</span><span class='lparen'>(</span><span class='id identifier rubyid_task_id'>task_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
+  <span class='id identifier rubyid_task_id'>task_id</span>    <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:task_id</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>Web</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_connection'>connection</span><span class='comma'>,</span>
+    <span class='symbol'>:post</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_target_api_url'>target_api_url</span><span class='embexpr_end'>}</span><span class='tstring_content'>/projects/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_id'>project_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/tasks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_task_id'>task_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/comments</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='lbrace'>{</span> <span class='label'>params:</span> <span class='id identifier rubyid_body'>body</span> <span class='rbrace'>}</span>
+  <span class='rparen'>)</span>
+  <span class='const'>Web</span><span class='op'>::</span><span class='const'>SendRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_request'>request</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_perform'>perform</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="delete_task-instance_method">
   
     #<strong>delete_task</strong>(task_id = nil, project_id = config.project_id)  &#x21d2; <tt>Object</tt> 
@@ -367,6 +554,68 @@
     <span class='id identifier rubyid_connection'>connection</span><span class='comma'>,</span>
     <span class='symbol'>:delete</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_target_api_url'>target_api_url</span><span class='embexpr_end'>}</span><span class='tstring_content'>/projects/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_id'>project_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/tasks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_task_id'>task_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rparen'>)</span>
+  <span class='const'>Web</span><span class='op'>::</span><span class='const'>SendRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_request'>request</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_perform'>perform</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_task_comment-instance_method">
+  
+    #<strong>delete_task_comment</strong>(task_id = nil, comment_id = nil, project_id = config.project_id)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.delete" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.delete" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/tasks.rb', line 164</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_task_comment'>delete_task_comment</span><span class='lparen'>(</span><span class='id identifier rubyid_task_id'>task_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_comment_id'>comment_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
+  <span class='id identifier rubyid_task_id'>task_id</span>    <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:task_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_comment_id'>comment_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:comment_id</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>Web</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_connection'>connection</span><span class='comma'>,</span>
+    <span class='symbol'>:delete</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_target_api_url'>target_api_url</span><span class='embexpr_end'>}</span><span class='tstring_content'>/projects/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_id'>project_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/tasks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_task_id'>task_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/comments/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_comment_id'>comment_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='rparen'>)</span>
   <span class='const'>Web</span><span class='op'>::</span><span class='const'>SendRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_request'>request</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_perform'>perform</span>
 <span class='kw'>end</span></pre>
@@ -470,6 +719,70 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="edit_task_comment-instance_method">
+  
+    #<strong>edit_task_comment</strong>(task_id = nil, comment_id = nil, body = {}, project_id = config.project_id)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.patch" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.patch" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/tasks.rb', line 148</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_edit_task_comment'>edit_task_comment</span><span class='lparen'>(</span><span class='id identifier rubyid_task_id'>task_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_comment_id'>comment_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_body'>body</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
+  <span class='id identifier rubyid_task_id'>task_id</span>    <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:task_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_comment_id'>comment_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:comment_id</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>Web</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_connection'>connection</span><span class='comma'>,</span>
+    <span class='symbol'>:patch</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_target_api_url'>target_api_url</span><span class='embexpr_end'>}</span><span class='tstring_content'>/projects/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_id'>project_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/tasks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_task_id'>task_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/comments/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_comment_id'>comment_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='lbrace'>{</span> <span class='label'>params:</span> <span class='id identifier rubyid_body'>body</span> <span class='rbrace'>}</span>
+  <span class='rparen'>)</span>
+  <span class='const'>Web</span><span class='op'>::</span><span class='const'>SendRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_request'>request</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_perform'>perform</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="export_task_strings-instance_method">
   
     #<strong>export_task_strings</strong>(task_id = nil, destination = nil, project_id = config.project_id)  &#x21d2; <tt>Object</tt> 
@@ -553,6 +866,130 @@
     <span class='id identifier rubyid_connection'>connection</span><span class='comma'>,</span>
     <span class='symbol'>:get</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_target_api_url'>target_api_url</span><span class='embexpr_end'>}</span><span class='tstring_content'>/projects/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_id'>project_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/tasks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_task_id'>task_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rparen'>)</span>
+  <span class='const'>Web</span><span class='op'>::</span><span class='const'>SendRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_request'>request</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_perform'>perform</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_task_comment-instance_method">
+  
+    #<strong>get_task_comment</strong>(task_id = nil, comment_id = nil, project_id = config.project_id)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.get" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.get" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/tasks.rb', line 118</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_task_comment'>get_task_comment</span><span class='lparen'>(</span><span class='id identifier rubyid_task_id'>task_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_comment_id'>comment_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
+  <span class='id identifier rubyid_task_id'>task_id</span>    <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:task_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_comment_id'>comment_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:comment_id</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>Web</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_connection'>connection</span><span class='comma'>,</span>
+    <span class='symbol'>:get</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_target_api_url'>target_api_url</span><span class='embexpr_end'>}</span><span class='tstring_content'>/projects/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_id'>project_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/tasks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_task_id'>task_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/comments/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_comment_id'>comment_id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rparen'>)</span>
+  <span class='const'>Web</span><span class='op'>::</span><span class='const'>SendRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_request'>request</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_perform'>perform</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_task_comments-instance_method">
+  
+    #<strong>list_task_comments</strong>(task_id = nil, query = {}, project_id = config.project_id)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <ul><li>
+<p><a href="https://support.crowdin.com/developer/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.getMany" target="_parent" title="API Documentation">API Documentation</a></p>
+</li><li>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/Tasks/operation/api.projects.tasks.comments.getMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/tasks.rb', line 103</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_list_task_comments'>list_task_comments</span><span class='lparen'>(</span><span class='id identifier rubyid_task_id'>task_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
+  <span class='id identifier rubyid_task_id'>task_id</span>    <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:task_id</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>Web</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+    <span class='id identifier rubyid_connection'>connection</span><span class='comma'>,</span>
+    <span class='symbol'>:get</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_target_api_url'>target_api_url</span><span class='embexpr_end'>}</span><span class='tstring_content'>/projects/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_id'>project_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/tasks/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_task_id'>task_id</span><span class='embexpr_end'>}</span><span class='tstring_content'>/comments</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span>
+    <span class='lbrace'>{</span> <span class='label'>params:</span> <span class='id identifier rubyid_query'>query</span> <span class='rbrace'>}</span>
   <span class='rparen'>)</span>
   <span class='const'>Web</span><span class='op'>::</span><span class='const'>SendRequest</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_request'>request</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_perform'>perform</span>
 <span class='kw'>end</span></pre>
@@ -654,9 +1091,9 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Nov  1 13:27:57 2024 by
+  Generated on Wed Nov 12 08:13:15 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.3.5).
+  0.9.36 (ruby-3.4.7).
 </div>
 
     </div>
