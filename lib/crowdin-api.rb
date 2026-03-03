@@ -6,7 +6,7 @@ module Crowdin
                              StringTranslations StringComments Screenshots Glossaries TranslationMemory
                              MachineTranslationEngines Reports Tasks Users Teams Vendors Webhooks
                              Dictionaries Distributions Labels TranslationStatus Bundles Notifications
-                             Applications StringCorrections].freeze
+                             Applications StringCorrections AI].freeze
 
   # Error Raisers modules
   ERROR_RAISERS_MODULES = %i[ApiErrorsRaiser ClientErrorsRaiser].freeze
