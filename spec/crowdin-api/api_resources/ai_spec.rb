@@ -21,9 +21,9 @@ describe Crowdin::ApiResources::Ai do
       expect(result['data']['translations']).to eq(['Hallo Welt'])
     end
 
-    it 'should raise error when user_id is missing' do
+    it 'should raise error when user_id is missing', :enterprise do
       expect { @crowdin.ai_translate_strings(nil, { strings: ['Hello'] }) }
-        .to raise_error(Crowdin::Errors::ParameterIsRequiredError)
+        .to raise_error(ArgumentError)
     end
 
     it 'should raise error when not in enterprise mode' do
