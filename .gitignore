@@ -9,3 +9,5 @@
 
 # Ignore tests coverage folder
 coverage
+.vscode/
+*.tgz
