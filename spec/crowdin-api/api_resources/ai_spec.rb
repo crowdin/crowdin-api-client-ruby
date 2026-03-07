@@ -7,7 +7,7 @@ describe Crowdin::ApiResources::Ai do
     let(:user_id) { 1 }
 
     it 'when request are valid', :enterprise do
-      stub_request(:post, "https://domain.api.crowdin.com/api/v2/users/#{user_id}/ai/translations/translate-strings")
+      stub_request(:post, "https://#{organization_domain}.api.crowdin.com/api/v2/users/#{user_id}/ai/translations/translate-strings")
         .to_return(
           status: 200,
           body: {
