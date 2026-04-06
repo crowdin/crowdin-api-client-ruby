@@ -7,7 +7,7 @@ module Crowdin
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.applications.api.get  API Documentation}
       def get_application_data(application_identifier = nil, path = nil)
         application_identifier || raise_parameter_is_required_error(:application_identifier)
-        application_identifier || raise_parameter_is_required_error(:path)
+        path || raise_parameter_is_required_error(:path)
 
         request = Web::Request.new(
           connection,
@@ -21,7 +21,7 @@ module Crowdin
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.applications.api.put  API Documentation}
       def update_or_restore_application_data(query = {}, application_identifier = nil, path = nil)
         application_identifier || raise_parameter_is_required_error(:application_identifier)
-        application_identifier || raise_parameter_is_required_error(:path)
+        path || raise_parameter_is_required_error(:path)
 
         request = Web::Request.new(
           connection,
@@ -36,7 +36,7 @@ module Crowdin
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.applications.api.put  API Documentation}
       def add_application_data(query = {}, application_identifier = nil, path = nil)
         application_identifier || raise_parameter_is_required_error(:application_identifier)
-        application_identifier || raise_parameter_is_required_error(:path)
+        path || raise_parameter_is_required_error(:path)
 
         request = Web::Request.new(
           connection,
@@ -51,7 +51,7 @@ module Crowdin
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.applications.api.delete  API Documentation}
       def delete_application_data(query = {}, application_identifier = nil, path = nil)
         application_identifier || raise_parameter_is_required_error(:application_identifier)
-        application_identifier || raise_parameter_is_required_error(:path)
+        path || raise_parameter_is_required_error(:path)
 
         request = Web::Request.new(
           connection,
@@ -66,7 +66,7 @@ module Crowdin
       # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.projects.applications.api.patch  API Documentation}
       def edit_application_data(query = {}, application_identifier = nil, path = nil)
         application_identifier || raise_parameter_is_required_error(:application_identifier)
-        application_identifier || raise_parameter_is_required_error(:path)
+        path || raise_parameter_is_required_error(:path)
 
         request = Web::Request.new(
           connection,
