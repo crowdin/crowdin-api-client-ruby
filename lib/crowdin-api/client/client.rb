@@ -69,6 +69,20 @@ module Crowdin
       config.logger_enabled?
     end
 
+    def graphql(query = {}, request_options = {})
+      response = ::RestClient::Request.execute(
+        {
+          method: :post,
+          url: request_options[:url] || "#{config.base_url}/api/graphql",
+          payload: query.to_json
+        }.merge(options)
+      )
+
+      response.body.empty? ? response.code : JSON.parse(response.body)
+    rescue StandardError => e
+      e.message
+    end
+
     #
     # FetchAll options:
     # * limit, Integer, default: 500 | How many records need to load per one request

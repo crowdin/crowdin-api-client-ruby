@@ -98,6 +98,43 @@ describe 'Crowdin Client' do
     end
   end
 
+  describe 'Crowdin Client graphql' do
+    let(:graphql_request) do
+      {
+        query: 'query Viewer { viewer { id } }',
+        operationName: 'Viewer',
+        variables: { projectId: 1, emptyValue: nil }
+      }
+    end
+    let(:graphql_response) { { 'data' => { 'viewer' => { 'id' => 1 } } } }
+
+    it 'posts to the default GraphQL endpoint', :default do
+      stub_request(:post, 'https://api.crowdin.com/api/graphql')
+        .with(body: graphql_request.to_json)
+        .to_return(body: graphql_response.to_json)
+
+      expect(@crowdin.graphql(graphql_request)).to eq(graphql_response)
+    end
+
+    it 'posts to the Enterprise GraphQL endpoint', :enterprise do
+      stub_request(:post, 'https://domain.api.crowdin.com/api/graphql')
+        .with(body: graphql_request.to_json)
+        .to_return(body: graphql_response.to_json)
+
+      expect(@crowdin.graphql(graphql_request)).to eq(graphql_response)
+    end
+
+    it 'supports a custom GraphQL endpoint URL', :default do
+      custom_url = 'http://localhost:3000/api/graphql'
+
+      stub_request(:post, custom_url)
+        .with(body: graphql_request.to_json)
+        .to_return(body: graphql_response.to_json)
+
+      expect(@crowdin.graphql(graphql_request, { url: custom_url })).to eq(graphql_response)
+    end
+  end
+
   describe 'connection' do
     subject(:connection) { crowdin_client.connection }
 
