@@ -133,6 +133,16 @@ describe 'Crowdin Client' do
 
       expect(@crowdin.graphql(graphql_request, url: custom_url)).to eq(graphql_response)
     end
+
+    it 'returns parsed GraphQL error responses', :default do
+      graphql_error_response = { 'errors' => [{ 'message' => 'Invalid query' }] }
+
+      stub_request(:post, 'https://api.crowdin.com/api/graphql')
+        .with(body: graphql_request.to_json)
+        .to_return(status: 400, body: graphql_error_response.to_json)
+
+      expect(@crowdin.graphql(graphql_request)).to eq(graphql_error_response)
+    end
   end
 
   describe 'connection' do
