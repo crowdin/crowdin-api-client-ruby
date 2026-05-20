@@ -3,11 +3,11 @@
 module Crowdin
   module Web
     module GraphqlExtensions
-      def graphql(query = {}, request_options = {})
+      def graphql(query = {}, url: nil)
         response = ::RestClient::Request.execute(
           {
             method: :post,
-            url: request_options[:url] || "#{config.base_url}/api/graphql",
+            url: url || "#{config.base_url}/api/graphql",
             payload: query.to_json
           }.merge(options)
         )

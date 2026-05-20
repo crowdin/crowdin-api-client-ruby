@@ -136,7 +136,7 @@ file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10 }, your_p
 
 ### GraphQL API
 
-The client can send GraphQL requests to Crowdin Enterprise.
+The client can send GraphQL requests to Crowdin's default API host or to an Enterprise organization endpoint.
 
 ```ruby
 query = <<~GRAPHQL
@@ -153,7 +153,7 @@ response = crowdin.graphql({ query: query })
 You can also provide a custom endpoint URL for testing.
 
 ```ruby
-crowdin.graphql({ query: query }, { url: 'http://localhost:3000/api/graphql' })
+crowdin.graphql({ query: query }, url: 'http://localhost:3000/api/graphql')
 ```
 
 ### Fetch all records

@@ -131,7 +131,7 @@ describe 'Crowdin Client' do
         .with(body: graphql_request.to_json)
         .to_return(body: graphql_response.to_json)
 
-      expect(@crowdin.graphql(graphql_request, { url: custom_url })).to eq(graphql_response)
+      expect(@crowdin.graphql(graphql_request, url: custom_url)).to eq(graphql_response)
     end
   end
 
