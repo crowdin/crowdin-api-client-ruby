@@ -31,6 +31,7 @@ module Crowdin
     end
 
     include Web::FetchAllExtensions
+    include Web::GraphqlExtensions
 
     # Config instance that includes configuration options for the Client
     attr_reader :config
@@ -67,20 +68,6 @@ module Crowdin
 
     def logger_enabled?
       config.logger_enabled?
-    end
-
-    def graphql(query = {}, request_options = {})
-      response = ::RestClient::Request.execute(
-        {
-          method: :post,
-          url: request_options[:url] || "#{config.base_url}/api/graphql",
-          payload: query.to_json
-        }.merge(options)
-      )
-
-      response.body.empty? ? response.code : JSON.parse(response.body)
-    rescue StandardError => e
-      e.message
     end
 
     #
