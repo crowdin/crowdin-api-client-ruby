@@ -31,15 +31,10 @@ module Crowdin
     end
 
     include Web::FetchAllExtensions
+    include Web::GraphqlExtensions
 
-    # Config instance that includes configuration options for the Client
-    attr_reader :config
-    # Instance with established connection through RestClient to the Crowdin API
-    attr_reader :connection
-    # Instance with options and headers for RestClient connection
-    attr_reader :options
-    # Logger instance
-    attr_reader :logger
+    # Client configuration, connection, request options, and logger instances
+    attr_reader :config, :connection, :options, :logger
 
     def initialize(&block)
       build_configuration(&block)

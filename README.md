@@ -134,6 +134,28 @@ file_revisions = crowdin.list_file_revisions(your_file_id, { limit: 10 }, your_p
 # Note: more examples you can find in spec folder
 ```
 
+### GraphQL API
+
+The client can send GraphQL requests to Crowdin's default API host or to an Enterprise organization endpoint.
+
+```ruby
+query = <<~GRAPHQL
+  query Viewer {
+    viewer {
+      id
+    }
+  }
+GRAPHQL
+
+response = crowdin.graphql({ query: query })
+```
+
+You can also provide a custom endpoint URL for testing.
+
+```ruby
+crowdin.graphql({ query: query }, url: 'http://localhost:3000/api/graphql')
+```
+
 ### Fetch all records
 
 There is a possibility to fetch all records from paginatable methods using `fetch_all` method.
