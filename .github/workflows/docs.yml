@@ -21,6 +21,7 @@ jobs:
 
       - name: Cleanup the Readme
         run: |
+          sed -i '/<p align="center">/,/<\/p>/d' README.md
           sed -i /\<div/d README.md
           sed -i /\<\\/div/d README.md
 
