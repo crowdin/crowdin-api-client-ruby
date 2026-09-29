@@ -36,6 +36,12 @@ describe Crowdin::ApiResources::SourceFiles do
         delete_branch = @crowdin.delete_branch(branch_id, project_id)
         expect(delete_branch).to eq(200)
       end
+
+      it 'sends Prefer header when async', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/branches/1")
+          .with(headers: { 'Prefer' => 'respond-async' })
+        expect(@crowdin.delete_branch(1, project_id, async: true)).to eq(200)
+      end
     end
 
     describe '#edit_branch' do
@@ -81,6 +87,12 @@ describe Crowdin::ApiResources::SourceFiles do
         stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/directories/#{directory_id}")
         delete_directory = @crowdin.delete_directory(directory_id, project_id)
         expect(delete_directory).to eq(200)
+      end
+
+      it 'sends Prefer header when async', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/directories/1")
+          .with(headers: { 'Prefer' => 'respond-async' })
+        expect(@crowdin.delete_directory(1, project_id, async: true)).to eq(200)
       end
     end
 
@@ -138,6 +150,12 @@ describe Crowdin::ApiResources::SourceFiles do
         delete_file = @crowdin.delete_file(file_id, project_id)
         expect(delete_file).to eq(200)
       end
+
+      it 'sends Prefer header when async', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/files/1")
+          .with(headers: { 'Prefer' => 'respond-async' })
+        expect(@crowdin.delete_file(1, project_id, async: true)).to eq(200)
+      end
     end
 
     describe '#edit_file' do
@@ -188,6 +206,170 @@ describe Crowdin::ApiResources::SourceFiles do
         stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/files/#{file_id}/revisions/#{revision_id}")
         get_file_revision = @crowdin.get_file_revision(file_id, revision_id, project_id)
         expect(get_file_revision).to eq(200)
+      end
+    end
+  end
+
+  describe 'Default endpoints' do
+    describe '#search_branches' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/branches")
+        result = @crowdin.search_branches({})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#search_directories' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/directories")
+        result = @crowdin.search_directories({})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#search_files' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/files")
+        result = @crowdin.search_files({})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#clone_branch' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/branches/1/clones")
+        result = @crowdin.clone_branch(1, {}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#check_branch_clone_status' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/branches/1/clones/1")
+        result = @crowdin.check_branch_clone_status(1, 1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_cloned_branch' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/branches/1/clones/1/branch")
+        result = @crowdin.get_cloned_branch(1, 1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#check_delete_branch_job_status' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/branches/1/jobs/1")
+        result = @crowdin.check_delete_branch_job_status(1, 1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#merge_branch' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/branches/1/merges")
+        result = @crowdin.merge_branch(1, {}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#check_branch_merge_status' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/branches/1/merges/1")
+        result = @crowdin.check_branch_merge_status(1, 1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_branch_merge_summary' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/branches/1/merges/1/summary")
+        result = @crowdin.get_branch_merge_summary(1, 1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#check_delete_directory_job_status' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/directories/1/jobs/1")
+        result = @crowdin.check_delete_directory_job_status(1, 1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#check_delete_file_job_status' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/files/1/jobs/1")
+        result = @crowdin.check_delete_file_job_status(1, 1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#list_asset_references' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/files/1/references")
+        result = @crowdin.list_asset_references(1, {}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#add_asset_reference' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/files/1/references")
+        result = @crowdin.add_asset_reference(1, {}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#delete_asset_reference' do
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/files/1/references/1")
+        result = @crowdin.delete_asset_reference(1, 1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_asset_reference' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/files/1/references/1")
+        result = @crowdin.get_asset_reference(1, 1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+  end
+
+  describe 'Enterprise endpoints' do
+    describe '#list_reviewed_source_files_builds' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/projects/#{project_id}/strings/reviewed-builds")
+        result = @crowdin.list_reviewed_source_files_builds({}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#build_reviewed_source_files' do
+      it 'when request are valid', :enterprise do
+        stub_request(:post, "https://domain.api.crowdin.com/#{target_api_url}/projects/#{project_id}/strings/reviewed-builds")
+        result = @crowdin.build_reviewed_source_files({}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#check_reviewed_source_files_build_status' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/projects/#{project_id}/strings/reviewed-builds/1")
+        result = @crowdin.check_reviewed_source_files_build_status(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#download_reviewed_source_files' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/projects/#{project_id}/strings/reviewed-builds/1/download")
+        result = @crowdin.download_reviewed_source_files(1, nil, project_id)
+        expect(result).to eq(200)
       end
     end
   end

@@ -169,4 +169,46 @@ describe Crowdin::ApiResources::Translations do
       end
     end
   end
+
+  describe 'Default endpoints' do
+    describe '#auto_translation_batch_operations' do
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/pre-translations")
+        result = @crowdin.auto_translation_batch_operations([], project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#import_translations' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/translations/imports")
+        result = @crowdin.import_translations({}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#import_translations_status' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/translations/imports/1")
+        result = @crowdin.import_translations_status(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#import_translations_report' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/translations/imports/1/report")
+        result = @crowdin.import_translations_report(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#validate_text_by_qa_checks' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/translations/validate-qa-checks")
+        result = @crowdin.validate_text_by_qa_checks([], project_id)
+        expect(result).to eq(200)
+      end
+    end
+  end
 end

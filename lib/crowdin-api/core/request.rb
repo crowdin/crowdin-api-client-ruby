@@ -26,7 +26,7 @@ module Crowdin
       end
 
       def delete
-        connection.delete(prepare_payload(payload[:params]))
+        connection.delete(prepare_payload(payload[:params]).merge(payload[:headers]))
       end
 
       def process_with_body

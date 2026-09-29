@@ -88,5 +88,13 @@ describe Crowdin::ApiResources::Bundles do
         expect(bundle_list_files).to eq(200)
       end
     end
+
+    describe '#bundle_list_branches' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/bundles/1/branches")
+        result = @crowdin.bundle_list_branches(1, {}, project_id)
+        expect(result).to eq(200)
+      end
+    end
   end
 end

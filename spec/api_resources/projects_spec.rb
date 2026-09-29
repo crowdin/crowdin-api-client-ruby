@@ -323,4 +323,62 @@ describe Crowdin::ApiResources::Projects do
       end
     end
   end
+
+  describe 'Default endpoints' do
+    describe '#list_project_file_format_settings' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/file-format-settings")
+        result = @crowdin.list_project_file_format_settings(project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#add_project_file_format_settings' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/file-format-settings")
+        result = @crowdin.add_project_file_format_settings({}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#delete_project_file_format_settings' do
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/file-format-settings/1")
+        result = @crowdin.delete_project_file_format_settings(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_project_file_format_settings' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/file-format-settings/1")
+        result = @crowdin.get_project_file_format_settings(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#edit_project_file_format_settings' do
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/file-format-settings/1")
+        result = @crowdin.edit_project_file_format_settings(1, [], project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#reset_project_file_format_settings_custom_segmentation' do
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/file-format-settings/1/custom-segmentations")
+        result = @crowdin.reset_project_file_format_settings_custom_segmentation(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#download_project_file_format_settings_custom_segmentation' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/file-format-settings/1/custom-segmentations")
+        result = @crowdin.download_project_file_format_settings_custom_segmentation(1, nil, project_id)
+        expect(result).to eq(200)
+      end
+    end
+  end
 end

@@ -2,6 +2,47 @@
 
 describe Crowdin::ApiResources::Reports do
   describe 'Default endpoints' do
+    describe '#list_report_settings_templates' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports/settings-templates")
+        result = @crowdin.list_report_settings_templates({}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#add_report_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports/settings-templates")
+        query = { name: 't', currency: 'USD', unit: 'words', mode: 'simple', config: {} }
+        result = @crowdin.add_report_settings_template(query, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_report_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports/settings-templates/1")
+        result = @crowdin.get_report_settings_template(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#edit_report_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports/settings-templates/1")
+        result = @crowdin.edit_report_settings_template({}, 1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#delete_report_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports/settings-templates/1")
+        result = @crowdin.delete_report_settings_template(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
     describe '#generate_report' do
       it 'when request are valid', :default do
         stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports")
@@ -139,6 +180,186 @@ describe Crowdin::ApiResources::Reports do
         stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/reports/settings-templates/#{template_id}")
         settings_templates = @crowdin.delete_report_settings_template(template_id, project_id)
         expect(settings_templates).to eq(200)
+      end
+    end
+  end
+
+  describe 'Default endpoints' do
+    describe '#list_report_archives' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/users/1/reports/archives")
+        result = @crowdin.list_report_archives({}, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#delete_report_archive' do
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/users/1/reports/archives/1")
+        result = @crowdin.delete_report_archive(1, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_report_archive' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/users/1/reports/archives/1")
+        result = @crowdin.get_report_archive(1, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#export_report_archive' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/users/1/reports/archives/1/exports")
+        result = @crowdin.export_report_archive(1, {}, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#check_report_archive_export_status' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/users/1/reports/archives/1/exports/1")
+        result = @crowdin.check_report_archive_export_status(1, 1, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#download_report_archive' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/users/1/reports/archives/1/exports/1/download")
+        result = @crowdin.download_report_archive(1, 1, nil, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#list_user_report_settings_templates' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/users/1/reports/settings-templates")
+        result = @crowdin.list_user_report_settings_templates(1, {})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#add_user_report_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/users/1/reports/settings-templates")
+        result = @crowdin.add_user_report_settings_template(1, {})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#delete_user_report_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/users/1/reports/settings-templates/1")
+        result = @crowdin.delete_user_report_settings_template(1, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_user_report_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/users/1/reports/settings-templates/1")
+        result = @crowdin.get_user_report_settings_template(1, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#edit_user_report_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/users/1/reports/settings-templates/1")
+        result = @crowdin.edit_user_report_settings_template(1, 1, [])
+        expect(result).to eq(200)
+      end
+    end
+  end
+
+  describe 'Enterprise endpoints' do
+    describe '#list_organization_report_settings_templates' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/reports/settings-templates")
+        result = @crowdin.list_organization_report_settings_templates({})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#add_organization_report_settings_template' do
+      it 'when request are valid', :enterprise do
+        stub_request(:post, "https://domain.api.crowdin.com/#{target_api_url}/reports/settings-templates")
+        result = @crowdin.add_organization_report_settings_template({})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#delete_organization_report_settings_template' do
+      it 'when request are valid', :enterprise do
+        stub_request(:delete, "https://domain.api.crowdin.com/#{target_api_url}/reports/settings-templates/1")
+        result = @crowdin.delete_organization_report_settings_template(1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_organization_report_settings_template' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/reports/settings-templates/1")
+        result = @crowdin.get_organization_report_settings_template(1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#edit_organization_report_settings_template' do
+      it 'when request are valid', :enterprise do
+        stub_request(:patch, "https://domain.api.crowdin.com/#{target_api_url}/reports/settings-templates/1")
+        result = @crowdin.edit_organization_report_settings_template(1, [])
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#list_report_archives' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/reports/archives")
+        result = @crowdin.list_report_archives({})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#delete_report_archive' do
+      it 'when request are valid', :enterprise do
+        stub_request(:delete, "https://domain.api.crowdin.com/#{target_api_url}/reports/archives/1")
+        result = @crowdin.delete_report_archive(1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_report_archive' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/reports/archives/1")
+        result = @crowdin.get_report_archive(1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#export_report_archive' do
+      it 'when request are valid', :enterprise do
+        stub_request(:post, "https://domain.api.crowdin.com/#{target_api_url}/reports/archives/1/exports")
+        result = @crowdin.export_report_archive(1, {})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#check_report_archive_export_status' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/reports/archives/1/exports/1")
+        result = @crowdin.check_report_archive_export_status(1, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#download_report_archive' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/reports/archives/1/exports/1/download")
+        result = @crowdin.download_report_archive(1, 1, nil)
+        expect(result).to eq(200)
       end
     end
   end

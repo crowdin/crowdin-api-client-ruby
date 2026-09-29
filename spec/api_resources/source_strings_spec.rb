@@ -56,4 +56,30 @@ describe Crowdin::ApiResources::SourceStrings do
       end
     end
   end
+
+  describe 'Default endpoints' do
+    describe '#upload_strings' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/strings/uploads")
+        result = @crowdin.upload_strings({}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#upload_strings_status' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/strings/uploads/1")
+        result = @crowdin.upload_strings_status(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#search_strings' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/strings")
+        result = @crowdin.search_strings({})
+        expect(result).to eq(200)
+      end
+    end
+  end
 end

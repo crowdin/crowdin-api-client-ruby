@@ -97,4 +97,46 @@ describe Crowdin::ApiResources::Teams do
       end
     end
   end
+
+  describe 'Enterprise endpoints' do
+    describe '#list_group_teams' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/groups/1/teams")
+        result = @crowdin.list_group_teams(1, {})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#update_group_teams' do
+      it 'when request are valid', :enterprise do
+        stub_request(:patch, "https://domain.api.crowdin.com/#{target_api_url}/groups/1/teams")
+        result = @crowdin.update_group_teams(1, [])
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_group_team' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/groups/1/teams/1")
+        result = @crowdin.get_group_team(1, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#list_team_projects_permissions' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/teams/1/projects/permissions")
+        result = @crowdin.list_team_projects_permissions(1, {})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#edit_team_projects_permissions' do
+      it 'when request are valid', :enterprise do
+        stub_request(:patch, "https://domain.api.crowdin.com/#{target_api_url}/teams/1/projects/permissions")
+        result = @crowdin.edit_team_projects_permissions(1, [])
+        expect(result).to eq(200)
+      end
+    end
+  end
 end

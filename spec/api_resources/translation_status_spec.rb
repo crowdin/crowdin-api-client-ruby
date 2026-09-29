@@ -58,4 +58,30 @@ describe Crowdin::ApiResources::TranslationStatus do
       end
     end
   end
+
+  describe 'Default endpoints' do
+    describe '#revalidate_qa_checks' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/qa-checks/revalidate")
+        result = @crowdin.revalidate_qa_checks({}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#cancel_qa_checks_revalidation' do
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/qa-checks/revalidate/1")
+        result = @crowdin.cancel_qa_checks_revalidation(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#qa_checks_revalidation_status' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/qa-checks/revalidate/1")
+        result = @crowdin.qa_checks_revalidation_status(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+  end
 end

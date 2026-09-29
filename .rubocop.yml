@@ -10,3 +10,7 @@ Gemspec/DevelopmentDependencies:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'lib/crowdin-api/api_resources/**/*'
