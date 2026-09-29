@@ -6,13 +6,13 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.36
+    &mdash; Documentation by YARD 0.9.45
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <link rel="stylesheet" href="css/common.css" type="text/css">
 
 <script type="text/javascript">
   pathId = "README";
@@ -27,6 +27,8 @@
 
   </head>
   <body>
+    <div id="main_progress" aria-hidden="true"></div>
+
     <div class="nav_wrap">
       <iframe id="nav" src="file_list.html?1"></iframe>
       <div id="resizer"></div>
@@ -57,45 +59,34 @@
         <div class="clear"></div>
       </div>
 
-      <div id="content"><div id='filecontents'>
-<p>&lt;p align=“center”&gt; &lt;picture&gt; &lt;source media=“(prefers-color-scheme: dark)” srcset=“<img src="https://support.crowdin.com/assets/logos/symbol/png/crowdin-symbol-cWhite.png" />”&gt; &lt;source media=“(prefers-color-scheme: light)” srcset=“<img src="https://support.crowdin.com/assets/logos/symbol/png/crowdin-symbol-cDark.png" />”&gt; &lt;img width=“150” height=“150” src=“<img src="https://support.crowdin.com/assets/logos/symbol/png/crowdin-symbol-cDark.png" />”&gt; &lt;/picture&gt; &lt;/p&gt;</p>
-
-<h1 id="label-Crowdin+Ruby+client">Crowdin Ruby client</h1>
-
+      <div id="content"><div id='filecontents'><h1 id="Crowdin_Ruby_client">Crowdin Ruby client</h1>
 <p>The Crowdin Ruby client is a lightweight interface to the Crowdin API. It provides common services for making API requests.</p>
-
 <p>Crowdin API is a full-featured RESTful API that helps you to integrate localization into your development process. The endpoints that we use allow you to easily make calls to retrieve information and to execute actions needed.</p>
-
-<p>Client Docs</code></strong><a href="http://crowdin.github.io/crowdin-api-client-ruby/"></a>  | API</code></strong><a href="https://developer.crowdin.com/api/v2/"></a>  | Enterprise API</code></strong><a href="https://developer.crowdin.com/enterprise/api/v2/"></a></p>
-
-<p><a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/v/crowdin-api?logo=ruby&amp;cacheSeconds=1800" alt="Gem"></a> <a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/dt/crowdin-api?cacheSeconds=1800" alt="Gem"></a> <a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/dtv/crowdin-api?cacheSeconds=1800" alt="Gem"></a> <a href="https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml"><img src="https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml/badge.svg" alt="Test and Lint"></a> <a href="https://codecov.io/gh/crowdin/crowdin-api-client-ruby"><img src="https://codecov.io/gh/crowdin/crowdin-api-client-ruby/branch/main/graph/badge.svg?token=OJsyJwQbFM" alt="codecov"></a> <a href="https://github.com/crowdin/crowdin-api-client-ruby/blob/main/LICENSE"><img src="https://img.shields.io/github/license/crowdin/crowdin-api-client-ruby?cacheSeconds=1800" alt="GitHub"></a></p>
-
-<h2 id="label-Requirements">Requirements</h2>
-<ul><li>
-<p>Ruby &gt;= 2.4</p>
-</li></ul>
-
-<h2 id="label-Installation">Installation</h2>
-
-<p>Add this line to your application’s Gemfile:</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>crowdin-api</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>~&gt; 1.15.0</span><span class='tstring_end'>&#39;</span></span>
+<p><a href="http://crowdin.github.io/crowdin-api-client-ruby/"><strong><code>API Client Docs</code></strong></a>  | 
+<a href="https://developer.crowdin.com/api/v2/"><strong><code>Crowdin API</code></strong></a>  | 
+<a href="https://developer.crowdin.com/enterprise/api/v2/"><strong><code>Crowdin Enterprise API</code></strong></a></p>
+<p><a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/v/crowdin-api?logo=ruby&amp;cacheSeconds=1800" alt="Gem" /></a>
+<a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/dt/crowdin-api?cacheSeconds=1800" alt="Gem" /></a>
+<a href="https://rubygems.org/gems/crowdin-api"><img src="https://img.shields.io/gem/dtv/crowdin-api?cacheSeconds=1800" alt="Gem" /></a>
+<a href="https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml"><img src="https://github.com/crowdin/crowdin-api-client-ruby/actions/workflows/test-and-lint.yml/badge.svg" alt="Test and Lint" /></a>
+<a href="https://codecov.io/gh/crowdin/crowdin-api-client-ruby"><img src="https://codecov.io/gh/crowdin/crowdin-api-client-ruby/branch/main/graph/badge.svg?token=OJsyJwQbFM" alt="codecov" /></a>
+<a href="https://github.com/crowdin/crowdin-api-client-ruby/blob/main/LICENSE"><img src="https://img.shields.io/github/license/crowdin/crowdin-api-client-ruby?cacheSeconds=1800" alt="GitHub" /></a></p>
+<h2 id="Requirements">Requirements</h2>
+<ul>
+<li>Ruby &gt;= 2.4</li>
+</ul>
+<h2 id="Installation">Installation</h2>
+<p>Add this line to your application's Gemfile:</p>
+<pre class="code gemfile"><code class="gemfile">gem &#39;crowdin-api&#39;, &#39;~&gt; 1.15.1&#39;
 </code></pre>
-
 <p>And then execute:</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_bundle'>bundle</span> <span class='id identifier rubyid_install'>install</span>
+<pre class="code console"><code class="console">bundle install
 </code></pre>
-
 <p>Or install it yourself as:</p>
-
-<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='op'>-</span><span class='id identifier rubyid_api'>api</span>
+<pre class="code console"><code class="console">gem install crowdin-api
 </code></pre>
-
-<h2 id="label-Quick+start">Quick start</h2>
-
-<h3 id="label-Initialization">Initialization</h3>
-
+<h2 id="Quick_start">Quick start</h2>
+<h3 id="Initialization">Initialization</h3>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>crowdin-api</span><span class='tstring_end'>&#39;</span></span>
 
 <span class='comment'># Initialize a new Client instance with config options
@@ -126,13 +117,17 @@
 </span>
 <span class='comment'># Also you can specify proxy by adding it to ENV[&#39;http_proxy&#39;] before Client initialization
 </span></code></pre>
-
-<p>To generate a new token in Crowdin, follow these steps: - Go to <em>Account Settings</em> &gt; <em>API</em> tab, <em>Personal Access Tokens</em> section, and click <em>New Token</em>. - Specify <em>Token Name</em> and click <em>Create</em>.</p>
-
-<p>To generate a new token in Crowdin Enterprise, follow these steps: - Go to <em>Account Settings</em> &gt; <em>Access tokens</em> tab and click <em>New token</em>. - Specify <em>Token Name</em>, select <em>Scopes</em> and <em>Projects</em>, click <em>Create</em>.</p>
-
-<h3 id="label-Usage">Usage</h3>
-
+<p>To generate a new token in Crowdin, follow these steps:</p>
+<ul>
+<li>Go to <em>Account Settings</em> &gt; <em>API</em> tab, <em>Personal Access Tokens</em> section, and click <em>New Token</em>.</li>
+<li>Specify <em>Token Name</em> and click <em>Create</em>.</li>
+</ul>
+<p>To generate a new token in Crowdin Enterprise, follow these steps:</p>
+<ul>
+<li>Go to <em>Account Settings</em> &gt; <em>Access tokens</em> tab and click <em>New token</em>.</li>
+<li>Specify <em>Token Name</em>, select <em>Scopes</em> and <em>Projects</em>, click <em>Create</em>.</li>
+</ul>
+<h3 id="Usage">Usage</h3>
 <pre class="code ruby"><code class="ruby"><span class='comment'># Create Project
 </span><span class='id identifier rubyid_project'>project</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_add_project'>add_project</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='id identifier rubyid_your_project_name'>your_project_name</span><span class='comma'>,</span> <span class='label'>sourceLanguageId:</span> <span class='id identifier rubyid_your_language_id'>your_language_id</span><span class='rparen'>)</span>
 
@@ -169,11 +164,8 @@
 
 <span class='comment'># Note: more examples you can find in spec folder
 </span></code></pre>
-
-<h3 id="label-GraphQL+API">GraphQL API</h3>
-
-<p>The client can send GraphQL requests to Crowdin’s default API host or to an Enterprise organization endpoint.</p>
-
+<h3 id="GraphQL_API">GraphQL API</h3>
+<p>The client can send GraphQL requests to Crowdin's default API host or to an Enterprise organization endpoint.</p>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='heredoc_beg'>&lt;&lt;~GRAPHQL</span>
 <span class='tstring_content'>  query Viewer {
 </span><span class='tstring_content'>    viewer {
@@ -184,16 +176,11 @@
 </span>
 <span class='id identifier rubyid_response'>response</span> <span class='op'>=</span> <span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_graphql'>graphql</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>query:</span> <span class='id identifier rubyid_query'>query</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
 </code></pre>
-
 <p>You can also provide a custom endpoint URL for testing.</p>
-
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_crowdin'>crowdin</span><span class='period'>.</span><span class='id identifier rubyid_graphql'>graphql</span><span class='lparen'>(</span><span class='lbrace'>{</span> <span class='label'>query:</span> <span class='id identifier rubyid_query'>query</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>url:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>http://localhost:3000/api/graphql</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
 </code></pre>
-
-<h3 id="label-Fetch+all+records">Fetch all records</h3>
-
+<h3 id="Fetch_all_records">Fetch all records</h3>
 <p>There is a possibility to fetch all records from paginatable methods using <code>fetch_all</code> method.</p>
-
 <pre class="code ruby"><code class="ruby"><span class='comment'># FetchAll options:
 </span><span class='comment'># * limit, Integer, default: 500 | How many records need to load per one request
 </span><span class='comment'># * offset, Integer, default: 0
@@ -215,35 +202,22 @@
 </span><span class='comment'># otherwise, the request will be retried so many times, as indicated at retries_count
 </span><span class='ivar'>@crowdin</span><span class='period'>.</span><span class='id identifier rubyid_fetch_all'>fetch_all</span><span class='lparen'>(</span><span class='symbol'>:list_projects</span><span class='comma'>,</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='label'>request_delay:</span> <span class='int'>2</span><span class='comma'>,</span> <span class='label'>retries_count:</span> <span class='int'>3</span><span class='comma'>,</span> <span class='label'>error_messages:</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>401</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
 </code></pre>
-
-<h3 id="label-Command-Line+Client">Command-Line Client</h3>
-
+<h3 id="Command_Line_Client">Command-Line Client</h3>
 <p>The Crowdin Ruby client support crowdin-console, where you can test endpoints easier</p>
-
-<pre class="code ruby"><code class="ruby">$ bundle exec crowdin-console --enable-logger --api-token API_TOKEN --project-id PROJECT_ID
+<pre class="code console"><code class="console">$ bundle exec crowdin-console --enable-logger --api-token API_TOKEN --project-id PROJECT_ID
 </code></pre>
-
 <p>Or Crowdin Enterprise</p>
-
-<pre class="code ruby"><code class="ruby">$ bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain DOMAIN --project-id PROJECT_ID
+<pre class="code console"><code class="console">$ bundle exec crowdin-console --enable-logger --enterprise --api-token API_TOKEN --organization-domain DOMAIN --project-id PROJECT_ID
 </code></pre>
-
-<p>Note: you can specify full organization domain by adding ‘.com’</p>
-
-<p>When execute you’ll have IRB console with configured <em>@crowdin</em> instance</p>
-
+<p>Note: you can specify full organization domain by adding '.com'</p>
+<p>When execute you'll have IRB console with configured <em>@crowdin</em> instance</p>
 <pre class="code ruby"><code class="ruby">&gt; @crowdin.list_projects
 </code></pre>
-
-<h2 id="label-Seeking+Assistance">Seeking Assistance</h2>
-
-<p>If you find any problems or would like to suggest a feature, please read the <a href="/CONTRIBUTING_md.html#how-can-i-contribute">How can I contribute</a> section in our contributing guidelines.</p>
-
-<h2 id="label-Contributing">Contributing</h2>
-
-<p>If you would like to contribute please read the <a href="/CONTRIBUTING_md.html">Contributing</a> guidelines.</p>
-
-<h2 id="label-License">License</h2>
+<h2 id="Seeking_Assistance">Seeking Assistance</h2>
+<p>If you find any problems or would like to suggest a feature, please read the <a href="/CONTRIBUTING.md#how-can-i-contribute">How can I contribute</a> section in our contributing guidelines.</p>
+<h2 id="Contributing">Contributing</h2>
+<p>If you would like to contribute please read the <a href="/CONTRIBUTING.md">Contributing</a> guidelines.</p>
+<h2 id="License">License</h2>
 <pre class="code ruby"><code class="ruby">
 The Crowdin Ruby Client is licensed under the MIT License.
 See the LICENSE.md file distributed with this work for additional 
@@ -255,9 +229,9 @@ use or other dealings in this Software without prior written authorization.
 </code></pre></div></div>
 
       <div id="footer">
-  Generated on Tue Sep 29 08:12:46 2026 by
+  Generated on Tue Sep 29 08:31:13 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.4.11).
+  0.9.45 (ruby-3.4.11).
 </div>
 
     </div>
