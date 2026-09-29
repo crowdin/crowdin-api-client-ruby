@@ -121,4 +121,64 @@ describe Crowdin::ApiResources::Tasks do
       end
     end
   end
+
+  describe 'Default endpoints' do
+    describe '#list_project_task_settings_templates' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/tasks/settings-templates")
+        result = @crowdin.list_project_task_settings_templates({}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#add_project_task_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/tasks/settings-templates")
+        result = @crowdin.add_project_task_settings_template({}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#delete_project_task_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/tasks/settings-templates/1")
+        result = @crowdin.delete_project_task_settings_template(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_project_task_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/tasks/settings-templates/1")
+        result = @crowdin.get_project_task_settings_template(1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#edit_project_task_settings_template' do
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/tasks/settings-templates/1")
+        result = @crowdin.edit_project_task_settings_template(1, [], project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#list_specific_user_tasks' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/users/1/tasks")
+        result = @crowdin.list_specific_user_tasks({}, 1)
+        expect(result).to eq(200)
+      end
+    end
+  end
+
+  describe 'Enterprise endpoints' do
+    describe '#list_specific_user_tasks' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/tasks")
+        result = @crowdin.list_specific_user_tasks({})
+        expect(result).to eq(200)
+      end
+    end
+  end
 end

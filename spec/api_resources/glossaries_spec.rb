@@ -152,6 +152,14 @@ describe Crowdin::ApiResources::Glossaries, 'Concept endpoints' do
     end
   end
 
+  describe '#delete_concept' do
+    it 'when request are valid', :default do
+      stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/glossaries/1/concepts/1")
+      result = @crowdin.delete_concept(1, 1)
+      expect(result).to eq(200)
+    end
+  end
+
   describe '#update_concept' do
     let(:glossary_id) { 1 }
     let(:concept_id) { 1 }
@@ -226,6 +234,16 @@ describe Crowdin::ApiResources::Glossaries, 'Term endpoints' do
       stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/glossaries/#{glossary_id}/terms/#{term_id}")
       edit_term = @crowdin.edit_term(glossary_id, term_id)
       expect(edit_term).to eq(200)
+    end
+  end
+
+  describe 'Default endpoints' do
+    describe '#concordance_search_in_glossaries' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/glossaries/concordance")
+        result = @crowdin.concordance_search_in_glossaries({})
+        expect(result).to eq(200)
+      end
     end
   end
 end

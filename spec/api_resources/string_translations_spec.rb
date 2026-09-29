@@ -165,4 +165,30 @@ describe Crowdin::ApiResources::StringTranslations do
       end
     end
   end
+
+  describe 'Default endpoints' do
+    describe '#approval_batch_operations' do
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/approvals")
+        result = @crowdin.approval_batch_operations([], project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#translation_batch_operations' do
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/translations")
+        result = @crowdin.translation_batch_operations([], project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#search_translations' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/translations")
+        result = @crowdin.search_translations({})
+        expect(result).to eq(200)
+      end
+    end
+  end
 end

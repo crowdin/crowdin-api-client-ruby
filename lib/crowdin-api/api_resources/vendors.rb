@@ -5,6 +5,8 @@ module Crowdin
     module Vendors
       # -- For Enterprise mode only --
 
+      # @param query [Hash] Request Query Parameters
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.vendors.getMany  Enterprise API Documentation}
       def list_vendors(query = {})
         enterprise_mode? || raise_only_for_enterprise_mode_error
 

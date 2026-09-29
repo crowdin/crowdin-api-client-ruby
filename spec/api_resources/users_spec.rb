@@ -31,6 +31,12 @@ describe Crowdin::ApiResources::Users do
 
   describe 'Enterprise endpoints' do
     describe '#add_project_member' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/members")
+        add_project_member = @crowdin.add_project_member({}, project_id)
+        expect(add_project_member).to eq(200)
+      end
+
       it 'when request are valid', :enterprise do
         stub_request(:post, "https://domain.api.crowdin.com/#{target_api_url}/projects/#{project_id}/members")
         add_project_member = @crowdin.add_project_member({}, project_id)
@@ -40,6 +46,12 @@ describe Crowdin::ApiResources::Users do
 
     describe '#get_project_member_permissions' do
       let(:member_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/members/#{member_id}")
+        get_project_member_permissions = @crowdin.get_project_member_permissions(member_id, project_id)
+        expect(get_project_member_permissions).to eq(200)
+      end
 
       it 'when request are valid', :enterprise do
         stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/projects/#{project_id}/members/#{member_id}")
@@ -51,6 +63,12 @@ describe Crowdin::ApiResources::Users do
     describe '#replace_project_permissions' do
       let(:member_id) { 1 }
 
+      it 'when request are valid', :default do
+        stub_request(:put, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/members/#{member_id}")
+        replace_project_permissions = @crowdin.replace_project_permissions(member_id, {}, project_id)
+        expect(replace_project_permissions).to eq(200)
+      end
+
       it 'when request are valid', :enterprise do
         stub_request(:put, "https://domain.api.crowdin.com/#{target_api_url}/projects/#{project_id}/members/#{member_id}")
         replace_project_permissions = @crowdin.replace_project_permissions(member_id, {}, project_id)
@@ -60,6 +78,12 @@ describe Crowdin::ApiResources::Users do
 
     describe '#delete_member_from_project' do
       let(:member_id) { 1 }
+
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/members/#{member_id}")
+        delete_member_from_project = @crowdin.delete_member_from_project(member_id, {}, project_id)
+        expect(delete_member_from_project).to eq(200)
+      end
 
       it 'when request are valid', :enterprise do
         stub_request(:delete, "https://domain.api.crowdin.com/#{target_api_url}/projects/#{project_id}/members/#{member_id}")
@@ -111,6 +135,66 @@ describe Crowdin::ApiResources::Users do
         stub_request(:patch, "https://domain.api.crowdin.com/#{target_api_url}/users/#{user_id}")
         edit_user = @crowdin.edit_user(user_id)
         expect(edit_user).to eq(200)
+      end
+    end
+  end
+
+  describe 'Default endpoints' do
+    describe '#edit_authenticated_user' do
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/user")
+        result = @crowdin.edit_authenticated_user([])
+        expect(result).to eq(200)
+      end
+    end
+  end
+
+  describe 'Enterprise endpoints' do
+    describe '#list_group_managers' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/groups/1/managers")
+        result = @crowdin.list_group_managers(1, {})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#update_group_managers' do
+      it 'when request are valid', :enterprise do
+        stub_request(:patch, "https://domain.api.crowdin.com/#{target_api_url}/groups/1/managers")
+        result = @crowdin.update_group_managers(1, [])
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_group_manager' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/groups/1/managers/1")
+        result = @crowdin.get_group_manager(1, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#list_user_projects_contributions' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/users/1/projects/contributions")
+        result = @crowdin.list_user_projects_contributions(1, {})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#list_user_projects_permissions' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/users/1/projects/permissions")
+        result = @crowdin.list_user_projects_permissions(1, {})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#edit_user_projects_permissions' do
+      it 'when request are valid', :enterprise do
+        stub_request(:patch, "https://domain.api.crowdin.com/#{target_api_url}/users/1/projects/permissions")
+        result = @crowdin.edit_user_projects_permissions(1, [])
+        expect(result).to eq(200)
       end
     end
   end

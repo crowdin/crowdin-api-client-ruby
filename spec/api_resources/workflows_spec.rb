@@ -38,4 +38,14 @@ describe Crowdin::ApiResources::Workflows do
       end
     end
   end
+
+  describe 'Enterprise endpoints' do
+    describe '#list_workflow_step_strings' do
+      it 'when request are valid', :enterprise do
+        stub_request(:get, "https://domain.api.crowdin.com/#{target_api_url}/projects/#{project_id}/workflow-steps/1/strings")
+        result = @crowdin.list_workflow_step_strings(1, {}, project_id)
+        expect(result).to eq(200)
+      end
+    end
+  end
 end

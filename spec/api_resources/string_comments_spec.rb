@@ -48,4 +48,22 @@ describe Crowdin::ApiResources::StringComments do
       end
     end
   end
+
+  describe 'Default endpoints' do
+    describe '#string_asset_comment_batch_operations' do
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/comments")
+        result = @crowdin.string_asset_comment_batch_operations([], project_id)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#delete_attachment_from_string_asset_comment' do
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/projects/#{project_id}/comments/1/attachments/1")
+        result = @crowdin.delete_attachment_from_string_asset_comment(1, 1, project_id)
+        expect(result).to eq(200)
+      end
+    end
+  end
 end

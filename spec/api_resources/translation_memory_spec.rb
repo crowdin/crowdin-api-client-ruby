@@ -132,4 +132,62 @@ describe Crowdin::ApiResources::TranslationMemory do
       end
     end
   end
+
+  describe 'Default endpoints' do
+    describe '#concordance_search_in_tms' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/tms/concordance")
+        result = @crowdin.concordance_search_in_tms({})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#list_tm_segments' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/tms/1/segments")
+        result = @crowdin.list_tm_segments(1, {})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#tm_segment_batch_operations' do
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/tms/1/segments")
+        result = @crowdin.tm_segment_batch_operations(1, [])
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#create_tm_segment' do
+      it 'when request are valid', :default do
+        stub_request(:post, "https://api.crowdin.com/#{target_api_url}/tms/1/segments")
+        result = @crowdin.create_tm_segment(1, {})
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#delete_tm_segment' do
+      it 'when request are valid', :default do
+        stub_request(:delete, "https://api.crowdin.com/#{target_api_url}/tms/1/segments/1")
+        result = @crowdin.delete_tm_segment(1, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#get_tm_segment' do
+      it 'when request are valid', :default do
+        stub_request(:get, "https://api.crowdin.com/#{target_api_url}/tms/1/segments/1")
+        result = @crowdin.get_tm_segment(1, 1)
+        expect(result).to eq(200)
+      end
+    end
+
+    describe '#edit_tm_segment' do
+      it 'when request are valid', :default do
+        stub_request(:patch, "https://api.crowdin.com/#{target_api_url}/tms/1/segments/1")
+        result = @crowdin.edit_tm_segment(1, 1, [])
+        expect(result).to eq(200)
+      end
+    end
+  end
 end

@@ -119,6 +119,7 @@ Metrics/PerceivedComplexity:
 # Offense count: 1
 Naming/AccessorMethodName:
   Exclude:
+    - 'lib/crowdin-api/api_resources/organization.rb'
     - 'lib/crowdin-api/api_resources/users.rb'
 
 # Offense count: 1

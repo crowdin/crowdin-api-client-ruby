@@ -3,9 +3,9 @@
 module Crowdin
   module ApiResources
     module Storages
-      # @param query [Hash] Request Body
-      # * {https://developer.crowdin.com/api/v2/#operation/api.storages.getMany  API Documentation}
-      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.storages.getMany  Enterprise API Documentation}
+      # @param query [Hash] Request Query Parameters
+      # * {https://support.crowdin.com/developer/api/v2/#operation/api.storages.getMany  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.storages.getMany  Enterprise API Documentation}
       def list_storages(query = {})
         request = Web::Request.new(
           connection,
@@ -17,8 +17,8 @@ module Crowdin
       end
 
       # @param file [string] File path
-      # * {https://developer.crowdin.com/api/v2/#operation/api.storages.post  API Documentation}
-      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.storages.post  Enterprise API Documentation}
+      # * {https://support.crowdin.com/developer/api/v2/#operation/api.storages.post  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.storages.post  Enterprise API Documentation}
       def add_storage(file = nil)
         file || raise_parameter_is_required_error(:file)
 
@@ -34,9 +34,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      # @param storage_id [Integer] Storage ID
-      # * {https://developer.crowdin.com/api/v2/#operation/api.storages.get  API Documentation}
-      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.storages.get  Enterprise API Documentation}
+      # @param storage_id [Integer] Storage Identifier
+      # * {https://support.crowdin.com/developer/api/v2/#operation/api.storages.get  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.storages.get  Enterprise API Documentation}
       def get_storage(storage_id = nil)
         storage_id || raise_parameter_is_required_error(:storage_id)
 
@@ -48,9 +48,9 @@ module Crowdin
         Web::SendRequest.new(request).perform
       end
 
-      # @param storage_id [Integer] Storage ID
-      # * {https://developer.crowdin.com/api/v2/#operation/api.storages.delete  API Documentation}
-      # * {https://developer.crowdin.com/enterprise/api/v2/#operation/api.storages.delete  Enterprise API Documentation}
+      # @param storage_id [Integer] Storage Identifier
+      # * {https://support.crowdin.com/developer/api/v2/#operation/api.storages.delete  API Documentation}
+      # * {https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.storages.delete  Enterprise API Documentation}
       def delete_storage(storage_id = nil)
         storage_id || raise_parameter_is_required_error(:storage_id)
 
