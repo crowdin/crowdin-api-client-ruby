@@ -116,7 +116,7 @@
 
   
     <span class="summary_desc"><div class='inline'><ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.post" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.post" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
 </li></ul>
 </div></span>
   
@@ -141,7 +141,7 @@
 
   
     <span class="summary_desc"><div class='inline'><ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.delete" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.delete" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
 </li></ul>
 </div></span>
   
@@ -166,7 +166,7 @@
 
   
     <span class="summary_desc"><div class='inline'><ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.deleteMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.deleteMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
 </li></ul>
 </div></span>
   
@@ -191,7 +191,7 @@
 
   
     <span class="summary_desc"><div class='inline'><ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.get" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.get" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
 </li></ul>
 </div></span>
   
@@ -216,7 +216,7 @@
 
   
     <span class="summary_desc"><div class='inline'><ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.getMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.getMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
 </li></ul>
 </div></span>
   
@@ -241,7 +241,7 @@
 
   
     <span class="summary_desc"><div class='inline'><ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.put" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.put" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a>.</p>
 </li></ul>
 </div></span>
   
@@ -269,14 +269,36 @@
 </h3><div class="docstring">
   <div class="discussion">
     <ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.post" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.post" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
 </li></ul>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>body</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Request Body</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -284,22 +306,24 @@
       <pre class="lines">
 
 
-20
-21
-22
-23
-24
 25
 26
 27
 28
 29
-30</pre>
+30
+31
+32
+33
+34
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_correction'>add_correction</span><span class='lparen'>(</span><span class='id identifier rubyid_body'>body</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_enterprise_mode?'>enterprise_mode?</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_only_for_enterprise_mode_error'>raise_only_for_enterprise_mode_error</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
 
   <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>Web</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
@@ -327,14 +351,36 @@
 </h3><div class="docstring">
   <div class="discussion">
     <ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.delete" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.delete" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
 </li></ul>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>correction_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Correction Identifier</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -342,22 +388,24 @@
       <pre class="lines">
 
 
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70</pre>
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_correction'>delete_correction</span><span class='lparen'>(</span><span class='id identifier rubyid_correction_id'>correction_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_enterprise_mode?'>enterprise_mode?</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_only_for_enterprise_mode_error'>raise_only_for_enterprise_mode_error</span>
   <span class='id identifier rubyid_correction_id'>correction_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:correction_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
 
@@ -385,14 +433,36 @@
 </h3><div class="docstring">
   <div class="discussion">
     <ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.deleteMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.deleteMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
 </li></ul>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Request Query Parameters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -400,22 +470,24 @@
       <pre class="lines">
 
 
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57</pre>
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 47</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_corrections'>delete_corrections</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_enterprise_mode?'>enterprise_mode?</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_only_for_enterprise_mode_error'>raise_only_for_enterprise_mode_error</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
 
   <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>Web</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
@@ -443,14 +515,54 @@
 </h3><div class="docstring">
   <div class="discussion">
     <ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.get" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.get" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
 </li></ul>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>correction_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Correction Identifier</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Request Query Parameters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -458,23 +570,25 @@
       <pre class="lines">
 
 
-33
-34
-35
-36
-37
-38
-39
-40
 41
 42
 43
-44</pre>
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 41</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_correction'>get_correction</span><span class='lparen'>(</span><span class='id identifier rubyid_correction_id'>correction_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_enterprise_mode?'>enterprise_mode?</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_only_for_enterprise_mode_error'>raise_only_for_enterprise_mode_error</span>
   <span class='id identifier rubyid_correction_id'>correction_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:correction_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
 
@@ -503,14 +617,36 @@
 </h3><div class="docstring">
   <div class="discussion">
     <ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.getMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.getMany" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
 </li></ul>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>query</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Request Query Parameters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -518,9 +654,6 @@
       <pre class="lines">
 
 
-7
-8
-9
 10
 11
 12
@@ -528,12 +661,17 @@
 14
 15
 16
-17</pre>
+17
+18
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_list_corrections'>list_corrections</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_enterprise_mode?'>enterprise_mode?</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_only_for_enterprise_mode_error'>raise_only_for_enterprise_mode_error</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
 
   <span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>Web</span><span class='op'>::</span><span class='const'>Request</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
@@ -561,14 +699,36 @@
 </h3><div class="docstring">
   <div class="discussion">
     <ul><li>
-<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#tag/String-Corrections/operation/api.projects.corrections.put" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
+<p><a href="https://support.crowdin.com/developer/enterprise/api/v2/#operation/api.projects.corrections.put" target="_parent" title="Enterprise API Documentation">Enterprise API Documentation</a></p>
 </li></ul>
 
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>correction_id</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Correction Identifier</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 
 </div><table class="source_code">
   <tr>
@@ -576,22 +736,24 @@
       <pre class="lines">
 
 
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/crowdin-api/api_resources/string_corrections.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_restore_correction'>restore_correction</span><span class='lparen'>(</span><span class='id identifier rubyid_correction_id'>correction_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_config'>config</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_enterprise_mode?'>enterprise_mode?</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_only_for_enterprise_mode_error'>raise_only_for_enterprise_mode_error</span>
   <span class='id identifier rubyid_correction_id'>correction_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_parameter_is_required_error'>raise_parameter_is_required_error</span><span class='lparen'>(</span><span class='symbol'>:correction_id</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>||</span> <span class='id identifier rubyid_raise_project_id_is_required_error'>raise_project_id_is_required_error</span>
 
@@ -612,9 +774,9 @@
 </div>
 
       <div id="footer">
-  Generated on Wed May 20 09:19:13 2026 by
+  Generated on Tue Sep 29 08:12:48 2026 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.36 (ruby-3.4.9).
+  0.9.36 (ruby-3.4.11).
 </div>
 
     </div>
