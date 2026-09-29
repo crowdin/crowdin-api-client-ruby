@@ -2,6 +2,6 @@
 
 module Crowdin
   class Client
-    VERSION = '1.15.0'
+    VERSION = '1.15.1'
   end
 end
